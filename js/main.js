@@ -18,7 +18,7 @@ document.addEventListener('sectionsLoaded', () => {
    ═══════════════════════════════════════════════════════════════ */
 
 // URL del Google Apps Script (Web App)
-const APPS_SCRIPT_URL = 'https://script.google.com/a/macros/somosmarketingperu.com/s/AKfycbz4mXj75Zqxhz8sludAjOCiDbIEa9ohuU-MVMjhwhdCwU1G10IhfccHi9jg-TDGc_7n/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBQaXXavdT3NHFgrqHgznRMuMt6Qec-prV6Sku5cJzqKzwgFljyYC7mxgsiXWFcj0Q/exec';
 // Debe coincidir con CONFIG.SECRET_KEY en el .gs, funciona como token de acceso
 const APPS_SECRET_KEY = 'TCP2026-SOMOS-MKT-PERÜ-SECURE-8f3k9';
 
