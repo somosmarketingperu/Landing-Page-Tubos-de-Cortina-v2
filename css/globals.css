@@ -1,0 +1,113 @@
+/* 
+   SYSTEM DESIGN & GLOBALS (v2.1)
+   Mobile-First, Responsive & Premium Aesthetics
+   -------------------------------------------------
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
+
+:root {
+    /* Color Palette */
+    --copper: #c88264;
+    --dark: #1c1917;
+    --stone: #292524;
+    --stone-light: #44403c;
+    --bone: #fcfbf9;
+    --white: #ffffff;
+    --success: #10b981;
+    --danger: #ef4444;
+    
+    /* Typography (Fluid) */
+    --fs-h1: clamp(2rem, 5vw, 3.5rem);
+    --fs-h2: clamp(1.5rem, 4vw, 2.5rem);
+    --fs-h3: clamp(1.2rem, 3vw, 1.8rem);
+    --fs-body: clamp(0.9rem, 2vw, 1.1rem);
+    --fs-sm: clamp(0.75rem, 1.8vw, 0.875rem);
+    --fs-xs: clamp(0.65rem, 1.5vw, 0.75rem);
+    
+    /* Spacing & Transitions */
+    --gap: clamp(1rem, 3vw, 2rem);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: var(--bone);
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    line-height: 1.1;
+    font-weight: 900;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Layout Utilities (Vanilla CSS) --- */
+
+.va-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--gap);
+}
+
+.va-grid {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.va-flex {
+    display: flex;
+    gap: var(--gap);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* --- Typography Helpers --- */
+
+.text-highlight {
+    color: var(--copper);
+}
+
+.text-center { text-align: center; }
+
+/* --- Mobile Responsiveness Enforcer --- */
+@media (max-width: 768px) {
+    .va-grid {
+        grid-template-columns: 1fr;
+    }
+    h1, h2, h3 { text-align: center; }
+    .va-container { padding: 0 14px; }
+}
+
+/* Infographic Crop Utility (as per user request) */
+.va-infog-crop {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.va-infog-crop img {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: -50px; /* Hides the bottom brand bar */
+}

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomía de la Landing Page — Tubos de Cortina B2B</title>
+    <!-- Tailwind CDN injection for High Fidelity POC modules -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: { preflight: false } // Avoid breaking custom blueprint styles
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playball&family=Cinzel:wght@400;700&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+            background: #f0ebe4;
+            padding: 48px 20px 80px;
+            color: white;
+        }
+        .doc-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 6px;
+            color: #111;
+        }
+        .doc-sub {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+        .doc-sub strong { color: #333; }
+
+        /* ─── ANATOMY LAYOUT ─── */
+        .anatomy { max-width: 1320px; margin: 0 auto; }
+
+        .arow {
+            display: flex;
+            align-items: center;
+            min-height: 0;
+            margin-bottom: -1px; /* Para empalmar bordes */
+        }
+
+        /* LEFT: label + horizontal connector */
+        .l-cell {
+            flex: 0 0 220px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0;
+            align-self: center;
+        }
+        .label-box {
+            background: #d4edda;
+            border: 2px solid #4caf50;
+            border-radius: 7px;
+            padding: 6px 10px;
+            font-size: 10.5px;
+            font-weight: 800;
+            text-align: center;
+            color: #1b5e20;
+            line-height: 1.3;
+            white-space: normal;
+            flex-shrink: 0;
+            max-width: 140px;
+        }
+        .h-line {
+            flex: 1;
+            height: 2px;
+            background: #aaa;
+            min-width: 8px;
+        }
+
+        /* CENTER: wireframe column */
+        .wf-col { flex: 0 0 420px; align-self: stretch; }
+
+        .wfs {
+            border-left: 3px solid #e6dbd0;
+            border-right: 3px solid #e6dbd0;
+            width: 100%;
+        }
+        .wfs.wf-first {
+            border-top: 3px solid #e6dbd0;
+            border-radius: 10px 10px 0 0;
+        }
+        .wfs.wf-last {
+            border-bottom: 3px solid #e6dbd0;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* RIGHT: connector + annotation */
+        .r-cell {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            align-self: center;
+        }
+        .r-conn {
+            flex: 0 0 40px;
+            height: 2px;
+            background: #aaa;
+        }
+        .anno {
+            background: white;
+            border: 1.5px solid #ddd;
+            border-radius: 7px;
+            padding: 8px 12px;
+            font-size: 10.5px;
+            line-height: 1.5;
+            color: #444;
+            max-width: 370px;
+            min-width: 200px;
+        }
+        .anno strong { color: #111; font-size: 11px; display: block; margin-bottom: 2px; }
+        .anno ul { margin-left: 13px; }
+        .anno li { margin-bottom: 1px; color: #555; }
+
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        /* WIREFRAME COMPONENT STYLES                     */
+        /* Theme: #c88264 (Champagne Gold), #1a1a1a (Dark)*/
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+        /* 0. BANNER & HEADER */
+        .wf-banner { background: #c88264; padding: 7px 12px; text-align: center; font-size: 8px; font-weight: 900; color: white; letter-spacing: .06em; }
+        .wf-header { background: #ffffff; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #e6dbd0; }
+        .wf-header .logo-row { display: flex; align-items: center; gap: 7px; }
+        .wf-header .lc { width: 32px; height: 18px; background: #c88264; border-radius: 3px; display:flex; align-items:center; justify-content:center; font-size:5px; font-weight:900; color:#1a1a1a; }
+        .wf-header .lt { width: 68px; height: 7px; background: #c88264; border-radius: 3px; opacity:.85; }
+        .wf-header .hbtn { background: #c88264; color: white; font-size: 8px; font-weight: 900; padding: 4px 10px; border-radius: 20px; }
+
+        /* 01. HERO */
+        .wf-hero { background: #ffffff; padding: 16px 14px; border-top: 1px solid #e6dbd0; }
+        .wf-hero .hero-grid { display: flex; gap: 12px; align-items: center; }
+        .wf-hero .h-left { flex: 1; }
+        .wf-hero .h-tag { color: #c88264; font-size: 7px; font-weight: 900; letter-spacing: .09em; margin-bottom: 3px; text-transform: uppercase; }
+        .wf-hero .h-title { font-size: 20px; font-weight: 900; color: #302621; line-height: .9; margin-bottom: 8px; text-transform: uppercase; }
+        .wf-hero .h-title span { color: #c88264; }
+        .wf-hero .h-check { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; }
+        .wf-hero .ck { width: 10px; height: 10px; background: #c88264; border-radius: 50%; flex-shrink: 0; display:flex; align-items:center; justify-content:center; font-size:6px; color:#1a1a1a; font-weight:900; }
+        .wf-hero .ck-tx { font-size: 7px; color: #555; font-weight: 700; }
+        .wf-hero .hcta { display: inline-block; background: #c88264; color: white; font-size: 9px; font-weight: 900; padding: 6px 12px; border-radius: 8px; margin-top: 8px; }
+        .wf-hero .h-img { flex: 0 0 105px; height: 95px; background: #f7f3ee; border-radius: 8px; border: 1px solid #e6dbd0; position: relative; }
+        .wf-hero .h-img::before { content:''; position:absolute; inset:6px; background:rgba(197, 160, 89, 0.15); border-radius:50%; filter:blur(8px); }
+
+        /* 02. RAZONES */
+        .wf-reasons { background: #ffffff; padding: 14px; border-top: 1px solid #e6dbd0; }
+        .wf-reasons .rtitle { color: #c88264; font-size: 14px; font-weight: 900; font-style: italic; margin-bottom: 2px; }
+        .wf-reasons .rsub { height: 5px; background: #e6dbd0; border-radius: 2px; width: 65%; margin-bottom: 10px; }
+        .wf-reasons .rcards { display: grid; grid-template-columns: repeat(5,1fr); gap: 4px; margin-bottom: 8px; }
+        .wf-reasons .rc { background: #fcfaf8; border-bottom: 2px solid #e6dbd0; border-radius: 5px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .wf-reasons .rci { width: 13px; height: 13px; background: #c88264; border-radius: 3px; }
+        .wf-reasons .rct { height: 4px; background: #d4c8b8; border-radius: 2px; width: 80%; }
+        .wf-reasons .rct2 { height: 3px; background: #383838; border-radius: 2px; width: 60%; }
+
+        /* 03. CALCULATOR JS */
+        .wf-calc { background: #ffffff; padding: 16px 14px; border-top: 1px solid #e6dbd0; border-bottom: 1px solid #2a2a2a;}
+        .wf-calc .ct { color: #302621; font-size: 13px; font-weight: 900; text-align: center; margin-bottom: 4px;}
+        .wf-calc .ct span { color: #c88264; }
+        .calc-grid { background: #fcfaf8; border: 1px solid #e6dbd0; border-radius: 8px; padding: 10px; margin-top: 14px; display: flex; flex-direction: column; gap: 4px;}
+        .calc-row { display: flex; justify-content: space-between; align-items: center;}
+        .calc-label { color: #aaa; font-size: 8px; font-weight: 700; text-transform: uppercase; }
+        .calc-val { color: #555; font-size: 9px; font-weight: 900; }
+        .calc-val.lime { color: #c88264; }
+        .calc-divider { height: 1px; background: #e6dbd0; margin: 4px 0; }
+        .calc-label.highlight { color: #c88264; font-size: 10px; font-weight: 900;}
+        .calc-val.highlight { color: #c88264; font-size: 13px; font-weight: 900; background: rgba(197, 160, 89, 0.1); padding: 2px 6px; border-radius: 4px; }
+        
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 18px; border-radius: 50%; background: #c88264; border: 3px solid white; cursor: pointer; margin-top: -6px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: #e6dbd0; border-radius: 3px; }
+
+        /* 04. PROFILE */
+        .wf-profile { background: #fcfaf8; padding: 14px; border-top: 1px solid #1a1a1a; }
+        .wf-profile .pth { color: #302621; font-size: 10px; font-weight: 900; margin-bottom: 8px; }
+        .wf-profile .pth span { color: #c88264; }
+        .wf-profile .pfl { display: flex; gap: 8px; }
+        .wf-profile .pbars { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+        .wf-profile .pb { background: #ffffff; border-left: 3px solid #c88264; border-radius: 0 6px 6px 0; padding: 5px 6px; display: flex; align-items: center; gap: 5px; }
+        .wf-profile .pb-ic { width: 11px; height: 11px; background: #c88264; border-radius: 50%; flex-shrink: 0; }
+        .wf-profile .pb-ln { flex: 1; height: 4px; background: #d4c8b8; border-radius: 2px; }
+        .wf-profile .pimg { flex: 0 0 65px; height: 80px; background: #e6dbd0; border-radius: 8px; }
+
+        /* 05. INGREDIENTS */
+        .wf-ingr { background: #ffffff; padding: 14px; border-top: 1px solid #e6dbd0; }
+        .wf-ingr .ith { color: #302621; font-size: 10px; font-weight: 900; margin-bottom: 10px; }
+        .wf-ingr .ith span { color: #c88264; font-style: italic; }
+        .wf-ingr .il { display: flex; gap: 10px; }
+        .wf-ingr .iimg { flex: 0 0 65px; height: 90px; background: #fcfaf8; border-radius: 8px; border: 1px solid #e6dbd0;}
+        .wf-ingr .iitems { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .wf-ingr .idr { display: flex; align-items: center; gap: 4px; }
+        .wf-ingr .idot { width: 8px; height: 8px; background: #c88264; border-radius: 50%; flex-shrink: 0; }
+        .wf-ingr .itl { flex: 1; height: 5px; background: #e0e0e0; border-radius: 2px; }
+        .wf-ingr .isl { height: 3px; background: #555; border-radius: 2px; width: 80%; margin-top:2px;}
+
+        /* 06. AUTHORITY */
+        .wf-auth { background: #fcfaf8; padding: 14px; border-top: 1px solid #1a1a1a; display: flex; gap: 10px; }
+        .wf-auth .aimg { flex: 0 0 65px; height: 80px; background: #e6dbd0; border-radius: 8px; }
+        .wf-auth .aright { flex: 1; }
+        .wf-auth .atitle { color: #302621; font-size: 13px; font-weight: 900; font-style: italic; }
+        .wf-auth .asub { color: #c88264; font-size: 8px; font-weight: 900; margin: 2px 0 8px; }
+        .wf-auth .abox { background: #ffffff; border: 1px solid #e6dbd0; border-radius: 8px; padding: 7px; }
+        .wf-auth .aql { height: 4px; background: #555; border-radius: 2px; margin-bottom: 3px; }
+
+        /* 07. INSTRUCTIONS */
+        .wf-instr { background: #ffffff; padding: 14px; border-top: 1px solid #e6dbd0; }
+        .wf-instr .instr-title { color: #c88264; font-size: 16px; font-weight: 900; font-style: italic; line-height: .9; margin-bottom: 10px; }
+        .wf-instr .itop { display: flex; gap: 8px; }
+        .wf-instr .ifeats { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+        .wf-instr .ifeat { background: #fcfaf8; border: 1px solid #e6dbd0; border-radius: 7px; padding: 6px; display: flex; align-items: flex-start; gap: 5px; }
+        .wf-instr .ific { width: 14px; height: 14px; background: #c88264; border-radius: 4px; flex-shrink: 0; }
+        .wf-instr .iftx { flex: 1; }
+        .wf-instr .ift1 { font-size: 6.5px; font-weight: 900; color: #302621; margin-bottom: 2px; }
+        .wf-instr .ift2 { height: 4px; background: #555; border-radius: 2px; }
+        .wf-instr .iimg { flex: 0 0 55px; height: 90px; background: #fcfaf8; border-radius: 8px; border: 1px dashed #444;}
+
+        /* 08. COMPARISON */
+        .wf-comp { background: #f7f3ee; padding: 14px; border-top: 1px solid #1a1a1a; }
+        .wf-comp .cth { color: #302621; font-size: 10px; font-weight: 900; text-align: center; margin-bottom: 8px; }
+        .wf-comp .cth span { color: #c88264; }
+        .wf-comp .cl { display: flex; gap: 0; }
+        .wf-comp .ls { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .wf-comp .vs { flex: 0 0 22px; background: #c88264; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 5px; font-weight: 900; color: white; writing-mode: vertical-rl; letter-spacing: .1em; }
+        .wf-comp .rs { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .wf-comp .ci { background: #fcfaf8; border-left: 3px solid #c88264; border-radius: 0 5px 5px 0; padding: 5px 5px; display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+        .wf-comp .ci .ck { width: 9px; height: 9px; background: #c88264; border-radius: 50%; flex-shrink: 0; }
+        .wf-comp .ci .cval { color: #c88264; font-size: 8px; font-weight: 900; }
+        .wf-comp .cx { background: #e6dbd0; border-right: 3px solid rgba(200,30,30,.5); border-radius: 5px 0 0 5px; padding: 5px; display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+        .wf-comp .cx .xk { width: 9px; height: 9px; border: 2px solid red; border-radius: 50%; flex-shrink: 0; order: 2; }
+        .wf-comp .cx .xval { color: #302621; font-size: 7px; font-weight: 700; order: 1; }
+
+        /* 09. WHOLESALE TABLE */
+        .wf-table { background: #ffffff; padding: 14px; border-top: 1px solid #e6dbd0; }
+        .wf-table .ttitle { color: #302621; font-size: 11px; font-weight: 900; text-align: center; margin-bottom: 10px; }
+        .wf-table .ttitle span { color: #c88264; }
+        .wf-table .tw { border: 1px solid #e6dbd0; border-radius: 8px; overflow: hidden; background: #fcfaf8; }
+        .wf-table .trow { display: flex; justify-content: space-between; padding: 8px 10px; border-bottom: 1px solid #333; }
+        .wf-table .trow.header { background: #e6dbd0; border-bottom: 2px solid #555; }
+        .wf-table .tc1 { flex: 1; color: #302621; font-size: 7px; font-weight: 700; text-transform: uppercase; }
+        .wf-table .tc2 { flex: 1; text-align: center; color: #aaa; font-size: 7px; font-weight: 700; }
+        .wf-table .tc3 { flex: 1; text-align: right; color: #302621; font-size: 8px; font-weight: 900; }
+        .wf-table .tc3.highlight { color: #c88264; font-size: 10px; }
+
+        /* 10. TESTIMONIALS */
+        .wf-test { background: #fcfaf8; padding: 14px; border-top: 1px solid #1a1a1a; }
+        .wf-test .tt { color: #302621; font-size: 11px; font-weight: 900; text-align: center; font-style: italic; margin-bottom: 8px; }
+        .wf-test .tt span { color: #c88264; }
+        .wf-test .tg { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+        .wf-test .tc { background: #ffffff; border-radius: 7px; padding: 8px; border: 1px solid rgba(255,255,255,.05); }
+        .wf-test .th { display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+        .wf-test .ta { width: 20px; height: 20px; background: #d4c8b8; border-radius: 50%; }
+        .wf-test .tn { height: 4px; background: #ccc; border-radius: 2px; width: 40px; margin-bottom: 2px;}
+        .wf-test .tl { height: 3px; background: #c88264; border-radius: 1px; width: 30px; }
+        .wf-test .tb { height: 3px; background: #d4c8b8; border-radius: 2px; margin-bottom: 3px; }
+
+        /* 11. FAQ & FOOTER */
+        .wf-faq { background: #ffffff; padding: 14px; border-top: 1px solid #e6dbd0; }
+        .wf-faq .fqs { margin-bottom: 10px; }
+        .wf-faq .fqi { border-bottom: 1px solid #2a2a2a; padding: 5px 2px; }
+        .wf-faq .fqq { height: 5px; background: rgba(197, 160, 89,.5); border-radius: 2px; width: 62%; margin-bottom: 3px; }
+        .wf-faq .fqa { height: 4px; background: #e6dbd0; border-radius: 2px; width: 85%; }
+        
+        .wf-footer { background: #111; padding: 12px 14px; border-top: 2px solid rgba(197, 160, 89,.3); }
+        .wf-footer .flogo { display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 8px; }
+        .wf-footer .fld { width: 13px; height: 13px; background: #c88264; border-radius: 5px; }
+        .wf-footer .flt { width: 60px; height: 6px; background: #c88264; border-radius: 2px; }
+
+        /* — FLOATING CTA — */
+        .wf-float {
+            background: #c88264;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-top: 2px solid rgba(255,255,255,.3);
+        }
+        .wf-float .fi { width: 16px; height: 16px; background: #ffffff; border-radius: 3px; flex-shrink: 0; }
+        .wf-float .ftx { display: flex; flex-direction: column; gap: 3px; }
+        .wf-float .ft1 { height: 6px; background: #ffffff; border-radius: 2px; width: 110px; }
+    </style>
+</head>
+
+<body>
+
+<h1 class="doc-title">Anatomía de la Landing Page — Tubos de Cortina Expansibles</h1>
+<p class="doc-sub">
+    <strong>B2B Venta Mayorista (Unidad: S/. 27)</strong> &nbsp;·&nbsp;
+    Arquitectura Completa de <strong>11 Módulos</strong> Interactivos
+</p>
+
+<div class="anatomy">
+
+    <!-- 0. TOP BANNER & HEADER -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">Barra & Header</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-banner wf-first">¡ENVÍO A PROVINCIA CON SHALOM! · PAGO CONTRA ENTREGA B2B</div>
+            <div class="wfs wf-header">
+                <div class="logo-row"><div class="lc">SVG</div><div class="lt"></div></div>
+                <div class="hbtn">COMPRAR CAJA (S/. 324)</div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Fijo en Sticky</strong><br>Banner de urgencia y header de navegación persistente con la CTA principal.</div></div>
+    </div>
+
+    <!-- 01. HERO MAIN -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">01 · Hero Principal</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-hero">
+                <div class="hero-grid">
+                    <div class="h-left">
+                        <div class="h-tag">STOCK INMEDIATO PROVINCIA</div>
+                        <div class="h-title">TUBOS DE CORTINA <span>EXTENSIBLES</span></div>
+                        <div class="h-check"><div class="ck">✓</div><div class="ck-ln"><span class="ck-tx">De 1.60 mts a 3.00 mts</span></div></div>
+                        <div class="h-check"><div class="ck">✓</div><div class="ck-ln"><span class="ck-tx">Diseño Metálico Resistente</span></div></div>
+                        <div class="hcta">S/. 27 / Tubo (Comprando x Caja)</div>
+                    </div>
+                    <div class="h-img"></div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Impacto Inicial</strong><br>Producto central + Beneficios comerciales + Precio de gancho para distribución B2B.</div></div>
+    </div>
+
+    <!-- 02. RAZONES B2B -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">02 · Por qué Emprender</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-reasons">
+                <div class="rtitle">¿POR QUÉ CON NOSOTROS?</div>
+                <div class="rsub"></div>
+                <div class="rcards">
+                    <div class="rc"><div class="rci"></div><div class="rct"></div><div class="rct2"></div></div>
+                    <div class="rc"><div class="rci"></div><div class="rct"></div><div class="rct2"></div></div>
+                    <div class="rc"><div class="rci"></div><div class="rct"></div><div class="rct2"></div></div>
+                    <div class="rc"><div class="rci"></div><div class="rct"></div><div class="rct2"></div></div>
+                    <div class="rc"><div class="rci"></div><div class="rct"></div><div class="rct2"></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>5 Razones Comerciales</strong><br>Stock asegurado, pago C.E., rentabilidad, envíos rápidos y soporte.</div></div>
+    </div>
+
+    <!-- 03. CALCULADORA (JS INTERACTIVO) -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">03 · Calculadora de Flete & Ganancia</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-calc">
+                <div class="ct">SIMULADOR EXACTO DE <span>COSTOS</span></div>
+                
+                <div style="padding: 0 10px; margin-top: 15px;">
+                    <input type="range" id="cajaSlider" min="1" max="3" step="1" value="2" style="width: 100%;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:2px; padding: 0 4px; margin-top: 6px;">
+                        <span style="font-size:7px; color:#aaa;" id="lbl-1">1 CAJA (12)</span>
+                        <span style="font-size:7px; color:#c88264; font-weight:900;" id="lbl-2">4 CAJAS (48)</span>
+                        <span style="font-size:7px; color:#aaa;" id="lbl-3">8 CAJAS (96)</span>
+                    </div>
+                </div>
+
+                <div class="calc-grid">
+                    <div class="calc-row"><span class="calc-label">Subtotal Tubos</span><span class="calc-val lime" id="val-tubos">S/. 1,296</span></div>
+                    <div class="calc-row"><span class="calc-label">Costo Envío a Agencia</span><span class="calc-val" id="val-agencia">S/. 20</span></div>
+                    <div class="calc-row"><span class="calc-label">Flete Promedio (Shalom)</span><span class="calc-val" id="val-flete">S/. 50</span></div>
+                    <div class="calc-divider"></div>
+                    <div class="calc-row"><span class="calc-label" style="color:white;font-weight:900;">INVERSIÓN TOTAL</span><span class="calc-val" style="color:white;font-weight:900;" id="val-total">S/. 1,366</span></div>
+                    <div class="calc-divider"></div>
+                    <div class="calc-row">
+                        <span class="calc-label highlight" style="font-size:9.5px;">COSTO REAL x TUBO</span>
+                        <span class="calc-val highlight" id="val-unit">S/. 28.45</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell">
+            <div class="r-conn"></div>
+            <div class="anno">
+                <strong>Interactividad JavaScript ★</strong><br>
+                <em>Mueve el slider en la izquierda para ver la calculadora funcionar.</em><br>
+                Muestra desglosado el precio de transporte de 1, 4 o 8 Cajas, probando que pedir al por mayor disminuye drásticamente el costo de flete por unidad.
+            </div>
+        </div>
+    </div>
+
+    <!-- 04. PERFIL DEL DISTRIBUIDOR -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">04 · Perfil Ideal</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-profile">
+                <div class="pth">¿PARA QUIÉN ES ESTA <span>OPORTUNIDAD?</span></div>
+                <div class="pfl">
+                    <div class="pbars">
+                        <div class="pb"><div class="pb-ic"></div><div class="pb-ln"></div></div>
+                        <div class="pb"><div class="pb-ic"></div><div class="pb-ln"></div></div>
+                        <div class="pb"><div class="pb-ic"></div><div class="pb-ln"></div></div>
+                    </div>
+                    <div class="pimg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Targeting</strong><br>Ferreterías, tiendas de hogar, o emprendedores independientes de provincia que buscan artículos de alta rotación.</div></div>
+    </div>
+
+    <!-- 05. DETALLE DE PRODUCTO (TIPO FLYER KIT) -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">05 · Contenido<br>del Kit</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <!-- POC_Flyer_Elegante Tailwind Structure -->
+            <div class="relative w-full max-w-[420px] shadow-[0_25px_60px_rgba(0,0,0,0.4)] bg-white overflow-hidden border border-stone-200 flex flex-col mx-auto transform transition duration-500 hover:translate-y-[-5px]">
+                
+                <!-- MITAD SUPERIOR (Imagen y panel superpuesto) -->
+                <div class="relative w-full h-[540px]">
+                    <!-- FOTO DE FONDO -->
+                    <img src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover filter sepia-[0.3] hover:scale-105 transition duration-1000" alt="Mesa elegante">
+                    
+                    <!-- PANEL IZQUIERDO TRASLÚCIDO -->
+                    <div class="absolute top-0 left-0 w-[55%] h-[85%] bg-white/95 backdrop-blur-md pt-8 px-5 flex flex-col shadow-[15px_0_30px_rgba(0,0,0,0.5)] border-r border-stone-200">
+                        
+                        <h2 class="font-bold text-[13.5px] leading-tight text-stone-900 mb-6 uppercase tracking-tight">
+                            LO QUE INCLUYE<br>EL KIT COMPLETO<br>DE 26 PIEZAS
+                        </h2>
+
+                        <ul class="space-y-4">
+                            <!-- Item 1 -->
+                            <li class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl border border-stone-200 bg-stone-50 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+                                    <span class="text-xl transform rotate-45 border-b-[3px] border-stone-500 w-4 block"></span> 
+                                </div>
+                                <div class="leading-none pt-1">
+                                    <span class="font-black text-[13px] text-stone-700">1x Barra</span><br>
+                                    <span class="font-medium text-[11px] text-stone-500 mt-1 block">Extensible</span>
+                                </div>
+                            </li>
+                            <!-- Item 2 -->
+                            <li class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl border border-stone-200 bg-stone-50 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                                    <span class="text-2xl text-stone-600">✦</span>
+                                </div>
+                                <div class="leading-none pt-1">
+                                    <span class="font-black text-[13px] text-stone-700">2x</span><br>
+                                    <span class="font-medium text-[11px] text-stone-500 mt-1 block">Terminales<br>Decorativas</span>
+                                </div>
+                            </li>
+                            <!-- Item 3 -->
+                            <li class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl border border-stone-200 bg-stone-50 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                                    <span class="text-2xl text-stone-600">▌</span>
+                                </div>
+                                <div class="leading-none pt-1">
+                                    <span class="font-black text-[13px] text-stone-700">2x</span><br>
+                                    <span class="font-medium text-[11px] text-stone-500 mt-1 block">Soportes de<br>Pared</span>
+                                </div>
+                            </li>
+                            <!-- Item 4 -->
+                            <li class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl border border-stone-200 bg-stone-50 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                                    <span class="text-2xl text-stone-600">◎</span>
+                                </div>
+                                <div class="leading-none pt-1">
+                                    <span class="font-black text-[13px] text-stone-700">20x</span><br>
+                                    <span class="font-medium text-[11px] text-stone-500 mt-1 block">Anillos<br>con Clips</span>
+                                </div>
+                            </li>
+                            <!-- Item 5 -->
+                            <li class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl border border-stone-200 bg-stone-50 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                                    <span class="text-2xl text-stone-600">●</span>
+                                </div>
+                                <div class="leading-none pt-1">
+                                    <span class="font-black text-[13px] text-stone-700">1x Kit de</span><br>
+                                    <span class="font-medium text-[11px] text-stone-500 mt-1 block">Herrajes</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- TEXTO CURSIVO "Limited Time Offer" EN LA ESQUINA DERECHA -->
+                    <div class="absolute top-[30px] right-[25px] text-center flex flex-col items-center">
+                        <div class="text-[20px] text-stone-700 mb-1 opacity-80">🔆</div>
+                        <div style="" class="text-[35px] text-stone-900 leading-[0.8] tracking-wider transform -rotate-3 text-right pr-2 mt-2">
+                            Oferta<br>Especial
+                        </div>
+                    </div>
+
+                    <!-- BADGE CIRCULAR "26 PIEZAS" -->
+                    <div class="absolute -bottom-[55px] left-1/2 transform -translate-x-1/2 w-[120px] h-[120px] bg-[#c88264] rounded-full flex flex-col items-center justify-center border-[5px] border-white shadow-[0_12px_25px_rgba(0,0,0,0.25)] z-30 ring-1 ring-[#c88264]/20">
+                        <span class="text-[#1a1a1a] font-black text-[46px] leading-none mt-2 select-none tracking-tighter">26</span>
+                        <svg viewBox="0 0 100 100" class="absolute w-full h-full inset-0 pointer-events-none">
+                            <path id="curve" d="M 20 65 A 35 35 0 0 0 80 65" fill="transparent" stroke="none"/>
+                            <text class="text-[10px] font-bold fill-[#1a1a1a] tracking-widest uppercase">
+                                <textPath href="#curve" startOffset="50%" text-anchor="middle">PIEZAS COMPLETAS</textPath>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- FOOTER INFERIOR BLANCO -->
+                <div class="w-full bg-white px-8 pt-16 pb-8 relative z-20 flex flex-col items-center">
+                    <h2 class="font-black text-[32px] text-stone-900 tracking-[-0.03em] leading-none mb-1">¡ORDENA YA!</h2>
+                    <h3 class="font-bold text-[16px] text-stone-700 tracking-wider mb-6">UNIDADES LIMITADAS</h3>
+                    <div class="w-[90%] h-[1px] bg-stone-100 mb-6"></div>
+                    <!-- Botón / Tag de Precio + Logo -->
+                    <div class="flex justify-between items-center w-full relative">
+                        <!-- Tag de Precio Izquierdo -->
+                        <div class="relative w-[130px]">
+                            <div style="position:absolute; width:40px; height:30px; border-bottom:2px solid #888; border-radius: 0 0 50% 50%; top:-20px; left:-35px; transform:rotate(-15deg);"></div>
+                            <div style="clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0 50%);" class="bg-white w-full py-2 pl-6 pr-3 font-black text-[13px] tracking-wide text-[#c88264] border border-[#c88264] shadow-[0_2px_5px_rgba(0,0,0,0.05)] relative z-10 flex items-center justify-center gap-1">
+                                <div class="w-1.5 h-1.5 bg-[#c88264] rounded-full absolute left-2 shadow-inner"></div>
+                                <span class="font-medium text-[11px] text-stone-600 uppercase">Solo</span> S/ 379
+                            </div>
+                        </div>
+                        <!-- Branding Derecho -->
+                        <div class="text-right flex flex-col items-end">
+                            <div class="flex items-center gap-1">
+                                <svg class="w-4 h-4 text-[#c88264]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                                <span class="font-black text-[17px] tracking-tight text-[#c88264]">SOMOS MARKETING</span>
+                            </div>
+                            <div class="font-semibold text-[9px] text-stone-500 tracking-widest mt-0.5 uppercase">
+                                www.somosmarketing.pe
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Inspirado en tu Flyer (Izquierda Iconos / Derecha Foto)</strong><br>El Módulo 05 ahora refleja exactamente la estética del flyer con el "Kit de 26 piezas" (1x barra, 2x terminales, etc.). Destaca brillantemente frente al sitio oscuro.</div></div>
+    </div>
+
+    <!-- 06. AUTORIDAD -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">06 · Autoridad Marca</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-auth">
+                <div class="aimg"></div>
+                <div class="aright">
+                    <div class="atitle">SOMOS IMPORTADORES</div>
+                    <div class="asub">ENTREGA DIRECTA — SIN TERCEROS</div>
+                    <div class="abox">
+                        <div class="aql"></div>
+                        <div class="aql"></div>
+                        <div class="aql" style="width:70%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Respaldo Mayorista</strong><br>Transmite la confianza de comprar desde Lima directamente a "Somos Marketing Perú EIRL".</div></div>
+    </div>
+
+    <!-- 07. ARGUMENTOS DE VENTA (2x2 GRID DE BENEFICIOS FLYER) -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">07 · Argumentos<br>de Venta</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-instr" style="padding: 16px 14px; background: #e8dfd5; border-top: 1px solid #d4c8b8; border-bottom: 1px solid #d4c8b8;">
+                <div style="text-align:center; font-size:12px; font-weight:900; color:#1a1a1a; margin-bottom:12px; line-height:1.1;">SOLUCIONES PARA CADA NECESIDAD<br><span style="font-size:8px; font-weight:700; color:#555;">(Usa estos beneficios para vender rápido a tus clientes)</span></div>
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <!-- Card 1 -->
+                    <div style="background:white; border-radius:6px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                        <div style="padding:6px; display:flex; align-items:center; gap:4px; border-bottom:1px solid #eee;">
+                            <div style="width:12px; height:12px; border:1px solid #1a1a1a; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:7px;">1</div>
+                            <div style="font-size:5.5px; font-weight:900; color:#1a1a1a; line-height:1;">BLOQUEA EL SOL<br>Y CALOR INTENSO</div>
+                        </div>
+                        <div style="height:55px; background:rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center; position:relative;">
+                            <div style="width:100%; height:100%; position:absolute; background:linear-gradient(45deg, rgba(197, 160, 89,0.2) 0%, transparent 100%);"></div>
+                            <div style="font-size:6.5px; font-weight:700; color:#888;">[Foto Ventana Sol]</div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div style="background:white; border-radius:6px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                        <div style="padding:6px; display:flex; align-items:center; gap:4px; border-bottom:1px solid #eee;">
+                            <div style="width:12px; height:12px; border:1px solid #1a1a1a; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:7px;">2</div>
+                            <div style="font-size:5.5px; font-weight:900; color:#1a1a1a; line-height:1;">EVITA VECINOS<br>CURIOSOS</div>
+                        </div>
+                        <div style="height:55px; background:rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center;">
+                            <div style="font-size:6.5px; font-weight:700; color:#888;">[Foto Privacidad]</div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div style="background:white; border-radius:6px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                        <div style="padding:6px; display:flex; align-items:center; gap:4px; border-bottom:1px solid #eee;">
+                            <div style="width:12px; height:12px; border:1px solid #1a1a1a; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:7px;">3</div>
+                            <div style="font-size:5.5px; font-weight:900; color:#1a1a1a; line-height:1;">ELIMINA DESLUMB-<br>RAMIENTO EN TV</div>
+                        </div>
+                        <div style="height:55px; background:rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center;">
+                            <div style="font-size:6.5px; font-weight:700; color:#888;">[Foto Cine en Casa]</div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div style="background:white; border-radius:6px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                        <div style="padding:6px; display:flex; align-items:center; gap:4px; border-bottom:1px solid #eee;">
+                            <div style="width:12px; height:12px; border:1px solid #1a1a1a; border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:7px;">4</div>
+                            <div style="font-size:5.5px; font-weight:900; color:#1a1a1a; line-height:1;">CREA TU PROPIO<br>SANTUARIO</div>
+                        </div>
+                        <div style="height:55px; background:rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center;">
+                            <div style="font-size:6.5px; font-weight:700; color:#888;">[Foto Dormitorio]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Layout Grid 2x2 (Basado en Flyer 2 y 4)</strong><br>Le demostramos al comprador B2B que <strong>sus clientes finales</strong> tienen problemas que este producto resolverá. Una grilla de "Soluciones para cada necesidad" (Calor, Privacidad, Luz, Descanso) altamente visual y fácil de vender.</div></div>
+    </div>
+
+    <!-- 08. COMPARATIVA -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">08 · Comparativa Precios</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-comp">
+                <div class="cth">EL MEJOR PRECIO <span>GARANTIZADO</span></div>
+                <div class="cl">
+                    <div class="ls">
+                        <div class="cx"><div class="xval">Distribuidores Locales</div><div class="xk"></div></div>
+                        <div class="cx"><div class="xval">Costos de Flete Independiente</div><div class="xk"></div></div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="rs">
+                        <div class="ci"><div class="ck"></div><div class="cval">Somos MKT (Lima)</div></div>
+                        <div class="ci"><div class="ck"></div><div class="cval">Desde S/. 27.00</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Ventaja Competitiva</strong><br>Muestra el ahorro directo VS comprarle a la competencia de la misma ciudad.</div></div>
+    </div>
+
+    <!-- 09. OFERTA MAYORISTA (TABLA) -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">09 · Tabla Escalonada</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-table">
+                <div class="ttitle">INVERSIÓN CLARA <span>POR VOLUMEN</span></div>
+                <div class="tw">
+                    <div class="trow header"><div class="tc1">Cajas (Ún)</div><div class="tc2">Flete Aprox</div><div class="tc3">Inversión Final</div></div>
+                    <div class="trow"><div class="tc1">1 Caja (12)</div><div class="tc2">S/ 55</div><div class="tc3">S/ 379</div></div>
+                    <div class="trow"><div class="tc1">4 Cajas (48)</div><div class="tc2">S/ 70</div><div class="tc3 highlight">S/ 1,366</div></div>
+                    <div class="trow" style="border:none;"><div class="tc1">8 Cajas (96)</div><div class="tc2">S/ 120</div><div class="tc3">S/ 2,712</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Aterrizaje del precio</strong><br>Recapitula la calculadora pero en una tabla fija inamovible para total transparencia comercial.</div></div>
+    </div>
+
+    <!-- 10. TESTIMONIOS -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">10 · Testimonios</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <div class="wfs wf-test">
+                <div class="tt">CLIENTES 100% <span>SATISFECHOS</span></div>
+                <div class="tg">
+                    <div class="tc"><div class="th"><div class="ta"></div><div style="flex:1;"><div class="tn"></div><div class="tl"></div></div></div><div class="tb"></div><div class="tb"></div></div>
+                    <div class="tc"><div class="th"><div class="ta"></div><div style="flex:1;"><div class="tn"></div><div class="tl"></div></div></div><div class="tb"></div><div class="tb"></div></div>
+                    <div class="tc"><div class="th"><div class="ta"></div><div style="flex:1;"><div class="tn"></div><div class="tl"></div></div></div><div class="tb"></div><div class="tb"></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Prueba Social</strong><br>Fotos de las cajas llegando a Trujillo, Arequipa, etc.</div></div>
+    </div>
+
+    <!-- 11. RECREACIÓN ALTA FIDELIDAD FLYER 2 -->
+    <div class="arow" style="align-items:flex-start;">
+        <div class="l-cell" style="margin-top:20px;"><div class="label-box" style="background:#e8dfd5; color:#5c4731; border-color:#c88264;">11 · Demo Flyer<br>(Alta Fidelidad)</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <!-- POC Flyer Responsivo -->
+            <div class="relative w-full max-w-[420px] bg-white text-stone-700 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden pt-8 ring-1 ring-stone-900/5 mx-auto z-10 hover:scale-[1.01] transition-transform duration-500">
+                <!-- FOTO DE FONDO SUPERIOR DESENFOCADA -->
+                <div class="absolute top-0 left-0 w-full h-[500px] z-0 opacity-20 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop" class="w-full h-full object-cover" alt="Fondo interior">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-white"></div>
+                </div>
+
+                <div class="relative z-10">
+                    <!-- HEADER -->
+                    <header class="text-center px-8 mb-6">
+                        <h2 style="" class="text-xl md:text-2xl tracking-[0.15em] text-stone-600 leading-tight">
+                            ELEVA TUS CORTINAS<br>AL SIGUIENTE NIVEL
+                        </h2>
+                        <div class="w-16 h-[1px] bg-stone-300 mx-auto my-5"></div>
+                        <h1 class="text-[22px] md:text-[28px] font-bold leading-snug px-4 text-stone-900">
+                            SET COMPLETO DE BARRA DE CORTINA EN COBRE CEPILLADO CON REMATES DE JAULA
+                        </h1>
+                    </header>
+
+                    <!-- GRID ASIMETRICO -->
+                    <section class="grid grid-cols-1 gap-y-8 px-6 mt-4 relative">
+                        <!-- COLUMNA IZQUIERDA (Pasos) -->
+                        <div class="flex flex-col justify-start w-full relative pt-2">
+                            <!-- Paso 1 -->
+                            <div class="flex items-center space-x-3 mb-6 relative z-30">
+                                <div class="w-12 h-12 rounded-[14px] bg-white border-[2px] border-[#c88264] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#c88264]">
+                                    <span class="text-2xl font-black text-[#c88264]">1</span>
+                                </div>
+                                <div class="pt-1">
+                                    <p class="font-black text-[13px] leading-tight text-stone-700">1. Pide por</p>
+                                    <p class="font-medium text-[13px] leading-tight text-stone-700">WhatsApp</p>
+                                </div>
+                            </div>
+
+                            <!-- Barra de cortina (1 columna) -->
+                            <div class="w-full h-[45px] my-6 relative z-10">
+                                <img src="https://images.unsplash.com/photo-1598300056393-4aac492f4344?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover filter sepia hue-rotate-15 contrast-125 rounded-md shadow-lg" alt="Tubo de cobre" style="clip-path: inset(0 round 10px);">
+                            </div>
+
+                            <!-- Pasos 2 al 5 -->
+                            <div class="space-y-6 lg:pl-0 mt-4 relative z-30">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 rounded-[14px] bg-white border-[2px] border-[#c88264] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#c88264]">
+                                        <span class="text-2xl font-black text-[#c88264]">2</span>
+                                    </div>
+                                    <div class="pt-1">
+                                        <p class="font-black text-[13px] leading-tight">2. Ingresa información</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 rounded-[14px] bg-white border-[2px] border-[#c88264] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#c88264]">
+                                        <span class="text-2xl font-black text-[#c88264]">3</span>
+                                    </div>
+                                    <div class="pt-1"><p class="font-black text-[13px] leading-tight">3. Genera Orden</p></div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 rounded-[14px] bg-white border-[2px] border-[#c88264] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#c88264]">
+                                        <span class="text-2xl font-black text-[#c88264]">4</span>
+                                    </div>
+                                    <div class="pt-1"><p class="font-black text-[13px] leading-tight">4. Espera 2 Días</p></div>
+                                </div>
+                                <div class="flex items-center space-x-3 pb-8">
+                                    <div class="w-12 h-8 flex items-center justify-center flex-shrink-0">
+                                        <span class="text-[17px] font-black text-stone-900 tracking-tighter">Shalom</span>
+                                    </div>
+                                    <div class="pt-1"><p class="font-black text-[13px] leading-tight">5. Recoge (con Email)</p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COLUMNA DERECHA (STACK VERTICAL Y TARJETA) -->
+                        <div class="w-full mt-4 mb-10 flex flex-col items-center">
+                            <div class="w-full h-[200px] bg-stone-300 overflow-hidden shadow-inner rounded-t-xl z-0 pointer-events-none">
+                                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-90" alt="Hombre comprando">
+                            </div>
+                            <div class="w-[90%] -mt-10 bg-white text-stone-900 p-5 shadow-[0_15px_30px_rgba(0,0,0,0.25)] z-20 border-t-4 border-[#c88264] rounded-b-xl">
+                                <h3 class="font-black text-[13px] text-[#c88264] border-b border-stone-200 pb-3 mb-4 tracking-wide uppercase">ESTO ES LO QUE OBTIENES:</h3>
+                                <div class="flex flex-col gap-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-3xl text-stone-500 w-8 text-center flex-shrink-0 ">✦</div>
+                                        <div class="font-black text-xl text-stone-900 w-6 flex-shrink-0">x2</div>
+                                        <div class="font-semibold text-xs leading-tight text-stone-900">Remates de Jaula</div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-3xl text-[#c88264] w-8 text-center flex-shrink-0 ">▌</div>
+                                        <div class="font-black text-xl text-stone-900 w-6 flex-shrink-0">x3</div>
+                                        <div class="font-semibold text-xs leading-tight text-stone-900">Soportes de Pared</div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-3xl text-stone-500 w-8 text-center flex-shrink-0 ">◎</div>
+                                        <div class="font-black text-xl text-stone-900 w-6 flex-shrink-0">x10</div>
+                                        <div class="font-semibold text-xs leading-tight text-stone-900">Anillos con Ganchos</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 mt-5 pt-4 border-t border-stone-200">
+                                    <div class="w-8 h-1.5 bg-[#c88264] rounded shrink-0"></div>
+                                    <div class="font-semibold text-xs leading-tight text-stone-900">1 Barra Telescópica Ajustable</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>⭐ Alta Fidelidad (Copia del Flyer 2)</strong><br>Para responder a tu desafío, este Módulo (11) ya no es un simple wireframe; es una <strong>recreación espectacular en vivo</strong> del flyer publicitario que contiene la chica, el "Kit Incluye" flotante, y los 5 pasos con iconos ilustrados.<br><br>Tiene degradados cobrizos (`#c88264`), sombras profundas `box-shadow`, transparencias `backdrop-filter` y una cinta roja CTA desbordada.<br><br><strong>Así de premium</strong> se verá el producto final de Tailwind. No te conformes con menos.</div></div>
+    </div>
+
+    <!-- 12. FAQ & FOOTER / FLOAT -->
+    <div class="arow">
+        <div class="l-cell"><div class="label-box">12 · Cierre Final</div><div class="h-line"></div></div>
+        <div class="wf-col">
+            <!-- POC Flyer Impreso (Cierre Final) -->
+            <div class="bg-white text-stone-700 w-full max-w-[480px] shadow-[0_15px_40px_rgba(0,0,0,0.1)] rounded-sm overflow-hidden flex flex-col items-center pt-8 pb-4 relative z-10 mx-auto transform transition duration-500 hover:scale-[1.02] border border-stone-200">
+                <!-- HEADER -->
+                <div class="text-center px-6 mb-4 w-full">
+                    <h1 class="font-black text-2xl leading-none text-stone-900 tracking-tight">¡TRANSFORMA TU<br>HOGAR CON ESTILO!</h1>
+                    <p class="font-bold text-sm text-stone-700 mt-2 tracking-wide">Set de Barra de Cortina Oro Rosa Copper</p>
+                </div>
+                <!-- AREA DE LA FOTO -->
+                <div class="relative w-full">
+                    <div class="w-full h-[220px] bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[30%] contrast-75 brightness-110" alt="Cortinas en ventana">
+                    </div>
+                    <!-- PILDORA -->
+                    <div class="absolute -bottom-5 w-full flex justify-center px-4">
+                        <div class="bg-[#c88264] text-[#1a1a1a] rounded-full py-2 px-6 shadow-lg border-[3px] border-white flex items-center gap-2">
+                            <span class="font-bold text-xs tracking-wider uppercase">KIT COMPLETO DE</span>
+                            <span class="font-black text-2xl leading-none">26</span>
+                            <span class="font-black text-base tracking-widest uppercase">PIEZAS</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- ESPACIADOR -->
+                <div class="h-8"></div>
+                <!-- LISTA DE ITEMS -->
+                <div class="w-full px-8 py-2">
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3"><div class="w-5 flex justify-center text-xl text-stone-600">▬</div><div class="font-bold text-sm text-stone-700">x 1 Barra Telescópica (1.2m - 2.1m)</div></li>
+                        <li class="flex items-center gap-3"><div class="w-5 flex justify-center text-xl text-stone-600">✦</div><div class="font-bold text-sm text-stone-700">x 2 Terminales de Jaula Espiral</div></li>
+                        <li class="flex items-center gap-3"><div class="w-5 flex justify-center text-xl text-stone-600">▌</div><div class="font-bold text-sm text-stone-700">x 2 Soportes de Pared Resistentes</div></li>
+                        <li class="flex items-center gap-3"><div class="w-5 flex justify-center text-xl text-stone-600">◎</div><div class="font-bold text-sm text-stone-700">x 20 Anillos de Cortina</div></li>
+                        <li class="flex items-center gap-3"><div class="w-5 flex justify-center text-xl text-stone-600">●</div><div class="font-bold text-sm text-stone-700">x Kit de Montaje Completo <span class="font-medium text-[11px]">(4 Tornillos, 2 Tacos)</span></div></li>
+                    </ul>
+                </div>
+                <!-- BOTON CTA CHAMPAGNE GOLD -->
+                <div class="w-full px-6 mt-6">
+                    <div class="bg-[#c88264] hover:bg-[#b58e47] cursor-pointer transition-colors w-full rounded-full py-3 px-4 shadow-lg flex flex-col items-center text-[#1a1a1a] border-2 border-[#1a1a1a]">
+                        <span class="font-black text-[15px] tracking-wide leading-tight text-center">¡APROVECHA LA OFERTA</span>
+                        <span class="font-black text-[15px] tracking-wide leading-tight text-center">Y CÓMPRALO YA!</span>
+                    </div>
+                </div>
+                <!-- ENLACE FOOTER -->
+                <div class="mt-4 text-[10px] font-bold text-stone-700 tracking-wide">
+                    Encuentra más beneficios en: <span class="border-b border-[#c88264] pb-0.5 text-[#c88264]">www.somosmarketing.pe</span>
+                </div>
+            </div>
+            <div class="wfs wf-footer wf-last">
+                <div class="flogo"><div class="fld"></div><div class="flt"></div></div>
+                <div style="text-align:center; font-size:6px; color:#555;">© 2026 Somos Marketing Perú EIRL</div>
+            </div>
+            
+            <div class="wfs wf-float" style="border:none; border-radius:8px; margin-top:20px; outline:2px dashed #0c0; outline-offset:4px;">
+                <div class="fi"></div>
+                <div class="ftx">
+                    <div class="ft1"></div>
+                    <div class="ft2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="r-cell"><div class="r-conn"></div><div class="anno"><strong>Despeje de Dudas y CTA</strong><br>Preguntas frecuentes sobre Shalom, el pago al recibir y el botón flotante que va para WhatsApp.</div></div>
+    </div>
+
+</div>
+
+<!-- Funcionalidad Interactiva JS de la Calculadora -->
+<script>
+    const slider = document.getElementById('cajaSlider');
+    const data = {
+        1: { lbl: '1 CAJA (12)', tubos: 324, agencia: 20, flete: 35, total: 379, unit: 31.58 },
+        2: { lbl: '4 CAJAS (48)', tubos: 1296, agencia: 20, flete: 50, total: 1366, unit: 28.45 },
+        3: { lbl: '8 CAJAS (96)', tubos: 2592, agencia: 20, flete: 100, total: 2712, unit: 28.25 }
+    };
+    
+    slider.addEventListener('input', (e) => {
+        const val = e.target.value;
+        document.getElementById('val-tubos').textContent = 'S/. ' + data[val].tubos.toLocaleString('en-US');
+        document.getElementById('val-agencia').textContent = 'S/. ' + data[val].agencia;
+        document.getElementById('val-flete').textContent = 'S/. ' + data[val].flete;
+        document.getElementById('val-total').textContent = 'S/. ' + data[val].total.toLocaleString('en-US');
+        document.getElementById('val-unit').textContent = 'S/. ' + data[val].unit.toFixed(2);
+        
+        document.getElementById('lbl-1').style.color = (val == 1) ? '#c88264' : '#aaa';
+        document.getElementById('lbl-1').style.fontWeight = (val == 1) ? '900' : 'normal';
+        document.getElementById('lbl-2').style.color = (val == 2) ? '#c88264' : '#aaa';
+        document.getElementById('lbl-2').style.fontWeight = (val == 2) ? '900' : 'normal';
+        document.getElementById('lbl-3').style.color = (val == 3) ? '#c88264' : '#aaa';
+        document.getElementById('lbl-3').style.fontWeight = (val == 3) ? '900' : 'normal';
+    });
+</script>
+
+<div class="doc-footer">
+    Tubos Expandibles Decorativos — Blueprint Completo (11 Secciones + JS Interactivo)
+</div>
+
+</body>
+</html>

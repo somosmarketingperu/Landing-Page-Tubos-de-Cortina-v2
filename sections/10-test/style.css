@@ -1,0 +1,58 @@
+.va-testimonials {
+  padding: 80px 0;
+  background: var(--bone);
+}
+
+.va-test-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.va-test-card {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.va-test-stars {
+  font-size: 14px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.va-test-q {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--stone-light);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.va-test-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid #f8f8f8;
+  padding-top: 20px;
+}
+
+.va-tu-info strong {
+  display: block;
+  font-size: 14px;
+  color: var(--dark);
+}
+
+.va-tu-info span {
+  font-size: 12px;
+  color: #888;
+}
+
+@media (max-width: 600px) {
+  .va-test-card { padding: 30px; }
+}

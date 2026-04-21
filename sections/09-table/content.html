@@ -1,0 +1,114 @@
+<section class="va-pricing-table-section">
+  <div class="va-container">
+    <div class="va-pt-head">
+      <h2 class="va-h2 text-center">NIVELES DE <span class="text-highlight">INVERSIÓN POR MAYOR</span></h2>
+      <p class="va-text-center va-p-desc">Precio oficial: <strong>S/. 27 por tubo</strong>. Con pago anticipado, el envío es gratis y pagas exactamente eso.</p>
+    </div>
+
+    <!-- Toggle de modalidad -->
+    <div class="va-pt-toggle">
+      <button class="va-pt-toggle-btn active" id="va-toggle-transfer" onclick="togglePricingTable('transfer')">
+        🏦 TRANSFERENCIA BANCARIA<br><small>S/. 27/tubo — Envío Gratis ✅</small>
+      </button>
+      <button class="va-pt-toggle-btn" id="va-toggle-cod" onclick="togglePricingTable('cod')">
+        🚚 CONTRA ENTREGA<br><small>S/. 27 + logística 🔼</small>
+      </button>
+    </div>
+
+    <div class="va-pt-wrapper">
+      <!-- TABLA TRANSFERENCIA -->
+      <table class="va-b2b-table" id="va-table-transfer">
+        <thead>
+          <tr>
+            <th>VOLUMEN</th>
+            <th class="featured">TU INVERSIÓN TOTAL<br><small>(S/. 27 × tubos)</small></th>
+            <th>PRECIO EFECTIVO/TUBO</th>
+            <th>FLETE + EMBALAJE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="va-v-name">1 Caja (12 Unid.)</td>
+            <td class="va-total">S/. 324</td>
+            <td><strong>S/. 27.00</strong> ✅</td>
+            <td><span class="va-free">GRATIS</span></td>
+          </tr>
+          <tr class="va-row-featured">
+            <td class="va-v-name">4 Cajas (48 Unid.) <span class="va-badge-pt">RECOMENDADO</span></td>
+            <td class="va-total">S/. 1,296</td>
+            <td><strong>S/. 27.00</strong> ✅</td>
+            <td><span class="va-free">GRATIS</span></td>
+          </tr>
+          <tr>
+            <td class="va-v-name">8 Cajas (96 Unid.)</td>
+            <td class="va-total">S/. 2,592</td>
+            <td><strong>S/. 27.00</strong> ✅</td>
+            <td><span class="va-free">GRATIS</span></td>
+          </tr>
+          <tr>
+            <td class="va-v-name">10 Cajas (120 Unid.)</td>
+            <td class="va-total">S/. 3,240</td>
+            <td><strong>S/. 27.00</strong> ✅</td>
+            <td><span class="va-free">GRATIS</span></td>
+          </tr>
+          <tr>
+            <td class="va-v-name">20 Cajas (240 Unid.) <span class="va-badge-pt">GRAN DIST.</span></td>
+            <td class="va-total">S/. 6,480</td>
+            <td><strong>S/. 27.00</strong> ✅</td>
+            <td><span class="va-free">GRATIS</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- TABLA CONTRA ENTREGA -->
+      <table class="va-b2b-table" id="va-table-cod" style="display:none">
+        <thead>
+          <tr>
+            <th>VOLUMEN</th>
+            <th>SUBTOTAL (S/. 27)</th>
+            <th>GESTIÓN + FLETE</th>
+            <th class="featured">TOTAL PUESTO EN SHALOM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="va-v-name">1 Caja (12 Unid.)</td>
+            <td>S/. 324</td>
+            <td>S/. 55 <span class="va-flete-pct">(17%)</span></td>
+            <td class="va-total">S/. 379</td>
+          </tr>
+          <tr class="va-row-featured">
+            <td class="va-v-name">4 Cajas (48 Unid.) <span class="va-badge-pt">RECOMENDADO</span></td>
+            <td>S/. 1,296</td>
+            <td>S/. 70 <span class="va-flete-pct">(5%)</span></td>
+            <td class="va-total">S/. 1,366</td>
+          </tr>
+          <tr>
+            <td class="va-v-name">8 Cajas (96 Unid.)</td>
+            <td>S/. 2,592</td>
+            <td>S/. 120 <span class="va-flete-pct">(4%)</span></td>
+            <td class="va-total">S/. 2,712</td>
+          </tr>
+          <tr>
+            <td class="va-v-name">10 Cajas (120 Unid.)</td>
+            <td>S/. 3,240</td>
+            <td>S/. 120 <span class="va-flete-pct">(4%)</span></td>
+            <td class="va-total">S/. 3,360</td>
+          </tr>
+          <tr>
+            <td class="va-v-name">20 Cajas (240 Unid.) <span class="va-badge-pt">GRAN DIST.</span></td>
+            <td>S/. 6,480</td>
+            <td>S/. 170 <span class="va-flete-pct">(3%)</span></td>
+            <td class="va-total">S/. 6,650</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="va-pt-note">
+      💡 <strong>Con pago anticipado (transferencia bancaria)</strong> el flete Shalom y el embalaje son por nuestra cuenta.
+      Con contra entrega, los costos de logística se suman al precio.
+      *Fletes son referenciales para ciudades principales.
+    </div>
+  </div>
+</section>

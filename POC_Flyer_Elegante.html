@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demostración Tailwind - Flyer Elegante 26 Piezas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fuentes: Montserrat para estructura, Playball para el "Limited Time Offer" */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&family=Playball&display=swap');
+        body { font-family: 'Montserrat', sans-serif; background-color: #f3f0ec; }
+        .font-cursive { font-family: 'Playball', cursive; }
+        
+        /* Etiqueta de precio recortada (Price Tag Clip) */
+        .price-tag {
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0 50%);
+        }
+
+        /* Línea curva decorativa del cable del tag */
+        .tag-string {
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            border-bottom: 2px solid #888;
+            border-radius: 0 0 50% 50%;
+            top: -20px;
+            left: -35px;
+            transform: rotate(-15deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- CONTENEDOR PRINCIPAL TIPO POSTER -->
+    <div class="relative w-full max-w-[420px] shadow-[0_25px_60px_rgba(0,0,0,0.2)] bg-white overflow-hidden flex flex-col 
+                transform transition duration-500 hover:translate-y-[-5px]">
+        
+        <!-- MITAD SUPERIOR (Imagen y panel superpuesto) -->
+        <div class="relative w-full h-[540px]">
+            <!-- FOTO DE FONDO (Mesa con tubos - simulada) -->
+            <img src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover filter sepia-[0.3] hover:scale-105 transition duration-1000" alt="Mesa elegante">
+            
+            <!-- PANEL IZQUIERDO TRASLÚCIDO (Blanco opalino) -->
+            <div class="absolute top-0 left-0 w-[55%] h-[85%] bg-white/90 backdrop-blur-md pt-8 px-5 flex flex-col shadow-[15px_0_30px_rgba(0,0,0,0.06)] border-r border-white/60">
+                
+                <h2 class="font-bold text-[13.5px] leading-tight text-stone-900 mb-6 uppercase tracking-tight">
+                    LO QUE INCLUYE<br>EL KIT COMPLETO<br>DE 26 PIEZAS
+                </h2>
+
+                <ul class="space-y-4">
+                    <!-- Item 1 -->
+                    <li class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl border border-stone-200 bg-white/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+                            <span class="text-xl transform rotate-45 border-b-[3px] border-stone-500 w-4 block"></span> 
+                        </div>
+                        <div class="leading-none pt-1">
+                            <span class="font-black text-[13px] text-stone-800">1x Barra</span><br>
+                            <span class="font-medium text-[11px] text-stone-600 mt-1 block">Extensible</span>
+                        </div>
+                    </li>
+                    <!-- Item 2 -->
+                    <li class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl border border-stone-200 bg-white/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl text-stone-700">💠</span>
+                        </div>
+                        <div class="leading-none pt-1">
+                            <span class="font-black text-[13px] text-stone-800">2x</span><br>
+                            <span class="font-medium text-[11px] text-stone-600 mt-1 block">Terminales<br>Decorativas</span>
+                        </div>
+                    </li>
+                    <!-- Item 3 -->
+                    <li class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl border border-stone-200 bg-white/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl text-stone-700">🗜️</span>
+                        </div>
+                        <div class="leading-none pt-1">
+                            <span class="font-black text-[13px] text-stone-800">2x</span><br>
+                            <span class="font-medium text-[11px] text-stone-600 mt-1 block">Soportes de<br>Pared</span>
+                        </div>
+                    </li>
+                    <!-- Item 4 -->
+                    <li class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl border border-stone-200 bg-white/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl text-stone-700">⭕</span>
+                        </div>
+                        <div class="leading-none pt-1">
+                            <span class="font-black text-[13px] text-stone-800">20x</span><br>
+                            <span class="font-medium text-[11px] text-stone-600 mt-1 block">Anillos<br>con Clips</span>
+                        </div>
+                    </li>
+                    <!-- Item 5 -->
+                    <li class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl border border-stone-200 bg-white/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl text-stone-700">🔩</span>
+                        </div>
+                        <div class="leading-none pt-1">
+                            <span class="font-black text-[13px] text-stone-800">1x Kit de</span><br>
+                            <span class="font-medium text-[11px] text-stone-600 mt-1 block">Herrajes</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- TEXTO CURSIVO "Limited Time Offer" EN LA ESQUINA DERECHA -->
+            <div class="absolute top-[30px] right-[25px] text-center flex flex-col items-center">
+                <div class="text-[20px] text-stone-800 mb-1 opacity-80">🔆</div>
+                <div class="font-cursive text-[45px] text-stone-900 leading-[0.8] tracking-wider transform -rotate-3 text-right pr-2">
+                    Limited<br>
+                    Time<br>
+                    Offer
+                </div>
+            </div>
+
+            <!-- BADGE CIRCULAR "26 PIEZAS" -->
+            <!-- Tailwind le da z-index 30 y position absolute centrada, bottom negativo para morder el borde inferior -->
+            <div class="absolute -bottom-[55px] left-1/2 transform -translate-x-1/2 w-[120px] h-[120px] bg-[#936652] rounded-full flex flex-col items-center justify-center border-[5px] border-white shadow-[0_12px_25px_rgba(0,0,0,0.25)] z-30 ring-1 ring-[#936652]/10">
+                <span class="text-white font-black text-[46px] leading-none mt-2 select-none tracking-tighter">26</span>
+                
+                <!-- SVG Para curvar el texto de "PIEZAS COMPLETAS" bordeando el interior inferior -->
+                <svg viewBox="0 0 100 100" class="absolute w-full h-full inset-0 pointer-events-none">
+                    <path id="curve" d="M 20 65 A 35 35 0 0 0 80 65" fill="transparent" stroke="none"/>
+                    <text class="text-[10px] font-bold fill-white tracking-widest uppercase">
+                        <textPath href="#curve" startOffset="50%" text-anchor="middle">PIEZAS COMPLETAS</textPath>
+                    </text>
+                </svg>
+            </div>
+            
+        </div>
+
+        <!-- FOOTER INFERIOR BLANCO -->
+        <div class="w-full bg-white px-8 pt-16 pb-8 relative z-20 flex flex-col items-center">
+            
+            <h2 class="font-black text-[32px] text-stone-900 tracking-[-0.03em] leading-none mb-1">¡ORDENA YA!</h2>
+            <h3 class="font-bold text-[16px] text-stone-800 tracking-wider mb-6">UNIDADES LIMITADAS</h3>
+            
+            <!-- Separador sutil -->
+            <div class="w-[90%] h-[1px] bg-stone-200 mb-6"></div>
+
+            <!-- Botón / Tag de Precio + Logo -->
+            <div class="flex justify-between items-center w-full relative">
+                
+                <!-- Tag de Precio Izquierdo -->
+                <div class="relative w-[130px]">
+                    <div class="tag-string block"></div>
+                    <div class="price-tag bg-[#e8dcd6] w-full py-2 pl-6 pr-3 font-black text-[13px] tracking-wide text-stone-900 border border-[#d5c3b9] shadow-[0_2px_5px_rgba(0,0,0,0.05)] relative z-10 flex items-center justify-center gap-1">
+                        <!-- Hoyito del tag -->
+                        <div class="w-1.5 h-1.5 bg-white rounded-full absolute left-2 border border-[#d5c3b9] shadow-inner"></div>
+                        <span class="font-medium text-[11px] text-stone-700 uppercase">Solo</span> $xx.xx
+                    </div>
+                </div>
+
+                <!-- Branding Derecho -->
+                <div class="text-right flex flex-col items-end">
+                    <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-stone-800" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        <span class="font-black text-[17px] tracking-tight">brand</span>
+                    </div>
+                    <div class="font-semibold text-[9px] text-stone-500 tracking-widest mt-0.5 uppercase">
+                        www.example.com
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

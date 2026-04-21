@@ -1,0 +1,67 @@
+.va-profile {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.va-profile-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.va-profile-list {
+  display: grid;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.va-prof-item {
+  display: flex;
+  gap: 20px;
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 16px;
+  transition: var(--transition);
+}
+
+.va-prof-item:hover {
+  background: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transform: translateX(10px);
+}
+
+.va-prof-ic {
+  font-size: 24px;
+  background: white;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+
+.va-prof-h4 {
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.va-prof-p {
+  font-size: 13px;
+  color: var(--stone-light);
+  line-height: 1.5;
+}
+
+.va-prof-img {
+  border-radius: 20px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .va-profile-grid { grid-template-columns: 1fr; }
+  .va-profile-visual { order: 1; }
+  .va-profile-text { order: 2; }
+}

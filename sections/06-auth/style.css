@@ -1,0 +1,89 @@
+.va-authority {
+  padding: 80px 0;
+  background: var(--dark);
+  color: white;
+}
+
+.va-auth-wrap {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.va-auth-visual {
+  position: relative;
+}
+
+.va-auth-img {
+  border-radius: 20px;
+  width: 100%;
+  filter: brightness(0.9);
+}
+
+.va-auth-badge {
+  position: absolute;
+  top: 30px;
+  left: -20px;
+  background: var(--copper);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.va-ab-num {
+  display: block;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.va-ab-tx {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.va-auth-stats {
+  display: flex;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.va-stat-item {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+.va-stat-val {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--copper);
+  margin-bottom: 5px;
+}
+
+.va-stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+.va-auth-cert {
+  background: rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .va-auth-wrap { grid-template-columns: 1fr; }
+  .va-auth-badge { left: 20px; top: 20px; }
+  .va-auth-stats { flex-direction: column; }
+}

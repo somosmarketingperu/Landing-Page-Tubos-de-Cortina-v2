@@ -1,0 +1,37 @@
+.va-flyer {
+  padding: 100px 0;
+  background: var(--dark);
+  color: white;
+  text-align: center;
+}
+
+.va-flyer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.va-flyer-visual {
+  margin: 50px 0;
+}
+
+.va-btn-final {
+  background: var(--copper);
+  color: white;
+  padding: 20px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 16px;
+  display: inline-block;
+  box-shadow: 0 15px 30px rgba(200, 130, 100, 0.3);
+  transition: var(--transition);
+}
+
+.va-btn-final:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .va-flyer { padding: 60px 0; }
+  .va-btn-final { width: 100%; font-size: 14px; }
+}

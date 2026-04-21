@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demostración Tailwind - Grid y Overlaps</title>
+    <!-- Cargamos Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Importamos fuentes idénticas a la imagen */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;700;900&display=swap');
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #f7f5f2; /* Color cálido de fondo similar a la pared del flyer */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e0d8ca' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        
+        /* Simulación del degradado metálico cobrizo de la barra y el banner */
+        .bg-copper-gradient {
+            background: linear-gradient(135deg, #e3af9d 0%, #c98b76 50%, #b86d55 100%);
+        }
+        .text-copper { color: #b86d55; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 lg:p-10 antialiased text-stone-800">
+
+    <!-- CONTENEDOR PRINCIPAL TIPO "POSTER" (Limita ancho máximo) -->
+    <main class="relative w-full max-w-[650px] bg-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] rounded-xl overflow-hidden pt-8 ring-1 ring-stone-900/5">
+        
+        <!-- FOTO DE FONDO SUPERIOR DESENFOCADA (Simulando la ventana difuminada) -->
+        <div class="absolute top-0 left-0 w-full h-[500px] z-0 opacity-20 pointer-events-none">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&auto=format&fit=crop" class="w-full h-full object-cover" alt="Fondo interior">
+            <!-- Capa blanca difuminada para que las letras resalten -->
+            <div class="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-white"></div>
+        </div>
+
+        <!-- CONTENIDO FRONTAL -->
+        <div class="relative z-10">
+
+            <!-- HEADER -->
+            <header class="text-center px-8 mb-6">
+                <h2 class="font-cinzel text-xl md:text-2xl tracking-[0.15em] text-stone-700 leading-tight">
+                    ELEVA TUS CORTINAS<br>AL SIGUIENTE NIVEL
+                </h2>
+                <div class="w-16 h-[1px] bg-stone-300 mx-auto my-5"></div>
+                <h1 class="font-cinzel text-[22px] md:text-[28px] font-bold leading-snug px-4">
+                    SET COMPLETO DE BARRA DE CORTINA EN COBRE CEPILLADO CON REMATES DE JAULA
+                </h1>
+            </header>
+
+            <!-- CONTENEDOR FLEX PRINCIPAL: 
+                 En desktop se divide en dos columnas con Grid. 
+                 En mobile colapsa uno debajo del otro. -->
+            <section class="grid grid-cols-1 md:grid-cols-12 gap-x-2 px-6 mt-4 relative">
+                
+                <!-- COLUMNA IZQUIERDA (Pasos de compra) md:col-span-4 -->
+                <div class="md:col-span-5 flex flex-col justify-start w-full relative pt-2">
+                    
+                    <!-- Paso 1 (Este paso "flota" por encima de la foto o la barra visualmente en el original) -->
+                    <div class="flex items-center space-x-3 mb-6 relative z-30">
+                        <div class="w-12 h-12 rounded-[14px] bg-[#fcfaf7] border-[2px] border-[#30211a] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#30211a]">
+                            <span class="text-2xl drop-shadow-sm">📱</span>
+                        </div>
+                        <div class="pt-1">
+                            <p class="font-black text-[13px] leading-tight text-stone-800">1. Pide por</p>
+                            <p class="font-medium text-[13px] leading-tight text-stone-800">WhatsApp</p>
+                        </div>
+                    </div>
+
+                    <!-- REQUERIMIENTO COMPLEJO: LA BARRA DE CORTINA ATRAVIESA TODO DE LADO A LADO -->
+                    <div class="w-[120%] lg:w-[150%] h-[35px] md:h-[45px] -ml-[10%] lg:-ml-[5%] my-6 relative z-10 transform translate-y-1">
+                        <img src="https://images.unsplash.com/photo-1598300056393-4aac492f4344?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover filter sepia hue-rotate-15 contrast-125 rounded-md shadow-2xl" alt="Tubo de cobre (Simulado)" style="clip-path: inset(0 round 15px);">
+                    </div>
+
+                    <!-- El resto de los pasos -->
+                    <div class="space-y-6 lg:pl-0 mt-4 relative z-30">
+                        <!-- Paso 2 -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-[14px] bg-[#fcfaf7] border-[2px] border-[#30211a] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#30211a]">
+                                <span class="text-2xl drop-shadow-sm">🤖</span>
+                            </div>
+                            <div class="pt-1">
+                                <p class="font-black text-[13px] leading-tight">2. Ingresa</p>
+                                <p class="font-black text-[13px] leading-tight">información</p>
+                                <p class="font-medium text-[13px] leading-tight">en Chatbot</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 3 -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-[14px] bg-[#fcfaf7] border-[2px] border-[#30211a] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#30211a]">
+                                <span class="text-2xl drop-shadow-sm">📝</span>
+                            </div>
+                            <div class="pt-1">
+                                <p class="font-black text-[13px] leading-tight">3. Chatbot</p>
+                                <p class="font-medium text-[13px] leading-tight">genera Orden</p>
+                                <p class="font-medium text-[13px] leading-tight">de Compra</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 4 -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-[14px] bg-[#fcfaf7] border-[2px] border-[#30211a] flex items-center justify-center flex-shrink-0 shadow-[2px_3px_0px_#30211a]">
+                                <span class="text-2xl drop-shadow-sm">🗓️</span>
+                            </div>
+                            <div class="pt-1">
+                                <p class="font-black text-[13px] leading-tight">4. Espera</p>
+                                <p class="font-medium text-[13px] leading-tight">2 Días hábiles</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 5 -->
+                        <div class="flex items-center space-x-3 pb-8">
+                            <div class="w-12 h-8 flex items-center justify-center flex-shrink-0">
+                                <span class="text-[17px] font-black italic text-red-600 tracking-tighter">Shalom</span>
+                            </div>
+                            <div class="pt-1">
+                                <p class="font-black text-[13px] leading-tight">5. Recoge en</p>
+                                <p class="font-black text-[13px] leading-tight">Shalom <span class="font-medium text-[11px] text-stone-500">(con datos</span></p>
+                                <p class="font-medium text-[11px] text-stone-500 leading-tight">de Email)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA (Grid Superpuesto) md:col-span-7 -->
+                <div class="md:col-span-7 relative w-full h-[350px] md:h-auto mt-8 md:mt-0 pb-[80px]">
+                    
+                    <!-- FOTOGRAFIA DEL HOMBRE (Al fondo y alineada abajo a la derecha) -->
+                    <!-- Tailwind: absolute, bottom-0, right-0, rounded corners to match the design -->
+                    <div class="absolute bottom-16 -right-6 w-full lg:w-[110%] h-[280px] bg-stone-300 overflow-hidden shadow-inner z-0 pointer-events-none">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-90" alt="Hombre relajado comprando">
+                    </div>
+
+                    <!-- TARJETA BLANCA SUPERPUESTA "ESTO ES LO QUE OBTIENES" -->
+                    <!-- Tailwind: z-20 (encima de la foto), -left-4 (se sale del margen), top-4, shadow-2xl -->
+                    <div class="absolute h-[110%] md:h-auto -left-4 md:-left-8 lg:-left-12 top-0 md:top-6 w-[88%] bg-white p-5 lg:p-6 shadow-[0_20px_40px_rgba(0,0,0,0.15)] z-20 border border-stone-100">
+                        <h3 class="font-black text-[13px] lg:text-[14px] text-stone-900 border-b-2 border-stone-100 pb-3 mb-4 tracking-wide uppercase">
+                            ESTO ES LO QUE OBTIENES:
+                        </h3>
+                        
+                        <div class="flex flex-col gap-4">
+                            <!-- Item 1 -->
+                            <div class="flex items-center gap-3">
+                                <div class="text-3xl text-stone-300 w-8 text-center flex-shrink-0 font-serif">☄</div>
+                                <div class="font-black text-xl w-6 flex-shrink-0">x2</div>
+                                <div class="font-semibold text-xs lg:text-[13px] leading-tight">Remates de Jaula<br><span class="font-medium text-stone-500 text-[11px]">de Pájaro</span></div>
+                            </div>
+                            
+                            <!-- Item 2 -->
+                            <div class="flex items-center gap-3">
+                                <div class="text-3xl text-stone-400 w-8 text-center flex-shrink-0 font-serif">⚡</div>
+                                <div class="font-black text-xl w-6 flex-shrink-0">x3</div>
+                                <div class="font-semibold text-xs lg:text-[13px] leading-tight">Soportes de<br><span class="font-medium text-stone-500 text-[11px]">Montaje en Pared</span></div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="flex items-center gap-3">
+                                <div class="text-3xl text-stone-300 w-8 text-center flex-shrink-0 font-serif">⭕</div>
+                                <div class="font-black text-xl w-6 flex-shrink-0">x10</div>
+                                <div class="font-semibold text-xs lg:text-[13px] leading-tight">Anillos con<br><span class="font-medium text-stone-500 text-[11px]">Ganchos</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Separador -->
+                        <div class="flex items-center gap-3 mt-5 pt-4 border-t border-stone-100">
+                            <!-- Simulación de la barra delgada -->
+                            <div class="w-8 h-1.5 bg-gradient-to-r from-[#d59f8c] to-[#b8806c] rounded shrink-0"></div>
+                            <div class="font-semibold text-xs lg:text-[13px] leading-tight">1 Barra Telescópica<br>Ajustable</div>
+                        </div>
+
+                        <!-- Legal -->
+                        <div class="mt-6 pt-3 text-center text-[10px] sm:text-[11px] font-bold text-stone-500 uppercase tracking-widest border-t border-stone-100">
+                            Incluye Todo el Hardware
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- CALL TO ACTION (CTA) INFERIOR -->
+            <!-- Tailwind: absolute positioning bottom transform translate-y-1/2 overlaps the container boundries -->
+            <div class="relative z-40 mx-4 md:mx-10 mt-2 mb-8 group cursor-pointer">
+                <!-- Sombra decorativa -->
+                <div class="absolute inset-0 bg-[#d59f8c] blur-xl opacity-60 rounded-2xl group-hover:opacity-80 transition-opacity duration-300"></div>
+                <!-- Boton real -->
+                <div class="relative bg-copper-gradient py-5 px-4 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.2)] text-center transform group-hover:scale-[1.02] transition-transform duration-300 border border-white/20">
+                    <h2 class="text-white font-black text-lg md:text-[22px] tracking-wide leading-tight drop-shadow-md">
+                        ¡COMPRA AHORA Y AHORRA!<br>
+                        ¡OBTÉN EL TUYO HOY MISMO!
+                    </h2>
+                </div>
+            </div>
+
+            <!-- FOOTER FALSO -->
+            <footer class="bg-white/90 backdrop-blur px-8 py-5 flex flex-col md:flex-row justify-between items-center text-[11px] font-bold text-stone-600 border-t border-stone-100 mt-2 gap-3 md:gap-0">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-stone-800" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2zm0 2.8L19.2 12H17v6H7v-6H4.8L12 4.8z"/></svg>
+                    Fictional brand
+                </div>
+                <div class="tracking-widest">+01 123 455-6789</div>
+                <div class="font-medium text-stone-500">www.yoursin@brand.com</div>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Explicación flotante fuera del demo -->
+    <div class="fixed top-4 right-4 bg-stone-900 text-white p-4 rounded-xl shadow-2xl max-w-xs z-50 text-xs hidden lg:block border border-stone-700">
+        <h3 class="font-bold text-sm mb-2 text-orange-300">¡Reto Superado! 🚀</h3>
+        <p class="mb-2">Recreación del <strong>Flyer 1</strong> de la segunda serie utilizando Tailwind CSS Grid responsivo puro.</p>
+        <ul class="list-disc pl-4 space-y-1 text-stone-300">
+            <li>La imagen la puse superpuesta con <code>absolute bottom-0 right-0</code></li>
+            <li>La tarjeta blanca intersecta ambas columnas rompiendo el grid con un margen negativo (<code>-left-12 z-20</code>)</li>
+            <li>La barra de cortina atraviesa responsive extendiendo su width (<code>w-[150%]</code>).</li>
+            <li>Prueba reduciendo el tamaño de tu navegador a modo celular y mira cómo se colapsa perfectamente.</li>
+        </ul>
+    </div>
+
+</body>
+</html>

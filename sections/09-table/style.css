@@ -1,0 +1,75 @@
+.va-pricing-table-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.va-pt-wrapper {
+  overflow-x: auto;
+  margin-top: 50px;
+  background: #fdf2f0;
+  border-radius: 24px;
+  padding: 30px;
+}
+
+.va-b2b-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.va-b2b-table th {
+  text-align: left;
+  padding: 20px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #888;
+  border-bottom: 2px solid #ddd;
+}
+
+.va-b2b-table th.featured {
+  color: var(--copper);
+}
+
+.va-b2b-table td {
+  padding: 25px 20px;
+  font-size: 14px;
+  color: var(--dark);
+  border-bottom: 1px solid #efefef;
+}
+
+.va-v-name { font-weight: 900; }
+
+.va-total {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--copper);
+}
+
+.va-row-featured {
+  background: white;
+  box-shadow: 0 10px 30px rgba(200, 130, 100, 0.1);
+}
+
+.va-row-featured td { border-bottom: none; }
+
+.va-badge-pt {
+  background: var(--copper);
+  color: white;
+  padding: 4px 10px;
+  font-size: 9px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.va-pt-note {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 11px;
+  color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .va-pt-wrapper { padding: 15px; }
+  .va-b2b-table td { padding: 15px 10px; font-size: 12px; }
+  .va-total { font-size: 15px; }
+}

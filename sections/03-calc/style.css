@@ -1,0 +1,113 @@
+.va-calc-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.va-calc-card {
+  background: var(--bone);
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.va-slider-module {
+  margin-bottom: 50px;
+}
+
+.va-slider-title {
+  display: block;
+  font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.va-range-slider {
+  width: 100%;
+  appearance: none;
+  height: 10px;
+  background: #e6dbd0;
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.va-range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: var(--copper);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(200, 130, 100, 0.4);
+}
+
+.va-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.va-label-item {
+  font-size: 11px;
+  font-weight: 700;
+  color: #aaa;
+  transition: var(--transition);
+}
+
+.va-label-item.va-active {
+  color: var(--copper);
+  transform: scale(1.1);
+}
+
+.va-calc-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.va-res-box {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.va-res-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.va-res-val {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--dark);
+}
+
+.va-res-box.highlight {
+  border: 1.5px solid var(--copper);
+}
+
+.va-res-box.profit {
+  border: 1.5px solid var(--success);
+}
+
+.va-res-box.profit .va-res-val {
+  color: var(--success);
+}
+
+.va-calc-footer {
+  margin-top: 30px;
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .va-calc-card { padding: 30px; }
+  .va-res-val { font-size: 18px; }
+}

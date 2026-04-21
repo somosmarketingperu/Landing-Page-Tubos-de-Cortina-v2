@@ -1,0 +1,57 @@
+.va-footer {
+  padding: 80px 0 40px;
+  background: var(--dark);
+  color: white;
+}
+
+.va-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.va-foot-p {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 15px;
+  max-width: 300px;
+}
+
+.va-f-h4 {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--copper);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.va-foot-legal p, .va-foot-sh p {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.va-sh-logo {
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  border-left: 3px solid var(--copper);
+  margin-bottom: 10px;
+}
+
+.va-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 40px;
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+}
+
+@media (max-width: 800px) {
+  .va-footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .va-foot-p { max-width: 100%; }
+}
