@@ -850,21 +850,21 @@ function generatePDF() {
     <div class="left-col">
       <div class="sec-t" style="margin-top:0;">📋 DATOS DEL COMPRADOR</div>
       <table class="data-tb">
-        <tr><td><img src="./img/assets-pdf/Icono Nombre del Beneficiario.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Nombre y Apellidos</td><td>\${nombre}</td></tr>
-        <tr><td><img src="./img/assets-pdf/Icono Whatsapp.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">WhatsApp</td><td>\${wsp}</td></tr>
-        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Departamento</td><td>\${dept}</td></tr>
-        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Agencia Shalom</td><td>\${agencia}</td></tr>
-        <tr><td><img src="./img/assets-pdf/Icono dni.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Quién Recoge</td><td>\${recogedorHtml}</td></tr>
-        <tr><td><img src="./img/assets-pdf/Icono Pago contraentrega.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Modalidad de Pago</td><td>\${modalidad}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Nombre del Beneficiario.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Nombre y Apellidos</td><td>${nombre}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Whatsapp.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">WhatsApp</td><td>${wsp}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Departamento</td><td>${dept}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Agencia Shalom</td><td>${agencia}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono dni.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Quién Recoge</td><td>${recog}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Pago contraentrega.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Modalidad de Pago</td><td>${modalidad}</td></tr>
       </table>
 
       <div class="sec-t">🧾 COMPROBANTE</div>
-      \${cHtml}
+      ${cHtml}
 
       <div class="note-box note-yellow">
-        🔐 La contraseña de este documento (cuando llegue en PDF por email) será: <strong>\${clave}</strong>
+        🔐 La contraseña de este documento (cuando llegue en PDF por email) será: <strong>${clave}</strong>
       </div>
-      <div class="note-box note-green">✅ <strong>\${state.esTransferencia ? 'Transferencia:' : 'Pago al Recibir:'}</strong> \${state.esTransferencia ? 'Flete y embalaje gratis. Envíe voucher.' : 'No requiere adelanto. El monto se abona en la agencia.'}</div>
+      <div class="note-box note-green">✅ <strong>${state.esTransferencia ? 'Transferencia:' : 'Pago al Recibir:'}</strong> ${state.esTransferencia ? 'Flete y embalaje gratis. Envíe voucher.' : 'No requiere adelanto. El monto se abona en la agencia.'}</div>
     </div>
 
     <div class="right-col">
@@ -876,31 +876,31 @@ function generatePDF() {
          <div class="item-1">1.</div>
          <div class="item-2">
            <strong>Tubo Extensible Luxury (hasta 3m)</strong>
-           <span class="item-sub">Lote de \${state.cajas} cajas (\${state.cajas * TUBOS_CAJA} tubos) a S/. 27 c/u</span>
+           <span class="item-sub">Lote de ${state.cajas} cajas (${state.cajas * TUBOS_CAJA} tubos) a S/. 27 c/u</span>
          </div>
-         <div class="item-3">S/. \${(state.cajas * TUBOS_CAJA * PRECIO_TUBO).toFixed(2)}</div>
+         <div class="item-3">S/. ${(state.cajas * TUBOS_CAJA * 27).toFixed(2)}</div>
       </div>
       <div class="item-row">
          <div class="item-1">2.</div>
          <div class="item-2">
            <strong>Gastos Logísticos</strong>
-           <span class="item-sub">Flete: \${ord.flete === 0 ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. '+ord.flete.toFixed(2)} | Embalaje: \${ord.embalaje === 0 ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. '+ord.embalaje.toFixed(2)}</span>
+           <span class="item-sub">Flete: ${ord.flete === 0 ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. '+ord.flete.toFixed(2)} | Embalaje: ${ord.embalaje === 0 ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. '+ord.embalaje.toFixed(2)}</span>
          </div>
-         <div class="item-3">S/. \${(ord.flete + ord.embalaje).toFixed(2)}</div>
+         <div class="item-3">S/. ${(ord.flete + ord.embalaje).toFixed(2)}</div>
       </div>
 
       <div class="totals">
-        <div class="tot-row"><span class="tot-r">SUBTOTAL (82%):</span><span class="tot-v">S/. \${(ord.total * 0.82).toFixed(2)}</span></div>
-        <div class="tot-row"><span class="tot-r">IGV (18%):</span><span class="tot-v">S/. \${(ord.total * 0.18).toFixed(2)}</span></div>
+        <div class="tot-row"><span class="tot-r">SUBTOTAL (82%):</span><span class="tot-v">S/. ${(ord.total * 0.82).toFixed(2)}</span></div>
+        <div class="tot-row"><span class="tot-r">IGV (18%):</span><span class="tot-v">S/. ${(ord.total * 0.18).toFixed(2)}</span></div>
       </div>
       <div style="text-align:right;">
         <span class="tot-r" style="color:#c88264;font-size:12px;">TOTAL:</span>
-        <span class="tot-v grand">S/. \${ord.total.toFixed(2)}</span>
+        <span class="tot-v grand">S/. ${ord.total.toFixed(2)}</span>
       </div>
 
       <div class="sec-t" style="margin-top:30px;">TÉRMINOS Y CONDICIONES:</div>
       <div class="qr-box">
-        <div class="qr-img"><img src="https://quickchart.io/qr?size=300&margin=1&text=https://wa.me/\${WA_EMPRESA}?text=Hola,%20consulta%20por%20mi%20OC:%20\${ocN}"></div>
+        <div class="qr-img"><img src="https://quickchart.io/qr?size=300&margin=1&text=https://wa.me/${WA_EMPRESA}?text=Hola,%20consulta%20por%20mi%20OC:%20${ocN}"></div>
         <div class="qr-txt">
            Escanee el código QR para autorizar el armado del lote vía WhatsApp con su asesor asignado.
         </div>
