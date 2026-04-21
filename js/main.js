@@ -262,9 +262,24 @@ function initCODModal() {
         const ocN = `OC-${new Date().getFullYear()}${String(new Date().getMonth()+1).padStart(2,'0')}${String(new Date().getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;
         const btn = document.getElementById('cod-email-btn');
         btn.textContent = '⏳ Enviando correo...';
-        sendToAppsScript(nombre, email, ocN).then(() => {
-            btn.textContent = '✅ ¡Enviado exitosamente!';
-            setTimeout(() => btn.textContent = '✉️ Re-enviar PDF al Correo', 4000);
+        sendToAppsScript(nombre, email, ocN).then((exito) => {
+            if (exito) {
+                btn.textContent = '✅ ¡Enviado exitosamente!';
+                btn.style.background = '#27ae60';
+                btn.style.borderColor = '#27ae60';
+                btn.style.color = '#fff';
+            } else {
+                btn.textContent = '❌ Error de Google';
+                btn.style.background = '#fee2e2';
+                btn.style.borderColor = '#ef4444';
+                btn.style.color = '#b91c1c';
+            }
+            setTimeout(() => {
+                btn.textContent = '✉️ Re-enviar PDF al Correo';
+                btn.style.background = '#f9f7f5';
+                btn.style.borderColor = '#e7e5e4';
+                btn.style.color = '#1c1917';
+            }, 5000);
         });
     });
 
@@ -719,14 +734,17 @@ async function sendToAppsScript(nombre, email, ocNumber) {
         const json = await resp.json();
         if (json.success) {
             console.log('[Apps Script] ✅ Email enviado:', json.ocNumber);
+            return true;
         } else {
             console.warn('[Apps Script] ⚠️ Respuesta sin éxito:', json.error);
             alert('Hubo un problema al enviar el correo. Por favor verifique el correo ingresado o contacte soporte si el error de Google persiste.');
+            return false;
         }
     } catch (err) {
         // No bloquear al usuario — el email es secundario al WA
         console.warn('[Apps Script] Error de conexión (no crítico):', err.message);
-        alert('Hubo un problema comunicándose con los servidores de Google. Asegúrese de que el backend tiene permisos públicos.');
+        alert('Hubo un problema comunicándose con los servidores de Google. Asegúrese de que el backend tiene permisos públicos de "Cualquier Persona" y no de administrador.');
+        return false;
     }
 }
 
