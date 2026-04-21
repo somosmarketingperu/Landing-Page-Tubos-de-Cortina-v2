@@ -256,6 +256,17 @@ function initCODModal() {
 
     // PDF
     document.getElementById('cod-pdf-btn').addEventListener('click', generatePDF);
+    document.getElementById('cod-email-btn').addEventListener('click', () => {
+        const nombre = document.getElementById('cod-nombre').value.trim();
+        const email = document.getElementById(state.comprobanteType === 'boleta' ? 'cod-email-boleta' : 'cod-email-factura').value.trim();
+        const ocN = `OC-${new Date().getFullYear()}${String(new Date().getMonth()+1).padStart(2,'0')}${String(new Date().getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;
+        const btn = document.getElementById('cod-email-btn');
+        btn.textContent = '⏳ Enviando correo...';
+        sendToAppsScript(nombre, email, ocN).then(() => {
+            btn.textContent = '✅ ¡Enviado exitosamente!';
+            setTimeout(() => btn.textContent = '✉️ Re-enviar PDF al Correo', 4000);
+        });
+    });
 
     // Inicializar en modo transferencia (precio puro)
     setPaymentMode('transfer', true);
@@ -634,11 +645,15 @@ function handleConfirm() {
     sendToAppsScript(nombre, email, ocN);
 
     // ✅ Desbloquear PDF y actualizar UI
-    const pdfBtn  = document.getElementById('cod-pdf-btn');
-    const lockMsg = document.getElementById('cod-pdf-lock');
+    const pdfBtn   = document.getElementById('cod-pdf-btn');
+    const emailBtn = document.getElementById('cod-email-btn');
+    const lockMsg  = document.getElementById('cod-pdf-lock');
     if (pdfBtn) {
         pdfBtn.disabled = false;
         pdfBtn.textContent = '📄 Descargar Resumen PDF — Listo ✅';
+    }
+    if (emailBtn) {
+        emailBtn.style.display = 'block';
     }
     if (lockMsg) {
         lockMsg.innerHTML = '<span>✅ ¡Pedido confirmado! Ya puedes descargar tu resumen.</span>';
@@ -706,10 +721,12 @@ async function sendToAppsScript(nombre, email, ocNumber) {
             console.log('[Apps Script] ✅ Email enviado:', json.ocNumber);
         } else {
             console.warn('[Apps Script] ⚠️ Respuesta sin éxito:', json.error);
+            alert('Hubo un problema al enviar el correo. Por favor verifique el correo ingresado o contacte soporte si el error de Google persiste.');
         }
     } catch (err) {
         // No bloquear al usuario — el email es secundario al WA
         console.warn('[Apps Script] Error de conexión (no crítico):', err.message);
+        alert('Hubo un problema comunicándose con los servidores de Google. Asegúrese de que el backend tiene permisos públicos.');
     }
 }
 
@@ -775,69 +792,126 @@ function generatePDF() {
   <meta charset="UTF-8">
   <title>Orden de Compra ${ocN} — Tubos de Cortina</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Montserrat', sans-serif; background: #fff; color: #1c1917; padding: 32px; font-size: 12px; }
-    .header { background: #1c1917; color: white; padding: 20px 24px; border-radius: 10px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
-    .header h1 { font-size: 18px; font-weight: 900; }
-    .header p  { font-size: 10px; opacity: 0.7; margin-top: 3px; }
-    .header .oc { background: #c88264; color: white; padding: 5px 12px; border-radius: 18px; font-size: 11px; font-weight: 900; text-align:center; }
-    h2 { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; color: #c88264; margin: 18px 0 8px; border-bottom: 1.5px solid #f0ece8; padding-bottom: 5px; }
-    table { width: 100%; border-collapse: collapse; }
-    td { padding: 7px 8px; border-bottom: 1px solid #f0ece8; color: #555; font-size: 11px; }
-    td:first-child { font-weight: 700; color: #1c1917; width: 42%; }
-    .total-row td { background: #f9f7f5; font-size: 14px; color: #1c1917; border-top: 2px solid #c88264; }
-    .total-row td:last-child { font-size: 17px; font-weight: 900; color: #c88264; }
-    .footer { margin-top: 28px; text-align: center; font-size: 9px; color: #aaa; border-top: 1px solid #f0ece8; padding-top: 14px; }
-    .note { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 7px; padding: 10px 14px; margin-top: 16px; font-size: 10px; color: #166534; font-weight: 600; }
-    .key-note { background: #fff8e1; border: 1px solid #ffe082; border-radius: 7px; padding: 10px 14px; margin-top: 10px; font-size: 10px; color: #795548; font-weight: 700; }
-    @media print { body { padding: 16px; } }
+    body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1c1917; margin: 0; padding: 30px 40px; background:#fff;}
+    .header { width: 100%; display: table; margin-bottom: 25px; }
+    .header-l { display: table-cell; vertical-align: top; }
+    .header-r { display: table-cell; vertical-align: top; text-align: right; }
+    .h-logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; display:inline-block; line-height:1; }
+    .h-tag { color: #c88264; font-size: 11px; font-weight: 700; letter-spacing: 1px; display:block; margin-bottom:6px; }
+    .oc-bg { color: #f0ece8; font-size: 40px; font-weight: 900; line-height: 0.8; margin-bottom: 10px; }
+    .oc-pill { background: #c88264; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; text-align: left; font-size:11px; }
+    .page { display: table; width: 100%; }
+    .left-col { display: table-cell; width: 50%; vertical-align: top; padding-right: 20px; border-right: 2px solid #f0ece8; }
+    .right-col { display: table-cell; width: 50%; vertical-align: top; padding-left: 20px; }
+    .sec-t { font-size: 14px; font-weight: 900; margin: 20px 0 10px; color: #c88264; letter-spacing: 0.5px; text-transform: uppercase; }
+    .data-tb { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 10px; }
+    .data-tb td { padding: 8px 0; border-bottom: 1px solid #f9f7f5; }
+    .data-tb tr td:first-child { font-weight: bold; width: 45%; color: #333; }
+    .data-tb tr td:last-child { color: #555; }
+    .desc-tb { width: 100%; border-bottom: 1px solid #c88264; padding-bottom: 8px; margin-bottom: 25px; }
+    .desc-th { color: #c88264; font-size: 10px; font-weight: bold; }
+    .desc-r { text-align: right; width: 80px; }
+    .item-row { width: 100%; display: table; font-size: 11px; margin-bottom: 10px; }
+    .item-1 { display: table-cell; font-weight: 900; width: 25px; }
+    .item-2 { display: table-cell; color: #333; line-height: 1.3; }
+    .item-3 { display: table-cell; text-align: right; font-weight: 900; font-size: 14px; width: 90px; }
+    .item-sub { display: block; font-size: 9px; color: #888; font-weight: normal; margin-top:2px; }
+    .totals { border-bottom: 2px solid #c88264; padding-bottom: 15px; margin-bottom: 15px; margin-top: 50px; text-align: right; }
+    .tot-r { font-size: 10px; font-weight: bold; color: #c88264; display: inline-block; width: 90px; text-align: right; margin-right: 15px; }
+    .tot-v { font-size: 13px; font-weight: bold; display: inline-block; width: 70px; text-align: right; color:#1c1917; }
+    .tot-row { margin-bottom: 10px; }
+    .grand { font-size: 16px !important; }
+    .note-box { border-radius: 6px; padding: 10px 14px; margin-top: 12px; font-size: 10px; }
+    .note-yellow { background: #fff8e1; border: 1px solid #ffe082; color: #795548; font-weight: bold; }
+    .note-green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+    .qr-box { margin-top: 30px; display: table; width: 100%; }
+    .qr-img { display: table-cell; width: 80px; vertical-align:middle; }
+    .qr-img img { width: 70px; }
+    .qr-txt { display: table-cell; vertical-align: middle; font-size: 9px; color: #666; line-height: 1.4; padding-left: 10px; }
+    .footer { margin-top: 25px; text-align: center; font-size: 9px; color: #999; border-top: 1px solid #f0ece8; padding-top: 15px; line-height: 1.5; }
   </style>
 </head>
 <body>
   <div class="header">
-    <div>
-      <span style="font-weight:700;font-size:16px;">TUBOS DE CORTINA PERÚ</span>
-      <div style="font-size:24px;font-weight:900;margin-top:8px;">Orden de Compra</div>
-      <div style="font-size:12px;color:#888;">${ocN}</div>
+    <div class="header-l">
+       <span class="h-tag">COTIZACIÓN MAYORISTA</span>
+       <span class="h-logo">TUBOS DE<br>CORTINA PERÚ</span>
     </div>
-    <div class="oc">FECHA<br>${now}</div>
+    <div class="header-r">
+       <div class="oc-bg">ORDEN DE<br>COMPRA</div>
+       <div class="oc-pill">
+         <strong>Nro. ${ocN}</strong><br>
+         <span style="font-weight:normal;">${now} &nbsp;|&nbsp; ${nombre}</span>
+       </div>
+    </div>
   </div>
 
-  <h2>📋 Datos del Comprador</h2>
-  <table>
-    <tr><td>Nombre y Apellidos</td><td>${nombre}</td></tr>
-    <tr><td>WhatsApp</td><td>${wsp}</td></tr>
-    <tr><td>Departamento</td><td>${dept.charAt(0) + dept.slice(1).toLowerCase()}</td></tr>
-    <tr><td>Agencia Shalom</td><td>${agencia}</td></tr>
-    ${recogedorHtml}
-    <tr><td>Modalidad de Pago</td><td>${modalidad}</td></tr>
-  </table>
+  <div class="page">
+    <div class="left-col">
+      <div class="sec-t" style="margin-top:0;">📋 DATOS DEL COMPRADOR</div>
+      <table class="data-tb">
+        <tr><td><img src="./img/assets-pdf/Icono Nombre del Beneficiario.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Nombre y Apellidos</td><td>\${nombre}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Whatsapp.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">WhatsApp</td><td>\${wsp}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Departamento</td><td>\${dept}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Agencia Shalom</td><td>\${agencia}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono dni.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Quién Recoge</td><td>\${recogedorHtml}</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Pago contraentrega.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Modalidad de Pago</td><td>\${modalidad}</td></tr>
+      </table>
 
-  <h2>📦 Detalle del Pedido</h2>
-  <table>
-    <tr><td>Producto</td><td>Tubo de Cortina Extensible (hasta 3m) — Luxury</td></tr>
-    <tr><td>Cantidad</td><td>${ord.cajas} ${ord.cajas===1?'caja':'cajas'} × 12 = <strong>${ord.tubos} tubos</strong></td></tr>
-    <tr><td>Precio por tubo</td><td><strong>S/. 27.00</strong></td></tr>
-    <tr><td>Subtotal</td><td>S/. ${fmt(ord.subtotal)}</td></tr>
-    <tr><td>Flete Shalom</td><td>${state.esTransferencia ? '<strong style="color:#27ae60">GRATIS ✅</strong>' : `S/. ${fmt(ord.flete)}`}</td></tr>
-    <tr><td>Embalaje y manipuleo</td><td>${state.esTransferencia ? '<strong style="color:#27ae60">GRATIS ✅</strong>' : `S/. ${EMBALAJE_FIJO}`}</td></tr>
-    <tr class="total-row"><td><strong>TOTAL A PAGAR</strong></td><td><strong>S/. ${fmt(ord.total)}</strong></td></tr>
-  </table>
+      <div class="sec-t">🧾 COMPROBANTE</div>
+      \${cHtml}
 
-  ${bankSection}
+      <div class="note-box note-yellow">
+        🔐 La contraseña de este documento (cuando llegue en PDF por email) será: <strong>\${clave}</strong>
+      </div>
+      <div class="note-box note-green">✅ <strong>\${state.esTransferencia ? 'Transferencia:' : 'Pago al Recibir:'}</strong> \${state.esTransferencia ? 'Flete y embalaje gratis. Envíe voucher.' : 'No requiere adelanto. El monto se abona en la agencia.'}</div>
+    </div>
 
-  <h2>🧾 Comprobante</h2>
-  <table>${cHtml}</table>
+    <div class="right-col">
+      <table class="desc-tb">
+        <tr><td class="desc-th">DESCRIPCIÓN</td><td class="desc-th desc-r">MONTO</td></tr>
+      </table>
+      
+      <div class="item-row">
+         <div class="item-1">1.</div>
+         <div class="item-2">
+           <strong>Tubo Extensible Luxury (hasta 3m)</strong>
+           <span class="item-sub">Lote de \${state.cajas} cajas (\${state.cajas * TUBOS_CAJA} tubos) a S/. 27 c/u</span>
+         </div>
+         <div class="item-3">S/. \${(state.cajas * TUBOS_CAJA * PRECIO_TUBO).toFixed(2)}</div>
+      </div>
+      <div class="item-row">
+         <div class="item-1">2.</div>
+         <div class="item-2">
+           <strong>Gastos Logísticos</strong>
+           <span class="item-sub">Flete: \${ord.flete === 0 ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. '+ord.flete.toFixed(2)} | Embalaje: \${ord.embalaje === 0 ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. '+ord.embalaje.toFixed(2)}</span>
+         </div>
+         <div class="item-3">S/. \${(ord.flete + ord.embalaje).toFixed(2)}</div>
+      </div>
 
-  <div class="key-note">🔐 La contraseña de este documento (cuando llegue en PDF por email) será: <strong>${clave}</strong></div>
+      <div class="totals">
+        <div class="tot-row"><span class="tot-r">SUBTOTAL (82%):</span><span class="tot-v">S/. \${(ord.total * 0.82).toFixed(2)}</span></div>
+        <div class="tot-row"><span class="tot-r">IGV (18%):</span><span class="tot-v">S/. \${(ord.total * 0.18).toFixed(2)}</span></div>
+      </div>
+      <div style="text-align:right;">
+        <span class="tot-r" style="color:#c88264;font-size:12px;">TOTAL:</span>
+        <span class="tot-v grand">S/. \${ord.total.toFixed(2)}</span>
+      </div>
 
-  <div class="note">✅ <strong>Pago al Recibir:</strong> No se requiere adelanto. El monto se abona en la agencia Shalom al recoger el pedido.</div>
+      <div class="sec-t" style="margin-top:30px;">TÉRMINOS Y CONDICIONES:</div>
+      <div class="qr-box">
+        <div class="qr-img"><img src="https://quickchart.io/qr?size=300&margin=1&text=https://wa.me/\${WA_EMPRESA}?text=Hola,%20consulta%20por%20mi%20OC:%20\${ocN}"></div>
+        <div class="qr-txt">
+           Escanee el código QR para autorizar el armado del lote vía WhatsApp con su asesor asignado.
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="footer">
-    <p><strong>Tubos de Cortina Perú</strong> — Somos Marketing Perú EIRL · RUC 20615554384</p>
-    <p>WhatsApp: +51 999 900 396 · cortinas-peru.web.app</p>
-    <p style="margin-top:6px">Este documento es una cotización para venta al por mayor. El pedido se confirma vía WhatsApp. Stock sujeto a disponibilidad.</p>
+      <strong>Tubos de Cortina Perú</strong> — Somos Marketing Perú EIRL · RUC 20615554384<br>
+      WhatsApp: +51 999 900 396 · cortinas-peru.web.app<br>
+      Este documento es una cotización para venta al por mayor. El pedido se confirma vía WhatsApp. Stock sujeto a disponibilidad.
   </div>
 </body>
 </html>`;

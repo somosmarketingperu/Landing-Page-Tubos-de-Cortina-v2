@@ -7,7 +7,7 @@
       "**/*.py",
       "**/*.gs",
       "**/*.md",
-      "BLUEPRINT_Visual_Anatomia.html",
+      "BLUEPRINT_Visual_Anatomia.html"
     ]
   }
 }
