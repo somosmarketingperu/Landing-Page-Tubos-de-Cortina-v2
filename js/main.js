@@ -18,7 +18,7 @@ document.addEventListener('sectionsLoaded', () => {
    ═══════════════════════════════════════════════════════════════ */
 
 // URL del Google Apps Script (Web App)
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnnYMJdoGvzxP5jw_6YXYAv6QsKGvjZKIG359MJbyT7cyt_nq9odfInxNqbBFVclmx/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwtzNEYYIb9HHxNLvhe3IfQE29jTM3UynhYypmYr1YpoUS_HU6CrJhLsmoNPECuYWf1/exec';
 // Debe coincidir con CONFIG.SECRET_KEY en el .gs, funciona como token de acceso
 const APPS_SECRET_KEY = 'TCP2026-SOMOS-MKT-PERÜ-SECURE-8f3k9';
 

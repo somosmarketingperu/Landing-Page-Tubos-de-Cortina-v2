@@ -277,28 +277,43 @@ function construirPDFHTML(d, ocN) {
       icono('Icono Cuenta corriente.png', ['N° Cta: 191-23456789-0-12', 'N° Interbancario: 002-191-000234567890-12']);
   }
 
+  var dCli = 
+    '<table class="data-tb">' +
+      '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Nombre y Apellidos') + '</td><td>' + d.nombre + '</td></tr>' +
+      '<tr><td>' + tIc('Icono Whatsapp.png', 'WhatsApp') + '</td><td>' + (d.wsp || '-') + '</td></tr>' +
+      '<tr><td>' + tIc('Icono Direccion.png', 'Departamento') + '</td><td>' + dpt + '</td></tr>' +
+      '<tr><td>' + tIc('Icono Direccion.png', 'Agencia Shalom') + '</td><td>' + (d.agencia || '-') + '</td></tr>' +
+      '<tr><td>' + tIc('Icono dni.png', 'Quién Recoge') + '</td><td>' + recog + '</td></tr>' +
+      '<tr><td>' + tIc('Icono Pago contraentrega.png', 'Modalidad de Pago') + '</td><td>' + (trnsf ? 'Transferencia Bancaria' : 'Contra Entrega 🚚') + '</td></tr>' +
+    '</table>';
+
   var cpbtHtml = '';
+  var passHint = '';
   if (d.comprobanteType === 'boleta') {
     cpbtHtml = 
-      icono('Icono Nombre del Beneficiario.png', ['Comprobante: Boleta Electrónica']) +
-      icono('Icono dni.png', ['DNI: ' + (d.dni||'')]);
+      '<table class="data-tb">' +
+        '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Tipo') + '</td><td>Boleta Electrónica</td></tr>' +
+        '<tr><td>' + tIc('Icono dni.png', 'DNI') + '</td><td>' + (d.dni||'') + '</td></tr>' +
+        '<tr><td>' + tIc('Icono Correo.png', 'Correo') + '</td><td>' + (d.email||'') + '</td></tr>' +
+      '</table>';
+    passHint = 'tu DNI (' + (d.dni||d.nombre) + ')';
   } else {
     cpbtHtml = 
-      icono('Icono Nombre del Beneficiario.png', ['Comprobante: Factura Electrónica']) +
-      icono('Icono RUC.png', ['RUC: ' + (d.ruc||'')]) +
-      icono('Icono Direccion.png', ['Razón: ' + (d.razon||''), 'Dir: ' + (d.dir||'')]);
+      '<table class="data-tb">' +
+        '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Tipo') + '</td><td>Factura Electrónica</td></tr>' +
+        '<tr><td>' + tIc('Icono RUC.png', 'RUC') + '</td><td>' + (d.ruc||'') + '</td></tr>' +
+        '<tr><td>' + tIc('Icono Direccion.png', 'Razón Social') + '</td><td>' + (d.razon||'') + '</td></tr>' +
+        '<tr><td>' + tIc('Icono Direccion.png', 'Dir. Fiscal') + '</td><td>' + (d.dir||'') + '</td></tr>' +
+      '</table>';
+    passHint = 'tu RUC (' + (d.ruc||'') + ')';
   }
 
-  var dCli = 
-    icono('Icono Whatsapp.png', [d.wsp || '-']) +
-    icono('Icono Correo.png', [d.email || '-']) +
-    icono('Icono Pago contraentrega.png', [trnsf ? 'Transferencia Bancaria' : 'Pagará al recibir en Shalom']) +
-    icono('Icono dni.png', ['Cliente / Recoge: ' + recog]);
-
-  var dAgencia = 
-    icono('Icono Direccion.png', ['Agencia Shalom', dpt + ' - ' + (d.agencia || '-')]) +
-    icono('Icono Whatsapp.png', ['Soporte Web: 999 900 396']) +
-    icono('Icono Pagina Web.png', ['cortinas-peru.web.app']);
+  var noteHtml = '';
+  if (trnsf) {
+    noteHtml = '<div class="note-box note-green">✅ <strong>Transferencia:</strong> Flete y embalaje gratis. Envíe su voucher respondiendo a este correo o vía WhatsApp.</div>';
+  } else {
+    noteHtml = '<div class="note-box note-green">✅ <strong>Pago al Recibir:</strong> No se requiere adelanto. El monto se abona en la agencia Shalom al recoger el pedido.</div>';
+  }
 
   return '\
 <!DOCTYPE html>\
@@ -315,30 +330,34 @@ function construirPDFHTML(d, ocN) {
     .oc-bg { color: #f0ece8; font-size: 40px; font-weight: 900; line-height: 0.8; margin-bottom: 10px; }\
     .oc-pill { background: #c88264; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; text-align: left; font-size:11px; }\
     .page { display: table; width: 100%; }\
-    .left-col { display: table-cell; width: 45%; vertical-align: top; padding-right: 25px; border-right: 2px solid #c88264; }\
-    .right-col { display: table-cell; width: 55%; vertical-align: top; padding-left: 25px; }\
-    .sec-t { font-size: 13px; font-weight: 900; margin: 25px 0 15px; color: #1c1917; letter-spacing: 0.5px; text-transform: uppercase; }\
-    .ic-row { display: table; width: 100%; margin-bottom: 12px; }\
-    .ic-icon { display: table-cell; vertical-align: top; width: 25px; padding-top: 2px; }\
-    .ic-icon img { width: 14px; }\
-    .ic-text { display: table-cell; vertical-align: top; font-size: 10px; color: #555; line-height: 1.4; }\
+    .left-col { display: table-cell; width: 50%; vertical-align: top; padding-right: 20px; border-right: 2px solid #f0ece8; }\
+    .right-col { display: table-cell; width: 50%; vertical-align: top; padding-left: 20px; }\
+    .sec-t { font-size: 14px; font-weight: 900; margin: 20px 0 10px; color: #c88264; letter-spacing: 0.5px; text-transform: uppercase; }\
+    .data-tb { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 10px; }\
+    .data-tb td { padding: 8px 0; border-bottom: 1px solid #f9f7f5; }\
+    .data-tb tr td:first-child { font-weight: bold; width: 45%; color: #333; }\
+    .data-tb tr td:last-child { color: #555; }\
     .desc-tb { width: 100%; border-bottom: 1px solid #c88264; padding-bottom: 8px; margin-bottom: 25px; }\
-    .desc-th { color: #e60000; font-size: 10px; font-weight: bold; }\
+    .desc-th { color: #c88264; font-size: 10px; font-weight: bold; }\
     .desc-r { text-align: right; width: 80px; }\
     .item-row { width: 100%; display: table; font-size: 11px; margin-bottom: 10px; }\
     .item-1 { display: table-cell; font-weight: 900; width: 25px; }\
     .item-2 { display: table-cell; color: #333; line-height: 1.3; }\
     .item-3 { display: table-cell; text-align: right; font-weight: 900; font-size: 14px; width: 90px; }\
     .item-sub { display: block; font-size: 9px; color: #888; font-weight: normal; margin-top:2px; }\
-    .totals { border-bottom: 2px solid #c88264; padding-bottom: 15px; margin-bottom: 15px; margin-top: 60px; text-align: right; }\
-    .tot-r { font-size: 10px; font-weight: bold; color: #e60000; display: inline-block; width: 90px; text-align: right; margin-right: 15px; }\
+    .totals { border-bottom: 2px solid #c88264; padding-bottom: 15px; margin-bottom: 15px; margin-top: 50px; text-align: right; }\
+    .tot-r { font-size: 10px; font-weight: bold; color: #c88264; display: inline-block; width: 90px; text-align: right; margin-right: 15px; }\
     .tot-v { font-size: 13px; font-weight: bold; display: inline-block; width: 70px; text-align: right; color:#1c1917; }\
     .tot-row { margin-bottom: 10px; }\
     .grand { font-size: 16px !important; }\
-    .qr-box { margin-top: 40px; display: table; width: 100%; }\
-    .qr-img { display: table-cell; width: 100px; vertical-align:middle; }\
-    .qr-img img { width: 90px; }\
-    .qr-txt { display: table-cell; vertical-align: middle; font-size: 10px; color: #666; line-height: 1.4; padding-left: 15px; }\
+    .note-box { border-radius: 6px; padding: 10px 14px; margin-top: 12px; font-size: 10px; }\
+    .note-yellow { background: #fff8e1; border: 1px solid #ffe082; color: #795548; font-weight: bold; }\
+    .note-green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }\
+    .qr-box { margin-top: 30px; display: table; width: 100%; }\
+    .qr-img { display: table-cell; width: 80px; vertical-align:middle; }\
+    .qr-img img { width: 70px; }\
+    .qr-txt { display: table-cell; vertical-align: middle; font-size: 9px; color: #666; line-height: 1.4; padding-left: 10px; }\
+    .footer { margin-top: 25px; text-align: center; font-size: 9px; color: #999; border-top: 1px solid #f0ece8; padding-top: 15px; line-height: 1.5; }\
   </style>\
 </head>\
 <body>\
@@ -358,16 +377,16 @@ function construirPDFHTML(d, ocN) {
 \
   <div class="page">\
     <div class="left-col">\
-      <div class="sec-t" style="margin-top:0;">DATOS DE LA AGENCIA</div>\
-      ' + dAgencia + '\
-\
-      <div class="sec-t">DATOS DEL CLIENTE</div>\
+      <div class="sec-t" style="margin-top:0;">📋 DATOS DEL COMPRADOR</div>\
       ' + dCli + '\
 \
-      ' + bankHtml + '\
-\
-      <div class="sec-t">COMPROBANTE</div>\
+      <div class="sec-t">🧾 COMPROBANTE</div>\
       ' + cpbtHtml + '\
+\
+      <div class="note-box note-yellow">\
+        🔐 La contraseña de este documento (cuando llegue en PDF por email) será: ' + passHint + '\
+      </div>\
+      ' + noteHtml + '\
     </div>\
 \
     <div class="right-col">\
@@ -401,14 +420,20 @@ function construirPDFHTML(d, ocN) {
         <span class="tot-v grand">S/. ' + total.toFixed(2) + '</span>\
       </div>\
 \
-      <div class="sec-t" style="margin-top:60px;">TÉRMINOS Y CONDICIONES:</div>\
+      <div class="sec-t" style="margin-top:30px;">TÉRMINOS Y CONDICIONES:</div>\
       <div class="qr-box">\
         <div class="qr-img"><img src="' + qrUrl + '"></div>\
         <div class="qr-txt">\
-           Escanea el código QR con la cámara de tu celular para enviarnos automáticamente tu constancia de pago o confirmar stock con un asesor por WhatsApp.\
+           Escanee el código QR para autorizar el armado del lote vía WhatsApp con su asesor asignado.\
         </div>\
       </div>\
     </div>\
+  </div>\
+\
+  <div class="footer">\
+      <strong>Tubos de Cortina Perú</strong> — Somos Marketing Perú EIRL · RUC 20615554384<br>\
+      WhatsApp: +51 999 900 396 · cortinas-peru.web.app<br>\
+      Este documento es una cotización para venta al por mayor. El pedido se confirma vía WhatsApp. Stock sujeto a disponibilidad.\
   </div>\
 </body>\
 </html>';

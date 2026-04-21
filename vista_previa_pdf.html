@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Vista Previa de Plantilla PDF (Dinámica)</title>
+  <style>
+    body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1c1917; margin: 0; padding: 30px 40px; background: #fff;}
+    .header { width: 100%; display: table; margin-bottom: 25px; }
+    .header-l { display: table-cell; vertical-align: top; }
+    .header-r { display: table-cell; vertical-align: top; text-align: right; }
+    .h-logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; display:inline-block; line-height:1; }
+    .h-tag { color: #c88264; font-size: 11px; font-weight: 700; letter-spacing: 1px; display:block; margin-bottom:6px; }
+    .oc-bg { color: #f0ece8; font-size: 40px; font-weight: 900; line-height: 0.8; margin-bottom: 10px; }
+    .oc-pill { background: #c88264; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; text-align: left; font-size:11px; }
+    .page { display: table; width: 100%; }
+    .left-col { display: table-cell; width: 50%; vertical-align: top; padding-right: 20px; border-right: 2px solid #f0ece8; }
+    .right-col { display: table-cell; width: 50%; vertical-align: top; padding-left: 20px; }
+    .sec-t { font-size: 14px; font-weight: 900; margin: 20px 0 10px; color: #c88264; letter-spacing: 0.5px; text-transform: uppercase; }
+    .data-tb { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 10px; }
+    .data-tb td { padding: 8px 0; border-bottom: 1px solid #f9f7f5; }
+    .data-tb tr td:first-child { font-weight: bold; width: 45%; color: #333; }
+    .data-tb tr td:last-child { color: #555; }
+    .desc-tb { width: 100%; border-bottom: 1px solid #c88264; padding-bottom: 8px; margin-bottom: 25px; }
+    .desc-th { color: #c88264; font-size: 10px; font-weight: bold; }
+    .desc-r { text-align: right; width: 80px; }
+    .item-row { width: 100%; display: table; font-size: 11px; margin-bottom: 10px; }
+    .item-1 { display: table-cell; font-weight: 900; width: 25px; }
+    .item-2 { display: table-cell; color: #333; line-height: 1.3; }
+    .item-3 { display: table-cell; text-align: right; font-weight: 900; font-size: 14px; width: 90px; }
+    .item-sub { display: block; font-size: 9px; color: #888; font-weight: normal; margin-top:2px; }
+    .totals { border-bottom: 2px solid #c88264; padding-bottom: 15px; margin-bottom: 15px; margin-top: 50px; text-align: right; }
+    .tot-r { font-size: 10px; font-weight: bold; color: #c88264; display: inline-block; width: 90px; text-align: right; margin-right: 15px; }
+    .tot-v { font-size: 13px; font-weight: bold; display: inline-block; width: 70px; text-align: right; color:#1c1917; }
+    .tot-row { margin-bottom: 10px; }
+    .grand { font-size: 16px !important; }
+    .note-box { border-radius: 6px; padding: 10px 14px; margin-top: 12px; font-size: 10px; }
+    .note-yellow { background: #fff8e1; border: 1px solid #ffe082; color: #795548; font-weight: bold; }
+    .note-green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+    .qr-box { margin-top: 30px; display: table; width: 100%; }
+    .qr-img { display: table-cell; width: 80px; vertical-align:middle; }
+    .qr-img img { width: 70px; }
+    .qr-txt { display: table-cell; vertical-align: middle; font-size: 9px; color: #666; line-height: 1.4; padding-left: 10px; }
+    .footer { margin-top: 25px; text-align: center; font-size: 9px; color: #999; border-top: 1px solid #f0ece8; padding-top: 15px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <!-- ESTO ES UN EJEMPLO DINÁMICO. LOS DATOS CAMBIAN SEGÚN LO QUE EL USUARIO ESCRIBA -->
+  <div class="header">
+    <div class="header-l">
+       <span class="h-tag">COTIZACIÓN MAYORISTA</span>
+       <span class="h-logo">TUBOS DE<br>CORTINA PERÚ</span>
+    </div>
+    <div class="header-r">
+       <div class="oc-bg">ORDEN DE<br>COMPRA</div>
+       <div class="oc-pill">
+         <strong>Nro. OC-20261125-8374</strong><br>
+         <span style="font-weight:normal;">25/11/2026 &nbsp;|&nbsp; Juan Pérez Castillo</span>
+       </div>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="left-col">
+      <div class="sec-t" style="margin-top:0;">📋 DATOS DEL COMPRADOR</div>
+      <table class="data-tb">
+        <tr><td><img src="./img/assets-pdf/Icono Nombre del Beneficiario.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Nombre y Apellidos</td><td>Juan Pérez Castillo</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Whatsapp.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">WhatsApp</td><td>987654321</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Departamento</td><td>Arequipa</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Agencia Shalom</td><td>Arequipa - Av. Parra Cercado</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono dni.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Quién Recoge</td><td>Luis Castillo - DNI: 70014234</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Pago contraentrega.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Modalidad de Pago</td><td>Transferencia Bancaria</td></tr>
+      </table>
+
+      <div class="sec-t">🧾 COMPROBANTE</div>
+      <table class="data-tb">
+        <tr><td><img src="./img/assets-pdf/Icono Nombre del Beneficiario.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Tipo</td><td>Factura Electrónica</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono RUC.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">RUC</td><td>20456123981</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Razón Social</td><td>Constructora Sur SA</td></tr>
+        <tr><td><img src="./img/assets-pdf/Icono Direccion.png" style="width:12px; vertical-align:middle; margin-right:6px; margin-bottom:2px;">Dir. Fiscal</td><td>Calle Los Fresnos 123, Arequipa</td></tr>
+      </table>
+
+      <div class="note-box note-yellow">
+        🔐 La contraseña de este documento (cuando llegue en PDF por email) será: tu RUC (20456123981)
+      </div>
+      <div class="note-box note-green">✅ <strong>Transferencia:</strong> Flete y embalaje gratis. Envíe su voucher respondiendo a este correo o vía WhatsApp.</div>
+    </div>
+
+    <div class="right-col">
+      <table class="desc-tb">
+        <tr><td class="desc-th">DESCRIPCIÓN</td><td class="desc-th desc-r">MONTO</td></tr>
+      </table>
+      
+      <div class="item-row">
+         <div class="item-1">1.</div>
+         <div class="item-2">
+           <strong>Tubo Extensible Luxury (hasta 3m)</strong>
+           <span class="item-sub">Lote de 4 cajas (48 tubos) a S/. 27 c/u</span>
+         </div>
+         <div class="item-3">S/. 1296.00</div>
+      </div>
+      <div class="item-row">
+         <div class="item-1">2.</div>
+         <div class="item-2">
+           <strong>Gastos Logísticos</strong>
+           <span class="item-sub">Flete: <strong style="color:#27ae60">GRATIS</strong> | Embalaje: <strong style="color:#27ae60">GRATIS</strong></span>
+         </div>
+         <div class="item-3">S/. 0.00</div>
+      </div>
+
+      <div class="totals">
+        <div class="tot-row"><span class="tot-r">SUBTOTAL (82%):</span><span class="tot-v">S/. 1062.72</span></div>
+        <div class="tot-row"><span class="tot-r">IGV (18%):</span><span class="tot-v">S/. 233.28</span></div>
+      </div>
+      <div style="text-align:right;">
+        <span class="tot-r" style="color:#c88264;font-size:12px;">TOTAL:</span>
+        <span class="tot-v grand">S/. 1296.00</span>
+      </div>
+
+      <div class="sec-t" style="margin-top:30px;">TÉRMINOS Y CONDICIONES:</div>
+      <div class="qr-box">
+        <div class="qr-img"><img src="https://quickchart.io/qr?size=300&margin=1&text=https://wa.me/51999900396?text=Hola,%20consulta%20por%20mi%20OC:%20OC-20261125-8374"></div>
+        <div class="qr-txt">
+           Escanee el código QR para autorizar el armado del lote vía WhatsApp con su asesor asignado.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+      <strong>Tubos de Cortina Perú</strong> — Somos Marketing Perú EIRL · RUC 20615554384<br>
+      WhatsApp: +51 999 900 396 · cortinas-peru.web.app<br>
+      Este documento es una cotización para venta al por mayor. El pedido se confirma vía WhatsApp. Stock sujeto a disponibilidad.
+  </div>
+</body>
+</html>
