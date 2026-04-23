@@ -1,14 +1,24 @@
 .va-authority {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--dark);
   color: white;
 }
 
 .va-auth-wrap {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 60px;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 50px;
   align-items: center;
+}
+
+.va-h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.va-p-desc {
+  color: #ccc; /* Improved contrast on dark background */
+  margin-bottom: 25px;
 }
 
 .va-auth-visual {
@@ -26,20 +36,24 @@
   top: 30px;
   left: -20px;
   background: var(--copper);
-  padding: 20px;
+  color: var(--dark); /* Changed to black as per user request */
+  padding: 15px 25px;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 5;
 }
 
 .va-ab-num {
   display: block;
-  font-size: 24px;
+  font-size: 2.2rem; /* Reduced from fs-xl to restore proportion */
   font-weight: 900;
+  line-height: 1;
+  margin-bottom: 5px;
 }
 
 .va-ab-tx {
-  font-size: 10px;
+  font-size: 0.8rem;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -60,30 +74,42 @@
 }
 
 .va-stat-val {
-  font-size: 18px;
+  font-size: var(--fs-lg);
   font-weight: 900;
   color: var(--copper);
   margin-bottom: 5px;
+  line-height: 1.1;
 }
 
 .va-stat-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: #aaa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ddd; /* Brighter for dark background */
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .va-auth-cert {
   background: rgba(255,255,255,0.1);
   padding: 15px;
   border-radius: 8px;
-  font-size: 11px;
+  font-size: var(--fs-sm);
   font-weight: 700;
   text-align: center;
 }
 
 @media (max-width: 900px) {
-  .va-auth-wrap { grid-template-columns: 1fr; }
+  .va-auth-wrap { 
+    grid-template-columns: 1fr; 
+    text-align: center;
+    gap: 30px;
+  }
+  .va-h2 { 
+    font-size: 1.8rem; /* Smaller for mobile */
+  }
+  .va-p-desc {
+    font-size: 1rem;
+  }
   .va-auth-badge { left: 20px; top: 20px; }
   .va-auth-stats { flex-direction: column; }
 }

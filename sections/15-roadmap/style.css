@@ -1,13 +1,13 @@
 .va-roadmap {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--white);
 }
 
 .va-road-steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-  margin: 50px 0;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 60px 0;
 }
 
 .va-road-item {
@@ -24,37 +24,59 @@
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  font-size: 14px;
+  font-size: var(--fs-base);
   position: absolute;
-  top: -15px;
-  left: 20px;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
   box-shadow: 0 4px 10px rgba(200, 130, 100, 0.3);
 }
 
 .va-road-card {
   background: var(--bone);
-  padding: 40px 25px 25px;
-  border-radius: 16px;
+  padding: 50px 30px 40px;
+  border-radius: 20px;
   height: 100%;
+  transition: var(--transition);
+  border: 1px solid rgba(0,0,0,0.03);
+  text-align: center; /* Centering all content */
+}
+
+.va-road-card:hover {
+  transform: translateY(-5px);
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.va-road-icon {
+  font-size: 3rem; /* Increased size */
+  margin-bottom: 20px;
 }
 
 .va-road-h4 {
-  font-size: 14px;
+  font-size: 1.4rem; /* Significantly larger */
   font-weight: 900;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   color: var(--dark);
+  text-wrap: balance;
 }
 
 .va-road-p {
-  font-size: 13px;
-  color: var(--stone-light);
+  font-size: 1.2rem; /* Significantly larger */
+  color: #333;
   line-height: 1.5;
+  font-weight: 500;
+  text-wrap: pretty;
 }
 
 .va-road-map {
   margin-top: 50px;
   border: 1px solid #eee;
+}
+
+@media (max-width: 1000px) {
+  .va-road-steps { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {

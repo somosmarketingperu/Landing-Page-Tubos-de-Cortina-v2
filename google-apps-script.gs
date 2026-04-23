@@ -74,8 +74,8 @@ function procesarPedido(data) {
   // 5. Enviar email al cliente
   GmailApp.sendEmail(
     data.email,
-    '📦 Tu Orden de Compra N° ' + ocNumber + ' — Tubos de Cortina Perú',
-    'Adjunto encontrarás tu Orden de Compra. Ábrela con tu ' + (data.comprobanteType === 'factura' ? 'RUC' : 'DNI') + ' como contraseña.',
+    '[Orden Confirmada] Tu Orden de Compra N° ' + ocNumber + ' - Tubos de Cortina Peru',
+    'Adjunto encontraras tu Orden de Compra. Abrela con tu ' + (data.comprobanteType === 'factura' ? 'RUC' : 'DNI') + ' como contrasena.',
     {
       htmlBody    : htmlBody,
       attachments : [pdfBlob],
@@ -181,13 +181,19 @@ function construirEmailHTML(data, ocNumber, driveUrl) {
   <div style="max-width:600px;margin:20px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);">\
 \
     <!-- Header -->\
-    <div style="background:#1c1917;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">\
-      <div>\
-        <div style="color:#c88264;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">TUBOS DE CORTINA PERÚ</div>\
-        <div style="color:white;font-size:20px;font-weight:900;margin-top:4px;">Orden de Compra</div>\
-        <div style="color:#888;font-size:12px;margin-top:2px;">' + ocNumber + '</div>\
-      </div>\
-      <div style="background:#c88264;color:white;padding:8px 16px;border-radius:20px;font-size:11px;font-weight:900;">PAGO CONTRA ENTREGA</div>\
+    <div style="background:#1c1917;padding:24px 28px;">\
+      <table style="width:100%; border-collapse:collapse; border:none; margin:0; padding:0;">\
+        <tr>\
+          <td style="text-align:left; vertical-align:middle;">\
+            <div style="color:#c88264;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">TUBOS DE CORTINA PERÚ</div>\
+            <div style="color:white;font-size:22px;font-weight:900;margin-top:4px;">Orden de Compra</div>\
+            <div style="color:#888;font-size:12px;margin-top:2px;">' + ocNumber + '</div>\
+          </td>\
+          <td style="text-align:right; vertical-align:middle;">\
+            <span style="background:#c88264;color:white;padding:8px 16px;border-radius:20px;font-size:10px;font-weight:900;display:inline-block;white-space:nowrap;letter-spacing:0.5px;">' + (data.esTransferencia ? 'TRANSFERENCIA' : 'CONTRA ENTREGA') + '</span>\
+          </td>\
+        </tr>\
+      </table>\
     </div>\
 \
     <!-- Saludo -->\
@@ -199,13 +205,13 @@ function construirEmailHTML(data, ocNumber, driveUrl) {
 \
       <!-- Alerta de contraseña -->\
       <div style="background:#fff8e1;border-left:4px solid #c88264;padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;">\
-        <div style="font-weight:700;color:#c88264;font-size:12px;text-transform:uppercase;margin-bottom:6px;">🔐 Para abrir tu PDF</div>\
+        <div style="font-weight:700;color:#c88264;font-size:12px;text-transform:uppercase;margin-bottom:6px;">&#128274; Para abrir tu PDF</div>\
         <div style="font-size:14px;color:#555;">La contraseña del PDF adjunto es <strong>' + clavePDF + '</strong></div>\
       </div>\
 \
       <!-- Resumen del pedido -->\
       <div style="background:#f9f7f5;border-radius:10px;padding:16px 20px;margin:16px 0;">\
-        <div style="font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">📋 Resumen del Pedido</div>\
+        <div style="font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">&#128193; Resumen del Pedido</div>\
         <table style="width:100%;border-collapse:collapse;font-size:13px;color:#444;">\
           <tr><td style="padding:5px 0;color:#888;">Producto</td><td style="text-align:right;font-weight:700;">Tubo Cortina Extensible 3m · Luxury</td></tr>\
           <tr><td style="padding:5px 0;color:#888;">Cantidad</td><td style="text-align:right;">' + (orden.cajas || '—') + ' cajas · ' + (orden.tubos || '—') + ' tubos</td></tr>\
@@ -220,14 +226,14 @@ function construirEmailHTML(data, ocNumber, driveUrl) {
 \
       <!-- Ver PDF en Drive -->\
       <div style="text-align:center;margin:20px 0;">\
-        <a href="' + driveUrl + '" style="background:#1c1917;color:white;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;display:inline-block;">📄 Ver mi PDF en Google Drive</a>\
+        <a href="' + driveUrl + '" style="background:#1c1917;color:white;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;display:inline-block;">&#128196; Ver mi PDF en Google Drive</a>\
         <p style="font-size:11px;color:#aaa;margin-top:8px;">Recuerda usar ' + clavePDF + ' como contraseña para abrirlo</p>\
       </div>\
 \
       <!-- WhatsApp CTA -->\
       <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px 18px;text-align:center;">\
-        <div style="font-size:13px;color:#166534;margin-bottom:8px;">🛡️ <strong>Pagas al recibir</strong> en la agencia Shalom. Sin anticipos.</div>\
-        <a href="https://wa.me/' + CONFIG.EMPRESA_WA + '" style="color:#16a34a;font-weight:700;font-size:13px;">💬 Contáctanos por WhatsApp para coordinar</a>\
+        <div style="font-size:13px;color:#166534;margin-bottom:8px;">&#9989; <strong>Pagas al recibir</strong> en la agencia Shalom. Sin anticipos.</div>\
+        <a href="https://wa.me/' + CONFIG.EMPRESA_WA + '" style="color:#16a34a;font-weight:700;font-size:13px;">&#128172; Contáctanos por WhatsApp para coordinar</a>\
       </div>\
     </div>\
 \
@@ -246,7 +252,6 @@ function construirEmailHTML(data, ocNumber, driveUrl) {
 }
 
 // ── PDF HTML BUILDER (Premium 2-Column Template) ───────────────
-
 function construirPDFHTML(d, ocN) {
   var dpt = (d.departamento || '').toLowerCase();
   dpt = dpt.charAt(0).toUpperCase() + dpt.slice(1);
@@ -256,35 +261,74 @@ function construirPDFHTML(d, ocN) {
   var fleteStr = trnsf ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. ' + (d.flete || '0.00');
   var embStr   = trnsf ? '<strong style="color:#27ae60">GRATIS</strong>' : 'S/. ' + (d.embalaje || '0.00');
 
-  // Cálculo igual a Mancuernas (82% Subt, 18% IGV) pero con Tubos de Cortina
   var total = parseFloat(d.total) || parseFloat(d.subtotal) || 0;
   var igv = total * 0.18;
   var subtSinIgv = total - igv;
   
+  // URL Encode proper for WA text
+  var waText = encodeURIComponent('Hola, consulta por mi OC: ' + ocN);
+  var qrUrl = 'https://quickchart.io/qr?size=200&margin=1&text=https://wa.me/' + CONFIG.EMPRESA_WA + '?text=' + waText;
+
   var urlBase = 'https://cortinas-peru.web.app/img/assets-pdf/';
-  var qrUrl = 'https://quickchart.io/qr?size=300&margin=1&text=https://wa.me/' + CONFIG.EMPRESA_WA + '?text=Hola,%20consulta%20por%20mi%20OC:%20' + ocN;
+  var iconFiles = [
+    'Icono Interbank.png', 'Icono Cuenta corriente.png',
+    'Icono Nombre del Beneficiario.png', 'Icono Whatsapp.png',
+    'Icono Direccion.png', 'Icono dni.png', 'Icono Pago contraentrega.png',
+    'Icono Correo.png', 'Icono RUC.png'
+  ];
+  
+  // ── INLINING IMAGES AS BASE64 PARA GOOGLE APPS SCRIPT PDF ENGINE ──
+  var requests = [{ url: qrUrl, muteHttpExceptions: true }];
+  iconFiles.forEach(function(f) {
+    requests.push({ url: urlBase + encodeURIComponent(f), muteHttpExceptions: true });
+  });
+
+  var responses = UrlFetchApp.fetchAll(requests);
+  
+  var qrB64 = '';
+  if (responses[0].getResponseCode() === 200) {
+    qrB64 = 'data:image/png;base64,' + Utilities.base64Encode(responses[0].getBlob().getBytes());
+  }
+
+  var iconMap = {};
+  for (var i = 0; i < iconFiles.length; i++) {
+    if (responses[i+1].getResponseCode() === 200) {
+      iconMap[iconFiles[i]] = 'data:image/png;base64,' + Utilities.base64Encode(responses[i+1].getBlob().getBytes());
+    } else {
+      iconMap[iconFiles[i]] = ''; // fail silent
+    }
+  }
 
   function icono(file, txtArray) {
     var txtHtml = txtArray.map(function(t) { return '<div>' + t + '</div>'; }).join('');
-    return '<div class="ic-row"><div class="ic-icon"><img src="' + urlBase + encodeURIComponent(file) + '" /></div><div class="ic-text">' + txtHtml + '</div></div>';
+    var imgHtml = iconMap[file] ? '<img src="' + iconMap[file] + '" width="22" style="margin-right:8px; vertical-align:top;">' : '';
+    return '<div class="ic-row" style="margin-bottom:8px;">' +
+             '<div class="ic-icon" style="display:inline-block; vertical-align:top;">' + imgHtml + '</div>' + 
+             '<div class="ic-text" style="display:inline-block; vertical-align:top;">' + txtHtml + '</div>' +
+           '</div>';
+  }
+
+  function tIc(file, txt) {
+    var imgHtml = iconMap[file] ? '<img src="' + iconMap[file] + '" width="14" style="vertical-align:middle; margin-right:6px; margin-bottom:2px;">' : '';
+    return imgHtml + '<span style="vertical-align:middle;">' + txt + '</span>';
   }
 
   var bankHtml = '';
   if (trnsf) {
     bankHtml = 
-      '<div class="sec-t">DATOS BANCARIOS</div>' +
+      '<div class="sec-t" style="margin-top:25px;">DATOS BANCARIOS</div>' +
       icono('Icono Interbank.png', ['Banco BCP (Cuenta Soles)', 'SOMOS MARKETING PERU EIRL']) +
       icono('Icono Cuenta corriente.png', ['N° Cta: 191-23456789-0-12', 'N° Interbancario: 002-191-000234567890-12']);
   }
 
   var dCli = 
     '<table class="data-tb">' +
-      '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Nombre y Apellidos') + '</td><td>' + d.nombre + '</td></tr>' +
-      '<tr><td>' + tIc('Icono Whatsapp.png', 'WhatsApp') + '</td><td>' + (d.wsp || '-') + '</td></tr>' +
-      '<tr><td>' + tIc('Icono Direccion.png', 'Departamento') + '</td><td>' + dpt + '</td></tr>' +
-      '<tr><td>' + tIc('Icono Direccion.png', 'Agencia Shalom') + '</td><td>' + (d.agencia || '-') + '</td></tr>' +
-      '<tr><td>' + tIc('Icono dni.png', 'Quién Recoge') + '</td><td>' + recog + '</td></tr>' +
-      '<tr><td>' + tIc('Icono Pago contraentrega.png', 'Modalidad de Pago') + '</td><td>' + (trnsf ? 'Transferencia Bancaria' : 'Contra Entrega 🚚') + '</td></tr>' +
+      '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Nombre/Beneficiado') + '</td><td><strong>' + d.nombre + '</strong></td></tr>' +
+      '<tr><td>' + tIc('Icono Whatsapp.png', 'WhatsApp') + '</td><td><strong>' + (d.wsp || '-') + '</strong></td></tr>' +
+      '<tr><td>' + tIc('Icono Direccion.png', 'Departamento') + '</td><td><strong>' + dpt + '</strong></td></tr>' +
+      '<tr><td>' + tIc('Icono Direccion.png', 'Agencia Shalom') + '</td><td><strong>' + (d.agencia || '-') + '</strong></td></tr>' +
+      '<tr><td>' + tIc('Icono dni.png', 'Quién Recoge') + '</td><td><strong>' + recog + '</strong></td></tr>' +
+      '<tr><td>' + tIc('Icono Pago contraentrega.png', 'Modalidad de Pago') + '</td><td><strong>' + (trnsf ? 'Transferencia Bancaria' : 'Contra Entrega') + '</strong></td></tr>' +
     '</table>';
 
   var cpbtHtml = '';
@@ -292,28 +336,30 @@ function construirPDFHTML(d, ocN) {
   if (d.comprobanteType === 'boleta') {
     cpbtHtml = 
       '<table class="data-tb">' +
-        '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Tipo') + '</td><td>Boleta Electrónica</td></tr>' +
-        '<tr><td>' + tIc('Icono dni.png', 'DNI') + '</td><td>' + (d.dni||'') + '</td></tr>' +
-        '<tr><td>' + tIc('Icono Correo.png', 'Correo') + '</td><td>' + (d.email||'') + '</td></tr>' +
+        '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Tipo de Cpe') + '</td><td><strong>Boleta de Venta</strong></td></tr>' +
+        '<tr><td>' + tIc('Icono dni.png', 'DNI del Cliente') + '</td><td><strong>' + (d.dni||'') + '</strong></td></tr>' +
+        '<tr><td>' + tIc('Icono Correo.png', 'Correo Asociado') + '</td><td><strong>' + (d.email||'') + '</strong></td></tr>' +
       '</table>';
-    passHint = 'tu DNI (' + (d.dni||d.nombre) + ')';
+    passHint = 'DNI (' + (d.dni||d.nombre) + ')';
   } else {
     cpbtHtml = 
       '<table class="data-tb">' +
-        '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Tipo') + '</td><td>Factura Electrónica</td></tr>' +
-        '<tr><td>' + tIc('Icono RUC.png', 'RUC') + '</td><td>' + (d.ruc||'') + '</td></tr>' +
-        '<tr><td>' + tIc('Icono Direccion.png', 'Razón Social') + '</td><td>' + (d.razon||'') + '</td></tr>' +
-        '<tr><td>' + tIc('Icono Direccion.png', 'Dir. Fiscal') + '</td><td>' + (d.dir||'') + '</td></tr>' +
+        '<tr><td>' + tIc('Icono Nombre del Beneficiario.png', 'Tipo de Cpe') + '</td><td><strong>Factura Electrónica</strong></td></tr>' +
+        '<tr><td>' + tIc('Icono RUC.png', 'RUC de la Empresa') + '</td><td><strong>' + (d.ruc||'') + '</strong></td></tr>' +
+        '<tr><td>' + tIc('Icono Direccion.png', 'Razón Social') + '</td><td><strong>' + (d.razon||'') + '</strong></td></tr>' +
+        '<tr><td>' + tIc('Icono Direccion.png', 'Domicilio Fiscal') + '</td><td><strong>' + (d.dir||'') + '</strong></td></tr>' +
       '</table>';
-    passHint = 'tu RUC (' + (d.ruc||'') + ')';
+    passHint = 'RUC (' + (d.ruc||'') + ')';
   }
 
   var noteHtml = '';
   if (trnsf) {
-    noteHtml = '<div class="note-box note-green">✅ <strong>Transferencia:</strong> Flete y embalaje gratis. Envíe su voucher respondiendo a este correo o vía WhatsApp.</div>';
+    noteHtml = '<div class="note-box note-green"><strong>&#10004; Pago por Transferencia Activo:</strong> Flete y embalaje gratis aplicados. Por favor, enviar comprobante por WhatsApp.</div>';
   } else {
-    noteHtml = '<div class="note-box note-green">✅ <strong>Pago al Recibir:</strong> No se requiere adelanto. El monto se abona en la agencia Shalom al recoger el pedido.</div>';
+    noteHtml = '<div class="note-box note-green"><strong>&#10004; Pago Contra Entrega Activo:</strong> No se requiere adelanto. Abonar el monto exacto directamente en la agencia Shalom al recoger.</div>';
   }
+
+  var qrImageTag = qrB64 ? '<img src="' + qrB64 + '" width="95" height="95" style="border:1px solid #ccc; border-radius:4px;">' : '<div style="width:95px;height:95px;border:1px solid #ccc;background:#eee;text-align:center;line-height:95px;font-size:10px;">QR</div>';
 
   return '\
 <!DOCTYPE html>\
@@ -321,113 +367,111 @@ function construirPDFHTML(d, ocN) {
 <head>\
   <meta charset="UTF-8">\
   <style>\
-    body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1c1917; margin: 0; padding: 30px 40px; }\
-    .header { width: 100%; display: table; margin-bottom: 25px; }\
-    .header-l { display: table-cell; vertical-align: top; }\
-    .header-r { display: table-cell; vertical-align: top; text-align: right; }\
-    .h-logo { font-size: 28px; font-weight: 900; letter-spacing: -1px; display:inline-block; line-height:1; }\
-    .h-tag { color: #c88264; font-size: 11px; font-weight: 700; letter-spacing: 1px; display:block; margin-bottom:6px; }\
-    .oc-bg { color: #f0ece8; font-size: 40px; font-weight: 900; line-height: 0.8; margin-bottom: 10px; }\
-    .oc-pill { background: #c88264; color: white; padding: 10px 20px; border-radius: 8px; display: inline-block; text-align: left; font-size:11px; }\
-    .page { display: table; width: 100%; }\
-    .left-col { display: table-cell; width: 50%; vertical-align: top; padding-right: 20px; border-right: 2px solid #f0ece8; }\
-    .right-col { display: table-cell; width: 50%; vertical-align: top; padding-left: 20px; }\
-    .sec-t { font-size: 14px; font-weight: 900; margin: 20px 0 10px; color: #c88264; letter-spacing: 0.5px; text-transform: uppercase; }\
-    .data-tb { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 10px; }\
-    .data-tb td { padding: 8px 0; border-bottom: 1px solid #f9f7f5; }\
-    .data-tb tr td:first-child { font-weight: bold; width: 45%; color: #333; }\
-    .data-tb tr td:last-child { color: #555; }\
-    .desc-tb { width: 100%; border-bottom: 1px solid #c88264; padding-bottom: 8px; margin-bottom: 25px; }\
-    .desc-th { color: #c88264; font-size: 10px; font-weight: bold; }\
-    .desc-r { text-align: right; width: 80px; }\
-    .item-row { width: 100%; display: table; font-size: 11px; margin-bottom: 10px; }\
-    .item-1 { display: table-cell; font-weight: 900; width: 25px; }\
-    .item-2 { display: table-cell; color: #333; line-height: 1.3; }\
-    .item-3 { display: table-cell; text-align: right; font-weight: 900; font-size: 14px; width: 90px; }\
-    .item-sub { display: block; font-size: 9px; color: #888; font-weight: normal; margin-top:2px; }\
-    .totals { border-bottom: 2px solid #c88264; padding-bottom: 15px; margin-bottom: 15px; margin-top: 50px; text-align: right; }\
-    .tot-r { font-size: 10px; font-weight: bold; color: #c88264; display: inline-block; width: 90px; text-align: right; margin-right: 15px; }\
-    .tot-v { font-size: 13px; font-weight: bold; display: inline-block; width: 70px; text-align: right; color:#1c1917; }\
-    .tot-row { margin-bottom: 10px; }\
-    .grand { font-size: 16px !important; }\
-    .note-box { border-radius: 6px; padding: 10px 14px; margin-top: 12px; font-size: 10px; }\
-    .note-yellow { background: #fff8e1; border: 1px solid #ffe082; color: #795548; font-weight: bold; }\
+    @page { margin: 25px 40px; size: A4 portrait; }\
+    body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1c1917; margin: 0; padding: 0; font-size: 15px; line-height: 1.5; }\
+    .header { width: 100%; border-bottom: 3px solid #1c1917; padding-bottom: 20px; margin-bottom: 25px; }\
+    .h-tag { color: #c88264; font-size: 14px; font-weight: 800; letter-spacing: 1.5px; display:block; margin-bottom:6px; text-transform:uppercase; }\
+    .h-logo { font-size: 38px; font-weight: 900; letter-spacing: -1px; display:block; color: #1c1917; line-height: 1.1; }\
+    .oc-box { background: #f9f7f5; padding: 14px 20px; border-left: 6px solid #c88264; text-align: left; margin-top: 15px; }\
+    .oc-title { font-size: 22px; font-weight: 900; color: #1c1917; margin-bottom: 4px; }\
+    .oc-sub { font-size: 14px; color: #666; }\
+    table.layout-tb { width: 100%; border-collapse: collapse; }\
+    table.layout-tb td { vertical-align: top; }\
+    .left-col { width: 48%; padding-right: 25px; }\
+    .right-col { width: 52%; border-left: 2px solid #f0ece8; padding-left: 25px; }\
+    .sec-t { font-size: 16px; font-weight: 900; margin: 0 0 15px; color: #c88264; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #f0ece8; padding-bottom: 5px; }\
+    .data-tb { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 30px; }\
+    .data-tb td { padding: 9px 0; border-bottom: 1px dotted #e5e5e5; }\
+    .data-tb tr td:first-child { color: #666; width: 45%; }\
+    .data-tb tr td:last-child { color: #1c1917; text-align: right; }\
+    .desc-tb { width: 100%; border-collapse: collapse; margin-bottom: 25px; }\
+    .desc-th { font-size: 13px; font-weight: 800; color: #c88264; border-bottom: 3px solid #c88264; padding-bottom: 8px; text-transform: uppercase; }\
+    .item-row { margin-bottom: 20px; font-size: 15px; }\
+    .item-title { font-weight: 800; color: #1c1917; font-size: 17px; margin-bottom: 4px; display:block; }\
+    .item-sub { color: #666; font-size: 13px; display:block; line-height: 1.4; padding-right: 15px; }\
+    .val-r { float: right; font-weight: 900; font-size: 18px; color: #1c1917; }\
+    .totals { border-top: 2px dashed #ccc; padding-top: 20px; text-align: right; margin-top: 35px; }\
+    .tot-row { margin-bottom: 10px; font-size: 15px; color: #555; }\
+    .tot-lbl { display: inline-block; width: 140px; text-align: right; margin-right: 15px; font-weight:bold; }\
+    .tot-val { display: inline-block; width: 90px; font-weight: 900; color:#1c1917; }\
+    .grand { font-size: 24px !important; color: #c88264 !important; margin-top: 10px; }\
+    .note-box { border-radius: 8px; padding: 14px 18px; margin-top: 25px; font-size: 13px; line-height: 1.5; }\
+    .note-yellow { background: #fff8e1; border: 1px solid #ffe082; color: #795548; }\
     .note-green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }\
-    .qr-box { margin-top: 30px; display: table; width: 100%; }\
-    .qr-img { display: table-cell; width: 80px; vertical-align:middle; }\
-    .qr-img img { width: 70px; }\
-    .qr-txt { display: table-cell; vertical-align: middle; font-size: 9px; color: #666; line-height: 1.4; padding-left: 10px; }\
-    .footer { margin-top: 25px; text-align: center; font-size: 9px; color: #999; border-top: 1px solid #f0ece8; padding-top: 15px; line-height: 1.5; }\
+    .footer { margin-top: 50px; text-align: center; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.6; }\
+    .qr-table { width: 100%; margin-top: 30px; }\
+    .qr-td { vertical-align: middle; }\
+    .qr-text { font-size: 13px; color: #444; padding-left: 20px; font-weight: bold; line-height:1.5; }\
   </style>\
 </head>\
 <body>\
-  <div class="header">\
-    <div class="header-l">\
-       <span class="h-tag">COTIZACIÓN MAYORISTA</span>\
-       <span class="h-logo">TUBOS DE<br>CORTINA PERÚ</span>\
-    </div>\
-    <div class="header-r">\
-       <div class="oc-bg">ORDEN DE<br>COMPRA</div>\
-       <div class="oc-pill">\
-         <strong>Nro. ' + ocN + '</strong><br>\
-         <span style="font-weight:normal;">' + new Date().toLocaleDateString('es-PE') + ' &nbsp;|&nbsp; ' + d.nombre + '</span>\
-       </div>\
-    </div>\
-  </div>\
-\
-  <div class="page">\
-    <div class="left-col">\
-      <div class="sec-t" style="margin-top:0;">📋 DATOS DEL COMPRADOR</div>\
-      ' + dCli + '\
-\
-      <div class="sec-t">🧾 COMPROBANTE</div>\
-      ' + cpbtHtml + '\
-\
-      <div class="note-box note-yellow">\
-        🔐 La contraseña de este documento (cuando llegue en PDF por email) será: ' + passHint + '\
-      </div>\
-      ' + noteHtml + '\
-    </div>\
-\
-    <div class="right-col">\
-      <table class="desc-tb">\
-        <tr><td class="desc-th">DESCRIPCIÓN</td><td class="desc-th desc-r">MONTO</td></tr>\
-      </table>\
-      \
-      <div class="item-row">\
-         <div class="item-1">1.</div>\
-         <div class="item-2">\
-           <strong>Tubo Extensible Luxury (hasta 3m)</strong>\
-           <span class="item-sub">Lote de ' + (d.cajas||'0') + ' cajas (' + (d.tubos||'0') + ' tubos) a S/. 27 c/u</span>\
-         </div>\
-         <div class="item-3">S/. ' + (d.subtotal||'0') + '</div>\
-      </div>\
-      <div class="item-row">\
-         <div class="item-1">2.</div>\
-         <div class="item-2">\
-           <strong>Gastos Logísticos</strong>\
-           <span class="item-sub">Flete: ' + fleteStr + ' | Embalaje: ' + embStr + '</span>\
-         </div>\
-         <div class="item-3">' + (trnsf ? "S/. 0.00" : "S/. "+((parseFloat(d.flete||0)+parseFloat(d.embalaje||0)).toFixed(2))) + '</div>\
-      </div>\
-\
-      <div class="totals">\
-        <div class="tot-row"><span class="tot-r">SUBTOTAL (82%):</span><span class="tot-v">S/. ' + subtSinIgv.toFixed(2) + '</span></div>\
-        <div class="tot-row"><span class="tot-r">IGV (18%):</span><span class="tot-v">S/. ' + igv.toFixed(2) + '</span></div>\
-      </div>\
-      <div style="text-align:right;">\
-        <span class="tot-r" style="color:#c88264;font-size:12px;">TOTAL:</span>\
-        <span class="tot-v grand">S/. ' + total.toFixed(2) + '</span>\
-      </div>\
-\
-      <div class="sec-t" style="margin-top:30px;">TÉRMINOS Y CONDICIONES:</div>\
-      <div class="qr-box">\
-        <div class="qr-img"><img src="' + qrUrl + '"></div>\
-        <div class="qr-txt">\
-           Escanee el código QR para autorizar el armado del lote vía WhatsApp con su asesor asignado.\
+  <table style="width:100%; margin-bottom:25px;">\
+    <tr>\
+      <td style="width:50%;">\
+        <span class="h-tag">COTIZACIÓN / ORDEN MAYORISTA</span>\
+        <span class="h-logo">TUBOS DE CORTINA PERÚ</span>\
+      </td>\
+      <td style="width:50%; text-align:right;">\
+        <div class="oc-box">\
+          <div class="oc-title">ORDEN N° ' + ocN + '</div>\
+          <div class="oc-sub">Fecha: ' + new Date().toLocaleDateString('es-PE') + ' &nbsp;|&nbsp; Emitido para: ' + d.nombre + '</div>\
         </div>\
-      </div>\
-    </div>\
+      </td>\
+    </tr>\
+  </table>\
+\
+  <table class="layout-tb">\
+    <tr>\
+      <td class="left-col">\
+        <div class="sec-t"> DATOS DE DESPACHO Y CONTACTO</div>\
+        ' + dCli + '\
+\
+        <div class="sec-t"> DATOS DE FACTURACIÓN</div>\
+        ' + cpbtHtml + '\
+\
+        ' + bankHtml + '\
+      </td>\
+\
+      <td class="right-col">\
+        <div class="sec-t"> DETALLE DEL PRODUCTO</div>\
+        <div class="item-row">\
+          <span class="val-r">S/. ' + (d.subtotal||'0.00') + '</span>\
+          <span class="item-title">1. Tubo Extensible Luxury (Acero)</span>\
+          <span class="item-sub">Envío de ' + (d.cajas||'0') + ' cajas que contienen ' + (d.tubos||'0') + ' tubos listos para vender. Precio unitario S/. 27.00/tubo.</span>\
+        </div>\
+        \
+        <div class="item-row" style="margin-top:25px;">\
+          <span class="val-r">' + (trnsf ? "S/. 0.00" : "S/. "+((parseFloat(d.flete||0)+parseFloat(d.embalaje||0)).toFixed(2))) + '</span>\
+          <span class="item-title">2. Gastos Logísticos Expresos</span>\
+          <span class="item-sub">Gestión de embalaje seguro (' + embStr + ') y transporte flete (' + fleteStr + ') hacia agencia destino.</span>\
+        </div>\
+\
+        <div class="totals">\
+          <div class="tot-row"><span class="tot-lbl">SUBTOTAL (82%):</span><span class="tot-val">S/. ' + subtSinIgv.toFixed(2) + '</span></div>\
+          <div class="tot-row"><span class="tot-lbl">I.G.V. (18%):</span><span class="tot-val">S/. ' + igv.toFixed(2) + '</span></div>\
+          <div class="tot-row" style="margin-top:15px;">\
+            <span class="tot-lbl" style="font-size:18px; color:#c88264;">TOTAL A PAGAR:</span>\
+            <span class="tot-val grand">S/. ' + total.toFixed(2) + '</span>\
+          </div>\
+        </div>\
+\
+        <table class="qr-table">\
+          <tr>\
+            <td class="qr-td" style="width:105px;">\
+              ' + qrImageTag + '\
+            </td>\
+            <td class="qr-td qr-text">\
+               IMPORTANTE: Por favor, escanee este código QR usando la cámara de su celular para informarnos vía WhatsApp que ha finalizado su orden y coordinar la entrega.\
+            </td>\
+          </tr>\
+        </table>\
+      </td>\
+    </tr>\
+  </table>\
+\
+  ' + noteHtml + '\
+  <div class="note-box note-yellow" style="margin-top:15px;">\
+    <strong>[ ! ] Contraseña de Seguridad:</strong> Si recibió este archivo como PDF adjunto en su correo electrónico personal, recuerde que está encriptado. Utilice su ' + passHint + ' como contraseña para abrirlo.\
   </div>\
 \
   <div class="footer">\

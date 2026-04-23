@@ -18,7 +18,7 @@ document.addEventListener('sectionsLoaded', () => {
    ═══════════════════════════════════════════════════════════════ */
 
 // URL del Google Apps Script (Web App)
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBQaXXavdT3NHFgrqHgznRMuMt6Qec-prV6Sku5cJzqKzwgFljyYC7mxgsiXWFcj0Q/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwvlNkBzNsNgeqIa1-4PtDId191IV80Kad5-BDFAlT0mIU6cxP-MYfscd3HFEfGzLeL/exec';
 // Debe coincidir con CONFIG.SECRET_KEY en el .gs, funciona como token de acceso
 const APPS_SECRET_KEY = 'TCP2026-SOMOS-MKT-PERÜ-SECURE-8f3k9';
 
@@ -268,18 +268,21 @@ function initCODModal() {
                 btn.style.background = '#27ae60';
                 btn.style.borderColor = '#27ae60';
                 btn.style.color = '#fff';
+                btn.disabled = true; // Deshabilitar el botón para no acumular reenvíos
+                btn.style.cursor = 'not-allowed';
             } else {
                 btn.textContent = '❌ Error de Google';
                 btn.style.background = '#fee2e2';
                 btn.style.borderColor = '#ef4444';
                 btn.style.color = '#b91c1c';
+                setTimeout(() => {
+                    btn.textContent = '✉️ Re-enviar PDF al Correo';
+                    btn.style.background = '#f9f7f5';
+                    btn.style.borderColor = '#e7e5e4';
+                    btn.style.color = '#1c1917';
+                    btn.disabled = false;
+                }, 5000);
             }
-            setTimeout(() => {
-                btn.textContent = '✉️ Re-enviar PDF al Correo';
-                btn.style.background = '#f9f7f5';
-                btn.style.borderColor = '#e7e5e4';
-                btn.style.color = '#1c1917';
-            }, 5000);
         });
     });
 

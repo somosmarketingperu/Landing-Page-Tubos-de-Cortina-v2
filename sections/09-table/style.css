@@ -1,5 +1,5 @@
 .va-pricing-table-section {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--white);
 }
 
@@ -20,7 +20,7 @@
 .va-b2b-table th {
   text-align: left;
   padding: 20px;
-  font-size: 11px;
+  font-size: var(--fs-sm);
   text-transform: uppercase;
   color: #888;
   border-bottom: 2px solid #ddd;
@@ -32,7 +32,7 @@
 
 .va-b2b-table td {
   padding: 25px 20px;
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: var(--dark);
   border-bottom: 1px solid #efefef;
 }
@@ -40,7 +40,7 @@
 .va-v-name { font-weight: 900; }
 
 .va-total {
-  font-size: 18px;
+  font-size: var(--fs-lg);
   font-weight: 900;
   color: var(--copper);
 }
@@ -56,7 +56,7 @@
   background: var(--copper);
   color: white;
   padding: 4px 10px;
-  font-size: 9px;
+  font-size: var(--fs-sm);
   border-radius: 4px;
   margin-left: 10px;
 }
@@ -64,12 +64,12 @@
 .va-pt-note {
   margin-top: 30px;
   text-align: center;
-  font-size: 11px;
+  font-size: var(--fs-sm);
   color: #aaa;
 }
 
 @media (max-width: 600px) {
   .va-pt-wrapper { padding: 15px; }
-  .va-b2b-table td { padding: 15px 10px; font-size: 12px; }
-  .va-total { font-size: 15px; }
+  .va-b2b-table td { padding: 15px 10px; font-size: var(--fs-base); }
+  .va-total { font-size: var(--fs-base); }
 }

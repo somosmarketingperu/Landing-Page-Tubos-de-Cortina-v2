@@ -1,5 +1,5 @@
 .va-kit {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--bone);
 }
 
@@ -26,7 +26,7 @@
 }
 
 .va-spec-h4 {
-  font-size: 14px;
+  font-size: var(--fs-base);
   font-weight: 900;
   color: var(--copper);
   margin-bottom: 20px;
@@ -38,7 +38,7 @@
 }
 
 .va-spec-ul li {
-  font-size: 14px;
+  font-size: var(--fs-base);
   padding: 8px 0;
   border-bottom: 1px solid #f8f8f8;
   color: var(--stone-light);

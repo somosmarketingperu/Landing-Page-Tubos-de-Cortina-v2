@@ -17,13 +17,11 @@
     --success: #10b981;
     --danger: #ef4444;
     
-    /* Typography (Fluid) */
-    --fs-h1: clamp(2rem, 5vw, 3.5rem);
-    --fs-h2: clamp(1.5rem, 4vw, 2.5rem);
-    --fs-h3: clamp(1.2rem, 3vw, 1.8rem);
-    --fs-body: clamp(0.9rem, 2vw, 1.1rem);
-    --fs-sm: clamp(0.75rem, 1.8vw, 0.875rem);
-    --fs-xs: clamp(0.65rem, 1.5vw, 0.75rem);
+    /* Typography (Refined Fluid Scale - Better Mobile Support) */
+    --fs-xl: clamp(1.4rem, 8vw, 3.5rem);   /* Hero Titles (Smaller min for mobile) */
+    --fs-lg: clamp(1.2rem, 6vw, 2.4rem);   /* Section Titles (Smaller min for mobile) */
+    --fs-base: clamp(0.95rem, 4vw, 1.2rem); /* Body Text */
+    --fs-sm: clamp(0.8rem, 3vw, 1rem);    /* Small Text */
     
     /* Spacing & Transitions */
     --gap: clamp(1rem, 3vw, 2rem);
@@ -47,11 +45,32 @@ body {
     color: var(--dark);
     background-color: var(--bone);
     overflow-x: hidden;
+    font-size: var(--fs-base);
+    /* Safe wrapping without forced hyphens */
+    overflow-wrap: break-word;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: var(--fs-xl);
     line-height: 1.1;
     font-weight: 900;
+}
+
+h2 {
+    font-size: var(--fs-lg);
+    line-height: 1.2;
+    font-weight: 900;
+}
+
+h3, h4 {
+    font-size: var(--fs-base);
+    line-height: 1.3;
+    font-weight: 700;
 }
 
 img {
@@ -81,13 +100,34 @@ img {
     align-items: center;
 }
 
+/* Responsive Text Overrides */
+@media (max-width: 600px) {
+    h1, .va-h1 { font-size: 1.8rem !important; }
+    h2, .va-h2 { font-size: 1.5rem !important; }
+    h3, .va-h3 { font-size: 1.2rem !important; }
+    
+    .va-container {
+        padding: 0 15px; /* Consistent mobile padding */
+    }
+}
+
 /* --- Typography Helpers --- */
 
 .text-highlight {
     color: var(--copper);
 }
 
+.va-p-desc {
+    font-size: var(--fs-base);
+    color: var(--stone-light);
+    max-width: 800px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
 .text-center { text-align: center; }
+.va-text-center { text-align: center; margin-left: auto; margin-right: auto; }
+.va-text-justify { text-align: justify; }
 
 /* --- Mobile Responsiveness Enforcer --- */
 @media (max-width: 768px) {
@@ -107,7 +147,7 @@ img {
 
 .va-infog-crop img {
     width: 100%;
-    object-fit: cover;
-    object-position: top;
-    margin-bottom: -50px; /* Hides the bottom brand bar */
+    height: 100%;
+    object-fit: contain; /* Changed from cover to contain to avoid cropping */
+    object-position: center;
 }

@@ -27,7 +27,7 @@
 }
 
 .va-sticky-text {
-  font-size: 13px;
+  font-size: var(--fs-base);
   font-weight: 500;
 }
 
@@ -38,7 +38,7 @@
   border-radius: 50px;
   text-decoration: none;
   font-weight: 900;
-  font-size: 12px;
+  font-size: var(--fs-base);
   white-space: nowrap;
   transition: var(--transition);
 }
@@ -55,6 +55,6 @@
     padding: 10px;
   }
   .va-sticky-text {
-    font-size: 11px;
+    font-size: var(--fs-sm);
   }
 }

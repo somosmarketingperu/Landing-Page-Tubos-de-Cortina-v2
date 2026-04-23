@@ -21,7 +21,7 @@
   border-radius: 50px;
   text-decoration: none;
   font-weight: 900;
-  font-size: 16px;
+  font-size: var(--fs-lg);
   display: inline-block;
   box-shadow: 0 15px 30px rgba(200, 130, 100, 0.3);
   transition: var(--transition);
@@ -33,5 +33,5 @@
 
 @media (max-width: 600px) {
   .va-flyer { padding: 60px 0; }
-  .va-btn-final { width: 100%; font-size: 14px; }
+  .va-btn-final { width: 100%; font-size: var(--fs-base); }
 }

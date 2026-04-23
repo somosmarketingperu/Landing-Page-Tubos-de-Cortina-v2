@@ -21,33 +21,30 @@
 }
 
 .va-logo-symbol {
-  background: var(--copper);
-  color: white;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-weight: 900;
-  font-size: 18px;
+  font-size: 1.5rem;
+  margin-right: 5px;
 }
 
 .va-logo-text {
   font-weight: 900;
-  font-size: 18px;
+  font-size: 1.2rem; /* Fixed size to prevent disproportion */
   letter-spacing: -0.5px;
   color: var(--dark);
+  text-transform: uppercase;
+}
+
+.text-highlight-dark {
+  color: #a86b52; /* Darker copper for better readability */
 }
 
 .va-btn-main {
   background: var(--copper);
-  color: var(--white);
-  padding: 10px 22px;
+  color: var(--dark); /* Black text as requested */
+  padding: 12px 24px;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 900;
-  font-size: 13px;
+  font-size: 0.9rem;
   transition: var(--transition);
   display: inline-block;
 }
@@ -62,14 +59,14 @@
   color: #666;
   text-align: center;
   padding: 8px;
-  font-size: 11px;
+  font-size: var(--fs-sm);
   font-weight: 700;
   letter-spacing: 0.5px;
   border-bottom: 1px solid #eee;
 }
 
 @media (max-width: 600px) {
-  .va-logo-text { font-size: 16px; }
-  .va-btn-main { font-size: 11px; padding: 8px 15px; }
-  .va-top-promo { font-size: 9px; }
+  .va-logo-text { font-size: var(--fs-lg); }
+  .va-btn-main { font-size: var(--fs-sm); padding: 8px 15px; }
+  .va-top-promo { font-size: var(--fs-sm); }
 }

@@ -1,5 +1,5 @@
 .va-comparison {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--bone);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .va-comp-type {
-  font-size: 11px;
+  font-size: var(--fs-sm);
   font-weight: 900;
   color: #888;
   letter-spacing: 1px;
@@ -41,7 +41,7 @@
 .va-cp-item {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: #666;
   padding-bottom: 10px;
   border-bottom: 1px dashed #ddd;
@@ -73,18 +73,18 @@
   justify-content: center;
 }
 
-.va-price-currency { font-size: 20px; margin-top: 10px; margin-right: 5px; }
+.va-price-currency { font-size: var(--fs-lg); margin-top: 10px; margin-right: 5px; }
 .va-price-num { font-size: 80px; font-weight: 900; line-height: 1; }
-.va-price-cents { font-size: 20px; margin-top: 10px; }
+.va-price-cents { font-size: var(--fs-lg); margin-top: 10px; }
 
-.va-comp-note { font-size: 12px; color: #aaa; margin-bottom: 20px; }
+.va-comp-note { font-size: var(--fs-base); color: #aaa; margin-bottom: 20px; }
 
 .va-comp-seal {
   background: var(--copper);
   padding: 10px;
   border-radius: 8px;
   font-weight: 900;
-  font-size: 12px;
+  font-size: var(--fs-base);
 }
 
 @media (max-width: 900px) {

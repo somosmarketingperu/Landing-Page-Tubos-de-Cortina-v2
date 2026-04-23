@@ -1,5 +1,5 @@
 .va-solution {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--white);
 }
 
@@ -16,7 +16,7 @@
 
 .va-sol-feat-grid {
   display: grid;
-  gap: 30px;
+  gap: 45px; /* Increased to fill more vertical space */
 }
 
 .va-sol-feat {
@@ -27,26 +27,26 @@
 
 .va-sf-icon {
   background: #fdf2f0;
-  width: 50px;
-  height: 50px;
+  width: 60px; /* Increased from 50px */
+  height: 60px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  font-size: 20px;
+  border-radius: 14px;
+  font-size: 1.5rem;
   border: 1px solid rgba(200, 130, 100, 0.2);
 }
 
 .va-sf-content h4 {
-  font-size: 14px;
+  font-size: var(--fs-base);
   font-weight: 900;
   margin-bottom: 5px;
   letter-spacing: -0.2px;
 }
 
 .va-sf-content p {
-  font-size: 13px;
+  font-size: var(--fs-base);
   color: var(--stone-light);
   line-height: 1.5;
 }
@@ -55,11 +55,19 @@
   position: relative;
 }
 
+.va-sol-main-visual img {
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  max-height: 800px; /* Prevent it from being too tall */
+  width: 100%;
+  object-fit: contain;
+}
+
 .va-sol-tag {
   background: var(--dark);
   color: white;
   padding: 10px 20px;
-  font-size: 10px;
+  font-size: 0.8rem;
   font-weight: 900;
   border-radius: 50px;
   position: absolute;

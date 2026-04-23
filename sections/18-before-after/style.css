@@ -1,5 +1,5 @@
 .va-ba {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--white);
 }
 
@@ -13,9 +13,9 @@
 
 .va-ba-card {
   background: #fdf2f0;
-  padding: 30px;
+  padding: 40px;
   border-radius: 20px;
-  width: 350px;
+  width: 450px;
   text-align: center;
   transition: var(--transition);
 }
@@ -27,7 +27,7 @@
 }
 
 .va-ba-label {
-  font-size: 11px;
+  font-size: var(--fs-sm);
   font-weight: 900;
   margin-bottom: 20px;
   color: #666;
@@ -38,7 +38,7 @@
 .va-ba-img-wrap {
   background: #eee;
   border-radius: 12px;
-  height: 200px;
+  height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +57,7 @@
 .va-ba-list {
   list-style: none;
   text-align: left;
-  font-size: 13px;
+  font-size: var(--fs-base);
   line-height: 1.8;
 }
 
@@ -71,7 +71,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  font-size: 14px;
+  font-size: var(--fs-base);
 }
 
 @media (max-width: 850px) {

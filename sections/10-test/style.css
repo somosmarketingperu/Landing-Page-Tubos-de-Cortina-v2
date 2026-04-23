@@ -1,5 +1,5 @@
 .va-testimonials {
-  padding: 80px 0;
+  padding: clamp(30px, 5vh, 50px) 0;
   background: var(--bone);
 }
 
@@ -21,14 +21,14 @@
 }
 
 .va-test-stars {
-  font-size: 14px;
+  font-size: var(--fs-base);
   margin-bottom: 20px;
   letter-spacing: 2px;
 }
 
 .va-test-q {
   font-style: italic;
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: var(--stone-light);
   line-height: 1.6;
   margin-bottom: 30px;
@@ -44,12 +44,12 @@
 
 .va-tu-info strong {
   display: block;
-  font-size: 14px;
+  font-size: var(--fs-base);
   color: var(--dark);
 }
 
 .va-tu-info span {
-  font-size: 12px;
+  font-size: var(--fs-base);
   color: #888;
 }
 
