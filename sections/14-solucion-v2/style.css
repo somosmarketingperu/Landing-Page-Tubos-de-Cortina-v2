@@ -1,0 +1,136 @@
+/* 14-SOLUCION-V2 — SECCIÓN DE CONSCIENCIA (LA SOLUCIÓN) */
+:root {
+  --sol-bronze: #9a6a4d;
+  --sol-navy: #0f172a;
+  --sol-bg: #ffffff;
+}
+
+.va-solution-v2 {
+  padding: 100px 0;
+  background-color: var(--sol-bg);
+}
+
+.va-sol-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Lado Izquierdo: El Producto como Héroe */
+.va-sol-img-wrap {
+  position: relative;
+}
+
+.va-sol-main-img {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 40px 80px rgba(15, 23, 42, 0.1);
+}
+
+.va-sol-badge {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  background: var(--sol-bronze);
+  color: #fff;
+  padding: 30px;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 8px solid #fff;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.va-sol-badge span {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.va-sol-badge strong {
+  font-size: 28px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+/* Lado Derecho: Propuesta */
+.va-sol-header h2 {
+  font-size: 64px;
+  font-weight: 950;
+  line-height: 0.85;
+  letter-spacing: -3px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: var(--sol-navy);
+}
+
+.va-sol-header h2 span {
+  display: block;
+  color: var(--sol-bronze);
+  font-size: 72px;
+}
+
+.va-sol-p {
+  font-size: 20px;
+  color: #64748b;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.va-sol-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.va-sol-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--sol-navy);
+}
+
+.va-sol-check {
+  width: 24px;
+  height: 24px;
+  background: var(--sol-bronze);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .va-sol-grid { grid-template-columns: 1fr; gap: 60px; }
+  .va-sol-header h2 { font-size: 44px; text-align: center; }
+  .va-sol-header h2 span { font-size: 48px; }
+  .va-sol-p { text-align: center; }
+  
+  .va-sol-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .va-sol-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los checks a la izquierda internamente */
+    width: fit-content; /* Se ajusta al contenido */
+    margin: 0 auto; /* Centra todo el bloque de la lista */
+  }
+
+  .va-sol-badge { position: relative; bottom: 0; right: 0; margin: -40px auto 0; }
+}

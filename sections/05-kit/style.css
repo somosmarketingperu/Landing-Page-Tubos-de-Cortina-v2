@@ -52,3 +52,15 @@
   .va-kit-specs { grid-template-columns: 1fr; }
   .va-spec-card { padding: 30px; }
 }
+.
+va-kit-install-note {
+  margin-top: 30px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid #22c55e;
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #166534;
+  line-height: 1.6;
+}

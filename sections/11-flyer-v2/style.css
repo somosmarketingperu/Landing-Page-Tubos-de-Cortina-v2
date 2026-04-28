@@ -1,0 +1,228 @@
+:root {
+  --bronze-accent: #9a6a4d;
+  --bronze-navy: #0f172a;
+  --bronze-red: #7c2d12;
+  --v2-neon: #34d399;
+}
+
+
+.va-flyer-final {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.va-canvas-final {
+  background: #fdfaf8;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  min-height: 600px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+}
+
+/* LADO IZQUIERDO (TITULAR Y DETALLES) */
+.va-final-left {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.va-final-header h2 {
+  font-size: 64px;
+  font-weight: 950;
+  color: var(--bronze-navy);
+  line-height: 0.85;
+  letter-spacing: -3px;
+  text-transform: uppercase;
+}
+
+.va-final-header h2 span {
+  display: block;
+  color: var(--bronze-accent);
+  font-size: 72px;
+}
+
+.va-final-subtitle {
+  background: var(--bronze-navy);
+  color: #fff;
+  padding: 12px 25px;
+  font-size: 20px;
+  font-weight: 900;
+  border-radius: 4px;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.va-final-icons {
+  display: flex;
+  gap: 25px;
+}
+
+.va-final-icon-item {
+  text-align: center;
+  flex: 1;
+}
+
+.va-final-icon-circle {
+  width: 65px;
+  height: 65px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 28px;
+  background: #fff;
+}
+
+.va-final-icon-item span {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--bronze-navy);
+  text-transform: uppercase;
+}
+
+/* INCLUYE */
+.va-final-incluye {
+  margin-top: auto;
+  border: 2px solid #f1f5f9;
+  border-radius: 16px;
+  padding: 30px 20px 20px;
+  position: relative;
+  background: #fff;
+}
+
+.va-final-incluye-label {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: var(--bronze-accent);
+  color: #fff;
+  padding: 6px 18px;
+  font-size: 14px;
+  font-weight: 950;
+  border-radius: 6px;
+}
+
+.va-final-incluye-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.va-final-incl-item img {
+  width: 100%;
+  max-width: 70px;
+  margin-bottom: 5px;
+}
+
+.va-final-incl-item span {
+  font-size: 9px;
+  font-weight: 900;
+  color: #64748b;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* LADO DERECHO (PRODUCTO Y PRECIO) */
+.va-final-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.va-final-main-img {
+  width: 115%;
+  transform: translateX(-5%);
+}
+
+.va-final-price-box {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  background: var(--bronze-navy);
+  color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  min-width: 220px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+
+.va-fprice-head {
+  font-size: 24px;
+  font-weight: 950;
+  border-bottom: 2px dashed rgba(255,255,255,0.2);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.va-fprice-head span { display: block; font-size: 13px; opacity: 0.7; }
+
+.va-fprice-val { font-size: 48px; font-weight: 950; line-height: 1; }
+
+.va-fprice-unit { font-size: 16px; font-weight: 800; opacity: 0.9; }
+
+.va-final-save-badge {
+  position: absolute;
+  top: 50%;
+  right: -35px;
+  background: var(--bronze-accent);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #fff;
+  transform: translateY(-50%);
+}
+
+.va-final-save-badge span:last-child { font-size: 24px; font-weight: 950; }
+
+/* FOOTER */
+.va-final-footer {
+  grid-column: span 2;
+  background: var(--bronze-navy);
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.va-final-footer span {
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.va-final-cta {
+  background: #fff;
+  color: var(--bronze-navy);
+  padding: 12px 40px;
+  font-size: 20px;
+  font-weight: 950;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+  .va-canvas-final { grid-template-columns: 1fr; }
+  .va-final-left { padding: 40px 20px; }
+  .va-final-header h2 { font-size: 44px; }
+  .va-final-header h2 span { font-size: 48px; }
+  .va-final-right { padding: 40px 0; overflow: hidden; }
+  .va-final-main-img { width: 100%; transform: none; }
+  .va-final-footer { flex-direction: column; gap: 20px; padding: 40px 20px; text-align: center; }
+}

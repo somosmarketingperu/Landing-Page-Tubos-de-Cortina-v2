@@ -11,44 +11,59 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 50px;
-  align-items: center;
+  align-items: stretch; /* Stretch to make both columns equal height */
 }
 
 .va-sol-feat-grid {
-  display: grid;
-  gap: 45px; /* Increased to fill more vertical space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spread items evenly across full height */
+  gap: 30px; /* Minimum gap */
 }
 
 .va-sol-feat {
   display: flex;
   gap: 20px;
   align-items: flex-start;
+  background: #f8f9fa; /* Color gris súper limpio como en la otra sección */
+  padding: 35px 30px; /* Mucho más relleno vertical y horizontal */
+  border-radius: 16px;
+  border: none; /* Sin borde */
+  transition: all 0.3s ease;
+}
+
+.va-sol-feat:hover {
+  background: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transform: translateX(10px); /* Efecto de deslizar a la derecha */
 }
 
 .va-sf-icon {
-  background: #fdf2f0;
-  width: 60px; /* Increased from 50px */
-  height: 60px;
+  background: white;
+  width: 75px; /* Ícono mucho más grande */
+  height: 75px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 14px;
-  font-size: 1.5rem;
-  border: 1px solid rgba(200, 130, 100, 0.2);
+  border-radius: 50%; /* Círculo perfecto */
+  font-size: 2.5rem; /* Emoji mucho más grande */
+  box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+  border: none;
 }
 
 .va-sf-content h4 {
-  font-size: var(--fs-base);
+  font-size: 1.4rem; /* Texto significativamente más grande */
   font-weight: 900;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   letter-spacing: -0.2px;
 }
 
 .va-sf-content p {
-  font-size: var(--fs-base);
-  color: var(--stone-light);
-  line-height: 1.5;
+  font-size: 1.15rem; /* Párrafos más grandes para llenar espacio */
+  color: #334155;
+  line-height: 1.6; /* Mayor interlineado para dar más altura */
+  text-align: left;
 }
 
 .va-sol-main-visual {

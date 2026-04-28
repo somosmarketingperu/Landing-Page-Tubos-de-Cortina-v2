@@ -1,0 +1,248 @@
+/* 09-TABLE-V2 — REFINAMIENTO PREMIUM (ESTILO HERO) */
+:root {
+  --log-navy: #0f172a;
+  --log-yellow: #fbbf24;
+  --log-blue: #1d4ed8;
+  --log-bg: #ffffff;
+  --v2-neon: #34d399;
+}
+
+
+.va-logistics-replica {
+  padding: 100px 0;
+  background-color: #f1f5f9;
+}
+
+.va-logistics-canvas {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(15, 23, 42, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Encabezado */
+.va-log-header {
+  padding: 60px 60px 20px 60px;
+  background: #fff;
+}
+
+.va-log-header h2 {
+  font-size: 64px;
+  font-weight: 950;
+  color: var(--log-navy);
+  line-height: 0.85;
+  margin: 0;
+  letter-spacing: -3px;
+  text-transform: uppercase;
+}
+
+.va-log-header h2 span {
+  display: block;
+  color: var(--log-blue);
+  font-size: 72px;
+}
+
+.va-log-subtitle {
+  background: var(--log-navy);
+  color: #fff;
+  padding: 10px 25px;
+  font-size: 20px;
+  font-weight: 900;
+  display: inline-block;
+  margin-top: 25px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Grid Principal */
+.va-log-main-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  background: #fff;
+}
+
+.va-log-cards-area {
+  padding: 40px 60px 60px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.va-log-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 2px solid #f1f5f9;
+  border-radius: 20px;
+  padding: 25px;
+  gap: 25px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.va-log-card:hover {
+  transform: translateX(10px);
+  border-color: var(--log-blue);
+  box-shadow: 0 10px 30px rgba(29, 78, 216, 0.1);
+}
+
+.va-log-card.featured {
+  border-color: var(--log-blue);
+  background: #eff6ff;
+  border-width: 3px;
+}
+
+.va-log-card-icon {
+  width: 90px;
+  height: 90px;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.va-log-card-info h3 {
+  font-size: 28px;
+  font-weight: 950;
+  color: var(--log-navy);
+  margin: 0;
+}
+
+.va-log-card-info p {
+  font-size: 15px;
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.va-log-card-price {
+  margin-left: auto;
+  text-align: right;
+  padding-right: 50px;
+}
+
+.va-log-price-total {
+  font-size: 36px;
+  font-weight: 950;
+  color: var(--log-navy);
+  display: block;
+}
+
+.va-log-price-unit {
+  font-size: 16px;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.va-log-save-badge {
+  background: var(--log-blue);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 900;
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 10px 20px rgba(29, 78, 216, 0.3);
+}
+
+/* Lado Camión */
+.va-log-truck-area {
+  background: #f8fafc;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid #f1f5f9;
+}
+
+.va-log-truck-img {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.va-log-bullets {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.va-log-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--log-navy);
+  text-transform: uppercase;
+}
+
+.va-log-bullet-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--log-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(251, 191, 36, 0.4);
+}
+
+/* Footer Canvas */
+.va-log-footer {
+  grid-column: span 2;
+  background: var(--log-yellow);
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.va-log-foot-text {
+  font-size: 32px;
+  font-weight: 950;
+  color: var(--log-navy);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.va-log-foot-cta {
+  background: var(--log-navy);
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 4px;
+  font-weight: 950;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.va-log-foot-cta:hover {
+  background: var(--log-blue);
+  transform: scale(1.05);
+}
+
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+  .va-log-main-grid { grid-template-columns: 1fr; }
+  .va-log-header { padding: 40px 20px; }
+  .va-log-cards-area { padding: 20px; }
+  .va-log-card { flex-direction: column; text-align: center; gap: 15px; }
+  .va-log-card-price { margin: 0; padding: 0; text-align: center; }
+  .va-log-save-badge { position: relative; right: 0; top: 0; transform: none; margin-top: 10px; width: fit-content; }
+  .va-log-footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 20px; }
+}

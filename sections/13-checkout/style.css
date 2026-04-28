@@ -335,22 +335,27 @@
 /* ── PAYMENT TOGGLE ── */
 .cod-payment-toggle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
   margin-bottom: 8px;
 }
 .cod-pay-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: 4px;
+  padding: 8px 4px;
   border-radius: 12px;
   border: 2px solid #e8e0da;
   background: #faf9f8;
   cursor: pointer;
   font-family: inherit;
-  text-align: left;
+  text-align: center;
   transition: all 0.25s;
+}
+.cod-pay-btn:hover {
+  border-color: #c0a898;
+  background: #fdf9f7;
 }
 .cod-pay-btn div {
   display: flex;
@@ -358,21 +363,51 @@
   gap: 1px;
 }
 .cod-pay-btn strong {
-  font-size: 10px;
+  font-size: 8.5px;
   font-weight: 800;
   color: var(--dark,#1c1917);
-  letter-spacing: 0.3px;
+  letter-spacing: 0.1px;
+  line-height: 1.1;
 }
 .cod-pay-btn span {
-  font-size: 9px;
+  font-size: 7.5px;
   color: #777;
+  line-height: 1.1;
 }
 .cod-pay-btn.active {
   border-color: var(--copper,#c88264);
   background: #fdf6f2;
+  box-shadow: 0 0 0 3px rgba(200,130,100,0.15);
 }
 .cod-pay-btn.active strong { color: var(--copper,#c88264); }
-.cod-pay-icon { font-size: 1.4rem; flex-shrink: 0; }
+.cod-pay-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* ── ALMACENES LIST ── */
+.cod-almacenes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cod-almacen-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1.5px solid #e8e0da;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cod-almacen-item:hover { border-color: var(--copper); }
+.cod-almacen-item.active {
+  border-color: var(--copper);
+  background: #fdf6f2;
+}
+.cod-almacen-radio { accent-color: var(--copper); width: 16px; height: 16px; }
+.cod-almacen-info { display: flex; flex-direction: column; gap: 2px; }
+.cod-almacen-name { font-size: 11px; font-weight: 800; color: var(--dark); }
+.cod-almacen-addr { font-size: 10px; color: #777; line-height: 1.2; }
+
 
 /* ── PRICE ANCHOR BAR ── */
 .cod-price-anchor-bar {
@@ -407,9 +442,21 @@
   transition: all 0.22s ease;
   overflow: hidden;
 }
-.cod-qty-card:has(.cod-qty-radio:checked) {
+.cod-qty-card:hover {
+  border-color: #c0a898;
+  background: #fdf9f7;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(200,130,100,0.12);
+}
+.cod-qty-card:has(.cod-qty-radio:checked),
+.cod-qty-card.selected {
   border-color: var(--copper,#c88264);
   background: #fdf6f2;
+  box-shadow: 0 0 0 3px rgba(200,130,100,0.15);
+}
+.cod-qty-card:has(.cod-qty-radio:checked) .cod-qty-price,
+.cod-qty-card.selected .cod-qty-price {
+  color: var(--copper,#c88264);
 }
 .cod-qty-radio { display: none; }
 .cod-qty-card-inner { padding: 9px 12px; }
@@ -452,8 +499,7 @@
   margin-bottom: 4px;
 }
 .cod-qty-card.recommended {
-  border-color: var(--copper,#c88264);
-  background: #fdf6f2;
+  border-color: #e8e0da;
 }
 
 /* ── CUSTOM QTY ── */
@@ -918,4 +964,16 @@
 .cod-input-wrap.error {
   border-color: #ef4444 !important;
   background: #fff5f5;
+}
+
+/* ── ALMACEN NOTICE ── */
+.cod-almacen-notice {
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 11px;
+  color: #78350f;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }

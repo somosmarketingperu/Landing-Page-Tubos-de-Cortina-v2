@@ -1,0 +1,235 @@
+/* 19-EXIT-INTENT — MODAL DE ÚLTIMA OPORTUNIDAD */
+:root {
+  --exit-purple: #6b21a8;
+  --exit-orange: #f97316;
+  --exit-dark: #0f172a;
+}
+
+#va-exit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(10px);
+  display: none; /* Se activa por JS */
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+#va-exit-modal.active {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.va-exit-content {
+  background: #fff;
+  width: 100%;
+  max-width: 500px; /* Mobile width */
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.va-exit-close-x {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0,0,0,0.05);
+  border: none;
+  color: var(--exit-dark);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.va-exit-close-x:hover {
+  background: rgba(0,0,0,0.15);
+  transform: scale(1.1);
+}
+
+/* Franja de Urgencia (Top / Izquierda) */
+.va-exit-top-bar {
+  background: linear-gradient(135deg, var(--exit-purple), #d946ef);
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.va-exit-top-bar h3 {
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Contador */
+.va-exit-timer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.va-timer-box {
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 60px;
+}
+
+.va-timer-num {
+  font-size: 32px;
+  font-weight: 950;
+  display: block;
+}
+
+.va-timer-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Cuerpo del Modal */
+.va-exit-body {
+  padding: 40px;
+  text-align: center;
+}
+
+.va-exit-body h2 {
+  font-size: 40px;
+  font-weight: 950;
+  color: var(--exit-dark);
+  line-height: 1;
+  margin-bottom: 15px;
+}
+
+.va-exit-body p {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+.va-exit-offer {
+  background: #fff7ed;
+  border: 2px dashed var(--exit-orange);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.va-exit-offer span {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--exit-orange);
+  text-transform: uppercase;
+}
+
+.va-exit-offer strong {
+  font-size: 32px;
+  color: var(--exit-dark);
+}
+
+/* CTA */
+.va-exit-cta {
+  background: var(--exit-orange);
+  color: #fff;
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+  transition: transform 0.2s;
+}
+
+.va-exit-cta:hover {
+  transform: scale(1.02);
+  background: #ea580c;
+}
+
+.va-exit-close-txt {
+  display: block;
+  margin-top: 20px;
+  color: #94a3b8;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media (min-width: 850px) {
+  .va-exit-content {
+    max-width: 850px;
+    flex-direction: row;
+  }
+  
+  .va-exit-top-bar {
+    width: 40%;
+    padding: 30px 25px;
+  }
+  
+  .va-exit-top-bar h3 {
+    font-size: 28px;
+  }
+  
+  .va-exit-body {
+    width: 60%;
+    padding: 30px 40px;
+    text-align: left;
+  }
+  
+  .va-exit-body h2 {
+    font-size: 36px;
+  }
+  
+  .va-exit-timer {
+    margin-top: 20px;
+  }
+  
+  .va-exit-offer {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .va-exit-body p {
+    margin-bottom: 20px;
+  }
+
+  .va-exit-close-txt {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .va-exit-body h2 { font-size: 28px; }
+  .va-exit-body { padding: 30px 20px; }
+  .va-exit-offer strong { font-size: 24px; }
+}

@@ -4,27 +4,21 @@
      2. Modal COD — 3 pasos con Transfer/COD toggle
      ============================================= -->
 
-<!-- ══════════════════════════════════════════════
-     MODAL 1: DECISIÓN — Pedido vs WhatsApp
-     ══════════════════════════════════════════════ -->
+<!-- MODAL 1: DECISIÓN -->
 <div id="decision-modal-backdrop" class="dec-backdrop" role="dialog" aria-modal="true">
   <div class="dec-card">
     <div class="dec-header">
       <span>🚚 TUBOS DE CORTINA PERÚ — MAYORISTAS</span>
       <button class="dec-close" id="dec-close-btn" aria-label="Cerrar">✕</button>
     </div>
-
     <div class="dec-body">
       <div class="dec-price-anchor">
         <span class="dec-price-label">PRECIO MAYORISTA OFICIAL</span>
         <span class="dec-price-val">S/. 27<span class="dec-price-unit">/tubo</span></span>
-        <span class="dec-price-note">Transferencia anticipada = envío gratis ✅</span>
+        <span class="dec-price-note">Transferencia anticipada = envío gratis ✅<br>Contra entrega = 20% adelanto / 80% en Shalom</span>
       </div>
-
       <p class="dec-question">¿Cómo quieres continuar?</p>
-
       <div class="dec-options">
-        <!-- Opción A: Pedido Online -->
         <button class="dec-option-btn primary" id="dec-btn-order">
           <div class="dec-opt-icon">📋</div>
           <div class="dec-opt-text">
@@ -33,8 +27,6 @@
           </div>
           <div class="dec-opt-arrow">→</div>
         </button>
-
-        <!-- Opción B: WhatsApp -->
         <button class="dec-option-btn secondary" id="dec-btn-wsp">
           <div class="dec-opt-icon">💬</div>
           <div class="dec-opt-text">
@@ -44,15 +36,12 @@
           <div class="dec-opt-arrow">→</div>
         </button>
       </div>
-
-      <div class="dec-trust">🛡️ Pago Contra Entrega en Shalom · Sin Anticipos · Sin Riesgo</div>
+      <div class="dec-trust">🛡️ Adelanto 20% para alistar · Saldo 80% en Agencia Shalom destino</div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     MODAL 2: CHECKOUT COD — 3 Pasos
-     ══════════════════════════════════════════════ -->
+<!-- MODAL 2: CHECKOUT COD — 3 Pasos -->
 <div id="cod-modal-backdrop" class="cod-backdrop" role="dialog" aria-modal="true" aria-labelledby="cod-modal-title">
   <div id="cod-modal-card" class="cod-card">
 
@@ -86,167 +75,129 @@
     <!-- Body scroll -->
     <div class="cod-body">
 
-      <!-- ══ PASO 1: TU PEDIDO ══ -->
+      <!-- PASO 1: TU PEDIDO -->
       <div class="cod-step-content active" id="cod-step-1">
 
-        <!-- TOGGLE: Modalidad de pago -->
         <div class="cod-payment-toggle">
           <button class="cod-pay-btn active" id="cod-pay-transfer" data-mode="transfer">
             <span class="cod-pay-icon">🏦</span>
-            <div>
-              <strong>TRANSFERENCIA</strong>
-              <span>Envío + Embalaje GRATIS ✅</span>
-            </div>
+            <div><strong>TRANSFERENCIA</strong><span>Envío GRATIS ✅</span></div>
           </button>
           <button class="cod-pay-btn" id="cod-pay-cod" data-mode="cod">
             <span class="cod-pay-icon">🚚</span>
-            <div>
-              <strong>CONTRA ENTREGA</strong>
-              <span>+ logística 🔼</span>
-            </div>
+            <div><strong>CONTRA ENTREGA</strong><span>Adelanto 20% / Saldo 80% Shalom</span></div>
+          </button>
+          <button class="cod-pay-btn" id="cod-pay-recojo" data-mode="recojo">
+            <span class="cod-pay-icon">🏢</span>
+            <div><strong>RECOJO ALMACÉN</strong><span>En Lima (Sin Flete)</span></div>
           </button>
         </div>
 
-        <!-- Precio ancla -->
         <div class="cod-price-anchor-bar" id="cod-anchor-bar">
-          <span id="cod-anchor-msg">✅ Con transferencia pagas S/. 27 exacto por tubo. Sin costos extra.</span>
+          <span>✅ Con transferencia pagas <strong>S/. 27 exacto</strong> por tubo. Envío gratis.</span>
         </div>
 
         <h3 class="cod-section-title">🛒 ¿Cuántas cajas necesitas?</h3>
 
-        <!-- Tarjetas de cantidad -->
         <div class="cod-qty-cards" id="cod-qty-cards">
-
-          <!-- 1 Caja -->
           <label class="cod-qty-card" data-cajas="1">
             <input type="radio" name="cod-qty" value="1" class="cod-qty-radio">
             <div class="cod-qty-card-inner">
               <div class="cod-qty-card-top">
-                <div class="cod-qty-info">
-                  <strong>1 Caja</strong>
-                  <span class="cod-qty-units">12 Tubos Luxury</span>
-                </div>
-                <div class="cod-qty-price" id="price-card-1">S/. 324</div>
+                <div class="cod-qty-info"><strong>1 Caja</strong><span class="cod-qty-units">12 Kits Extensibles</span></div>
+                <div class="cod-qty-price">S/. 324</div>
               </div>
               <div class="cod-qty-card-bottom">
-                <span class="cod-flete-badge" id="ftbadge-1">✅ S/. 27/tubo — Precio oficial</span>
+                <span class="cod-flete-badge">✅ S/. 27/tubo — Precio oficial</span>
               </div>
             </div>
           </label>
 
-          <!-- 4 Cajas RECOMENDADO -->
           <label class="cod-qty-card recommended" data-cajas="4">
             <input type="radio" name="cod-qty" value="4" class="cod-qty-radio" checked>
             <div class="cod-qty-card-inner">
               <div class="cod-best-badge">⭐ RECOMENDADO</div>
               <div class="cod-qty-card-top">
-                <div class="cod-qty-info">
-                  <strong>4 Cajas</strong>
-                  <span class="cod-qty-units">48 Tubos Luxury</span>
-                </div>
-                <div class="cod-qty-price" id="price-card-4">S/. 1,296</div>
+                <div class="cod-qty-info"><strong>4 Cajas</strong><span class="cod-qty-units">48 Kits Extensibles</span></div>
+                <div class="cod-qty-price">S/. 1,296</div>
               </div>
               <div class="cod-qty-card-bottom">
-                <span class="cod-flete-badge low" id="ftbadge-4">✅ S/. 27/tubo — Precio oficial</span>
-                <span class="cod-saving" id="saving-card-4"></span>
+                <span class="cod-flete-badge low">✅ S/. 27/tubo — Flete reducido</span>
               </div>
             </div>
           </label>
 
-          <!-- 10 Cajas -->
           <label class="cod-qty-card" data-cajas="10">
             <input type="radio" name="cod-qty" value="10" class="cod-qty-radio">
             <div class="cod-qty-card-inner">
               <div class="cod-qty-card-top">
-                <div class="cod-qty-info">
-                  <strong>10 Cajas</strong>
-                  <span class="cod-qty-units">120 Tubos Luxury</span>
-                </div>
-                <div class="cod-qty-price" id="price-card-10">S/. 3,240</div>
+                <div class="cod-qty-info"><strong>10 Cajas</strong><span class="cod-qty-units">120 Kits Extensibles</span></div>
+                <div class="cod-qty-price">S/. 3,240</div>
               </div>
               <div class="cod-qty-card-bottom">
-                <span class="cod-flete-badge low" id="ftbadge-10">✅ S/. 27/tubo — Precio oficial</span>
+                <span class="cod-flete-badge low">✅ S/. 27/tubo — Precio oficial</span>
               </div>
             </div>
           </label>
-
         </div>
 
-        <!-- Input personalizado -->
         <div class="cod-custom-qty">
           <p class="cod-custom-label-txt">📦 ¿Otra cantidad? Ingresa el número de cajas:</p>
           <div class="cod-custom-input-wrap">
             <button class="cod-qty-btn" id="cod-qty-minus" aria-label="Reducir">−</button>
-            <input type="number" id="cod-custom-cajas" min="1" max="100" placeholder="0"
-              class="cod-custom-input" inputmode="numeric">
+            <input type="number" id="cod-custom-cajas" min="1" max="100" placeholder="0" class="cod-custom-input" inputmode="numeric">
             <button class="cod-qty-btn" id="cod-qty-plus" aria-label="Aumentar">+</button>
             <span class="cod-caja-label">cajas</span>
           </div>
-          <p class="cod-rec-tip" id="cod-rec-tip">💡 Con 4+ cajas el flete baja drásticamente. ¡Es el punto óptimo!</p>
+          <p class="cod-rec-tip">💡 Con 4+ cajas el flete baja drásticamente. ¡Es el punto óptimo!</p>
         </div>
 
-        <!-- Resumen de precios -->
         <div class="cod-price-summary" id="cod-price-summary">
+          <div id="cod-discount-badge" style="display:none; background:#dcfce7; border:1px solid #86efac; border-radius:8px; padding:7px 10px; font-size:11px; font-weight:700; color:#166534; margin-bottom:8px; text-align:center;"></div>
           <div class="cod-sum-row">
-            <span><span id="cod-sum-units">48</span> tubos × S/. 27</span>
+            <span id="cod-sum-units-label">48 tubos × S/. 27.00</span>
             <span id="cod-sum-subtotal">S/. 1,296</span>
           </div>
-          <div class="cod-sum-row" id="cod-flete-row">
-            <span>Flete Shalom <span class="cod-flete-pct-label" id="cod-sum-flete-pct">(5%)</span></span>
-            <span id="cod-sum-flete">S/. 50</span>
-          </div>
-          <div class="cod-sum-row" id="cod-embalaje-row">
-            <span>Embalaje y manipuleo</span>
-            <span id="cod-sum-embalaje">S/. 20</span>
+          <div class="cod-sum-row" id="cod-flete-row" style="display:none">
+            <span>Flete Shalom + Embalaje</span>
+            <span id="cod-sum-flete">S/. 70</span>
           </div>
           <div class="cod-sum-row total">
             <strong>TOTAL a pagar</strong>
             <strong id="cod-sum-total">S/. 1,296</strong>
           </div>
-          <div class="cod-sum-row cod-efectivo-row">
+          <div class="cod-sum-row" id="cod-adelanto-row" style="display:none; color:#ef4444; border-top:1px dashed #eee; padding-top:8px;">
+            <span>Adelanto (20% para alistar)</span>
+            <strong id="cod-sum-adelanto">S/. 0</strong>
+          </div>
+          <div class="cod-sum-row" id="cod-saldo-row" style="display:none; color:#166534;">
+            <span>Saldo (80% en Shalom)</span>
+            <strong id="cod-sum-saldo">S/. 0</strong>
+          </div>
+          <div class="cod-sum-row">
             <span>Precio efectivo por tubo</span>
             <strong id="cod-sum-unit-price">S/. 27.00</strong>
           </div>
           <div class="cod-sum-margin">
-            💰 Ganancia estimada (a S/. 40/u): <strong id="cod-sum-profit">S/. 624</strong>
-          </div>
-          <!-- Ahorras vs COD (solo visible en modo transfer) -->
-          <div class="cod-saving-vs" id="cod-saving-vs" style="display:none">
-            🏦 Ahorras vs. contra entrega: <strong id="cod-saving-vs-val">S/. 70</strong>
+            💰 Ganancia estimada: <strong id="cod-sum-profit">S/. 624</strong>
           </div>
         </div>
 
-        <!-- Datos bancarios (solo en modo transfer) -->
         <div class="cod-bank-data" id="cod-bank-data">
           <div class="cod-bank-title">🏦 Datos para tu Transferencia</div>
-          <div class="cod-bank-row">
-            <span class="cod-bank-label">Banco</span>
-            <span>Interbank</span>
-          </div>
-          <div class="cod-bank-row">
-            <span class="cod-bank-label">Beneficiario</span>
-            <span>Somos Marketing Peru E.I.R.L.</span>
-          </div>
-          <div class="cod-bank-row">
-            <span class="cod-bank-label">Cta. Corriente S/.</span>
-            <span class="cod-bank-num">200 - 3008139189</span>
-          </div>
-          <div class="cod-bank-row">
-            <span class="cod-bank-label">CCI</span>
-            <span class="cod-bank-num">003 - 200 - 003008139189 - 35</span>
-          </div>
-          <div class="cod-bank-note">
-            📸 Envía tu comprobante de pago por WhatsApp para coordinar el despacho inmediato.
-          </div>
+          <div class="cod-bank-row"><span class="cod-bank-label">Banco</span><span>Interbank</span></div>
+          <div class="cod-bank-row"><span class="cod-bank-label">Beneficiario</span><span>Somos Marketing Peru E.I.R.L.</span></div>
+          <div class="cod-bank-row"><span class="cod-bank-label">Cta. Corriente S/.</span><span class="cod-bank-num">200 - 3008139189</span></div>
+          <div class="cod-bank-row"><span class="cod-bank-label">CCI</span><span class="cod-bank-num">003 - 200 - 003008139189 - 35</span></div>
+          <div class="cod-bank-note">📸 Envía tu comprobante de pago por WhatsApp para coordinar el despacho inmediato.</div>
         </div>
 
         <button class="cod-btn-next" id="cod-next-1">CONTINUAR — DATOS DE ENVÍO →</button>
-        <div class="cod-trust">🛡️ Pagas al recibir en Shalom · Sin adelantos · Sin riesgo</div>
+        <div class="cod-trust">🛡️ Trato Directo · Acabado Rejilla Elegante · Adelanto 20% / Saldo 80% Shalom</div>
 
       </div><!-- /paso-1 -->
 
-
-      <!-- ══ PASO 2: TU ENVÍO ══ -->
+      <!-- PASO 2: TU ENVÍO -->
       <div class="cod-step-content" id="cod-step-2">
 
         <h3 class="cod-section-title">📍 Datos Personales</h3>
@@ -255,8 +206,7 @@
           <label class="cod-label" for="cod-nombre">Nombre y Apellidos <span class="req">*</span></label>
           <div class="cod-input-wrap">
             <span class="cod-input-icon">👤</span>
-            <input type="text" id="cod-nombre" placeholder="Ej: Juan Pérez García"
-              class="cod-input" autocomplete="name">
+            <input type="text" id="cod-nombre" placeholder="Ej: Juan Pérez García" class="cod-input" autocomplete="name">
           </div>
         </div>
 
@@ -264,63 +214,76 @@
           <label class="cod-label" for="cod-wsp">WhatsApp <span class="req">*</span></label>
           <div class="cod-input-wrap">
             <span class="cod-input-icon">📱</span>
-            <input type="tel" id="cod-wsp" placeholder="Ej: 999 999 999"
-              class="cod-input" maxlength="9" autocomplete="tel" inputmode="tel">
+            <input type="tel" id="cod-wsp" placeholder="9XXXXXXXX" maxlength="9" class="cod-input" inputmode="numeric">
+          </div>
+          <small class="cod-hint">Número peruano de 9 dígitos. Te contactaremos aquí para coordinar.</small>
+        </div>
+
+        <!-- OPCIÓN A: Envío Shalom -->
+        <div id="cod-shipping-shalom">
+          <h3 class="cod-section-title" style="margin-top:18px">📦 Agencia Shalom de Destino</h3>
+
+          <div class="cod-form-group">
+            <label class="cod-label" for="cod-departamento">Departamento <span class="req">*</span></label>
+            <div class="cod-input-wrap">
+              <span class="cod-input-icon">🗺️</span>
+              <select id="cod-departamento" class="cod-select">
+                <option value="">— Selecciona tu departamento —</option>
+                <option value="AMAZONAS">Amazonas</option>
+                <option value="ANCASH">Áncash</option>
+                <option value="APURIMAC">Apurímac</option>
+                <option value="AREQUIPA">Arequipa</option>
+                <option value="AYACUCHO">Ayacucho</option>
+                <option value="CAJAMARCA">Cajamarca</option>
+                <option value="CALLAO">Callao</option>
+                <option value="CUSCO">Cusco</option>
+                <option value="HUANCAVELICA">Huancavelica</option>
+                <option value="HUANUCO">Huánuco</option>
+                <option value="ICA">Ica</option>
+                <option value="JUNIN">Junín</option>
+                <option value="LA LIBERTAD">La Libertad</option>
+                <option value="LAMBAYEQUE">Lambayeque</option>
+                <option value="LIMA">Lima / Callao</option>
+                <option value="LORETO">Loreto</option>
+                <option value="MADRE DE DIOS">Madre de Dios</option>
+                <option value="MOQUEGUA">Moquegua</option>
+                <option value="PASCO">Pasco</option>
+                <option value="PIURA">Piura</option>
+                <option value="PUNO">Puno</option>
+                <option value="SAN MARTIN">San Martín</option>
+                <option value="TACNA">Tacna</option>
+                <option value="TUMBES">Tumbes</option>
+                <option value="UCAYALI">Ucayali</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cod-form-group">
+            <label class="cod-label" for="cod-agencia">Ciudad / Agencia Shalom <span class="req">*</span></label>
+            <div class="cod-input-wrap">
+              <span class="cod-input-icon">📍</span>
+              <select id="cod-agencia" class="cod-select" disabled>
+                <option value="">— Primero selecciona el departamento —</option>
+              </select>
+            </div>
+            <small class="cod-hint warning">⚠️ Si tu ciudad NO aparece, Shalom no tiene cobertura en ese destino.</small>
           </div>
         </div>
 
-        <h3 class="cod-section-title" style="margin-top:18px">📦 Agencia Shalom de Destino</h3>
-
-        <div class="cod-form-group">
-          <label class="cod-label" for="cod-departamento">Departamento <span class="req">*</span></label>
-          <div class="cod-input-wrap">
-            <span class="cod-input-icon">🗺️</span>
-            <select id="cod-departamento" class="cod-select">
-              <option value="">— Selecciona tu departamento —</option>
-              <option value="AMAZONAS">Amazonas</option>
-              <option value="ANCASH">Áncash</option>
-              <option value="APURIMAC">Apurímac</option>
-              <option value="AREQUIPA">Arequipa</option>
-              <option value="AYACUCHO">Ayacucho</option>
-              <option value="CAJAMARCA">Cajamarca</option>
-              <option value="CALLAO">Callao</option>
-              <option value="CUSCO">Cusco</option>
-              <option value="HUANCAVELICA">Huancavelica</option>
-              <option value="HUANUCO">Huánuco</option>
-              <option value="ICA">Ica</option>
-              <option value="JUNIN">Junín</option>
-              <option value="LA LIBERTAD">La Libertad</option>
-              <option value="LAMBAYEQUE">Lambayeque</option>
-              <option value="LIMA">Lima / Callao</option>
-              <option value="LORETO">Loreto</option>
-              <option value="MADRE DE DIOS">Madre de Dios</option>
-              <option value="MOQUEGUA">Moquegua</option>
-              <option value="PASCO">Pasco</option>
-              <option value="PIURA">Piura</option>
-              <option value="PUNO">Puno</option>
-              <option value="SAN MARTIN">San Martín</option>
-              <option value="TACNA">Tacna</option>
-              <option value="TUMBES">Tumbes</option>
-              <option value="UCAYALI">Ucayali</option>
-            </select>
+        <!-- OPCIÓN B: Recojo Almacén -->
+        <div id="cod-shipping-recojo" style="display:none">
+          <h3 class="cod-section-title" style="margin-top:18px">🏢 Selecciona Almacén para Recojo</h3>
+          <div class="cod-almacen-notice">
+            ⚠️ <strong>Importante:</strong> Nuestros almacenes son depósitos, <strong>no hay atención al público</strong>. El recojo es previa coordinación y requiere el <strong>adelanto del 20%</strong> para activar tu pedido.
           </div>
-        </div>
-
-        <div class="cod-form-group">
-          <label class="cod-label" for="cod-agencia">Ciudad / Agencia Shalom <span class="req">*</span></label>
-          <div class="cod-input-wrap">
-            <span class="cod-input-icon">📍</span>
-            <select id="cod-agencia" class="cod-select" disabled>
-              <option value="">— Primero selecciona el departamento —</option>
-            </select>
+          <div class="cod-form-group">
+            <div class="cod-almacenes-list" id="cod-almacenes-list"></div>
           </div>
-          <small class="cod-hint warning">⚠️ Si tu ciudad NO aparece, Shalom no tiene cobertura en ese destino.</small>
         </div>
 
         <!-- ¿Quién recoge? -->
         <div class="cod-recogedor-section">
           <h3 class="cod-section-title" style="margin-top:18px">🪪 ¿Quién recoge en la agencia?</h3>
-
           <div class="cod-recog-toggle">
             <label class="cod-recog-opt">
               <input type="radio" name="cod-recogedor" value="yo" checked id="cod-recog-yo">
@@ -331,8 +294,6 @@
               <span>Otra persona</span>
             </label>
           </div>
-
-          <!-- Datos recogedor (visible solo si "Otra persona") -->
           <div id="cod-recog-fields" style="display:none">
             <div class="cod-form-group" style="margin-top:10px">
               <label class="cod-label" for="cod-recog-nombre">Nombre de quien recoge <span class="req">*</span></label>
@@ -345,8 +306,7 @@
               <label class="cod-label" for="cod-recog-dni">DNI del recogedor <span class="req">*</span></label>
               <div class="cod-input-wrap">
                 <span class="cod-input-icon">🪪</span>
-                <input type="text" id="cod-recog-dni" placeholder="12345678" maxlength="8"
-                  class="cod-input" inputmode="numeric">
+                <input type="text" id="cod-recog-dni" placeholder="12345678" maxlength="8" class="cod-input" inputmode="numeric">
               </div>
             </div>
           </div>
@@ -360,8 +320,7 @@
 
       </div><!-- /paso-2 -->
 
-
-      <!-- ══ PASO 3: COMPROBANTE ══ -->
+      <!-- PASO 3: COMPROBANTE -->
       <div class="cod-step-content" id="cod-step-3">
 
         <h3 class="cod-section-title">🧾 Tipo de Comprobante</h3>
@@ -374,19 +333,18 @@
         <!-- Campos BOLETA -->
         <div id="cod-fields-boleta" class="cod-fields-block">
           <div class="cod-form-group">
-            <label class="cod-label" for="cod-dni">DNI del Comprador <span class="req">*</span></label>
+            <label class="cod-label" for="cod-dni">DNI o RUC del Comprador <span class="req">*</span></label>
             <div class="cod-input-wrap">
               <span class="cod-input-icon">🪪</span>
-              <input type="text" id="cod-dni" placeholder="12345678" maxlength="8"
-                class="cod-input" inputmode="numeric">
+              <input type="text" id="cod-dni" placeholder="DNI (8 dígitos) o RUC (11 dígitos)" maxlength="11" class="cod-input" inputmode="numeric">
             </div>
+            <small class="cod-hint">Personas naturales: DNI · Empresas que prefieren boleta: RUC</small>
           </div>
           <div class="cod-form-group">
             <label class="cod-label" for="cod-email-boleta">Correo Electrónico <span class="req">*</span></label>
             <div class="cod-input-wrap">
               <span class="cod-input-icon">📧</span>
-              <input type="email" id="cod-email-boleta" placeholder="tucorreo@ejemplo.com"
-                class="cod-input" autocomplete="email">
+              <input type="email" id="cod-email-boleta" placeholder="tucorreo@ejemplo.com" class="cod-input" autocomplete="email">
             </div>
             <small class="cod-hint">Recibirás tu Orden de Compra en PDF con contraseña = tu DNI 🔐</small>
           </div>
@@ -398,8 +356,7 @@
             <label class="cod-label" for="cod-ruc">RUC de la Empresa <span class="req">*</span></label>
             <div class="cod-input-wrap">
               <span class="cod-input-icon">🏛️</span>
-              <input type="text" id="cod-ruc" placeholder="20612345678" maxlength="11"
-                class="cod-input" inputmode="numeric">
+              <input type="text" id="cod-ruc" placeholder="20612345678" maxlength="11" class="cod-input" inputmode="numeric">
             </div>
           </div>
           <div class="cod-form-group">
@@ -420,8 +377,7 @@
             <label class="cod-label" for="cod-email-factura">Correo para Factura Electrónica <span class="req">*</span></label>
             <div class="cod-input-wrap">
               <span class="cod-input-icon">📧</span>
-              <input type="email" id="cod-email-factura" placeholder="contabilidad@empresa.com"
-                class="cod-input" autocomplete="email">
+              <input type="email" id="cod-email-factura" placeholder="contabilidad@empresa.com" class="cod-input" autocomplete="email">
             </div>
             <small class="cod-hint">Recibirás tu Orden de Compra en PDF con contraseña = tu RUC 🔐</small>
           </div>
@@ -431,18 +387,28 @@
         <div class="cod-final-summary" id="cod-final-summary">
           <h4>📋 Resumen de tu Pedido</h4>
           <div class="cod-sum-row"><span>Producto</span><span id="fs-prod">48 Tubos · 4 Cajas</span></div>
-          <div class="cod-sum-row"><span>Precio por tubo</span><span>S/. 27.00</span></div>
+          <div class="cod-sum-row"><span>Precio por tubo</span><span id="fs-precio-tubo">S/. 27.00</span></div>
           <div class="cod-sum-row"><span>Subtotal</span><span id="fs-subtotal">S/. 1,296</span></div>
           <div class="cod-sum-row" id="fs-flete-row">
-            <span>Flete Shalom <span class="cod-flete-pct-label" id="fs-flete-pct"></span></span>
+            <span>Flete Shalom + Embalaje</span>
             <span id="fs-flete">S/. 0</span>
           </div>
-          <div class="cod-sum-row" id="fs-embalaje-row"><span>Embalaje</span><span id="fs-embalaje">S/. 0</span></div>
+          <div class="cod-sum-row" id="fs-dest-row">
+            <span>Destino / Almacén</span>
+            <span id="fs-agencia" style="font-size:10px;text-align:right;max-width:160px">—</span>
+          </div>
           <div class="cod-sum-row"><span>Modalidad</span><span id="fs-modalidad">Transferencia Bancaria 🏦</span></div>
-          <div class="cod-sum-row"><span>Agencia Shalom</span><span id="fs-agencia" style="font-size:10px;text-align:right;max-width:160px">—</span></div>
           <div class="cod-sum-row total">
-            <strong>TOTAL A PAGAR</strong>
+            <strong>TOTAL COMPRA</strong>
             <strong id="fs-total">S/. 1,296</strong>
+          </div>
+          <div class="cod-sum-row" id="fs-adelanto-row" style="display:none; color:#ef4444;">
+            <span>Adelanto (20% hoy)</span>
+            <strong id="fs-adelanto">S/. 0</strong>
+          </div>
+          <div class="cod-sum-row" id="fs-saldo-row" style="display:none; color:#166534;">
+            <span>Saldo (80% al recibir)</span>
+            <strong id="fs-saldo">S/. 0</strong>
           </div>
         </div>
 
@@ -451,13 +417,12 @@
           <button class="cod-btn-confirm" id="cod-confirm-btn">✅ CONFIRMAR POR WHATSAPP</button>
         </div>
 
-        <!-- PDF bloqueado hasta confirmar -->
         <div class="cod-pdf-lock" id="cod-pdf-lock">
           <span>🔒 Confirma por WhatsApp para habilitar el PDF</span>
         </div>
         <button class="cod-btn-pdf" id="cod-pdf-btn" disabled>📄 Descargar Resumen PDF</button>
         <button class="cod-btn-pdf" id="cod-email-btn" style="margin-top:8px; display:none;">✉️ Re-enviar PDF al Correo</button>
-        <div class="cod-trust">🛡️ Pagas al recibir en la agencia Shalom · Sin anticipos · Sin riesgo</div>
+        <div class="cod-trust" id="cod-step3-trust">🛡️ Compra Segura · Recibe tu OC al instante · Adelanto 20% / Saldo 80%</div>
 
       </div><!-- /paso-3 -->
 

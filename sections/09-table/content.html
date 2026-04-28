@@ -2,7 +2,28 @@
   <div class="va-container">
     <div class="va-pt-head">
       <h2 class="va-h2 text-center">NIVELES DE <span class="text-highlight">INVERSIÓN POR MAYOR</span></h2>
-      <p class="va-text-center va-p-desc">Precio oficial: <strong>S/. 27 por tubo</strong>. Con pago anticipado, el envío es gratis y pagas exactamente eso.</p>
+      <p class="va-text-center va-p-desc">Precio desde <strong>S/. 27/tubo</strong>. A mayor volumen, mejor precio. Con transferencia anticipada el envío es gratis.</p>
+    </div>
+
+    <!-- Escalera de precios -->
+    <div class="va-price-tiers">
+      <div class="va-tier-card">
+        <div class="va-tier-range">1 – 9 cajas</div>
+        <div class="va-tier-price">S/. 27.00<span>/tubo</span></div>
+        <div class="va-tier-label">Precio base</div>
+      </div>
+      <div class="va-tier-card featured">
+        <div class="va-tier-badge">MÁS PEDIDO</div>
+        <div class="va-tier-range">10 – 29 cajas</div>
+        <div class="va-tier-price">S/. 26.50<span>/tubo</span></div>
+        <div class="va-tier-label">Ahorras S/. 0.50/tubo</div>
+      </div>
+      <div class="va-tier-card premium">
+        <div class="va-tier-badge">GRAN DISTRIBUIDOR</div>
+        <div class="va-tier-range">30+ cajas</div>
+        <div class="va-tier-price">S/. 26.30<span>/tubo</span></div>
+        <div class="va-tier-label">Ahorras S/. 0.70/tubo</div>
+      </div>
     </div>
 
     <div class="va-measure-guide" style="margin-bottom: 40px;">
@@ -14,10 +35,10 @@
     <!-- Toggle de modalidad -->
     <div class="va-pt-toggle">
       <button class="va-pt-toggle-btn active" id="va-toggle-transfer" onclick="togglePricingTable('transfer')">
-        🏦 TRANSFERENCIA BANCARIA<br><small>S/. 27/tubo — Envío Gratis ✅</small>
+        🏦 TRANSFERENCIA BANCARIA<br><small>Envío Gratis ✅</small>
       </button>
       <button class="va-pt-toggle-btn" id="va-toggle-cod" onclick="togglePricingTable('cod')">
-        🚚 CONTRA ENTREGA<br><small>S/. 27 + logística 🔼</small>
+        🚚 CONTRA ENTREGA (Shalom)<br><small>20% Adelanto / 80% Destino</small>
       </button>
     </div>
 
@@ -27,40 +48,40 @@
         <thead>
           <tr>
             <th>VOLUMEN</th>
-            <th class="featured">TU INVERSIÓN TOTAL<br><small>(S/. 27 × tubos)</small></th>
-            <th>PRECIO EFECTIVO/TUBO</th>
-            <th>FLETE + EMBALAJE</th>
+            <th>PRECIO/TUBO</th>
+            <th class="featured">INVERSIÓN TOTAL</th>
+            <th>FLETE</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="va-v-name">1 Caja (12 Unid.)</td>
+            <td><strong>S/. 27.00</strong></td>
             <td class="va-total">S/. 324</td>
-            <td><strong>S/. 27.00</strong> ✅</td>
             <td><span class="va-free">GRATIS</span></td>
           </tr>
-          <tr class="va-row-featured">
+          <tr>
             <td class="va-v-name">4 Cajas (48 Unid.) <span class="va-badge-pt">RECOMENDADO</span></td>
+            <td><strong>S/. 27.00</strong></td>
             <td class="va-total">S/. 1,296</td>
-            <td><strong>S/. 27.00</strong> ✅</td>
             <td><span class="va-free">GRATIS</span></td>
           </tr>
           <tr>
             <td class="va-v-name">8 Cajas (96 Unid.)</td>
+            <td><strong>S/. 27.00</strong></td>
             <td class="va-total">S/. 2,592</td>
-            <td><strong>S/. 27.00</strong> ✅</td>
             <td><span class="va-free">GRATIS</span></td>
           </tr>
-          <tr>
-            <td class="va-v-name">10 Cajas (120 Unid.)</td>
-            <td class="va-total">S/. 3,240</td>
-            <td><strong>S/. 27.00</strong> ✅</td>
+          <tr class="va-row-featured">
+            <td class="va-v-name">10 Cajas (120 Unid.) <span class="va-badge-pt">PRECIO ESPECIAL</span></td>
+            <td><strong class="va-price-special">S/. 26.50 🎉</strong></td>
+            <td class="va-total">S/. 3,180</td>
             <td><span class="va-free">GRATIS</span></td>
           </tr>
-          <tr>
-            <td class="va-v-name">20 Cajas (240 Unid.) <span class="va-badge-pt">GRAN DIST.</span></td>
-            <td class="va-total">S/. 6,480</td>
-            <td><strong>S/. 27.00</strong> ✅</td>
+          <tr class="va-row-featured">
+            <td class="va-v-name">30 Cajas (360 Unid.) <span class="va-badge-pt">GRAN DIST.</span></td>
+            <td><strong class="va-price-special">S/. 26.30 🏆</strong></td>
+            <td class="va-total">S/. 9,468</td>
             <td><span class="va-free">GRATIS</span></td>
           </tr>
         </tbody>
@@ -71,50 +92,50 @@
         <thead>
           <tr>
             <th>VOLUMEN</th>
-            <th>SUBTOTAL (S/. 27)</th>
-            <th>GESTIÓN + FLETE</th>
-            <th class="featured">TOTAL PUESTO EN SHALOM</th>
+            <th>PRECIO/TUBO</th>
+            <th>FLETE SHALOM</th>
+            <th class="featured">TOTAL EN DESTINO</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="va-v-name">1 Caja (12 Unid.)</td>
-            <td>S/. 324</td>
-            <td>S/. 55 <span class="va-flete-pct">(17%)</span></td>
+            <td><strong>S/. 27.00</strong></td>
+            <td>S/. 55</td>
             <td class="va-total">S/. 379</td>
           </tr>
-          <tr class="va-row-featured">
+          <tr>
             <td class="va-v-name">4 Cajas (48 Unid.) <span class="va-badge-pt">RECOMENDADO</span></td>
-            <td>S/. 1,296</td>
-            <td>S/. 70 <span class="va-flete-pct">(5%)</span></td>
+            <td><strong>S/. 27.00</strong></td>
+            <td>S/. 70</td>
             <td class="va-total">S/. 1,366</td>
           </tr>
           <tr>
             <td class="va-v-name">8 Cajas (96 Unid.)</td>
-            <td>S/. 2,592</td>
-            <td>S/. 120 <span class="va-flete-pct">(4%)</span></td>
+            <td><strong>S/. 27.00</strong></td>
+            <td>S/. 120</td>
             <td class="va-total">S/. 2,712</td>
           </tr>
-          <tr>
-            <td class="va-v-name">10 Cajas (120 Unid.)</td>
-            <td>S/. 3,240</td>
-            <td>S/. 120 <span class="va-flete-pct">(4%)</span></td>
-            <td class="va-total">S/. 3,360</td>
+          <tr class="va-row-featured">
+            <td class="va-v-name">10 Cajas (120 Unid.) <span class="va-badge-pt">PRECIO ESPECIAL</span></td>
+            <td><strong class="va-price-special">S/. 26.50 🎉</strong></td>
+            <td>S/. 145</td>
+            <td class="va-total">S/. 3,325</td>
           </tr>
-          <tr>
-            <td class="va-v-name">20 Cajas (240 Unid.) <span class="va-badge-pt">GRAN DIST.</span></td>
-            <td>S/. 6,480</td>
-            <td>S/. 170 <span class="va-flete-pct">(3%)</span></td>
-            <td class="va-total">S/. 6,650</td>
+          <tr class="va-row-featured">
+            <td class="va-v-name">30 Cajas (360 Unid.) <span class="va-badge-pt">GRAN DIST.</span></td>
+            <td><strong class="va-price-special">S/. 26.30 🏆</strong></td>
+            <td>S/. 395</td>
+            <td class="va-total">S/. 9,863</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="va-pt-note">
-      💡 <strong>Con pago anticipado (transferencia bancaria)</strong> el flete Shalom y el embalaje son por nuestra cuenta.
-      Con contra entrega, los costos de logística se suman al precio.
-      *Fletes son referenciales para ciudades principales.
+      💡 <strong>Transferencia anticipada:</strong> flete y embalaje gratis en todos los volúmenes.
+      <strong>Contra entrega:</strong> adelantas el 20% para activar el armado y pagas el 80% restante en la Agencia Shalom de tu ciudad al recoger.
+      <strong>Recojo en almacén Lima:</strong> adelantas el 20% para activar el pedido y pagas el 80% al recoger en nuestro almacén. Sin flete.
     </div>
   </div>
 </section>

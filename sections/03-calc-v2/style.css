@@ -1,0 +1,197 @@
+.va-calc-section {
+  padding: clamp(30px, 5vh, 50px) 0;
+  background: var(--white);
+}
+
+.va-calc-card {
+  background: var(--bone);
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.va-slider-module {
+  margin-bottom: 50px;
+}
+
+.va-slider-title {
+  display: block;
+  font-weight: 900;
+  font-size: var(--fs-base);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.va-range-slider {
+  width: 100%;
+  appearance: none;
+  height: 10px;
+  background: #e6dbd0;
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.va-range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: var(--copper);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(200, 130, 100, 0.4);
+}
+
+.va-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.va-label-item {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: #aaa;
+  transition: var(--transition);
+}
+
+.va-label-item.va-active {
+  color: var(--copper);
+  transform: scale(1.1);
+}
+
+.va-calc-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.va-res-box {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.va-res-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(0,0,0,0.09);
+}
+
+.va-res-label {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.va-res-val {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--dark);
+  display: block;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.va-res-box.highlight {
+  border: 1.5px solid var(--copper);
+}
+
+.va-res-box.profit {
+  border: 1.5px solid var(--success);
+}
+
+.va-res-box.profit .va-res-val {
+  color: var(--success);
+}
+
+.va-res-sub {
+  display: block;
+  font-size: var(--fs-sm);
+  color: #888;
+  margin-top: 5px;
+}
+
+.va-profit-context {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.va-pctx-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: #555;
+  gap: 10px;
+}
+
+.va-pctx-note {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 8px;
+  line-height: 1.2;
+}
+
+.va-calc-footer {
+  margin-top: 30px;
+  font-size: var(--fs-sm);
+  color: #888;
+  text-align: center;
+}
+
+/* --- TABS --- */
+.va-calc-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 30px 0;
+}
+.va-calc-tab {
+  padding: 14px;
+  border: 2px solid #e8e0da;
+  border-radius: 14px;
+  background: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: #888;
+  transition: all 0.25s;
+}
+.va-calc-tab.active {
+  border-color: var(--copper);
+  background: #fdf6f2;
+  color: var(--copper);
+}
+
+/* --- CTAs --- */
+.va-calc-cta {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  background: var(--dark);
+  color: #fff;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 15px;
+  margin-top: 30px;
+  letter-spacing: 0.5px;
+  transition: background 0.3s;
+}
+.va-calc-cta:hover { background: #000; }
+
+@media (max-width: 600px) {
+  .va-calc-card { padding: 25px 15px; }
+  .va-res-val { font-size: 1.5rem; }
+  .va-calc-results { grid-template-columns: 1fr; }
+  .va-calc-tabs { grid-template-columns: 1fr; }
+}

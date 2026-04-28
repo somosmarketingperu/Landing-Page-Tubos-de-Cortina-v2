@@ -1,0 +1,39 @@
+<div id="va-exit-modal">
+  <div class="va-exit-content">
+    <button class="va-exit-close-x" onclick="closeExitModal()">✕</button>
+    
+    <!-- Top Bar con Urgencia -->
+    <div class="va-exit-top-bar">
+      <h3>¡ESPERA! NO TE VAYAS TODAVÍA ✋</h3>
+      <p>Tenemos una oferta de último minuto para tu primer lote.</p>
+      
+      <!-- Contador -->
+      <div class="va-exit-timer">
+        <div class="va-timer-box">
+          <span class="va-timer-num" id="exit-min">05</span>
+          <span class="va-timer-label">Min</span>
+        </div>
+        <div class="va-timer-box">
+          <span class="va-timer-num" id="exit-sec">00</span>
+          <span class="va-timer-label">Seg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cuerpo del Modal -->
+    <div class="va-exit-body">
+      <h2>¡ASEGURA TU LOTE HOY!</h2>
+      <p>Si generas tu orden ahora, tu pedido se embala y sale a agencia Shalom en el día.</p>
+      
+      <div class="va-exit-offer">
+        <span>RECUERDA: SOLO NECESITAS:</span>
+        <strong>20% DE ADELANTO PARA ACTIVAR TU PEDIDO</strong>
+      </div>
+
+      <button class="va-exit-cta" onclick="handleExitCTA()">¡HACER MI PEDIDO AHORA!</button>
+      
+      <span class="va-exit-close-txt" onclick="closeExitModal()">No gracias, lo dejo para después</span>
+    </div>
+
+  </div>
+</div>

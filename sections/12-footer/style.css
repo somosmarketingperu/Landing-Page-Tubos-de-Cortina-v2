@@ -1,57 +1,144 @@
 .va-footer {
-  padding: 80px 0 40px;
-  background: var(--dark);
+  padding: 100px 0 40px;
+  background: #0b0a09; /* Negro profundo para máximo contraste */
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Borde superior decorativo en cobre */
+.va-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--copper), transparent);
 }
 
 .va-footer-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 60px;
-  margin-bottom: 60px;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 30px;
+  margin-bottom: 80px;
 }
 
-.va-foot-p {
-  font-size: var(--fs-base);
-  color: #aaa;
-  margin-top: 15px;
-  max-width: 300px;
+/* Tarjetas de sección para profundidad */
+.va-foot-col {
+  padding: 24px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: var(--transition);
+}
+
+.va-foot-col:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-5px);
+  border-color: rgba(200, 130, 100, 0.3);
+}
+
+/* Iconos Estilizados */
+.va-icon-box {
+  width: 32px;
+  height: 32px;
+  background: rgba(200, 130, 100, 0.15);
+  color: var(--copper);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin-right: 12px;
+  flex-shrink: 0;
 }
 
 .va-f-h4 {
-  font-size: var(--fs-base);
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff; /* Títulos en blanco para mejor legibilidad */
+  margin-bottom: 24px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.va-f-h4::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--copper), transparent);
+  margin-left: 15px;
+  opacity: 0.3;
+}
+
+.va-foot-p, 
+.va-footer p, 
+.va-footer li {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.8;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+/* Branding Especial */
+.va-foot-brand .va-brand-title {
+  font-size: 16px;
   font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.va-brand-tag {
   color: var(--copper);
-  margin-bottom: 20px;
-  letter-spacing: 1px;
-}
-
-.va-foot-legal p, .va-foot-sh p {
-  font-size: var(--fs-base);
-  color: #aaa;
-  margin-bottom: 10px;
-}
-
-.va-sh-logo {
-  background: rgba(255,255,255,0.05);
-  padding: 10px;
-  border-radius: 4px;
-  display: inline-block;
-  font-size: var(--fs-sm);
-  font-weight: 900;
-  border-left: 3px solid var(--copper);
-  margin-bottom: 10px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .va-footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.05);
   padding-top: 40px;
   text-align: center;
-  font-size: var(--fs-sm);
-  color: #666;
 }
 
-@media (max-width: 800px) {
-  .va-footer-grid { grid-template-columns: 1fr; gap: 40px; }
-  .va-foot-p { max-width: 100%; }
+.va-bottom-text {
+  font-size: 11px;
+  color: #444;
+  letter-spacing: 0.5px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.va-foot-sedes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.va-foot-sedes li {
+  margin-bottom: 16px;
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.va-foot-sedes li:hover {
+  color: #fff;
+}
+
+@media (max-width: 1100px) {
+  .va-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .va-footer { padding: 80px 0 40px; }
+  .va-footer-grid { grid-template-columns: 1fr; gap: 20px; }
+  .va-foot-col { padding: 20px; }
 }

@@ -118,8 +118,9 @@ img {
 }
 
 .va-p-desc {
-    font-size: var(--fs-base);
-    color: var(--stone-light);
+    font-size: 1.15rem; /* Letra ligeramente más grande */
+    font-weight: 500; /* Más cuerpo/grosor */
+    color: var(--stone); /* Color más oscuro para mejor contraste */
     max-width: 800px;
     margin-bottom: 20px;
     line-height: 1.6;

@@ -26,14 +26,18 @@
 
 .va-hero-title {
   font-size: var(--fs-xl);
-  margin-bottom: 24px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
 }
 
 .va-hero-sub {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--stone-light);
-  margin-bottom: 32px;
-  max-width: 600px;
+  margin-bottom: 30px;
+  max-width: 580px;
+  line-height: 1.5;
+  opacity: 0.9;
 }
 
 .va-hero-btns {
@@ -51,6 +55,12 @@
   font-weight: 900;
   font-size: var(--fs-base);
   transition: var(--transition);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
 }
 
 .va-btn-hero-secondary {
@@ -62,6 +72,12 @@
   font-weight: 900;
   font-size: var(--fs-base);
   transition: var(--transition);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
 }
 
 .va-btn-hero-primary:hover {
@@ -69,16 +85,56 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+.va-hero-cta-box {
+  margin-bottom: 40px;
+}
+
+.va-btn-primary {
+  background: var(--dark);
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.va-btn-primary:hover {
+  transform: translateY(-3px);
+  background: #000;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.va-hero-note {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--copper);
+  opacity: 0.9;
+}
+
 .va-hero-trust {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .va-trust-item {
-  font-size: var(--fs-base);
-  font-weight: 600;
-  color: #666;
+  flex: 1;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--dark);
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  padding: 10px 8px;
+  border-radius: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .va-hero-img-wrap {
@@ -138,8 +194,9 @@
 @media (max-width: 900px) {
   .va-grid-hero { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .va-hero-sub { margin-left: auto; margin-right: auto; }
-  .va-hero-btns { justify-content: center; flex-direction: column; }
-  .va-hero-trust { align-items: center; }
+  .va-hero-btns { justify-content: center; flex-direction: column; width: 100%; }
+  .va-btn-hero-primary, .va-btn-hero-secondary { width: 100%; box-sizing: border-box; }
+  .va-hero-trust { align-items: center; width: 100%; flex-direction: column; }
   .va-hero-img-wrap { max-width: 500px; margin: 0 auto; }
   .va-floating-price { width: 120px; height: 120px; top: -15px; right: -15px; }
   .va-fp-val { font-size: 2rem; }

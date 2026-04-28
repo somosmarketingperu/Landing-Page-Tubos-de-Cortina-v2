@@ -213,7 +213,7 @@ function construirEmailHTML(data, ocNumber, driveUrl) {
       <div style="background:#f9f7f5;border-radius:10px;padding:16px 20px;margin:16px 0;">\
         <div style="font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">&#128193; Resumen del Pedido</div>\
         <table style="width:100%;border-collapse:collapse;font-size:13px;color:#444;">\
-          <tr><td style="padding:5px 0;color:#888;">Producto</td><td style="text-align:right;font-weight:700;">Tubo Cortina Extensible 3m · Luxury</td></tr>\
+          <tr><td style="padding:5px 0;color:#888;">Producto</td><td style="text-align:right;font-weight:700;">Kit de Tubo Extensible (Rejilla Elegante)</td></tr>\
           <tr><td style="padding:5px 0;color:#888;">Cantidad</td><td style="text-align:right;">' + (orden.cajas || '—') + ' cajas · ' + (orden.tubos || '—') + ' tubos</td></tr>\
           <tr><td style="padding:5px 0;color:#888;">Agencia Shalom</td><td style="text-align:right;font-size:11px;">' + (orden.agencia || '—') + '</td></tr>\
           <tr><td style="padding:5px 0;color:#888;">Comprobante</td><td style="text-align:right;">' + tipoCpbt + '</td></tr>\
@@ -436,7 +436,7 @@ function construirPDFHTML(d, ocN) {
         <div class="sec-t"> DETALLE DEL PRODUCTO</div>\
         <div class="item-row">\
           <span class="val-r">S/. ' + (d.subtotal||'0.00') + '</span>\
-          <span class="item-title">1. Tubo Extensible Luxury (Acero)</span>\
+          <span class="item-title">1. Kit de Tubo Extensible (Rejilla Elegante)</span>\
           <span class="item-sub">Envío de ' + (d.cajas||'0') + ' cajas que contienen ' + (d.tubos||'0') + ' tubos listos para vender. Precio unitario S/. 27.00/tubo.</span>\
         </div>\
         \

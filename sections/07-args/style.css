@@ -42,6 +42,7 @@
   font-size: var(--fs-base);
   font-weight: 600;
   line-height: 1.5;
+  text-align: center;
 }
 
 /* Tablet */
@@ -76,6 +77,6 @@
   .va-args-highlight {
     font-size: var(--fs-base);
     padding: 14px 16px;
-    text-align: left;
+    text-align: center;
   }
 }

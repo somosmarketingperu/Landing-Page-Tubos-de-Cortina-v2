@@ -73,3 +73,79 @@
   .va-b2b-table td { padding: 15px 10px; font-size: var(--fs-base); }
   .va-total { font-size: var(--fs-base); }
 }
+/* ──
+ ESCALERA DE PRECIOS ── */
+.va-price-tiers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.va-tier-card {
+  background: #faf9f8;
+  border: 2px solid #e8e0da;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  position: relative;
+}
+.va-tier-card.featured {
+  border-color: var(--copper, #c88264);
+  background: #fdf6f2;
+}
+.va-tier-card.premium {
+  border-color: #1c1917;
+  background: #1c1917;
+  color: #fff;
+}
+.va-tier-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--copper, #c88264);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.va-tier-card.premium .va-tier-badge {
+  background: #f59e0b;
+  color: #1c1917;
+}
+.va-tier-range {
+  font-size: 12px;
+  font-weight: 700;
+  color: #888;
+  margin-bottom: 8px;
+  margin-top: 6px;
+}
+.va-tier-card.premium .va-tier-range { color: #ccc; }
+.va-tier-price {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--dark, #1c1917);
+  line-height: 1;
+}
+.va-tier-card.premium .va-tier-price { color: #fff; }
+.va-tier-price span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+}
+.va-tier-card.premium .va-tier-price span { color: #ccc; }
+.va-tier-label {
+  font-size: 10px;
+  color: #27ae60;
+  font-weight: 700;
+  margin-top: 6px;
+}
+.va-tier-card.premium .va-tier-label { color: #86efac; }
+.va-price-special { color: #27ae60 !important; }
+
+@media (max-width: 600px) {
+  .va-price-tiers { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,126 @@
+/* 06-AUTH-V2 — SECCIÓN DE AUTORIDAD Y CONFIANZA */
+:root {
+  --auth-navy: #0f172a;
+  --auth-gold: #b45309;
+  --auth-bg: #f8fafc;
+}
+
+.va-auth-v2 {
+  padding: 100px 0;
+  background-color: var(--auth-bg);
+}
+
+.va-auth-canvas {
+  background: #fff;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 24px;
+  padding: 60px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.05);
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Lado Izquierdo: El Sello de Confianza */
+.va-auth-badge-wrap {
+  text-align: center;
+}
+
+.va-auth-stamp {
+  width: 180px;
+  height: 180px;
+  border: 4px solid var(--auth-gold);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.va-auth-stamp::after {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px; right: 10px; bottom: 10px;
+  border: 1px dashed var(--auth-gold);
+  border-radius: 50%;
+}
+
+.va-auth-stamp span {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--auth-gold);
+  text-transform: uppercase;
+}
+
+.va-auth-stamp strong {
+  font-size: 32px;
+  font-weight: 950;
+  color: var(--auth-navy);
+  line-height: 1;
+}
+
+/* Lado Derecho: Los Pilares */
+.va-auth-header h2 {
+  font-size: 48px;
+  font-weight: 950;
+  color: var(--auth-navy);
+  line-height: 1;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.va-auth-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.va-auth-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.va-auth-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--auth-gold);
+  box-shadow: 0 10px 25px rgba(180, 83, 9, 0.08);
+}
+
+.va-auth-item h4 {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--auth-navy);
+  text-transform: uppercase;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.va-auth-item p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .va-auth-canvas { grid-template-columns: 1fr; padding: 40px 20px; text-align: center; }
+  .va-auth-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .va-auth-header h2 { font-size: 36px; }
+  .va-auth-item { text-align: left; }
+}
+
+@media (max-width: 500px) {
+  .va-auth-grid { grid-template-columns: 1fr; }
+}

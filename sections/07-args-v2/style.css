@@ -1,0 +1,85 @@
+/* 07-ARGS-V2 — ARGUMENTOS DE VENTA / BENEFICIOS */
+:root {
+  --arg-blue: #1d4ed8;
+  --arg-navy: #0f172a;
+  --arg-bg: #ffffff;
+}
+
+.va-args-v2 {
+  padding: 100px 0;
+  background-color: var(--arg-bg);
+}
+
+.va-args-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.va-args-header h2 {
+  font-size: 56px;
+  font-weight: 950;
+  color: var(--arg-navy);
+  line-height: 0.9;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+}
+
+.va-args-header h2 span {
+  display: block;
+  color: var(--arg-blue);
+  font-size: 64px;
+}
+
+.va-args-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.va-arg-card {
+  background: #f8fafc;
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+}
+
+.va-arg-card:hover {
+  transform: translateY(-10px);
+  background: #fff;
+  border-color: var(--arg-blue);
+  box-shadow: 0 20px 40px rgba(29, 78, 216, 0.1);
+}
+
+.va-arg-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.va-arg-card h3 {
+  font-size: 20px;
+  font-weight: 950;
+  color: var(--arg-navy);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.va-arg-card p {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .va-args-grid { grid-template-columns: 1fr 1fr; }
+  .va-args-header h2 { font-size: 40px; }
+  .va-args-header h2 span { font-size: 48px; }
+}
+
+@media (max-width: 600px) {
+  .va-args-grid { grid-template-columns: 1fr; }
+}

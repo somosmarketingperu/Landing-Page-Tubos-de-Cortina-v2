@@ -57,8 +57,49 @@
 .va-ba-list {
   list-style: none;
   text-align: left;
-  font-size: var(--fs-base);
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.4;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.va-ba-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+/* Estilos para "Antes" (Malo) */
+.va-ba-card.bad .va-ba-list li {
+  background: rgba(239, 68, 68, 0.08);
+  color: #7f1d1d;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.va-ba-card.bad .va-ba-list li::before {
+  content: '✖';
+  color: #ef4444;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/* Estilos para "Ahora" (Bueno) */
+.va-ba-card.good .va-ba-list li {
+  background: rgba(34, 197, 94, 0.08);
+  color: #14532d;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.va-ba-card.good .va-ba-list li::before {
+  content: '✓';
+  color: #22c55e;
+  font-weight: 900;
+  font-size: 18px;
 }
 
 .va-ba-vs {
@@ -77,5 +118,7 @@
 @media (max-width: 850px) {
   .va-ba-grid { flex-direction: column; }
   .va-ba-card { width: 100%; max-width: 400px; }
-  .va-ba-vs { margin: 10px 0; }
+  .va-ba-card.bad { order: 1; }
+  .va-ba-vs { order: 2; margin: 20px 0; }
+  .va-ba-card.good { order: 3; }
 }

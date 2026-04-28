@@ -1,0 +1,115 @@
+/* 10-TEST-V2 — TESTIMONIOS PREMIUM */
+:root {
+  --test-gold: #fbbf24;
+  --test-navy: #0f172a;
+  --test-bg: #f8fafc;
+}
+
+.va-test-v2 {
+  padding: 100px 0;
+  background-color: var(--test-bg);
+}
+
+.va-test-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.va-test-header h2 {
+  font-size: 56px;
+  font-weight: 950;
+  color: var(--test-navy);
+  line-height: 0.9;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+}
+
+.va-test-header h2 span {
+  display: block;
+  color: #9a6a4d;
+  font-size: 64px;
+}
+
+.va-test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.va-test-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.3s;
+}
+
+.va-test-card:hover {
+  transform: translateY(-10px);
+}
+
+.va-test-stars {
+  color: var(--test-gold);
+  font-size: 20px;
+}
+
+.va-test-body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #475569;
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.va-test-footer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.va-test-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e2e8f0;
+}
+
+.va-test-info h4 {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--test-navy);
+  margin: 0;
+}
+
+.va-test-info span {
+  font-size: 12px;
+  color: #64748b;
+  display: block;
+}
+
+.va-test-verified {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 900;
+  color: #10b981;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+  .va-test-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .va-test-grid { grid-template-columns: 1fr; }
+}

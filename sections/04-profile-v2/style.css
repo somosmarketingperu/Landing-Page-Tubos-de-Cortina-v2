@@ -1,0 +1,110 @@
+/* 04-PROFILE-V2 — SEGMENTACIÓN DE PERFILES B2B */
+:root {
+  --prof-navy: #0f172a;
+  --prof-bronze: #9a6a4d;
+  --prof-bg: #ffffff;
+}
+
+.va-profile-v2 {
+  padding: 100px 0;
+  background-color: var(--prof-bg);
+}
+
+.va-prof-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.va-prof-header h2 {
+  font-size: 56px;
+  font-weight: 950;
+  color: var(--prof-navy);
+  line-height: 0.9;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+}
+
+.va-prof-header h2 span {
+  display: block;
+  color: var(--prof-bronze);
+  font-size: 64px;
+}
+
+.va-prof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.va-prof-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.va-prof-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 6px;
+  background: var(--prof-bronze);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.va-prof-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--prof-bronze);
+  box-shadow: 0 30px 60px rgba(154, 106, 77, 0.1);
+}
+
+.va-prof-card:hover::before {
+  transform: scaleX(1);
+}
+
+.va-prof-icon {
+  font-size: 56px;
+  margin-bottom: 10px;
+}
+
+.va-prof-card h3 {
+  font-size: 24px;
+  font-weight: 950;
+  color: var(--prof-navy);
+  text-transform: uppercase;
+}
+
+.va-prof-card p {
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.va-prof-benefit {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--prof-navy);
+  text-transform: uppercase;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .va-prof-grid { grid-template-columns: 1fr; max-width: 500px; }
+  .va-prof-card { padding: 45px 30px; } /* Más altura, menos márgenes laterales */
+  .va-prof-icon { font-size: 75px; } /* Ícono gigante */
+  .va-prof-card h3 { font-size: 30px; } /* Título más imponente */
+  .va-prof-card p { font-size: 18px; line-height: 1.6; } /* Texto más grande */
+  .va-prof-benefit { font-size: 16px; padding: 20px; } /* Botón/etiqueta más gordo */
+}
