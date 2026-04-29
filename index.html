@@ -67,6 +67,16 @@
     }
   </script>
 
+  <!-- Three.js Import Map -->
+  <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js"
+    }
+  }
+  </script>
+
   <!-- Loader Logic -->
   <script src="js/app-loader.js?v=4.0" defer></script>
 
@@ -79,7 +89,7 @@
   <script src="js/checkout.js?v=4.0" defer></script>
   <script src="js/ui.js?v=4.0" defer></script>
   <script src="js/scroll-fx.js?v=4.0" defer></script>
-  <script src="js/spiral-fx.js?v=4.0" defer></script>
+  <script type="module" src="js/submerge-fx.js?v=4.0"></script>
   <script src="js/app-bundle.js?v=4.0" defer></script>
 </head>
 
@@ -90,8 +100,8 @@
     <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
   </div>
 
-  <!-- SPIRAL BACKGROUND (Canvas Particle Engine) -->
-  <canvas id="va-spiral-canvas"></canvas>
+  <!-- SUBMERGE BACKGROUND (WebGL 3D Engine) -->
+  <canvas id="submerge-canvas"></canvas>
 
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58KQ93XL" height="0" width="0"

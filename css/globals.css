@@ -638,23 +638,23 @@ body.cursor-hover #va-cursor-dot {
 }
 
 /* ═══════════════════════════════════════════════════
-   PREMIUM SPIRAL BACKGROUND (Canvas WebGL/2D)
+   PREMIUM SUBMERGE BACKGROUND (WebGL 3D Engine)
    ═══════════════════════════════════════════════════ */
-#va-spiral-canvas {
+#submerge-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 10; /* Sobre las secciones, debajo de modales */
-    pointer-events: none;
-    opacity: 0.25; /* Sutil en modo claro */
+    pointer-events: none; /* No bloquea clics en los botones */
+    opacity: 0.15; /* Muy transparente para no solapar los textos */
     mix-blend-mode: multiply;
     transition: opacity 0.8s ease;
 }
 
-.dark-theme #va-spiral-canvas {
-    opacity: 0.6; /* Vibrante en modo oscuro */
+.dark-theme #submerge-canvas {
+    opacity: 0.35; /* Un poco más visible pero sin ahogar el diseño oscuro */
     mix-blend-mode: screen;
 }
 
