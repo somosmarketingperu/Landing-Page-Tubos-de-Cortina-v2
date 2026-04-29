@@ -420,3 +420,55 @@
     color: #fff;
   }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-kit-replica {
+  background-color: var(--bone);
+}
+
+.dark-theme .va-flyer-canvas {
+  background: var(--white);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .va-flyer-left {
+  background-image: none;
+}
+
+.dark-theme .va-flyer-header h2 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-flyer-desc {
+  color: #94a3b8;
+}
+
+.dark-theme .va-flyer-feat-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .va-flyer-feat-item span {
+  color: #e2e8f0;
+}
+
+.dark-theme .va-flyer-incluye {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .va-incluye-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-theme .va-incluye-item span {
+  color: #94a3b8;
+}
+
+.dark-theme .va-flyer-right {
+  background: rgba(255, 255, 255, 0.02);
+}

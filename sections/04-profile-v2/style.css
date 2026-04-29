@@ -108,3 +108,45 @@
   .va-prof-card p { font-size: 18px; line-height: 1.6; } /* Texto más grande */
   .va-prof-benefit { font-size: 16px; padding: 20px; } /* Botón/etiqueta más gordo */
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-profile-v2 {
+  background-color: var(--bone);
+}
+
+.dark-theme .va-prof-header h2 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-prof-header h2 span {
+  color: #d4a574;
+}
+
+.dark-theme .va-prof-card {
+  background: var(--white);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .va-prof-card:hover {
+  border-color: #d4a574;
+  box-shadow: 0 30px 60px rgba(154, 106, 77, 0.15);
+}
+
+.dark-theme .va-prof-card::before {
+  background: #d4a574;
+}
+
+.dark-theme .va-prof-card h3 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-prof-card p {
+  color: #94a3b8;
+}
+
+.dark-theme .va-prof-benefit {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}

@@ -107,10 +107,10 @@ async function loadSections() {
 
                 const link = document.createElement('link');
                 link.rel = 'stylesheet';
-                link.href = `sections/${section}/style.css?v=2.3`;
+                link.href = `sections/${section}/style.css?v=3.0`;
                 document.head.appendChild(link);
 
-                const response = await fetch(`sections/${section}/content.html?v=2.3`);
+                const response = await fetch(`sections/${section}/content.html?v=3.0`);
                 if (response.ok) {
                     const html = await response.text();
                     sectionWrapper.innerHTML = html;
@@ -126,7 +126,10 @@ async function loadSections() {
     } finally {
         console.log('[Loader] Dispatching sectionsLoaded event');
         document.dispatchEvent(new CustomEvent('sectionsLoaded'));
+        // NOTE: initScrollEffects is now called from main.js in correct order
+        // (after progress bar DOM element is created)
     }
 }
 
 document.addEventListener('DOMContentLoaded', loadSections);
+

@@ -144,3 +144,36 @@
   .va-ba-header h2 { font-size: 36px; }
   .va-ba-header h2 span { font-size: 44px; }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-ba-v2 {
+  background-color: var(--bone);
+}
+
+.dark-theme .va-ba-header h2 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-ba-header h2 span {
+  color: #d4a574;
+}
+
+.dark-theme .va-ba-card {
+  background: var(--white);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .va-ba-vs-circle {
+  box-shadow: 0 0 0 10px rgba(10, 10, 10, 0.85);
+}
+
+.dark-theme .va-ba-content h4 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-ba-content li {
+  color: #94a3b8;
+}

@@ -19,7 +19,7 @@
     content="Importación directa de kits de tubos de cortina extensibles (hasta 3m) para tiendas de hogar y distribuidores en todo el Perú. ¡Empieza tu negocio hoy!">
 
   <!-- Global Design System & Resets -->
-  <link rel="stylesheet" href="css/globals.css">
+  <link rel="stylesheet" href="css/globals.css?v=3.0">
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;600;700;900&display=swap"
     rel="stylesheet">
@@ -60,21 +60,39 @@
     }
     </script>
 
+  <!-- Theme Init (Prevent Flash) -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  </script>
+
   <!-- Loader Logic -->
-  <script src="js/app-loader.js?v=2.3" defer></script>
+  <script src="js/app-loader.js?v=4.0" defer></script>
 
   <!-- Modular Interactive Logic -->
-  <script src="js/config.js?v=2.5" defer></script>
-  <script src="js/state.js?v=2.5" defer></script>
-  <script src="js/utils.js?v=2.5" defer></script>
-  <script src="js/calculator.js?v=2.5" defer></script>
-  <script src="js/modals.js?v=2.5" defer></script>
-  <script src="js/checkout.js?v=2.5" defer></script>
-  <script src="js/ui.js?v=2.5" defer></script>
-  <script src="js/app-bundle.js?v=2.5" defer></script>
+  <script src="js/config.js?v=4.0" defer></script>
+  <script src="js/state.js?v=4.0" defer></script>
+  <script src="js/utils.js?v=4.0" defer></script>
+  <script src="js/calculator.js?v=4.0" defer></script>
+  <script src="js/modals.js?v=4.0" defer></script>
+  <script src="js/checkout.js?v=4.0" defer></script>
+  <script src="js/ui.js?v=4.0" defer></script>
+  <script src="js/scroll-fx.js?v=4.0" defer></script>
+  <script src="js/spiral-fx.js?v=4.0" defer></script>
+  <script src="js/app-bundle.js?v=4.0" defer></script>
 </head>
 
 <body>
+  <!-- PRELOADER -->
+  <div id="va-preloader">
+    <div class="preloader-brand">Somos <span>Marketing</span></div>
+    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+  </div>
+
+  <!-- SPIRAL BACKGROUND (Canvas Particle Engine) -->
+  <canvas id="va-spiral-canvas"></canvas>
+
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58KQ93XL" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>

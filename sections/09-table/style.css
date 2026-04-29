@@ -149,3 +149,56 @@
 @media (max-width: 600px) {
   .va-price-tiers { grid-template-columns: 1fr; }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-pricing-table-section {
+  background: var(--bone);
+}
+
+.dark-theme .va-pt-wrapper {
+  background: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .va-b2b-table th {
+  color: #64748b;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .va-b2b-table td {
+  color: #e2e8f0;
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .va-row-featured {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(200, 130, 100, 0.1);
+}
+
+.dark-theme .va-tier-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .va-tier-card.featured {
+  background: rgba(200, 130, 100, 0.08);
+  border-color: var(--copper);
+}
+
+.dark-theme .va-tier-range {
+  color: #94a3b8;
+}
+
+.dark-theme .va-tier-price {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-tier-price span {
+  color: #94a3b8;
+}
+
+.dark-theme .va-pt-note {
+  color: #64748b;
+}

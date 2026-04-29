@@ -14,10 +14,11 @@
   background: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(10px);
   display: none; /* Se activa por JS */
-  align-items: center;
+  align-items: flex-start; /* Changed from center to prevent top cutoff */
   justify-content: center;
+  overflow-y: auto; /* Allow scrolling if modal is taller than screen */
   z-index: 10000;
-  padding: 20px;
+  padding: 40px 20px; /* Added more top/bottom padding */
 }
 
 #va-exit-modal.active {
@@ -29,6 +30,7 @@
   background: #fff;
   width: 100%;
   max-width: 500px; /* Mobile width */
+  margin: auto; /* Centers vertically when there's space */
   border-radius: 24px;
   overflow: hidden;
   position: relative;
@@ -233,3 +235,27 @@
   .va-exit-body { padding: 30px 20px; }
   .va-exit-offer strong { font-size: 24px; }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME — Force light internal card
+   ═══════════════════════════════════════ */
+.dark-theme .va-exit-content {
+  background: #fff;
+}
+
+.dark-theme .va-exit-body h2 {
+  color: #0f172a;
+}
+
+.dark-theme .va-exit-body p {
+  color: #64748b;
+}
+
+.dark-theme .va-exit-offer strong {
+  color: #0f172a;
+}
+
+.dark-theme .va-exit-close-x {
+  color: #0f172a;
+}
+

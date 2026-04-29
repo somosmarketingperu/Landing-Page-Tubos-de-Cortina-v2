@@ -1,8 +1,12 @@
+/* --- SCROLL SCRUBBING (Glimmer Curtain Effect) --- */
 .va-hero {
   background: var(--white);
   padding: clamp(30px, 6vh, 60px) 0;
   position: relative;
   overflow: hidden;
+  /* Support for JS Scrubbing */
+  will-change: transform, opacity, filter;
+  transform-origin: center top;
 }
 
 .va-grid-hero {
@@ -96,18 +100,38 @@
   border-radius: 12px;
   font-weight: 900;
   font-size: 1.1rem;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.1);
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto Glow animado interno para el botón */
+.va-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, var(--glow-amber), transparent);
+  transform: skewX(-20deg);
+  animation: shine 4s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
 }
 
 .va-btn-primary:hover {
   transform: translateY(-3px);
   background: #000;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(217, 119, 6, 0.5);
 }
 
 .va-hero-note {
@@ -128,17 +152,49 @@
   font-size: 11px;
   font-weight: 800;
   color: var(--dark);
-  background: #fff;
-  border: 1px solid #e2e8f0;
+  
+  /* Glassmorphism aplicado desde CSS global extendido */
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+
   padding: 10px 8px;
   border-radius: 8px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.va-trust-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px var(--glow-champagne);
+  border-color: rgba(217, 119, 6, 0.3);
 }
 
 .va-hero-img-wrap {
   position: relative;
+  border-radius: 24px;
+}
+
+/* Glow Ambiental detrás de la imagen principal */
+.va-hero-img-wrap::after {
+  content: '';
+  position: absolute;
+  top: 10%; left: 10%; right: 10%; bottom: 10%;
+  background: var(--copper);
+  filter: blur(60px);
+  opacity: 0.3;
+  z-index: -1;
+  border-radius: 50%;
+  animation: pulseGlow 6s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.9); opacity: 0.2; }
+  100% { transform: scale(1.1); opacity: 0.4; }
 }
 
 .va-hero-img {
@@ -152,7 +208,7 @@
   top: -20px;
   right: -20px;
   background: var(--copper);
-  color: var(--dark); /* Black text for better contrast as requested */
+  color: var(--dark); 
   padding: 10px;
   border-radius: 50%;
   width: 135px;
@@ -162,9 +218,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 15px 30px rgba(200, 130, 100, 0.4);
+  box-shadow: var(--shadow-glow); /* Efecto glow heredado */
   animation: float 3s ease-in-out infinite;
   z-index: 10;
+  border: 2px solid rgba(255,255,255,0.4);
 }
 
 .va-fp-label { 
@@ -201,4 +258,72 @@
   .va-floating-price { width: 120px; height: 120px; top: -15px; right: -15px; }
   .va-fp-val { font-size: 2rem; }
   .va-fp-label { font-size: 0.8rem; }
+}
+
+/* --- DARK THEME OVERRIDES --- */
+.dark-theme .va-hero {
+  background: var(--bone); /* Resolves to black */
+}
+
+/* Massive ambient light behind the text */
+.dark-theme .va-hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: -10%;
+  width: 70vw; height: 70vw;
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.15) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dark-theme .va-hero-text {
+  position: relative;
+  z-index: 1;
+}
+
+.dark-theme .va-hero-title,
+.dark-theme .va-hero-sub {
+  color: var(--dark); /* Resolves to white/light gray */
+}
+
+.dark-theme .va-hero-badge {
+  background: rgba(200, 130, 100, 0.1);
+  color: #fb923c;
+  border-color: rgba(200, 130, 100, 0.3);
+}
+
+.dark-theme .va-trust-item {
+  color: #e2e8f0;
+}
+
+.dark-theme .va-floating-price {
+  background: var(--glass-dark-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-color: var(--copper);
+  color: #fff;
+  box-shadow: 0 0 30px var(--glow-champagne);
+}
+
+.dark-theme .va-hero-subtitle {
+  color: #cbd5e1;
+}
+
+.dark-theme .va-hero-note {
+  color: #fb923c;
+}
+
+.dark-theme .va-btn-primary {
+  background: #fff;
+  color: #0f172a;
+}
+
+.dark-theme .va-btn-primary:hover {
+  background: var(--copper);
+  color: #fff;
+}
+
+.dark-theme .va-hero-media {
+  position: relative;
+  z-index: 1;
 }

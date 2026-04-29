@@ -76,9 +76,49 @@ function initCODModal() {
     if (defaultRadio) defaultRadio.closest('.cod-qty-card').classList.add('selected');
 }
 
+/**
+ * Sincroniza visualmente las tarjetas de cantidad con state.cajas
+ * (Refleja lo que el usuario eligió en el slider de la calculadora)
+ */
+function syncQtyCardUI() {
+    const cajas = state.cajas;
+    const radios = document.querySelectorAll('.cod-qty-radio');
+    let matched = false;
+
+    radios.forEach(radio => {
+        const card = radio.closest('.cod-qty-card');
+        const val  = parseInt(radio.value, 10);
+        if (val === cajas) {
+            radio.checked = true;
+            card.classList.add('selected');
+            matched = true;
+        } else {
+            radio.checked = false;
+            card.classList.remove('selected');
+        }
+    });
+
+    // Si no coincide con ninguna tarjeta preset, poner en input personalizado
+    if (!matched) {
+        radios.forEach(r => {
+            r.checked = false;
+            r.closest('.cod-qty-card').classList.remove('selected');
+        });
+        const customInput = document.getElementById('cod-custom-cajas');
+        if (customInput) customInput.value = cajas;
+    } else {
+        const customInput = document.getElementById('cod-custom-cajas');
+        if (customInput) customInput.value = '';
+    }
+}
+
 function openCODModal() {
     const backdrop = document.getElementById('cod-modal-backdrop');
     if (!backdrop) return;
+    // Sincronizar visualmente las tarjetas con la cantidad del slider
+    syncQtyCardUI();
+    updatePriceSummary();
+    updateQtyCardPrices();
     goToStep(1, true);
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -101,7 +141,7 @@ function goToStep(step, silent = false) {
 }
 
 function updateProgressUI(step) {
-    const fills = { 1: '16.6%', 2: '50%', 3: '90%' };
+    const fills = { 1: '16.6%', 2: '50%', 3: '90%', 4: '100%' };
     document.getElementById('cod-progress-fill').style.width = fills[step] || '16.6%';
     [1, 2, 3].forEach(i => {
         const lbl = document.getElementById('cod-lbl-' + i);
@@ -150,6 +190,43 @@ function setPaymentMode(mode, silent = false) {
     if (recWrap)    recWrap.style.display    = (mode === 'recojo') ? 'block' : 'none';
 
     if (!silent) updatePriceSummary();
+    updateQtyCardPrices();
+}
+
+/**
+ * Dynamically updates the price shown on each qty card
+ * based on the current payment mode (transfer / cod / recojo)
+ */
+function updateQtyCardPrices() {
+    const cards = document.querySelectorAll('.cod-qty-card[data-cajas]');
+    cards.forEach(function(card) {
+        const cajas = parseInt(card.getAttribute('data-cajas'), 10);
+        if (!cajas) return;
+        const ord = calculateOrder(cajas, state.shippingMode);
+
+        // Update price
+        const priceEl = card.querySelector('.cod-qty-price');
+        if (priceEl) priceEl.textContent = 'S/. ' + fmt(ord.total);
+
+        // Update flete badge
+        const badgeEl = card.querySelector('.cod-flete-badge');
+        if (badgeEl) {
+            if (state.shippingMode === 'transfer') {
+                badgeEl.className = 'cod-flete-badge low';
+                if (ord.precioUnit < 27) {
+                    badgeEl.textContent = '✅ S/. ' + ord.precioUnit.toFixed(2) + '/tubo — Precio especial';
+                } else {
+                    badgeEl.textContent = '✅ S/. ' + ord.precioUnit.toFixed(2) + '/tubo — Envío GRATIS';
+                }
+            } else if (state.shippingMode === 'cod') {
+                badgeEl.className = ord.flete <= 70 ? 'cod-flete-badge low' : 'cod-flete-badge';
+                badgeEl.textContent = '🚚 Flete S/. ' + fmt(ord.flete) + ' · S/. ' + ord.unitCost.toFixed(2) + '/tubo efectivo';
+            } else {
+                badgeEl.className = 'cod-flete-badge low';
+                badgeEl.textContent = '🏢 Sin flete · S/. ' + ord.precioUnit.toFixed(2) + '/tubo';
+            }
+        }
+    });
 }
 
 function updatePriceSummary() {
@@ -386,15 +463,36 @@ function handleConfirm() {
         '👤 *RECOGE:* ' + recogedorLinea,
         '━━━━━━━━━━━━━━━━━━━━━━',
         '_Generado desde cortinas-peru.web.app_'
-    ].filter(Boolean).join('%0A');
+    ].filter(Boolean).join('\n'); // Unencoded for clipboard
 
-    window.open('https://wa.me/' + WA_EMPRESA + '?text=' + lines, '_blank');
+    const encodedLines = encodeURIComponent(lines);
+    const waUrl = 'https://wa.me/' + WA_EMPRESA + '?text=' + encodedLines;
+
+    // Configurar Paso 4
+    document.getElementById('cod-qr-whatsapp').src = 'https://quickchart.io/qr?size=300&margin=1&text=' + encodeURIComponent(waUrl);
+    
+    const btnWaWeb = document.getElementById('cod-btn-wa-web');
+    btnWaWeb.onclick = function() { window.open(waUrl, '_blank'); };
+
+    const btnCopy = document.getElementById('cod-btn-copy-wa');
+    btnCopy.onclick = function() {
+        navigator.clipboard.writeText(lines).then(function() {
+            btnCopy.textContent = '✅ ¡MENSAJE COPIADO!';
+            btnCopy.style.background = '#f0fdf4';
+            setTimeout(function() {
+                btnCopy.textContent = '📋 COPIAR MENSAJE MANUALMENTE';
+                btnCopy.style.background = 'transparent';
+            }, 3000);
+        }).catch(function() {
+            alert('No se pudo copiar. Intenta seleccionar el texto manualmente.');
+        });
+    };
+
+    // Mover al Paso 4
+    goToStep(4);
+    
+    // Registrar backend
     sendToAppsScript(nombre, email, ocN);
-
-    document.getElementById('cod-pdf-btn').disabled = false;
-    document.getElementById('cod-email-btn').style.display = 'block';
-    document.getElementById('cod-pdf-lock').innerHTML = '<span>✅ ¡Pedido confirmado!</span>';
-    document.getElementById('cod-pdf-lock').classList.add('unlocked');
 }
 
 async function handleEmailResend() {

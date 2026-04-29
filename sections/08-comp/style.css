@@ -123,3 +123,37 @@
   .va-comp-grid { flex-direction: column; align-items: center; gap: 40px; }
   .va-comp-card { width: 100%; max-width: 450px; }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-comparison {
+  background: var(--bone);
+}
+
+.dark-theme .va-comp-card {
+  background: var(--white);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .va-comp-type {
+  color: #64748b;
+}
+
+.dark-theme .va-cp-item {
+  color: #94a3b8;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .va-cp-item strong {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-comp-footer {
+  color: #64748b;
+}
+
+.dark-theme .va-comp-card.main {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(200, 130, 100, 0.15);
+}

@@ -114,3 +114,16 @@
   .va-prob-header h2 { font-size: 48px; }
   .va-prob-header h2 span { font-size: 56px; }
 }
+
+/* Fix: scrub-text on dark background needs white gradient, not black */
+.va-problem-v2 .scrub-text {
+  background: linear-gradient(to right, #fff var(--scrub-percent), rgba(255,255,255,0.15) var(--scrub-percent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Highlight lines spacing */
+.va-prob-p.va-highlight-line {
+  margin-bottom: 4px;
+}

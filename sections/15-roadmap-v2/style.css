@@ -128,7 +128,8 @@
 
 /* ── PASO ROW ── */
 .rm-step {
-  position: relative;
+  position: sticky;
+  top: 100px; /* Ajuste para que se apilen debajo del header */
   margin-bottom: 0;
 }
 
@@ -543,3 +544,43 @@
   .rm-body::before { display: none; } /* Ocultar línea en pantallas muy pequeñas */
 }
 
+/* ══════════════════════════════════════════════
+   DARK THEME OVERRIDES (Glimmer Look)
+══════════════════════════════════════════════ */
+.dark-theme .rm-section {
+  background: var(--bone);
+}
+.dark-theme .rm-body {
+  background: transparent;
+}
+.dark-theme .rm-card {
+  background: var(--white);
+  border-color: rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.dark-theme .rm-col-left {
+  border-color: rgba(255,255,255,0.05);
+}
+.dark-theme .rm-titles h3 {
+  /* Mantener colores base pero con text-shadow */
+}
+.dark-theme .rm-titles em {
+  color: #94a3b8;
+}
+.dark-theme .rm-col-left p {
+  color: #cbd5e1 !important;
+}
+.dark-theme .rm-step--1 .rm-card,
+.dark-theme .rm-step--2 .rm-card,
+.dark-theme .rm-step--3 .rm-card,
+.dark-theme .rm-step--4 .rm-card,
+.dark-theme .rm-step--5 .rm-card,
+.dark-theme .rm-step--6 .rm-card {
+  background: var(--white);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.dark-theme .rm-col-right {
+  background: rgba(0,0,0,0.2);
+}

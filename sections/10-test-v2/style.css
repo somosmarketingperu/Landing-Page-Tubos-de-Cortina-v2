@@ -113,3 +113,39 @@
 @media (max-width: 640px) {
   .va-test-grid { grid-template-columns: 1fr; }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-test-v2 {
+  background-color: var(--bone);
+}
+
+.dark-theme .va-test-header h2 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-test-header h2 span {
+  color: #d4a574;
+}
+
+.dark-theme .va-test-card {
+  background: var(--white);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .va-test-body {
+  color: #94a3b8;
+}
+
+.dark-theme .va-test-footer {
+  border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .va-test-info h4 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-test-info span {
+  color: #64748b;
+}

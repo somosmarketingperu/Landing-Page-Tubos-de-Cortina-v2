@@ -79,9 +79,18 @@
 .va-sol-p {
   font-size: 20px;
   color: #64748b;
-  margin-bottom: 40px;
+  margin-bottom: 8px;
   line-height: 1.5;
 }
+
+/* When used as highlight lines, reduce spacing */
+.va-sol-p.va-highlight-line {
+  margin-bottom: 4px;
+}
+.va-sol-p.va-highlight-line:last-of-type {
+  margin-bottom: 40px;
+}
+
 
 .va-sol-list {
   display: flex;
@@ -133,4 +142,36 @@
   }
 
   .va-sol-badge { position: relative; bottom: 0; right: 0; margin: -40px auto 0; }
+}
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-solution-v2 {
+  background-color: var(--bone);
+}
+
+.dark-theme .va-sol-header h2 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-sol-header h2 span {
+  color: #d4a574;
+}
+
+.dark-theme .va-sol-p {
+  color: #94a3b8;
+}
+
+.dark-theme .va-sol-item {
+  color: #e2e8f0;
+}
+
+.dark-theme .va-sol-main-img {
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .va-sol-badge {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }

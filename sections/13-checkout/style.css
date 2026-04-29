@@ -977,3 +977,245 @@
   line-height: 1.5;
   margin-bottom: 12px;
 }
+
+/* ═══════════════════════════════════════════════════
+   DARK THEME — MODALS
+   Force light internal theme so content stays visible
+   ═══════════════════════════════════════════════════ */
+
+/* ── DECISION MODAL ── */
+.dark-theme .dec-card {
+  background: #fff;
+  color: #1c1917;
+}
+
+.dark-theme .dec-header {
+  background: #1c1917;
+  color: #fff;
+}
+
+.dark-theme .dec-price-val {
+  color: #1c1917;
+}
+
+.dark-theme .dec-question {
+  color: #1c1917;
+}
+
+.dark-theme .dec-option-btn.primary {
+  background: #1c1917;
+  color: #fff;
+}
+
+.dark-theme .dec-option-btn.primary strong,
+.dark-theme .dec-option-btn.primary span {
+  color: #fff;
+}
+
+.dark-theme .dec-option-btn.secondary {
+  background: #f5fdf8;
+  border-color: #25d366;
+  color: #1c1917;
+}
+
+.dark-theme .dec-option-btn.secondary strong {
+  color: #1c1917;
+}
+
+.dark-theme .dec-option-btn.secondary span {
+  color: #555;
+}
+
+.dark-theme .dec-trust {
+  color: #888;
+  border-top-color: #f0ebe7;
+}
+
+/* ── COD MODAL ── */
+.dark-theme .cod-card {
+  background: #fff;
+  color: #1c1917;
+}
+
+.dark-theme .cod-header {
+  background: #1c1917;
+  color: #fff;
+}
+
+.dark-theme .cod-progress-bar {
+  background: #faf9f8;
+  border-bottom-color: #f0ebe7;
+}
+
+.dark-theme .cod-step-label {
+  color: #bbb;
+}
+
+.dark-theme .cod-step-label.active {
+  color: #c88264;
+}
+
+.dark-theme .cod-section-title {
+  color: #1c1917;
+}
+
+.dark-theme .cod-pay-btn {
+  background: #faf9f8;
+  border-color: #e8e0da;
+}
+
+.dark-theme .cod-pay-btn strong {
+  color: #1c1917;
+}
+
+.dark-theme .cod-pay-btn span {
+  color: #777;
+}
+
+.dark-theme .cod-pay-btn.active {
+  background: #fdf6f2;
+  border-color: #c88264;
+}
+
+.dark-theme .cod-pay-btn.active strong {
+  color: #c88264;
+}
+
+.dark-theme .cod-qty-card {
+  background: #faf9f8;
+  border-color: #e8e0da;
+}
+
+.dark-theme .cod-qty-info strong {
+  color: #1c1917;
+}
+
+.dark-theme .cod-qty-price {
+  color: #1c1917;
+}
+
+.dark-theme .cod-qty-card:has(.cod-qty-radio:checked),
+.dark-theme .cod-qty-card.selected {
+  background: #fdf6f2;
+  border-color: #c88264;
+}
+
+.dark-theme .cod-custom-qty {
+  background: #f5f4f2;
+}
+
+.dark-theme .cod-custom-label-txt {
+  color: #555;
+}
+
+.dark-theme .cod-custom-input {
+  color: #1c1917;
+  background: #fff;
+  border-color: #d1c5be;
+}
+
+.dark-theme .cod-price-summary {
+  background: #f9f7f5;
+}
+
+.dark-theme .cod-sum-row {
+  color: #555;
+}
+
+.dark-theme .cod-sum-row.total {
+  color: #1c1917;
+  border-top-color: #e8e0da;
+}
+
+.dark-theme .cod-label {
+  color: #1c1917;
+}
+
+.dark-theme .cod-input-wrap {
+  background: #fff;
+  border-color: #d1c5be;
+}
+
+.dark-theme .cod-input,
+.dark-theme .cod-select {
+  color: #1c1917;
+}
+
+.dark-theme .cod-hint {
+  color: #888;
+}
+
+.dark-theme .cod-toggle-btn {
+  background: #faf9f8;
+  border-color: #e8e0da;
+  color: #888;
+}
+
+.dark-theme .cod-toggle-btn.active {
+  background: #fdf6f2;
+  border-color: #c88264;
+  color: #c88264;
+}
+
+.dark-theme .cod-final-summary {
+  background: #f9f7f5;
+}
+
+.dark-theme .cod-final-summary h4 {
+  color: #1c1917;
+}
+
+.dark-theme .cod-btn-next {
+  background: #1c1917;
+  color: #fff;
+}
+
+.dark-theme .cod-btn-back {
+  background: #fff;
+  border-color: #e8e0da;
+  color: #888;
+}
+
+.dark-theme .cod-bank-data {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.dark-theme .cod-bank-row {
+  color: #333;
+  border-bottom-color: #d1fae5;
+}
+
+.dark-theme .cod-trust {
+  color: #aaa;
+  border-top-color: #f0ebe7;
+}
+
+.dark-theme .cod-recog-opt {
+  color: #1c1917;
+}
+
+.dark-theme .cod-almacen-name {
+  color: #1c1917;
+}
+
+.dark-theme .cod-almacen-item {
+  border-color: #e8e0da;
+}
+
+.dark-theme .cod-almacen-item.active {
+  background: #fdf6f2;
+  border-color: #c88264;
+}
+
+.dark-theme .cod-btn-pdf {
+  background: #fff;
+  border-color: #c88264;
+  color: #c88264;
+}
+
+.dark-theme .cod-price-anchor-bar {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}

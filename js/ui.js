@@ -28,6 +28,13 @@ function initExitIntent() {
     const modal = document.getElementById('va-exit-modal');
     if (!modal) return;
 
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeExitModal();
+        }
+    });
+
     document.addEventListener('mouseleave', (e) => {
         if (e.clientY < 0 && !exitIntentShown) openExitModal();
     });
@@ -83,8 +90,48 @@ function interceptCheckoutLinks() {
     });
 }
 
+function initScrollGlow() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('glow-active');
+            }
+        });
+    }, { threshold: 0.3, rootMargin: "0px 0px -100px 0px" });
+
+    document.querySelectorAll('.glow-on-scroll').forEach(el => observer.observe(el));
+}
+
+function initThemeToggle() {
+    const btn = document.createElement('button');
+    btn.id = 'theme-toggle-btn';
+    btn.className = 'va-theme-toggle';
+    
+    // Check initial state from html class (set by inline script)
+    const isDark = document.documentElement.classList.contains('dark-theme');
+    btn.innerHTML = isDark ? '☀️' : '🌙';
+    
+    document.body.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark-theme');
+        const darkActive = document.documentElement.classList.contains('dark-theme');
+        localStorage.setItem('theme', darkActive ? 'dark' : 'light');
+        btn.innerHTML = darkActive ? '☀️' : '🌙';
+        
+        // Animación de rotación
+        btn.style.transform = 'scale(1.1) rotate(360deg)';
+        setTimeout(() => btn.style.transform = 'scale(1) rotate(0)', 300);
+    });
+}
+
 function initRoadmapV2() {
     console.log('Vertical Roadmap Active');
+    initScrollGlow();
+    // Iniciar theme toggle si no existe
+    if (!document.getElementById('theme-toggle-btn')) {
+        initThemeToggle();
+    }
 }
 
 // Exponer globalmente
@@ -92,5 +139,9 @@ window.initStickyBanner = initStickyBanner;
 window.initExitIntent = initExitIntent;
 window.interceptCheckoutLinks = interceptCheckoutLinks;
 window.initRoadmapV2 = initRoadmapV2;
+window.initScrollGlow = initScrollGlow;
+window.initThemeToggle = initThemeToggle;
+
+
 window.closeExitModal = closeExitModal;
 window.handleExitCTA = handleExitCTA;

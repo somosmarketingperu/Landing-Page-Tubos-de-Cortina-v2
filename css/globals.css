@@ -23,10 +23,63 @@
     --fs-base: clamp(0.95rem, 4vw, 1.2rem); /* Body Text */
     --fs-sm: clamp(0.8rem, 3vw, 1rem);    /* Small Text */
     
+    /* Premium Visual Effects Variables */
+    --glow-amber: rgba(217, 119, 6, 0.4);      /* Warm golden amber for main glows */
+    --glow-champagne: rgba(253, 230, 138, 0.3); /* Soft warm light for highlights */
+    --glass-bg: rgba(255, 255, 255, 0.7);     /* Light glass */
+    --glass-border: rgba(255, 255, 255, 0.5); /* Light glass border */
+    --glass-dark-bg: rgba(28, 25, 23, 0.85);  /* Dark glass (stone base) */
+    --glass-dark-border: rgba(200, 130, 100, 0.2); /* Copper tinted border */
+    
     /* Spacing & Transitions */
     --gap: clamp(1rem, 3vw, 2rem);
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --shadow-glow: 0 0 40px var(--glow-amber);
+}
+
+/* --- Dark Theme Overrides --- */
+.dark-theme {
+    --bone: rgba(10, 10, 10, 0.85);          /* Deep black transparent */
+    --white: rgba(23, 21, 19, 0.6);         /* Very dark gray transparent for cards */
+    --dark: #fdfbf7;          /* White text */
+    --stone: #d6d3d1;         /* Light gray text */
+    --stone-light: #a8a29e;   /* Muted text */
+    --glass-bg: rgba(20, 20, 20, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+
+/* --- Premium Utility Classes --- */
+
+/* Vidrio Esmerilado (Claro) */
+.va-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+/* Vidrio Esmerilado (Oscuro) */
+.va-glass-dark {
+    background: var(--glass-dark-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-dark-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Resplandor Cálido (Glow) */
+.va-glow-box {
+    box-shadow: 0 0 30px var(--glow-amber), inset 0 0 20px rgba(255,255,255,0.5);
+    border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+/* Efecto de Texto Iluminado */
+.va-text-glow {
+    text-shadow: 0 0 20px var(--glow-amber);
 }
 
 * {
@@ -48,6 +101,7 @@ body {
     font-size: var(--fs-base);
     /* Safe wrapping without forced hyphens */
     overflow-wrap: break-word;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 h1, h2, h3, h4 {
@@ -152,3 +206,456 @@ img {
     object-fit: contain; /* Changed from cover to contain to avoid cropping */
     object-position: center;
 }
+
+/* --- Scroll Animations (Glimmer Style) --- */
+.glow-on-scroll {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateY(24px);
+    transition: opacity 0.75s cubic-bezier(0.4,0,0.2,1),
+                filter 0.75s cubic-bezier(0.4,0,0.2,1),
+                transform 0.75s cubic-bezier(0.4,0,0.2,1),
+                text-shadow 0.75s ease;
+}
+
+.glow-on-scroll.glow-active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    text-shadow: 0 0 20px var(--glow-champagne);
+}
+
+/* Stagger delay helpers */
+.glow-delay-1 { transition-delay: 0.1s; }
+.glow-delay-2 { transition-delay: 0.2s; }
+.glow-delay-3 { transition-delay: 0.3s; }
+.glow-delay-4 { transition-delay: 0.4s; }
+.glow-delay-5 { transition-delay: 0.5s; }
+.glow-delay-6 { transition-delay: 0.6s; }
+
+.scrub-text {
+    --scrub-progress: 0;
+    --scrub-percent: calc(var(--scrub-progress) * 100%);
+    background: linear-gradient(to right, var(--dark) var(--scrub-percent), rgba(0,0,0,0.12) var(--scrub-percent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    will-change: background;
+}
+
+.dark-theme .scrub-text {
+    background: linear-gradient(to right, #fff var(--scrub-percent), #333 var(--scrub-percent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* --- CTA Shimmer Effect --- */
+@keyframes shimmer-slide {
+    0%   { transform: translateX(-120%) skewX(-15deg); }
+    100% { transform: translateX(250%) skewX(-15deg); }
+}
+
+.va-cta-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.va-cta-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255,255,255,0.35) 50%,
+        transparent 100%
+    );
+    animation: shimmer-slide 2.4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* --- Scroll Progress Bar --- */
+#va-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--copper) 0%, #fbbf24 50%, var(--copper) 100%);
+    z-index: 99999;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 8px var(--glow-amber);
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
+/* --- Social Proof Toasts --- */
+#va-toast-container {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.va-toast {
+    background: var(--glass-dark-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(200, 130, 100, 0.3);
+    border-radius: 14px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 260px;
+    max-width: 300px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 12px var(--glow-amber);
+    animation: toast-in 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    pointer-events: none;
+    color: #f8fafc;
+}
+
+.va-toast.toast-out {
+    animation: toast-out 0.4s ease-in forwards;
+}
+
+.va-toast-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--copper), #fbbf24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+
+.va-toast-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.va-toast-name {
+    font-size: 12px;
+    font-weight: 800;
+    color: #f1f5f9;
+    line-height: 1.2;
+}
+
+.va-toast-action {
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.2;
+}
+
+.va-toast-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    flex-shrink: 0;
+    margin-left: auto;
+    box-shadow: 0 0 6px #10b981;
+    animation: pulse-dot 1.5s ease infinite;
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: translateX(-40px) scale(0.9); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes toast-out {
+    from { opacity: 1; transform: translateX(0) scale(1); }
+    to   { opacity: 0; transform: translateX(-30px) scale(0.9); }
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+@media (max-width: 600px) {
+    #va-toast-container {
+        bottom: 90px;
+        left: 12px;
+        right: 12px;
+    }
+    .va-toast { min-width: auto; max-width: 100%; }
+}
+
+/* --- Custom Cursor (Desktop only) --- */
+@media (hover: hover) and (pointer: fine) {
+    body { cursor: none; }
+    a, button, [role="button"], input, select, textarea,
+    .va-arg-card, .va-auth-item, label, .cod-qty-card, .cod-pay-btn {
+        cursor: none;
+    }
+}
+
+#va-cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--copper);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999999;
+    will-change: left, top;
+    transition: width 0.15s ease, height 0.15s ease, background 0.2s ease;
+    display: none;
+}
+
+#va-cursor-ring {
+    position: fixed;
+    width: 34px;
+    height: 34px;
+    border: 2px solid rgba(200,130,100,0.55);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999998;
+    will-change: left, top;
+    transition: width 0.25s cubic-bezier(0.4,0,0.2,1),
+                height 0.25s cubic-bezier(0.4,0,0.2,1),
+                border-color 0.2s ease;
+    display: none;
+}
+
+/* Only show cursor elements on real desktop with mouse */
+@media (hover: hover) and (pointer: fine) {
+    #va-cursor-dot, #va-cursor-ring { display: block; }
+}
+
+/* Ring expands on hover over interactive elements */
+body.cursor-hover #va-cursor-ring {
+    width: 48px;
+    height: 48px;
+    border-color: var(--copper);
+}
+
+body.cursor-hover #va-cursor-dot {
+    width: 5px;
+    height: 5px;
+    background: #fbbf24;
+}
+
+/* --- Float-In for hero elements --- */
+@keyframes float-in-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.va-animate-in {
+    animation: float-in-up 0.8s cubic-bezier(0.4,0,0.2,1) both;
+}
+.va-animate-in-d1 { animation-delay: 0.15s; }
+.va-animate-in-d2 { animation-delay: 0.30s; }
+.va-animate-in-d3 { animation-delay: 0.45s; }
+.va-animate-in-d4 { animation-delay: 0.60s; }
+
+/* --- Theme Toggle Button --- */
+.va-theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.va-theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px var(--glow-champagne);
+}
+
+/* ═══════════════════════════════════════════
+   PREMIUM EFFECTS — Glimmer Extrapolation
+   ═══════════════════════════════════════════ */
+
+/* --- 1. Smooth Section Transitions (Gradient Fades) --- */
+.va-section-fade {
+    position: relative;
+}
+
+.va-section-fade::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--bone));
+    z-index: 3;
+    pointer-events: none;
+}
+
+.dark-theme .va-section-fade::after {
+    background: linear-gradient(to bottom, transparent, rgba(10, 10, 10, 0.85));
+}
+
+/* --- 2. Stacking Cards (Scroll-Driven Stack) --- */
+.va-stack-container {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.va-stack-card {
+    position: sticky;
+    top: 90px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    transition: box-shadow 0.4s ease;
+    will-change: transform;
+    z-index: 1;
+}
+
+.va-stack-card:nth-child(1) { top: 90px;  z-index: 6; }
+.va-stack-card:nth-child(2) { top: 110px; z-index: 5; }
+.va-stack-card:nth-child(3) { top: 130px; z-index: 4; }
+.va-stack-card:nth-child(4) { top: 150px; z-index: 3; }
+.va-stack-card:nth-child(5) { top: 170px; z-index: 2; }
+.va-stack-card:nth-child(6) { top: 190px; z-index: 1; }
+
+/* --- 3. Magnetic Buttons --- */
+.va-magnetic {
+    transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* --- 4. Scroll-Highlight Lines --- */
+.va-highlight-line {
+    color: rgba(100, 116, 139, 0.35);
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.7;
+}
+
+.va-highlight-line.hl-active {
+    color: var(--dark);
+}
+
+.dark-theme .va-highlight-line {
+    color: rgba(148, 163, 184, 0.25);
+}
+
+.dark-theme .va-highlight-line.hl-active {
+    color: #f1f5f9;
+}
+
+/* On dark backgrounds (like problem section), override */
+.va-problem-v2 .va-highlight-line {
+    color: rgba(148, 163, 184, 0.3);
+}
+
+.va-problem-v2 .va-highlight-line.hl-active {
+    color: #cbd5e1;
+}
+
+/* --- 5. Preloader --- */
+#va-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0b0a09;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#va-preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-brand {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: preloader-fade-in 0.8s 0.2s ease forwards;
+}
+
+.preloader-brand span {
+    color: var(--copper);
+}
+
+.preloader-bar {
+    width: 160px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    opacity: 0;
+    animation: preloader-fade-in 0.8s 0.5s ease forwards;
+}
+
+.preloader-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--copper), #fbbf24);
+    border-radius: 3px;
+    animation: preloader-fill 1.8s 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes preloader-fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes preloader-fill {
+    0%   { width: 0%; }
+    60%  { width: 70%; }
+    100% { width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════
+   PREMIUM SPIRAL BACKGROUND (Canvas WebGL/2D)
+   ═══════════════════════════════════════════════════ */
+#va-spiral-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10; /* Sobre las secciones, debajo de modales */
+    pointer-events: none;
+    opacity: 0.25; /* Sutil en modo claro */
+    mix-blend-mode: multiply;
+    transition: opacity 0.8s ease;
+}
+
+.dark-theme #va-spiral-canvas {
+    opacity: 0.6; /* Vibrante en modo oscuro */
+    mix-blend-mode: screen;
+}
+
+

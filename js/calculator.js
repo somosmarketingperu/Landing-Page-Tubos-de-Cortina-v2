@@ -31,6 +31,13 @@ function initCalculator() {
         console.log("Slider moved to:", val);
         updateCalcDisplay(val);
         updateCalcLabels(val);
+        // ── Sincronizar con el estado global del checkout ──
+        const entry = CALC_DATA[val];
+        if (entry && typeof state !== 'undefined') {
+            state.cajas = entry.cajas;
+            // Si el modal de checkout ya está inicializado, refrescar su resumen
+            if (typeof updatePriceSummary === 'function') updatePriceSummary();
+        }
     });
 
     try {

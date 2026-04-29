@@ -226,3 +226,38 @@
   .va-final-main-img { width: 100%; transform: none; }
   .va-final-footer { flex-direction: column; gap: 20px; padding: 40px 20px; text-align: center; }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-flyer-final {
+  background-color: var(--bone);
+}
+
+.dark-theme .va-canvas-final {
+  background: var(--white);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+}
+
+.dark-theme .va-final-header h2 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-final-icon-circle {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .va-final-icon-item span {
+  color: #e2e8f0;
+}
+
+.dark-theme .va-final-incluye {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .va-final-incl-item span {
+  color: #94a3b8;
+}

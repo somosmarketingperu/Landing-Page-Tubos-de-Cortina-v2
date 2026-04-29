@@ -124,3 +124,42 @@
 @media (max-width: 500px) {
   .va-auth-grid { grid-template-columns: 1fr; }
 }
+
+/* ═══════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════ */
+.dark-theme .va-auth-v2 {
+  background-color: var(--bone);
+}
+
+.dark-theme .va-auth-canvas {
+  background: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .va-auth-header h2 {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-auth-stamp strong {
+  color: #f1f5f9;
+}
+
+.dark-theme .va-auth-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .va-auth-item:hover {
+  border-color: var(--auth-gold);
+  box-shadow: 0 10px 25px rgba(180, 83, 9, 0.12);
+}
+
+.dark-theme .va-auth-item h4 {
+  color: #e2e8f0;
+}
+
+.dark-theme .va-auth-item p {
+  color: #94a3b8;
+}

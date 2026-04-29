@@ -78,7 +78,8 @@
 
 .va-res-box:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 35px rgba(0,0,0,0.09);
+  box-shadow: 0 16px 35px var(--glow-champagne);
+  border-color: rgba(217, 119, 6, 0.2);
 }
 
 .va-res-label {
@@ -104,10 +105,22 @@
 
 .va-res-box.profit {
   border: 1.5px solid var(--success);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.15); /* Green glow for profit */
+  position: relative;
+}
+
+.va-res-box.profit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 16px;
+  box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.05);
+  pointer-events: none;
 }
 
 .va-res-box.profit .va-res-val {
   color: var(--success);
+  text-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
 }
 
 .va-res-sub {
@@ -170,6 +183,8 @@
   border-color: var(--copper);
   background: #fdf6f2;
   color: var(--copper);
+  box-shadow: 0 0 15px var(--glow-champagne), inset 0 0 10px rgba(255,255,255,0.8);
+  transform: translateY(-2px);
 }
 
 /* --- CTAs --- */
@@ -194,4 +209,41 @@
   .va-res-val { font-size: 1.5rem; }
   .va-calc-results { grid-template-columns: 1fr; }
   .va-calc-tabs { grid-template-columns: 1fr; }
+}
+
+/* --- DARK THEME OVERRIDES --- */
+.dark-theme .va-calc-section {
+  background: var(--bone);
+}
+.dark-theme .va-calc-card {
+  background: var(--white);
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.dark-theme .va-res-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.dark-theme .va-res-val,
+.dark-theme .va-slider-title {
+  color: #fff;
+}
+.dark-theme .va-res-label,
+.dark-theme .va-pctx-row {
+  color: var(--stone);
+}
+.dark-theme .va-calc-tab {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+  color: var(--stone);
+}
+.dark-theme .va-calc-tab.active {
+  background: rgba(217, 119, 6, 0.15);
+  border-color: var(--copper);
+  color: #fff;
+  box-shadow: 0 0 15px var(--glow-amber), inset 0 0 10px rgba(255,255,255,0.1);
+}
+.dark-theme .va-res-box.profit {
+  background: rgba(16, 185, 129, 0.05);
 }
