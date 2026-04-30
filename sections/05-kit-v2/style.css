@@ -36,30 +36,31 @@
 
 .va-flyer-header h2 {
   color: var(--flyer-navy);
-  font-size: 64px;
+  font-size: 52px; /* Reducido de 64px */
   font-weight: 950;
-  line-height: 0.85;
-  margin: 0;
-  letter-spacing: -3px;
+  line-height: 1.1; /* Aumentado de 0.85 para evitar solapamiento */
+  margin: 0 0 10px;
+  letter-spacing: -2px;
   text-transform: uppercase;
 }
 
 .va-flyer-header h2 span {
   display: block;
   color: var(--flyer-red);
-  font-size: 72px;
+  font-size: 60px; /* Reducido de 72px */
 }
 
 .va-flyer-subtitle {
   background: var(--flyer-navy);
   color: #fff;
-  padding: 12px 25px;
-  font-size: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
   font-weight: 900;
   display: inline-block;
   width: fit-content;
   border-radius: 4px;
   text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
 .va-flyer-desc {
@@ -307,59 +308,66 @@
 }
 
 /* RESPONSIVO */
-@media (max-width: 1024px) {
-  /* Layout principal: una sola columna */
+@media (max-width: 1100px) {
+  /* Layout principal: una sola columna más temprano */
   .va-flyer-canvas {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   /* Lado izquierdo: centrar todo el contenido */
   .va-flyer-left {
-    padding: 40px 24px;
+    padding: 40px 20px;
     align-items: center;
     text-align: center;
+    gap: 20px;
   }
 
   .va-flyer-header h2 {
-    font-size: 44px;
+    font-size: 38px;
     text-align: center;
+    letter-spacing: -1px;
   }
 
-  .va-flyer-header h2 span { font-size: 50px; }
+  .va-flyer-header h2 span { font-size: 42px; }
 
   .va-flyer-subtitle {
     width: 100%;
     text-align: center;
     box-sizing: border-box;
+    font-size: 16px;
   }
+
+  .va-flyer-desc { font-size: 16px; }
 
   .va-flyer-top-features {
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
   }
 
-  .va-flyer-feat-item {
-    text-align: center;
-  }
+  .va-flyer-feat-icon { width: 60px; height: 60px; font-size: 24px; }
 
   .va-flyer-incluye-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en celular */
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas para que respiren */
     gap: 12px;
   }
 
   /* Lado derecho: imagen normal + precio como tarjeta */
   .va-flyer-right {
     flex-direction: column;
-    padding: 20px 24px 40px;
-    gap: 24px;
-    position: static; /* Anula el position:relative para que los absolutos no vuelen */
+    padding: 20px 10px 40px;
+    gap: 30px;
+    position: static;
+    background: #fff;
   }
 
   .va-flyer-main-prod {
     width: 100%;
-    max-width: 340px;
+    max-width: 300px;
     transform: none;
     margin: 0 auto;
+    display: block;
   }
 
   /* Badge "1.60 A 3MTS": quitar posición absoluta, mostrarlo normalmente */

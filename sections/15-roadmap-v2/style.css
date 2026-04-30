@@ -271,33 +271,24 @@
   align-self: flex-start;
 }
 
-/* ── COLUMNA DERECHA (imagen) ── */
+/* ── COLUMNA DERECHA (imagen removida) ── */
 .rm-col-right {
   position: relative;
   overflow: hidden;
-  background: #f0f4f8;
-  min-height: 240px; /* Aumentado para mantener proporción al ser más ancho */
+  background: #f8fafc; /* Gris ultra claro */
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.rm-col-right img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+.rm-col-right::after {
+  content: '📦';
+  font-size: 48px;
+  opacity: 0.2;
 }
 
-.rm-step:hover .rm-col-right img { transform: scale(1.05); }
-
-/* Crop por paso */
-.rm-step--1 .rm-col-right img { object-position: center 54%; }
-.rm-step--2 .rm-col-right img { object-position: center 42%; }
-.rm-step--3 .rm-col-right img { object-position: center 68%; }
-.rm-step--4 .rm-col-right img { object-position: center 50%; }
-.rm-step--5 .rm-col-right img { object-position: center 54%; }
-.rm-step--6 .rm-col-right img { object-position: center 55%; }
+.rm-step:hover .rm-col-right { background: #f1f5f9; }
 
 /* ── CONECTOR ── */
 .rm-connector {

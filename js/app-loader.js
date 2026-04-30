@@ -125,7 +125,7 @@ async function loadSections() {
     } catch (error) {
         console.error('[Loader] Fatal error during loadSections:', error);
     } finally {
-        console.log('[Loader] Dispatching sectionsLoaded event');
+        console.log('%c[SYSTEM] Dispatching sectionsLoaded event...', 'color: #c88264; font-weight: bold;');
         document.dispatchEvent(new CustomEvent('sectionsLoaded'));
         // NOTE: initScrollEffects is now called from main.js in correct order
         // (after progress bar DOM element is created)

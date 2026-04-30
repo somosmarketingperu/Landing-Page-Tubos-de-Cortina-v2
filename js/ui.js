@@ -126,7 +126,6 @@ function initThemeToggle() {
 }
 
 function initRoadmapV2() {
-    console.log('Vertical Roadmap Active');
     initScrollGlow();
     // Iniciar theme toggle si no existe
     if (!document.getElementById('theme-toggle-btn')) {

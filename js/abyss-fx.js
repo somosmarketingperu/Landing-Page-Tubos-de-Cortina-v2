@@ -11,6 +11,8 @@ export function initAbyssBackground() {
     if (!canvas) return;
 
     // ── HUD: Animaciones GSAP y Textos Cíclicos ──
+    let onHudMouseMove = null; 
+    
     if (typeof gsap !== 'undefined') {
         const hudEl = document.getElementById("abyss-hud");
         const cEl   = document.getElementById("coords");
@@ -33,12 +35,17 @@ export function initAbyssBackground() {
         }
 
         // Parallax Sutil del HUD
-        window.addEventListener("mousemove", e => {
+        onHudMouseMove = (e) => {
             const px = (e.clientX / innerWidth - 0.5) * 2;
             const py = (e.clientY / innerHeight - 0.5) * 2;
-            gsap.to(".hud-footer", {x: px * 6, y: py * 3, duration: 1.8, ease: "power2.out"});
-            gsap.to(".hud-header", {x: px * 3, duration: 1.6, ease: "power2.out"});
-        });
+            
+            const footer = document.querySelector(".hud-footer");
+            const header = document.querySelector(".hud-header");
+            
+            if (footer) gsap.to(footer, {x: px * 6, y: py * 3, duration: 1.8, ease: "power2.out"});
+            if (header) gsap.to(header, {x: px * 3, duration: 1.6, ease: "power2.out"});
+        };
+        window.addEventListener("mousemove", onHudMouseMove);
 
         // Ciclo de frases creativas (Somos...)
         const dynamicText = document.getElementById("somos-dynamic-text");
@@ -80,8 +87,12 @@ export function initAbyssBackground() {
     camera.position.z = 5;
     camera.position.y = -0.2;
 
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: window.innerWidth > 768 });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // Optimización Lighthouse: Reducir pixelRatio en móviles para ahorrar batería/CPU
+    const pixelRatio = window.innerWidth > 768 ? Math.min(window.devicePixelRatio, 2) : 1;
+    renderer.setPixelRatio(pixelRatio);
 
     // Controles limitados (No bloquean el scroll normal, solo orbitan internamente)
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -95,10 +106,26 @@ export function initAbyssBackground() {
     controls.minAzimuthAngle = -0.25;
     controls.maxAzimuthAngle = 0.25;
 
-    // Texturas del túnel
+    // Texturas del túnel con Lógica de Reintento
     const textureLoader = new THREE.TextureLoader();
-    const normalTexture = textureLoader.load("https://raw.githubusercontent.com/danielyl123/person/refs/heads/main/pool-normal.jpg");
-    const colorTexture = textureLoader.load("https://raw.githubusercontent.com/danielyl123/person/refs/heads/main/pool-color.jpg");
+    let texturesLoaded = 0;
+    const onTextureLoad = () => { texturesLoaded++; if (texturesLoaded >= 2) startEngine(); };
+
+    const loadWithRetry = (url, callback, retries = 3) => {
+        return textureLoader.load(url, callback, undefined, (err) => {
+            if (retries > 0) {
+                console.warn(`%c[NETWORK] Falla en textura. Reintentando... (${retries} restantes)`, "color: #f59e0b;");
+                setTimeout(() => loadWithRetry(url, callback, retries - 1), 2000);
+            } else {
+                console.error("%c[FATAL] No se pudo cargar la textura tras varios reintentos.", "color: #ef4444;");
+                // Fallback: Iniciar de todas formas para no bloquear la web
+                startEngine();
+            }
+        });
+    };
+
+    const normalTexture = loadWithRetry("https://raw.githubusercontent.com/danielyl123/person/refs/heads/main/pool-normal.jpg", onTextureLoad);
+    const colorTexture  = loadWithRetry("https://raw.githubusercontent.com/danielyl123/person/refs/heads/main/pool-color.jpg", onTextureLoad);
 
     normalTexture.wrapS = normalTexture.wrapT = THREE.RepeatWrapping;
     normalTexture.repeat.set(10, 20);
@@ -405,8 +432,10 @@ export function initAbyssBackground() {
     });
 
     const clock = new THREE.Clock();
+    let isDestroyed = false;
 
     function tick() {
+        if (isDestroyed) return;
         const elapsedTime = clock.getElapsedTime();
 
         waterMaterial.uniforms.uTime.value = elapsedTime;
@@ -463,7 +492,10 @@ export function initAbyssBackground() {
         rafId = requestAnimationFrame(tick);
     }
 
-    let rafId = requestAnimationFrame(tick);
+    let rafId;
+    function startEngine() {
+        rafId = requestAnimationFrame(tick);
+    }
 
     window.addEventListener("resize", () => {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -476,10 +508,12 @@ export function initAbyssBackground() {
     });
 
     window.addEventListener("abyss-destroy", () => {
+        isDestroyed = true;
         cancelAnimationFrame(rafId);
+        if (onHudMouseMove) window.removeEventListener("mousemove", onHudMouseMove);
         scene.clear();
         renderer.dispose();
-        console.log("Abyss WebGL Engine: Destroyed & Memory Freed");
+        console.log("%c[SYSTEM] Abyss WebGL Engine: Destroyed & Memory Freed", "color: #ef4444; font-style: italic;");
     });
 }
 

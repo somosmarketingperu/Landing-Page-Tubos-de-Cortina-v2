@@ -4,7 +4,14 @@
  */
 
 document.addEventListener('sectionsLoaded', () => {
-    console.log('🚀 Inicializando módulos Premium...');
+    // ── BRANDING PROFESIONAL EN CONSOLA ──
+    const bannerStyle = 'background: #1c1917; color: #c88264; padding: 10px 20px; border-radius: 8px; font-weight: 900; font-size: 14px; border: 1px solid #c88264;';
+    const infoStyle   = 'color: #78716c; font-size: 11px; font-family: monospace;';
+    const successStyle = 'color: #10b981; font-weight: bold;';
+
+    console.log('%c SOMOS MARKETING PERÚ | Premium Landing Engine v3.0 ', bannerStyle);
+    console.log('%c🚀 Architecture: Modular v3.0 | Fonts: Montserrat & Poppins | Core: Three.js & GSAP', infoStyle);
+    console.log('%c------------------------------------------------------------------', infoStyle);
 
     const modules = [
         // ── MUST INIT FIRST: DOM elements needed by other modules ──
@@ -31,13 +38,14 @@ document.addEventListener('sectionsLoaded', () => {
 
     modules.forEach(m => {
         try {
-            console.log('  ↳ ' + m.name);
             m.init();
+            console.log(`%c  ✔ ${m.name.padEnd(25)} [READY]`, 'color: #c88264; font-size: 10px;');
         } catch (err) {
-            console.error('❌ Error inicializando ' + m.name + ':', err);
+            console.error(`%c  ✘ Error inicializando ${m.name}:`, 'color: #ef4444; font-weight: bold;', err);
         }
     });
 
-    console.log('✅ Todos los módulos inicializados.');
+    console.log('%c------------------------------------------------------------------', infoStyle);
+    console.log('%c✅ DESARROLLADO POR SOMOS MARKETING PERÚ | Todos los sistemas activos.', successStyle);
 });
 

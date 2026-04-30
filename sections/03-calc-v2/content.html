@@ -8,7 +8,7 @@
     <div class="va-calc-card">
       <div class="va-slider-module">
         <label class="va-slider-title">Selección de Volumen por Mayor:</label>
-        <input type="range" class="va-range-slider" id="cajaSlider" min="1" max="5" step="1" value="2">
+        <input type="range" class="va-range-slider" id="cajaSlider" min="1" max="5" step="1" value="2" aria-label="Seleccionar cantidad de cajas para calcular ganancia">
         <div class="va-labels">
           <span class="va-label-item" data-index="1">1 Caja</span>
           <span class="va-label-item va-active" data-index="2">4 Cajas ⭐</span>
@@ -20,10 +20,10 @@
 
       <!-- Tabs Transfer vs COD -->
       <div class="va-calc-tabs">
-        <button class="va-calc-tab active" id="calc-tab-transfer">
+        <button class="va-calc-tab active" id="calc-tab-transfer" aria-label="Calcular con modalidad de transferencia bancaria y envío gratis">
           🏦 TRANSFERENCIA — Envío Gratis
         </button>
-        <button class="va-calc-tab" id="calc-tab-cod">
+        <button class="va-calc-tab" id="calc-tab-cod" aria-label="Calcular con modalidad de pago contra entrega (20 por ciento adelanto y 80 por ciento en destino)">
           🚚 CONTRA ENTREGA (20/80)
         </button>
       </div>
