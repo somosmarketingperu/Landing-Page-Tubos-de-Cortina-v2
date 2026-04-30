@@ -1,0 +1,89 @@
+/* PERSPECTIVE-FX.CSS — Versión Escalera (Restauración de Ángulo & Efecto) */
+:root {
+  --perspective-height: clamp(50px, 9vw, 95px);
+  --perspective-font: clamp(1.4rem, 5.5vw, 4.8rem); 
+}
+
+.perspective-words {
+  margin: 50px auto;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--perspective-font);
+  font-weight: 900;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  list-style: none;
+  text-align: center;
+  perspective: 1500px;
+  width: 100%;
+}
+
+.perspective-line {
+  height: var(--perspective-height); /* Altura fija para ocultar el duplicado */
+  overflow: hidden;
+  position: relative;
+  left: 0 !important; 
+  transform-origin: center center;
+  transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+  /* Recuperamos el ángulo de escalera */
+  transform: rotateX(35deg);
+  margin-bottom: 5px;
+}
+
+.perspective-line p {
+  height: var(--perspective-height);
+  line-height: var(--perspective-height);
+  padding: 0 10px;
+  margin: 0;
+  transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+  white-space: nowrap;
+  display: block;
+}
+
+
+
+/* COLORES ORIGINALES */
+.perspective-line:nth-child(1) p { color: #0f172a; } 
+.perspective-line:nth-child(2) p { color: #2563eb; } 
+
+/* Hover */
+.perspective-words:hover .perspective-line {
+  transform: rotateX(0deg);
+}
+
+.perspective-words:hover p {
+  transform: translateY(calc(var(--perspective-height) * -1));
+}
+
+/* Modo Oscuro Adaptado */
+.dark-theme .perspective-line:nth-child(1) p { color: #ffffff; }
+.dark-theme .perspective-line:nth-child(2) p { color: #60a5fa; }
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+  :root {
+    --perspective-height: 40px;
+  }
+  .perspective-words {
+    letter-spacing: -1px;
+    margin: 30px auto;
+  }
+  .perspective-line p { padding: 0 10px; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --perspective-font: clamp(1.2rem, 8vw, 1.8rem);
+    --perspective-height: 35px;
+  }
+}
+
+
+/* Ajustes Móviles */
+@media (max-width: 768px) {
+  .perspective-words {
+      margin: 30px auto;
+      letter-spacing: -1px;
+  }
+}
+
