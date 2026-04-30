@@ -144,7 +144,6 @@
             </div>
           </label>
 
-          <!-- Custom Qty ahora como parte del grid -->
           <div class="cod-custom-qty">
             <p class="cod-custom-label-txt">📦 ¿Otra cantidad?</p>
             <div class="cod-custom-input-wrap">
@@ -154,7 +153,6 @@
             </div>
             <p class="cod-rec-tip">💡 Con 4+ cajas el flete baja drásticamente.</p>
           </div>
-
         </div>
 
         <div class="cod-price-summary" id="cod-price-summary">
@@ -209,10 +207,8 @@
 
       <!-- PASO 2: TU ENVÍO -->
       <div class="cod-step-content" id="cod-step-2">
-
         <div class="cod-form-row">
           <h3 class="cod-section-title">📍 Datos Personales</h3>
-
           <div class="cod-form-group">
             <label class="cod-label" for="cod-nombre">Nombre y Apellidos <span class="req">*</span></label>
             <div class="cod-input-wrap">
@@ -220,7 +216,6 @@
               <input type="text" id="cod-nombre" placeholder="Ej: Juan Pérez García" class="cod-input" autocomplete="name">
             </div>
           </div>
-
           <div class="cod-form-group">
             <label class="cod-label" for="cod-wsp">WhatsApp <span class="req">*</span></label>
             <div class="cod-input-wrap">
@@ -231,11 +226,9 @@
           </div>
         </div>
 
-        <!-- OPCIÓN A: Envío Shalom -->
         <div id="cod-shipping-shalom">
           <div class="cod-form-row">
             <h3 class="cod-section-title" style="margin-top:18px">📦 Agencia Shalom de Destino</h3>
-
             <div class="cod-form-group">
               <label class="cod-label" for="cod-departamento">Departamento <span class="req">*</span></label>
               <div class="cod-input-wrap">
@@ -270,7 +263,6 @@
                 </select>
               </div>
             </div>
-
             <div class="cod-form-group">
               <label class="cod-label" for="cod-agencia">Ciudad / Agencia Shalom <span class="req">*</span></label>
               <div class="cod-input-wrap">
@@ -284,7 +276,6 @@
           </div>
         </div>
 
-        <!-- OPCIÓN B: Recojo Almacén -->
         <div id="cod-shipping-recojo" style="display:none">
           <h3 class="cod-section-title" style="margin-top:18px">🏢 Selecciona Almacén para Recojo</h3>
           <div class="cod-almacen-notice">
@@ -295,7 +286,6 @@
           </div>
         </div>
 
-        <!-- ¿Quién recoge? -->
         <div class="cod-recogedor-section">
           <h3 class="cod-section-title" style="margin-top:18px">🪪 ¿Quién recoge en la agencia?</h3>
           <div class="cod-recog-toggle">
@@ -336,20 +326,16 @@
           </svg>
           <span>Verificamos cada orden manualmente para tu seguridad</span>
         </div>
-
       </div><!-- /paso-2 -->
 
       <!-- PASO 3: COMPROBANTE -->
       <div class="cod-step-content" id="cod-step-3">
-
         <h3 class="cod-section-title">🧾 Tipo de Comprobante</h3>
-
         <div class="cod-toggle-wrap" role="group">
           <button class="cod-toggle-btn active" id="cod-toggle-boleta">📄 BOLETA DE VENTA</button>
           <button class="cod-toggle-btn" id="cod-toggle-factura">🏢 FACTURA</button>
         </div>
 
-        <!-- Campos BOLETA -->
         <div id="cod-fields-boleta" class="cod-fields-block">
           <div class="cod-form-group">
             <label class="cod-label" for="cod-dni">DNI o RUC del Comprador <span class="req">*</span></label>
@@ -369,7 +355,6 @@
           </div>
         </div>
 
-        <!-- Campos FACTURA -->
         <div id="cod-fields-factura" class="cod-fields-block" style="display:none">
           <div class="cod-form-group">
             <label class="cod-label" for="cod-ruc">RUC de la Empresa <span class="req">*</span></label>
@@ -402,25 +387,13 @@
           </div>
         </div>
 
-        <!-- Aceptación Legal -->
-        <!-- Aceptación Legal con Efecto Neon Inline -->
-        <style>
-          @keyframes neonPulseLocal {
-            0%, 100% { box-shadow: 0 0 0px rgba(200,130,100,0); background: rgba(0,0,0,0.02); transform: scale(1); }
-            50% { box-shadow: 0 0 30px rgba(200,130,100,0.8); background: #fff5f0; border-color: #c88264 !important; transform: scale(1.015); }
-          }
-          .cod-neon-pulse-active {
-            animation: neonPulseLocal 2s infinite ease-in-out !important;
-          }
-        </style>
-        <div class="cod-legal-accept cod-neon-pulse-active" style="margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.02); border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s; display: block;">
+        <div class="cod-legal-accept" style="margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.02); border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); display: block;">
           <label style="display: flex; gap: 10px; cursor: pointer; font-size: 13px; line-height: 1.4;">
             <input type="checkbox" id="cod-accept-terms" style="margin-top: 3px;">
-            <span>He leído y acepto los <a href="javascript:void(0)" onclick="openLegalModal('terms')" style="color:var(--copper); font-weight:700;">Términos y Condiciones</a> (incluyendo política de cancelación) y las <a href="javascript:void(0)" onclick="openLegalModal('privacy')" style="color:var(--copper); font-weight:700;">Políticas de Privacidad</a>.</span>
+            <span>He leído y acepto los <a href="javascript:void(0)" onclick="openLegalModal('terms')" style="color:var(--copper); font-weight:700;">Términos y Condiciones</a> y las <a href="javascript:void(0)" onclick="openLegalModal('privacy')" style="color:var(--copper); font-weight:700;">Políticas de Privacidad</a>.</span>
           </label>
         </div>
 
-        <!-- Resumen Final -->
         <div class="cod-final-summary" id="cod-final-summary">
           <h4>📋 Resumen de tu Pedido</h4>
           <div class="cod-sum-row"><span>Producto</span><span id="fs-prod">48 Tubos · 4 Cajas</span></div>
@@ -439,67 +412,25 @@
             <strong>TOTAL COMPRA</strong>
             <strong id="fs-total">S/. 1,296</strong>
           </div>
-          <div class="cod-sum-row" id="fs-adelanto-row" style="display:none; color:#ef4444;">
-            <span>Adelanto (20% hoy)</span>
-            <strong id="fs-adelanto">S/. 0</strong>
-          </div>
-          <div class="cod-sum-row" id="fs-saldo-row" style="display:none; color:#166534;">
-            <span>Saldo (80% al recibir)</span>
-            <strong id="fs-saldo">S/. 0</strong>
-          </div>
         </div>
 
         <div class="cod-nav-btns">
           <button class="cod-btn-back" id="cod-back-3">← Volver</button>
           <button class="cod-btn-confirm" id="cod-confirm-btn">✅ GENERAR ORDEN DE COMPRA</button>
         </div>
-        <div class="cod-trust" id="cod-step3-trust">🛡️ Tu pedido se generará y se enviará por WhatsApp al asesor.</div>
-
       </div><!-- /paso-3 -->
 
-      <!-- PASO 4: CONFIRMACIÓN Y WHATSAPP -->
+      <!-- PASO 4: CONFIRMACIÓN -->
       <div class="cod-step-content" id="cod-step-4">
         <div style="text-align:center; padding: 10px 0;">
-          <h3 class="cod-section-title" style="color: #27ae60; font-size: 16px;">✅ ¡PEDIDO GENERADO EXITOSAMENTE!</h3>
-          <p style="font-size: 12px; color: #555; margin-bottom: 20px;">Tu Orden de Compra ha sido creada. Para que tu asesor procese el envío inmediatamente, envía el mensaje por WhatsApp.</p>
-          
+          <h3 class="cod-section-title" style="color: #27ae60; font-size: 16px;">✅ ¡PEDIDO GENERADO!</h3>
+          <p style="font-size: 12px; color: #555; margin-bottom: 20px;">Tu Orden de Compra ha sido creada. Envía el mensaje por WhatsApp para procesar el envío.</p>
           <img id="cod-qr-whatsapp" src="" alt="QR WhatsApp" style="width: 160px; height: 160px; border-radius: 12px; border: 2px solid #e8e0da; margin-bottom: 10px; display: inline-block;">
-          <p style="font-size: 11px; color: #888; margin-bottom: 20px;">¿No tienes WhatsApp Web? Escanea este QR con la cámara de tu celular.</p>
-
-          <div style="background: #fff8e1; border: 1px solid #ffe082; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 11px; color: #795548; text-align: left;">
-            <strong>ℹ️ Información de Cancelación:</strong><br>
-            Puedes cancelar tu orden sin costo alguno antes de realizar el pago del 20%. Una vez hecho el pago, comunícate inmediatamente con tu asesor para cualquier cambio.
-          </div>
-
-          <div class="cod-actions-grid">
-            <button class="cod-btn-confirm cod-btn-wa-full" id="cod-btn-wa-web" style="background: #25d366; margin-bottom:0;">🟢 ABRIR WHATSAPP (WEB / APP)</button>
-            <button class="cod-btn-back cod-btn-secondary" id="cod-btn-copy-wa" style="width: 100%; border-color: var(--copper); color: var(--copper); margin-top:0;">📋 COPIAR MENSAJE</button>
-
-            <button class="cod-btn-pdf cod-btn-secondary" id="cod-pdf-btn" style="margin-top:0;">📄 DESCARGAR PDF</button>
-            <button class="cod-btn-pdf cod-btn-secondary" id="cod-email-btn" style="margin-top:0;">✉️ RE-ENVIAR AL CORREO</button>
-          </div>
-
-          <div style="margin-top: 30px; border-top: 1.5px dashed #e8e0da; padding-top: 25px; text-align: center;">
-             <div style="display: inline-block; max-width: 600px; text-align: left; background: #fffdfa; border: 1px solid #f3e8df; padding: 20px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-               <p style="font-size: 13px; line-height: 1.6; color: #555; margin-bottom: 0;">
-                 📧 <strong>¡Correo enviado!</strong> Al finalizar tu pedido, te hemos enviado automáticamente el resumen a tu bandeja. 
-                 <br><br>
-                 ✅ <strong>Siguiente paso:</strong> Para <strong>confirmar stock e iniciar el despacho</strong>, presiona el botón de WhatsApp arriba e indica tu <strong>Nro. de Orden de Compra</strong> o nombre completo.
-                 <br><br>
-                 <span style="font-size: 11px; color: #999; font-style: italic;">
-                   ⚠️ Si no encuentras el correo, revisa tu carpeta de <strong>Promociones o SPAM</strong>, o descarga el PDF directamente aquí arriba.
-                 </span>
-               </p>
-             </div>
-          </div>
-          
-          <div style="margin-top: 25px; font-size: 14px; color: #888; text-align: center; background: #f9f7f5; padding: 22px; border-radius: 12px; display: flex; justify-content: center; gap: 40px; border: 1px solid #f0ebe7;">
-            <div style="display: flex; align-items: center; gap: 10px;">📞 Soporte: <strong>999 900 396</strong></div>
-            <div style="display: flex; align-items: center; gap: 10px;">🏢 <strong>Somos Marketing Perú E.I.R.L.</strong></div>
-          </div>
+          <button class="cod-btn-confirm" id="cod-btn-wa-web" style="background: #25d366; width: 100%;">🟢 ABRIR WHATSAPP</button>
+          <div style="margin-top: 20px; font-size: 12px; color: #888;">🏢 Somos Marketing Perú E.I.R.L.</div>
         </div>
-      </div><!-- /paso-4 -->
+      </div>
 
-    </div><!-- /cod-body -->
-  </div><!-- /cod-card -->
-</div><!-- /cod-backdrop -->
+    </div>
+  </div>
+</div>
