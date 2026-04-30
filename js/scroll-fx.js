@@ -116,6 +116,10 @@ function initCountUp() {
    4. SOCIAL PROOF TOASTS (FOMO)
    ───────────────────────────────────────────── */
 function initSocialProofToasts() {
+    // Evitar múltiples inicializaciones
+    if (window.vaSocialProofInitialized) return;
+    window.vaSocialProofInitialized = true;
+
     var data = [
         { name: 'Decoraciones Luna', city: 'Huancayo',    emoji: '🏠', action: 'acaba de pedir 15 cajas' },
         { name: 'Distribuidora S&M', city: 'Juliaca',     emoji: '📦', action: 'generó OC por 40 cajas' },
@@ -139,8 +143,10 @@ function initSocialProofToasts() {
     var idx = 0;
 
     function showToast() {
+        // No mostrar si hay modales abiertos o si ya hay un toast activo
         var activeModal = document.querySelector('#va-exit-modal.active, #cod-modal-backdrop.open, .dec-backdrop.open');
-        if (activeModal) return;
+        var existingToast = container.querySelector('.va-toast');
+        if (activeModal || existingToast) return;
 
         var d = data[idx % data.length];
         idx++;
@@ -156,27 +162,27 @@ function initSocialProofToasts() {
             '<div class="va-toast-dot"></div>';
         container.appendChild(toast);
 
+        // Remover automáticamente después de 5 segundos
         setTimeout(function() {
             toast.classList.add('toast-out');
-            setTimeout(function() { toast.remove(); }, 450);
-        }, 4000);
+            setTimeout(function() { if(toast.parentNode) toast.remove(); }, 600);
+        }, 5000);
     }
 
-    // 🕒 Cronograma de Intenciones de Compra:
+    // 🕒 Cronograma de Intenciones de Compra (Estricto):
     // 1. Primera intención: 30 segundos
     setTimeout(showToast, 30000);
 
     // 2. Segunda intención: 3 minutos
     setTimeout(showToast, 180000);
 
-    // 3. Siguientes: Cada 5 minutos (contados desde la aparición de la primera a los 30s)
-    // Esto significa que la tercera aparece a los 5m 30s, la cuarta a los 10m 30s, etc.
+    // 3. Siguientes: Cada 5 minutos
     setTimeout(function() {
         showToast();
         setInterval(showToast, 300000);
     }, 330000);
 
-    console.log('Social Proof Toasts: Active');
+    console.log('Social Proof Engine: Protected & Active');
 }
 
 /* ─────────────────────────────────────────────

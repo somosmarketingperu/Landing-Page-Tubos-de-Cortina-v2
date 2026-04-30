@@ -46,6 +46,58 @@ function initKitParallax() {
                 { id: 'hero-img-main', factor: 35 },
                 { id: 'hero-glare-main', isGlare: true }
             ]
+        },
+        {
+            triggerId: 'prof-trigger-1',
+            layers: [
+                { id: 'prof-icon-1', factor: 15 },
+                { id: 'prof-ben-1', factor: 25 },
+                { id: 'prof-glare-1', isGlare: true }
+            ]
+        },
+        {
+            triggerId: 'prof-trigger-2',
+            layers: [
+                { id: 'prof-icon-2', factor: 15 },
+                { id: 'prof-ben-2', factor: 25 },
+                { id: 'prof-glare-2', isGlare: true }
+            ]
+        },
+        {
+            triggerId: 'prof-trigger-3',
+            layers: [
+                { id: 'prof-icon-3', factor: 15 },
+                { id: 'prof-ben-3', factor: 25 },
+                { id: 'prof-glare-3', isGlare: true }
+            ]
+        },
+        {
+            triggerId: 'auth-trigger-1',
+            layers: [
+                { id: 'auth-block-1', factor: 20 },
+                { id: 'auth-glare-1', isGlare: true }
+            ]
+        },
+        {
+            triggerId: 'auth-trigger-2',
+            layers: [
+                { id: 'auth-block-2', factor: 20 },
+                { id: 'auth-glare-2', isGlare: true }
+            ]
+        },
+        {
+            triggerId: 'auth-trigger-3',
+            layers: [
+                { id: 'auth-block-3', factor: 20 },
+                { id: 'auth-glare-3', isGlare: true }
+            ]
+        },
+        {
+            triggerId: 'auth-trigger-4',
+            layers: [
+                { id: 'auth-block-4', factor: 20 },
+                { id: 'auth-glare-4', isGlare: true }
+            ]
         }
     ];
 
