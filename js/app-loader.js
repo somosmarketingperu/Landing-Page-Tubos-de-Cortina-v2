@@ -48,11 +48,11 @@ async function loadModal() {
         // CSS del modal
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'sections/13-checkout/style.css?v=4.0';
+        link.href = 'sections/13-checkout/style.css?v=4.1';
         document.head.appendChild(link);
 
         // HTML del modal → directo en body
-        const response = await fetch('sections/13-checkout/content.html');
+        const response = await fetch('sections/13-checkout/content.html?v=4.1');
         if (response.ok) {
             const html = await response.text();
             const wrapper = document.createElement('div');
@@ -74,10 +74,10 @@ async function loadExitIntent() {
     try {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'sections/19-exit-intent/style.css';
+        link.href = 'sections/19-exit-intent/style.css?v=4.1';
         document.head.appendChild(link);
 
-        const response = await fetch('sections/19-exit-intent/content.html');
+        const response = await fetch('sections/19-exit-intent/content.html?v=4.1');
         if (response.ok) {
             const html = await response.text();
             const wrapper = document.createElement('div');
@@ -108,10 +108,10 @@ async function loadSections() {
 
                 const link = document.createElement('link');
                 link.rel = 'stylesheet';
-                link.href = `sections/${section}/style.css?v=3.0`;
+                link.href = `sections/${section}/style.css?v=4.1`;
                 document.head.appendChild(link);
 
-                const response = await fetch(`sections/${section}/content.html?v=3.0`);
+                const response = await fetch(`sections/${section}/content.html?v=4.1`);
                 if (response.ok) {
                     const html = await response.text();
                     sectionWrapper.innerHTML = html;

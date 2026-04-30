@@ -194,3 +194,88 @@
 .va-bottom-claims:hover img {
   filter: grayscale(0) opacity(1);
 }
+
+/* --- TRUST BADGES SECTION --- */
+.va-footer-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 40px 24px;
+  background: rgba(255,255,255,0.01);
+  border-top: 1px solid rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.va-trust-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.va-trust-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.va-trust-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.va-trust-img {
+  height: 20px;
+  opacity: 0.6;
+  filter: grayscale(1) brightness(2);
+  transition: all 0.3s ease;
+}
+
+.va-trust-img:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.1);
+}
+
+.va-trust-badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: #888;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.va-trust-badge.logistic {
+  border-color: rgba(200, 130, 100, 0.3);
+  color: var(--copper);
+}
+
+.va-trust-badge.secure {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.va-trust-badge:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  border-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .va-footer-trust {
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px 15px;
+  }
+}

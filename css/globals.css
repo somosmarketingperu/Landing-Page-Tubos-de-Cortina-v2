@@ -416,6 +416,30 @@ img {
     display: none;
 }
 
+/* --- FEEDBACK DE INTERACCIÓN (UX) --- */
+button, .va-btn, a.btn, .va-calc-tab, .cod-pay-btn, .cod-qty-btn, .va-exit-cta {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease, background 0.3s ease;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:active, .va-btn:active, .va-calc-tab:active, .cod-qty-btn:active, .va-exit-cta:active {
+    transform: scale(0.96);
+    filter: brightness(0.9);
+}
+
+/* TOUCH TARGETS (GOOGLE UX COMPLIANCE) */
+@media (max-width: 768px) {
+    button, .va-btn, .va-calc-tab, .cod-qty-btn, .va-sticky-close, .va-exit-close-x {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 #va-cursor-ring {
     position: fixed;
     width: 34px;

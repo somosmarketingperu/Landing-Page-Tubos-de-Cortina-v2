@@ -365,31 +365,86 @@
   flex-shrink: 0;
 }
 
-.rm-badge-ia,
-.rm-badge-human {
+/* ── NUEVAS TARJETAS DE VALIDACIÓN ── */
+.rm-validation-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
-  font-size: 12px;
-  font-weight: 800;
+  gap: 12px;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.rm-validation-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.rm-validation-card.ia {
+  border-left: 4px solid #4ade80;
+}
+
+.rm-validation-card.human {
+  border-left: 4px solid var(--copper, #c88264);
+}
+
+.rm-card-emoji {
+  font-size: 24px;
+}
+
+.rm-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.rm-card-info strong {
+  font-size: 11px;
   color: #fff;
   letter-spacing: 0.5px;
 }
 
-.rm-badge-ia br,
-.rm-badge-human br { 
-  display: none; /* Ocultar salto de línea en desktop */
+.rm-card-info span {
+  font-size: 9px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 600;
 }
 
-.rm-badge-ia span,
-.rm-badge-human span { 
-  display: inline;
-  font-weight: 800; 
-  font-size: 12px; 
-  opacity: 1; 
-  margin-left: 4px;
+.rm-plus-circle {
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  color: #11224a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+  z-index: 2;
 }
 
-.rm-plus { color: #fff; font-size: 24px; font-weight: 900; }
+@media (max-width: 768px) {
+  .rm-footer-badges {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+  .rm-validation-card {
+    width: 100%;
+    justify-content: center;
+    max-width: 280px;
+  }
+  .rm-plus-circle {
+    margin: -5px 0;
+  }
+}
 
 /* ══════════════════════════════════════════════
    RESPONSIVE — Desktop → Tablet → Móvil

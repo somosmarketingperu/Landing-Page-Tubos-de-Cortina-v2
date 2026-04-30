@@ -30,6 +30,30 @@ document.addEventListener('sectionsLoaded', () => {
 
     console.log('%c------------------------------------------------------------------', 'color: #444;');
     
+    // ── INTERACTION TRACKER (UX/MARKETING/GA) ──
+    const trackInteraction = (label) => {
+        // Log profesional en consola
+        console.log(`%c[TRACKING] Interaction: ${label} %c| Time: ${new Date().toLocaleTimeString()}`, 'color: #c88264; font-weight: bold;', 'color: #78716c;');
+        
+        // ENVÍO A GOOGLE ANALYTICS (vía GTM DataLayer)
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                'event': 'ua_interaction',
+                'event_category': 'Engagement',
+                'event_action': 'Click',
+                'event_label': label
+            });
+        }
+    };
+
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('button, a.btn, .va-btn');
+        if (btn) {
+            const label = btn.innerText || btn.getAttribute('aria-label') || 'Action Button';
+            trackInteraction(label.trim().substring(0, 30));
+        }
+    });
+
     console.log('🚀 APP-BUNDLE: Inicializando módulos...');
 
     const modules = [

@@ -117,14 +117,16 @@ function initCountUp() {
    ───────────────────────────────────────────── */
 function initSocialProofToasts() {
     var data = [
-        { name: 'Carlos R.',   city: 'Arequipa',  emoji: '🛒', action: 'acaba de hacer su pedido'       },
-        { name: 'Milagros T.', city: 'Trujillo',  emoji: '📦', action: 'pidió 2 cajas (24 unidades)'    },
-        { name: 'José M.',     city: 'Cusco',     emoji: '✅', action: 'confirmó su primer pedido'       },
-        { name: 'Lucía P.',    city: 'Piura',     emoji: '💰', action: 'ya está revendiendo a S/.45'     },
-        { name: 'Renzo V.',    city: 'Iquitos',   emoji: '🚚', action: 'pidió envío a su agencia local'  },
-        { name: 'Ana G.',      city: 'Chiclayo',  emoji: '⭐', action: 'hizo su segundo pedido este mes' },
-        { name: 'Mario C.',    city: 'Huancayo',  emoji: '🏪', action: 'agregó tubos a su tienda'        },
-        { name: 'Fátima L.',   city: 'Tacna',     emoji: '📲', action: 'consultó y luego compró'         },
+        { name: 'Decoraciones Luna', city: 'Huancayo',    emoji: '🏠', action: 'acaba de pedir 15 cajas' },
+        { name: 'Distribuidora S&M', city: 'Juliaca',     emoji: '📦', action: 'generó OC por 40 cajas' },
+        { name: 'Multiservicios Hogar', city: 'Cusco',    emoji: '✅', action: 'acaba de confirmar su lote' },
+        { name: 'Almacén de Cortinas', city: 'Piura',     emoji: '🛒', action: 'pidió envío por Shalom' },
+        { name: 'Estilo & Diseño',   city: 'Trujillo',    emoji: '🚚', action: 'pidió 120 tubos para tienda' },
+        { name: 'Bazar Anita',       city: 'Iquitos',     emoji: '✈️', action: 'pidió envío aéreo urgente' },
+        { name: 'Sr. Huamán',       city: 'Puno',        emoji: '💰', action: 'hizo su 3er pedido mayorista' },
+        { name: 'Hogar Confort SAC', city: 'Chimbote',    emoji: '⭐', action: 'ya está distribuyendo en Ancash' },
+        { name: 'Comercial Tovar',   city: 'Tacna',       emoji: '📲', action: 'coordina envío a frontera' },
+        { name: 'Cortinas & Más',    city: 'Arequipa',    emoji: '🔥', action: 'agotó stock en 3 días' },
     ];
 
     var container = document.getElementById('va-toast-container');
