@@ -8,10 +8,13 @@
     <div class="va-ba-flex">
       
       <!-- Antes -->
-      <div class="va-ba-card">
+      <div class="va-ba-card kit-parallax-trigger" id="ba-trigger-bad">
         <div class="va-ba-badge bad">PRODUCTO GENÉRICO</div>
         <div class="va-ba-img-box">
-          <img src="img/ba-before.png" alt="Tubo de baja calidad">
+          <div class="kit-parallax-container">
+            <img src="img/ba-before.png" alt="Tubo de baja calidad" class="kit-parallax-layer" data-factor="40" id="ba-img-bad">
+            <div class="kit-glare" id="ba-glare-bad"></div>
+          </div>
         </div>
         <div class="va-ba-content">
           <h4>Calidad Inestable</h4>
@@ -27,10 +30,14 @@
       <div class="va-ba-vs-circle">VS</div>
 
       <!-- Después -->
-      <div class="va-ba-card success">
+      <div class="va-ba-card success kit-parallax-trigger" id="ba-trigger-good">
         <div class="va-ba-badge good">LÍNEA LUXURY</div>
         <div class="va-ba-img-box">
-          <img src="img/ba-after.png" alt="Tubo Luxury">
+          <div class="kit-parallax-bg" style="width: 300px; height: 300px; opacity: 0.3;"></div>
+          <div class="kit-parallax-container">
+            <img src="img/ba-after.png" alt="Tubo Luxury" class="kit-parallax-layer" data-factor="25" id="ba-img-good">
+            <div class="kit-glare" id="ba-glare-good"></div>
+          </div>
         </div>
         <div class="va-ba-content">
           <h4>Estándar Premium</h4>

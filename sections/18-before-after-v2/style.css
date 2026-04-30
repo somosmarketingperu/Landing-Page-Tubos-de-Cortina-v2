@@ -179,3 +179,34 @@
 .dark-theme .va-ba-content li {
   color: #94a3b8;
 }
+
+/* ── SOPORTE PARALLAX ── */
+.va-ba-img-box {
+  perspective: 1000px;
+  overflow: visible !important;
+}
+
+.va-ba-card .kit-parallax-layer {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+  object-fit: contain !important; /* Asegurar que el producto se vea completo */
+  padding: 20px;
+}
+
+.va-ba-card.success .kit-parallax-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(30px);
+  animation: pulseAuraBA 4s infinite alternate ease-in-out;
+}
+
+@keyframes pulseAuraBA {
+  from { transform: translate(-50%, -50%) scale(0.9); opacity: 0.3; }
+  to { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+}

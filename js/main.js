@@ -34,6 +34,7 @@ document.addEventListener('sectionsLoaded', () => {
         { name: 'Tilt 3D Cards',         init: () => typeof initTiltEffect         === 'function' && initTiltEffect()         },
         { name: 'Custom Cursor',         init: () => typeof initCustomCursor       === 'function' && initCustomCursor()       },
         { name: 'Spiral Canvas BG',      init: () => typeof initSpiralBackground   === 'function' && initSpiralBackground()   },
+        { name: 'Kit Product Parallax',  init: () => typeof initKitParallax        === 'function' && initKitParallax()        },
     ];
 
     modules.forEach(m => {

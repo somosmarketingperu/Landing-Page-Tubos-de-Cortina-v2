@@ -55,13 +55,19 @@
         </div>
       </div>
 
-      <!-- Lado Derecho: Producto y Precio -->
-      <div class="va-flyer-right">
+      <!-- Lado Derecho: Producto y Precio con Efecto Parallax -->
+      <div class="va-flyer-right" id="kit-parallax-trigger">
         
-        <img src="img/Caracteristicas de tubo de cortina 8.webp" alt="Tubo Cortina" class="va-flyer-main-prod" loading="lazy">
+        <!-- Capas del Efecto -->
+        <div class="kit-parallax-bg"></div> <!-- Aura de luz -->
         
-        <!-- Badge Graduable -->
-        <div class="va-flyer-grad-badge">
+        <div class="kit-parallax-container">
+          <img src="img/kit-3d-model.png" alt="Tubo Cortina Premium 3D" class="va-flyer-main-prod kit-parallax-layer" data-factor="20" id="kit-prod-img">
+          <div class="kit-glare" id="kit-glare"></div> <!-- Capa de brillo dinámico -->
+        </div>
+        
+        <!-- Badge Graduable (Capa Superior) -->
+        <div class="va-flyer-grad-badge kit-parallax-layer" data-factor="10" id="kit-badge">
           <div class="va-flyer-grad-top">BARRA / TUBO BRONCE<br>PARA CORTINA</div>
           <div class="va-flyer-grad-val">1.60 A 3MTS</div>
           <div class="va-flyer-grad-color">COLOR PLATEADO</div>
