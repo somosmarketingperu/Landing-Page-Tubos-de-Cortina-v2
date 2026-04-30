@@ -10,13 +10,30 @@
   height: 50px;
   background: #0f0d0c;
   border-bottom: 2px solid var(--copper);
-  z-index: 10000; /* Por encima de todo */
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
+}
+
+/* Estado: Abajo */
+.va-sticky-bar.is-bottom {
+  top: auto;
+  bottom: 0;
+  border-bottom: none;
+  border-top: 2px solid var(--copper);
+  transform: translateY(0);
+}
+
+/* Estado: Oculto (para transiciones) */
+.va-sticky-bar.is-hidden {
+  transform: translateY(-100%);
+}
+.va-sticky-bar.is-bottom.is-hidden {
+  transform: translateY(100%);
 }
 
 .va-sticky-close {

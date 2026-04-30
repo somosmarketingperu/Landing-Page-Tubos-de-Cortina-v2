@@ -3,7 +3,7 @@
  */
 
 function initStickyBanner() {
-    const sticky = document.querySelector('.va-sticky-wrap');
+    const sticky = document.getElementById('va-sticky-bar');
     const closeBtn = document.getElementById('va-sticky-close');
     if (!sticky) return;
 
@@ -15,10 +15,37 @@ function initStickyBanner() {
         });
     }
 
-    window.addEventListener('scroll', () => {
+    // Puntos de referencia
+    const section2 = document.getElementById('section-17-problem-v2');
+    const footer = document.getElementById('section-12-footer');
+
+    function updateStickyPosition() {
         if (isClosed) return;
-        sticky.style.display = window.scrollY > 500 ? 'block' : 'none';
-    }, { passive: true });
+
+        const scrollY = window.scrollY;
+        const s2Top = section2 ? section2.offsetTop : 800;
+        const footerTop = footer ? footer.offsetTop : document.body.scrollHeight - 600;
+        const viewportHeight = window.innerHeight;
+
+        // Lógica de "Sándwich" dinámico
+        if (scrollY > s2Top && (scrollY + viewportHeight) < footerTop) {
+            // MODO: FIJO ABAJO
+            sticky.classList.add('is-bottom');
+            sticky.classList.remove('is-hidden');
+        } else if ((scrollY + viewportHeight) >= footerTop) {
+            // MODO: REGRESO A POSICIÓN ORIGINAL (ARRIBA)
+            sticky.classList.remove('is-bottom');
+            sticky.classList.remove('is-hidden');
+        } else {
+            // MODO: INICIO (ARRIBA)
+            sticky.classList.remove('is-bottom');
+            sticky.classList.remove('is-hidden');
+        }
+    }
+
+    window.addEventListener('scroll', updateStickyPosition, { passive: true });
+    window.addEventListener('resize', updateStickyPosition, { passive: true });
+    updateStickyPosition(); // Ejecución inicial
 }
 
 let exitIntentShown = false;
