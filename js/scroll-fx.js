@@ -250,14 +250,18 @@ function initCustomCursor() {
     var DOT_SIZE  = 8;
     var RING_SIZE = 34;
 
+    // Aumentar z-index para estar sobre la cinemática (999999)
+    if (dot) dot.style.zIndex = "1000000";
+    if (ring) ring.style.zIndex = "1000000";
+
     var mouseX = 0, mouseY = 0;
     var ringX  = 0, ringY  = 0;
     var ringMoving = false;
     var hasMoved = false;
 
-    // Hide both until first mouse move (they start at 0,0 otherwise)
-    dot.style.visibility  = 'hidden';
-    ring.style.visibility = 'hidden';
+    // Solo ocultar si NO hay movimiento previo (evita parpadeos en re-init)
+    if (!dot.style.left) dot.style.visibility = 'hidden';
+    if (!ring.style.left) ring.style.visibility = 'hidden';
 
     // DOT: updates immediately on every mouse move
     document.addEventListener('mousemove', function(e) {

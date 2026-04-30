@@ -1,0 +1,102 @@
+<div class="va-legal-modals">
+    
+    <!-- MODAL: POLÍTICA DE PRIVACIDAD -->
+    <div id="legal-privacy-modal" class="legal-modal-backdrop">
+        <div class="legal-modal-card">
+            <div class="legal-modal-header">
+                <h3>Políticas de Privacidad</h3>
+                <button class="legal-modal-close" onclick="closeLegalModal('privacy')">✕</button>
+            </div>
+            <div class="legal-modal-body">
+                <p><strong>SOMOS MARKETING PERÚ E.I.R.L.</strong> (en adelante, "La Empresa") valora la privacidad de sus usuarios. Esta política describe cómo manejamos tus datos personales.</p>
+                
+                <h4>1. Recolección de Datos</h4>
+                <p>Solicitamos información como Nombre, WhatsApp, Email y DNI/RUC exclusivamente para la generación de tu Orden de Compra y la coordinación logística del despacho.</p>
+                
+                <h4>2. Almacenamiento y Seguridad</h4>
+                <p>La Empresa **no almacena información en servidores de su propiedad**. Utilizamos servicios de terceros de alta seguridad (Google Cloud, Google Drive y Google Sheets) para el procesamiento y respaldo de las transacciones. Esto garantiza que tu información no sea vulnerable en infraestructuras locales.</p>
+                
+                <h4>3. Finalidad del Tratamiento</h4>
+                <p>Tus datos se conservan con el fin de brindarte soporte post-venta, gestionar garantías, atender reclamos futuros y verificar tu historial de compras mediante tu número de identificación.</p>
+                
+                <h4>4. Derechos ARCO</h4>
+                <p>Como titular de tus datos, puedes solicitar el acceso, rectificación, cancelación u oposición de tu información en cualquier momento enviando un mensaje a nuestro WhatsApp oficial o al correo <strong>contacto@somosmarketingperu.com</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: TÉRMINOS Y CONDICIONES (Inlcuye Cancelación) -->
+    <div id="legal-terms-modal" class="legal-modal-backdrop">
+        <div class="legal-modal-card">
+            <div class="legal-modal-header">
+                <h3>Términos y Condiciones</h3>
+                <button class="legal-modal-close" onclick="closeLegalModal('terms')">✕</button>
+            </div>
+            <div class="legal-modal-body">
+                <h4>1. Precios y Oferta</h4>
+                <p>Nuestros precios son exclusivos para venta al por mayor (mínimo 1 caja). El precio oficial es de S/. 27.00 por unidad en la modalidad de transferencia.</p>
+                
+                <h4>2. Modalidad de Pago (20/80)</h4>
+                <p>Para pedidos contra entrega o recojo, se requiere un adelanto del 20% para activar la orden y proceder con el embalaje. El 80% restante se cancela al recibir el producto en la agencia Shalom o al recoger en almacén.</p>
+                
+                <h4>3. Política de Cancelación</h4>
+                <p><strong>Antes del pago del 20%:</strong> El cliente puede cancelar su orden de compra en cualquier momento sin penalidad, simplemente informando a su asesor por WhatsApp.</p>
+                <p><strong>Después del pago del 20%:</strong> Una vez realizado el adelanto, si el pedido aún no ha sido despachado, se podrá solicitar la cancelación con una penalidad administrativa del 5% del valor total (por gastos de embalaje y gestión). Si el pedido ya fue entregado a la agencia de transporte, no se aceptan cancelaciones ni devoluciones del adelanto.</p>
+                
+                <h4>4. Logística</h4>
+                <p>La empresa se responsabiliza de la entrega del producto en óptimas condiciones a la agencia Shalom. Los tiempos de tránsito dependen exclusivamente de la empresa de transportes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: LIBRO DE RECLAMACIONES (Virtual) -->
+    <div id="legal-claims-modal" class="legal-modal-backdrop">
+        <div class="legal-modal-card">
+            <div class="legal-modal-header">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--copper)">
+                        <path d="M12 11.673l-6.03-3.487v7.015l6.03 3.487 6.03-3.487v-7.015l-6.03 3.487zm0-2.315l6.03-3.488-6.03-3.487-6.03 3.487 6.03 3.488zm7.03-4.575v9.177l-7.03 4.062-7.03-4.062v-9.177l7.03-4.063 7.03 4.063z"/>
+                    </svg>
+                    <h3 style="margin:0;">Libro de Reclamaciones</h3>
+                </div>
+                <button class="legal-modal-close" onclick="closeLegalModal('claims')">✕</button>
+            </div>
+            <div class="legal-modal-body">
+                <p style="font-size:12px; color:#666; margin-bottom:20px;">Conforme a lo establecido en el Código de Protección y Defensa del Consumidor, esta institución cuenta con un Libro de Reclamaciones a su disposición.</p>
+                
+                <form id="claims-form" class="claims-form">
+                    <div class="claims-group">
+                        <label>Nombre y Apellido</label>
+                        <input type="text" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    <div class="claims-group">
+                        <label>DNI / CE</label>
+                        <input type="text" placeholder="Número de documento" required>
+                    </div>
+                    <div class="claims-group">
+                        <label>Teléfono de Contacto</label>
+                        <input type="tel" placeholder="9XXXXXXXX" required>
+                    </div>
+                    <div class="claims-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" placeholder="tu@correo.com" required>
+                    </div>
+                    <div class="claims-group">
+                        <label>Tipo de Bien</label>
+                        <select required>
+                            <option value="producto">Producto (Kits de Tubos)</option>
+                            <option value="servicio">Servicio (Transporte/Atención)</option>
+                        </select>
+                    </div>
+                    <div class="claims-group">
+                        <label>Detalle de Reclamo / Queja</label>
+                        <textarea rows="4" placeholder="Describe lo sucedido..." required></textarea>
+                    </div>
+                    <button type="submit" class="claims-submit">ENVIAR RECLAMACIÓN</button>
+                </form>
+                <p style="font-size:11px; margin-top:15px; color:#888;">* Un asesor se comunicará con usted en un plazo máximo de 15 días hábiles conforme a ley.</p>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -22,6 +22,7 @@ const SECTIONS = [
     '10-test-v2',         // 13. PRUEBA SOCIAL / TESTIMONIOS
     '11-flyer-v2',        // 14. CTA FINAL
     '12-footer',
+    '21-legal',
 
     // --- SECCIONES DESACTIVADAS (código intacto, no se cargan) ---
     // '17-problem',       // duplicado de 17-problem-v2
@@ -47,7 +48,7 @@ async function loadModal() {
         // CSS del modal
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'sections/13-checkout/style.css';
+        link.href = 'sections/13-checkout/style.css?v=4.0';
         document.head.appendChild(link);
 
         // HTML del modal → directo en body

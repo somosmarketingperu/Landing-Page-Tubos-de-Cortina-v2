@@ -23,6 +23,7 @@ document.addEventListener('sectionsLoaded', () => {
         { name: 'Sticky Banner',       fn: () => typeof initStickyBanner       === 'function' && initStickyBanner()       },
         { name: 'Exit Intent',         fn: () => typeof initExitIntent         === 'function' && initExitIntent()         },
         { name: 'Roadmap V2',          fn: () => typeof initRoadmapV2          === 'function' && initRoadmapV2()          },
+        { name: 'Libro Reclamaciones', fn: () => typeof initClaimsForm         === 'function' && initClaimsForm()         },
 
         // ── PREMIUM ANIMATION ENGINE ──
         { name: 'CTA Shimmer',         fn: () => typeof initCTAShimmer         === 'function' && initCTAShimmer()         },

@@ -381,6 +381,13 @@ function validateStep2() {
 function validateStep3() {
     var valid = true;
     const tipo = state.comprobanteType;
+    const acceptTerms = document.getElementById('cod-accept-terms');
+
+    if (acceptTerms && !acceptTerms.checked) {
+        showFieldError('cod-accept-terms', 'Debes aceptar los términos y políticas para continuar');
+        valid = false;
+    }
+
     if (tipo === 'boleta') {
         const dni   = document.getElementById('cod-dni').value.trim();
         const email = document.getElementById('cod-email-boleta').value.trim();
@@ -426,6 +433,9 @@ function handleConfirm() {
         ? document.getElementById('cod-email-boleta').value.trim()
         : document.getElementById('cod-email-factura').value.trim();
 
+    // Nota de cancelación dinámica
+    const cancellationNote = '\n\n⚠️ *NOTA DE CANCELACIÓN:* Puedes cancelar sin penalidad antes de pagar el 20%. Si ya pagaste, comunícate urgente para evitar el despacho.';
+    
     if (!state.ocNumber) {
         const now = new Date();
         state.ocNumber = 'OC-' + now.getFullYear() +
@@ -462,6 +472,7 @@ function handleConfirm() {
         '📍 *DESTINO:* ' + destino,
         '👤 *RECOGE:* ' + recogedorLinea,
         '━━━━━━━━━━━━━━━━━━━━━━',
+        '_Recuerda que puedes cancelar sin costo antes de abonar el 20%_',
         '_Generado desde cortinas-peru.web.app_'
     ].filter(Boolean).join('\n'); // Unencoded for clipboard
 

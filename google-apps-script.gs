@@ -31,7 +31,14 @@ function doPost(e) {
       return buildResponse({ success: false, error: 'No autorizado' });
     }
 
-    var resultado = procesarPedido(data);
+    // ── Diferenciar entre Pedido y Reclamo ──
+    var resultado;
+    if (data.type === 'claim') {
+      resultado = procesarReclamacion(data);
+    } else {
+      resultado = procesarPedido(data);
+    }
+    
     return buildResponse(resultado);
   } catch (err) {
     Logger.log('ERROR doPost: ' + err.message);
@@ -478,6 +485,102 @@ function construirPDFHTML(d, ocN) {
       <strong>Tubos de Cortina Perú</strong> — Somos Marketing Perú EIRL · RUC 20615554384<br>\
       WhatsApp: +51 999 900 396 · cortinas-peru.web.app<br>\
       Este documento es una cotización para venta al por mayor. El pedido se confirma vía WhatsApp. Stock sujeto a disponibilidad.\
+  </div>\
+</body>\
+</html>';
+}
+
+}
+
+// ── LÓGICA DE RECLAMACIONES ──────────────────────────
+
+function procesarReclamacion(data) {
+  var claimNumber = 'REC-' + new Date().getTime();
+  
+  // 1. Construir HTML del PDF de Reclamo
+  var html = construirReclamoHTML(data, claimNumber);
+  
+  // 2. Generar PDF
+  var pdfBlob = Utilities.newBlob(html, MimeType.HTML)
+                .setName('Reclamacion-' + claimNumber + '.pdf')
+                .getAs(MimeType.PDF);
+                
+  // 3. Enviar email membretado al cliente
+  var htmlBody = construirEmailReclamoHTML(data, claimNumber);
+
+  GmailApp.sendEmail(
+    data.email,
+    '[Libro de Reclamaciones] Hoja de Reclamación N° ' + claimNumber,
+    'Adjuntamos su Hoja de Reclamación en formato PDF.',
+    {
+      htmlBody: htmlBody,
+      attachments: [pdfBlob],
+      name: CONFIG.EMPRESA_NOMBRE,
+      bcc: CONFIG.EMPRESA_EMAIL // Copia para ti
+    }
+  );
+
+  return { success: true, message: 'Reclamación enviada con éxito', claimNumber: claimNumber };
+}
+
+function construirReclamoHTML(d, num) {
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>' +
+         'body { font-family: Arial; padding: 40px; color: #333; }' +
+         '.header { border-bottom: 2px solid #1c1917; padding-bottom: 20px; margin-bottom: 20px; }' +
+         '.title { font-size: 24px; font-weight: bold; }' +
+         '.box { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }' +
+         '.label { font-weight: bold; color: #666; font-size: 12px; text-transform: uppercase; }' +
+         '.val { font-size: 16px; margin-bottom: 10px; }' +
+         '</style></head><body>' +
+         '<div class="header"><div class="title">LIBRO DE RECLAMACIONES VIRTUAL</div>' +
+         '<div>' + CONFIG.EMPRESA_NOMBRE + ' | RUC 20615554384</div></div>' +
+         '<div class="box"><div class="label">N° DE REGISTRO</div><div class="val">' + num + '</div>' +
+         '<div class="label">FECHA Y HORA</div><div class="val">' + new Date().toLocaleString('es-PE') + '</div></div>' +
+         '<div class="box"><h3>1. IDENTIFICACIÓN DEL CONSUMIDOR</h3>' +
+         '<div class="label">Nombre</div><div class="val">' + d.nombre + '</div>' +
+         '<div class="label">DNI / CE</div><div class="val">' + d.documento + '</div>' +
+         '<div class="label">Teléfono</div><div class="val">' + d.telefono + '</div>' +
+         '<div class="label">Email</div><div class="val">' + d.email + '</div></div>' +
+         '<div class="box"><h3>2. DETALLES DE LA RECLAMACIÓN</h3>' +
+         '<div class="label">Tipo de Bien</div><div class="val">' + d.tipoBien + '</div>' +
+         '<div class="label">Detalle del Reclamo o Queja</div><div class="val">' + d.detalle + '</div></div>' +
+         '<p style="font-size:12px; color:#888;">La empresa dará respuesta al reclamo en un plazo no mayor a quince (15) días hábiles.</p>' +
+         '</body></html>';
+}
+
+function construirEmailReclamoHTML(data, num) {
+  return '\
+<!DOCTYPE html>\
+<html lang="es">\
+<head><meta charset="UTF-8"></head>\
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;background:#f5f5f5;">\
+  <div style="max-width:600px;margin:20px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1);">\
+    <div style="background:#1c1917;padding:24px 28px;">\
+      <div style="color:#c88264;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">LIBRO DE RECLAMACIONES</div>\
+      <div style="color:white;font-size:22px;font-weight:900;margin-top:4px;">Hoja de Reclamación</div>\
+      <div style="color:#888;font-size:12px;margin-top:2px;">Registro N° ' + num + '</div>\
+    </div>\
+    <div style="padding:24px 28px;">\
+      <p style="font-size:15px;color:#333;">Hola <strong>' + data.nombre + '</strong>,</p>\
+      <p style="color:#555;font-size:14px;line-height:1.6;">\
+        Confirmamos la recepción de tu reclamo/queja a través de nuestra plataforma virtual. Adjunto encontrarás el cargo oficial en formato PDF para tus registros.\
+      </p>\
+      <div style="background:#f9f7f5;border-radius:10px;padding:16px 20px;margin:16px 0;">\
+        <div style="font-size:12px;font-weight:700;color:#888;text-transform:uppercase;margin-bottom:12px;">📄 Detalles del Registro</div>\
+        <table style="width:100%;font-size:13px;color:#444;">\
+          <tr><td style="padding:5px 0;color:#888;">Nombre</td><td style="text-align:right;">' + data.nombre + '</td></tr>\
+          <tr><td style="padding:5px 0;color:#888;">Documento</td><td style="text-align:right;">' + data.documento + '</td></tr>\
+          <tr><td style="padding:5px 0;color:#888;">Tipo de Bien</td><td style="text-align:right;">' + data.tipoBien + '</td></tr>\
+        </table>\
+      </div>\
+      <p style="color:#555;font-size:13px;">Nuestro equipo revisará el caso detalladamente y emitirá una respuesta en un plazo no mayor a <strong>15 días hábiles</strong>.</p>\
+    </div>\
+    <div style="background:#f9f7f5;padding:16px 28px;text-align:center;">\
+      <div style="font-size:11px;color:#aaa;">\
+        <strong style="color:#555;">' + CONFIG.EMPRESA_NOMBRE + '</strong><br>\
+        RUC 20615554384 · contacto@somosmarketingperu.com\
+      </div>\
+    </div>\
   </div>\
 </body>\
 </html>';

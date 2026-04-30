@@ -139,17 +139,18 @@
               </div>
             </div>
           </label>
-        </div>
 
-        <div class="cod-custom-qty">
-          <p class="cod-custom-label-txt">📦 ¿Otra cantidad? Ingresa el número de cajas:</p>
-          <div class="cod-custom-input-wrap">
-            <button class="cod-qty-btn" id="cod-qty-minus" aria-label="Reducir">−</button>
-            <input type="number" id="cod-custom-cajas" min="1" max="100" placeholder="0" class="cod-custom-input" inputmode="numeric">
-            <button class="cod-qty-btn" id="cod-qty-plus" aria-label="Aumentar">+</button>
-            <span class="cod-caja-label">cajas</span>
+          <!-- Custom Qty ahora como parte del grid -->
+          <div class="cod-custom-qty">
+            <p class="cod-custom-label-txt">📦 ¿Otra cantidad?</p>
+            <div class="cod-custom-input-wrap">
+              <button class="cod-qty-btn" id="cod-qty-minus" aria-label="Reducir">−</button>
+              <input type="number" id="cod-custom-cajas" min="1" max="100" placeholder="0" class="cod-custom-input" inputmode="numeric">
+              <button class="cod-qty-btn" id="cod-qty-plus" aria-label="Aumentar">+</button>
+            </div>
+            <p class="cod-rec-tip">💡 Con 4+ cajas el flete baja drásticamente.</p>
           </div>
-          <p class="cod-rec-tip">💡 Con 4+ cajas el flete baja drásticamente. ¡Es el punto óptimo!</p>
+
         </div>
 
         <div class="cod-price-summary" id="cod-price-summary">
@@ -200,73 +201,77 @@
       <!-- PASO 2: TU ENVÍO -->
       <div class="cod-step-content" id="cod-step-2">
 
-        <h3 class="cod-section-title">📍 Datos Personales</h3>
+        <div class="cod-form-row">
+          <h3 class="cod-section-title">📍 Datos Personales</h3>
 
-        <div class="cod-form-group">
-          <label class="cod-label" for="cod-nombre">Nombre y Apellidos <span class="req">*</span></label>
-          <div class="cod-input-wrap">
-            <span class="cod-input-icon">👤</span>
-            <input type="text" id="cod-nombre" placeholder="Ej: Juan Pérez García" class="cod-input" autocomplete="name">
+          <div class="cod-form-group">
+            <label class="cod-label" for="cod-nombre">Nombre y Apellidos <span class="req">*</span></label>
+            <div class="cod-input-wrap">
+              <span class="cod-input-icon">👤</span>
+              <input type="text" id="cod-nombre" placeholder="Ej: Juan Pérez García" class="cod-input" autocomplete="name">
+            </div>
           </div>
-        </div>
 
-        <div class="cod-form-group">
-          <label class="cod-label" for="cod-wsp">WhatsApp <span class="req">*</span></label>
-          <div class="cod-input-wrap">
-            <span class="cod-input-icon">📱</span>
-            <input type="tel" id="cod-wsp" placeholder="9XXXXXXXX" maxlength="9" class="cod-input" inputmode="numeric">
+          <div class="cod-form-group">
+            <label class="cod-label" for="cod-wsp">WhatsApp <span class="req">*</span></label>
+            <div class="cod-input-wrap">
+              <span class="cod-input-icon">📱</span>
+              <input type="tel" id="cod-wsp" placeholder="9XXXXXXXX" maxlength="9" class="cod-input" inputmode="numeric">
+            </div>
+            <small class="cod-hint">Te contactaremos aquí para coordinar.</small>
           </div>
-          <small class="cod-hint">Número peruano de 9 dígitos. Te contactaremos aquí para coordinar.</small>
         </div>
 
         <!-- OPCIÓN A: Envío Shalom -->
         <div id="cod-shipping-shalom">
-          <h3 class="cod-section-title" style="margin-top:18px">📦 Agencia Shalom de Destino</h3>
+          <div class="cod-form-row">
+            <h3 class="cod-section-title" style="margin-top:18px">📦 Agencia Shalom de Destino</h3>
 
-          <div class="cod-form-group">
-            <label class="cod-label" for="cod-departamento">Departamento <span class="req">*</span></label>
-            <div class="cod-input-wrap">
-              <span class="cod-input-icon">🗺️</span>
-              <select id="cod-departamento" class="cod-select">
-                <option value="">— Selecciona tu departamento —</option>
-                <option value="AMAZONAS">Amazonas</option>
-                <option value="ANCASH">Áncash</option>
-                <option value="APURIMAC">Apurímac</option>
-                <option value="AREQUIPA">Arequipa</option>
-                <option value="AYACUCHO">Ayacucho</option>
-                <option value="CAJAMARCA">Cajamarca</option>
-                <option value="CALLAO">Callao</option>
-                <option value="CUSCO">Cusco</option>
-                <option value="HUANCAVELICA">Huancavelica</option>
-                <option value="HUANUCO">Huánuco</option>
-                <option value="ICA">Ica</option>
-                <option value="JUNIN">Junín</option>
-                <option value="LA LIBERTAD">La Libertad</option>
-                <option value="LAMBAYEQUE">Lambayeque</option>
-                <option value="LIMA">Lima / Callao</option>
-                <option value="LORETO">Loreto</option>
-                <option value="MADRE DE DIOS">Madre de Dios</option>
-                <option value="MOQUEGUA">Moquegua</option>
-                <option value="PASCO">Pasco</option>
-                <option value="PIURA">Piura</option>
-                <option value="PUNO">Puno</option>
-                <option value="SAN MARTIN">San Martín</option>
-                <option value="TACNA">Tacna</option>
-                <option value="TUMBES">Tumbes</option>
-                <option value="UCAYALI">Ucayali</option>
-              </select>
+            <div class="cod-form-group">
+              <label class="cod-label" for="cod-departamento">Departamento <span class="req">*</span></label>
+              <div class="cod-input-wrap">
+                <span class="cod-input-icon">🗺️</span>
+                <select id="cod-departamento" class="cod-select">
+                  <option value="">— Selecciona —</option>
+                  <option value="AMAZONAS">Amazonas</option>
+                  <option value="ANCASH">Áncash</option>
+                  <option value="APURIMAC">Apurímac</option>
+                  <option value="AREQUIPA">Arequipa</option>
+                  <option value="AYACUCHO">Ayacucho</option>
+                  <option value="CAJAMARCA">Cajamarca</option>
+                  <option value="CALLAO">Callao</option>
+                  <option value="CUSCO">Cusco</option>
+                  <option value="HUANCAVELICA">Huancavelica</option>
+                  <option value="HUANUCO">Huánuco</option>
+                  <option value="ICA">Ica</option>
+                  <option value="JUNIN">Junín</option>
+                  <option value="LA LIBERTAD">La Libertad</option>
+                  <option value="LAMBAYEQUE">Lambayeque</option>
+                  <option value="LIMA">Lima / Callao</option>
+                  <option value="LORETO">Loreto</option>
+                  <option value="MADRE DE DIOS">Madre de Dios</option>
+                  <option value="MOQUEGUA">Moquegua</option>
+                  <option value="PASCO">Pasco</option>
+                  <option value="PIURA">Piura</option>
+                  <option value="PUNO">Puno</option>
+                  <option value="SAN MARTIN">San Martín</option>
+                  <option value="TACNA">Tacna</option>
+                  <option value="TUMBES">Tumbes</option>
+                  <option value="UCAYALI">Ucayali</option>
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div class="cod-form-group">
-            <label class="cod-label" for="cod-agencia">Ciudad / Agencia Shalom <span class="req">*</span></label>
-            <div class="cod-input-wrap">
-              <span class="cod-input-icon">📍</span>
-              <select id="cod-agencia" class="cod-select" disabled>
-                <option value="">— Primero selecciona el departamento —</option>
-              </select>
+            <div class="cod-form-group">
+              <label class="cod-label" for="cod-agencia">Ciudad / Agencia Shalom <span class="req">*</span></label>
+              <div class="cod-input-wrap">
+                <span class="cod-input-icon">📍</span>
+                <select id="cod-agencia" class="cod-select" disabled>
+                  <option value="">— Selecciona departamento —</option>
+                </select>
+              </div>
+              <small class="cod-hint warning">⚠️ Solo ciudades con cobertura.</small>
             </div>
-            <small class="cod-hint warning">⚠️ Si tu ciudad NO aparece, Shalom no tiene cobertura en ese destino.</small>
           </div>
         </div>
 
@@ -383,6 +388,24 @@
           </div>
         </div>
 
+        <!-- Aceptación Legal -->
+        <!-- Aceptación Legal con Efecto Neon Inline -->
+        <style>
+          @keyframes neonPulseLocal {
+            0%, 100% { box-shadow: 0 0 0px rgba(200,130,100,0); background: rgba(0,0,0,0.02); transform: scale(1); }
+            50% { box-shadow: 0 0 30px rgba(200,130,100,0.8); background: #fff5f0; border-color: #c88264 !important; transform: scale(1.015); }
+          }
+          .cod-neon-pulse-active {
+            animation: neonPulseLocal 2s infinite ease-in-out !important;
+          }
+        </style>
+        <div class="cod-legal-accept cod-neon-pulse-active" style="margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.02); border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s; display: block;">
+          <label style="display: flex; gap: 10px; cursor: pointer; font-size: 13px; line-height: 1.4;">
+            <input type="checkbox" id="cod-accept-terms" style="margin-top: 3px;">
+            <span>He leído y acepto los <a href="javascript:void(0)" onclick="openLegalModal('terms')" style="color:var(--copper); font-weight:700;">Términos y Condiciones</a> (incluyendo política de cancelación) y las <a href="javascript:void(0)" onclick="openLegalModal('privacy')" style="color:var(--copper); font-weight:700;">Políticas de Privacidad</a>.</span>
+          </label>
+        </div>
+
         <!-- Resumen Final -->
         <div class="cod-final-summary" id="cod-final-summary">
           <h4>📋 Resumen de tu Pedido</h4>
@@ -429,22 +452,36 @@
           <img id="cod-qr-whatsapp" src="" alt="QR WhatsApp" style="width: 160px; height: 160px; border-radius: 12px; border: 2px solid #e8e0da; margin-bottom: 10px; display: inline-block;">
           <p style="font-size: 11px; color: #888; margin-bottom: 20px;">¿No tienes WhatsApp Web? Escanea este QR con la cámara de tu celular.</p>
 
-          <button class="cod-btn-confirm" id="cod-btn-wa-web" style="margin-bottom: 12px; background: #25d366;">🟢 ABRIR WHATSAPP (WEB / APP)</button>
-          
-          <button class="cod-btn-back" id="cod-btn-copy-wa" style="width: 100%; border-color: var(--copper); color: var(--copper);">📋 COPIAR MENSAJE MANUALMENTE</button>
+          <div style="background: #fff8e1; border: 1px solid #ffe082; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 11px; color: #795548; text-align: left;">
+            <strong>ℹ️ Información de Cancelación:</strong><br>
+            Puedes cancelar tu orden sin costo alguno antes de realizar el pago del 20%. Una vez hecho el pago, comunícate inmediatamente con tu asesor para cualquier cambio.
+          </div>
 
-          <div style="margin-top: 25px; border-top: 1px dashed #e8e0da; padding-top: 20px;">
-             <p style="font-size: 11px; font-weight: bold; margin-bottom: 10px; color: var(--dark);">DOCUMENTOS DE RESPALDO:</p>
-             <button class="cod-btn-pdf" id="cod-pdf-btn">📄 Descargar Resumen PDF (Recomendado)</button>
-             <button class="cod-btn-pdf" id="cod-email-btn" style="margin-top:8px;">✉️ Re-enviar PDF al Correo</button>
-             <p style="font-size: 10.5px; color: #888; margin-top: 10px; line-height: 1.4; padding: 0 15px;">
-               ⚠️ <strong>Nota importante:</strong> El reenvío de correo solo se puede procesar una sola vez. Si no te llega, revisa si tu almacenamiento de correo está lleno. De igual manera, te sugerimos descargar tu Orden de Compra presionando en <strong>Descargar Resumen PDF</strong> aquí arriba.
-             </p>
+          <div class="cod-actions-grid">
+            <button class="cod-btn-confirm cod-btn-wa-full" id="cod-btn-wa-web" style="background: #25d366; margin-bottom:0;">🟢 ABRIR WHATSAPP (WEB / APP)</button>
+            <button class="cod-btn-back cod-btn-secondary" id="cod-btn-copy-wa" style="width: 100%; border-color: var(--copper); color: var(--copper); margin-top:0;">📋 COPIAR MENSAJE</button>
+
+            <button class="cod-btn-pdf cod-btn-secondary" id="cod-pdf-btn" style="margin-top:0;">📄 DESCARGAR PDF</button>
+            <button class="cod-btn-pdf cod-btn-secondary" id="cod-email-btn" style="margin-top:0;">✉️ RE-ENVIAR AL CORREO</button>
+          </div>
+
+          <div style="margin-top: 30px; border-top: 1.5px dashed #e8e0da; padding-top: 25px; text-align: center;">
+             <div style="display: inline-block; max-width: 600px; text-align: left; background: #fffdfa; border: 1px solid #f3e8df; padding: 20px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+               <p style="font-size: 13px; line-height: 1.6; color: #555; margin-bottom: 0;">
+                 📧 <strong>¡Correo enviado!</strong> Al finalizar tu pedido, te hemos enviado automáticamente el resumen a tu bandeja. 
+                 <br><br>
+                 ✅ <strong>Siguiente paso:</strong> Para <strong>confirmar stock e iniciar el despacho</strong>, presiona el botón de WhatsApp arriba e indica tu <strong>Nro. de Orden de Compra</strong> o nombre completo.
+                 <br><br>
+                 <span style="font-size: 11px; color: #999; font-style: italic;">
+                   ⚠️ Si no encuentras el correo, revisa tu carpeta de <strong>Promociones o SPAM</strong>, o descarga el PDF directamente aquí arriba.
+                 </span>
+               </p>
+             </div>
           </div>
           
-          <div style="margin-top: 20px; font-size: 10px; color: #888; text-align: center; background: #f9f7f5; padding: 12px; border-radius: 8px;">
-            📞 Atención al Cliente: <strong>999 900 396</strong><br>
-            🏢 <strong>Somos Marketing Perú E.I.R.L.</strong>
+          <div style="margin-top: 25px; font-size: 14px; color: #888; text-align: center; background: #f9f7f5; padding: 22px; border-radius: 12px; display: flex; justify-content: center; gap: 40px; border: 1px solid #f0ebe7;">
+            <div style="display: flex; align-items: center; gap: 10px;">📞 Soporte: <strong>999 900 396</strong></div>
+            <div style="display: flex; align-items: center; gap: 10px;">🏢 <strong>Somos Marketing Perú E.I.R.L.</strong></div>
           </div>
         </div>
       </div><!-- /paso-4 -->

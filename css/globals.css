@@ -396,10 +396,10 @@ img {
 
 /* --- Custom Cursor (Desktop only) --- */
 @media (hover: hover) and (pointer: fine) {
-    body { cursor: none; }
+    body { cursor: auto !important; }
     a, button, [role="button"], input, select, textarea,
     .va-arg-card, .va-auth-item, label, .cod-qty-card, .cod-pay-btn {
-        cursor: none;
+        cursor: auto !important;
     }
 }
 
@@ -433,7 +433,7 @@ img {
 
 /* Only show cursor elements on real desktop with mouse */
 @media (hover: hover) and (pointer: fine) {
-    #va-cursor-dot, #va-cursor-ring { display: block; }
+    #va-cursor-dot, #va-cursor-ring { display: none !important; }
 }
 
 /* Ring expands on hover over interactive elements */

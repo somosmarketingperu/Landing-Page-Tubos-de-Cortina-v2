@@ -1,0 +1,202 @@
+ * LEGAL MODALS STYLE (v1.0)
+ */
+.va-legal-modals {
+    pointer-events: none;
+}
+
+.legal-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+}
+
+.legal-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.legal-modal-card {
+    background: #ffffff;
+    width: 95%;
+    max-width: 650px;
+    max-height: 85vh;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.dark-theme .legal-modal-card {
+    background: #1c1917;
+    color: #e8e0da;
+    border: 1px solid rgba(200, 130, 100, 0.2);
+}
+
+.legal-modal-backdrop.active .legal-modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.legal-modal-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dark-theme .legal-modal-header {
+    border-bottom-color: rgba(255,255,255,0.05);
+}
+
+.legal-modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+}
+
+.dark-theme .legal-modal-header h3 {
+    color: var(--copper);
+}
+
+.legal-modal-close {
+    background: rgba(0,0,0,0.05);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.dark-theme .legal-modal-close {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+}
+
+.legal-modal-close:hover {
+    background: var(--copper);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.legal-modal-body {
+    padding: 32px;
+    overflow-y: auto;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.dark-theme .legal-modal-body {
+    color: #aaa;
+}
+
+.legal-modal-body h4 {
+    margin: 24px 0 12px;
+    color: var(--dark);
+    font-weight: 700;
+}
+
+.dark-theme .legal-modal-body h4 {
+    color: #fff;
+}
+
+.legal-modal-body p {
+    margin-bottom: 16px;
+}
+
+/* CLAIMS FORM */
+.claims-form {
+    display: grid;
+    gap: 16px;
+}
+
+.claims-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.claims-group label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #888;
+}
+
+.claims-group input, 
+.claims-group select, 
+.claims-group textarea {
+    padding: 12px 16px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #f9f7f5;
+}
+
+.dark-theme .claims-group input,
+.dark-theme .claims-group select,
+.dark-theme .claims-group textarea {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+.claims-submit {
+    margin-top: 10px;
+    padding: 16px;
+    background: var(--dark);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dark-theme .claims-submit {
+    background: var(--copper);
+}
+
+.claims-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Scrollbar Style */
+.legal-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.legal-modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.legal-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+.dark-theme .legal-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+}

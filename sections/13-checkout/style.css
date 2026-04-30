@@ -67,37 +67,40 @@
   background: linear-gradient(135deg,#fcf8f5,#f5ede8);
   border: 1px solid #e8d5c8;
   border-radius: 14px;
-  padding: 14px 18px;
+  padding: 24px 30px; /* Aumentado padding */
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 .dec-price-label {
   display: block;
-  font-size: 10px;
+  font-size: 12px; /* Aumentado */
   font-weight: 700;
   color: var(--copper,#c88264);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .dec-price-val {
   display: block;
-  font-size: 2.2rem;
+  font-size: 4rem;
   font-weight: 900;
   color: var(--dark,#1c1917);
   line-height: 1;
+  letter-spacing: -1px; /* Juntamos un poco para que sea mas compacto y potente */
 }
 .dec-price-unit {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--copper,#c88264);
+  margin-left: 5px;
 }
 .dec-price-note {
   display: block;
-  font-size: 11px;
+  font-size: 14px;
   color: #27ae60;
   font-weight: 600;
-  margin-top: 5px;
+  margin-top: 10px;
+  letter-spacing: 0.2px; /* Expandimos un poco */
 }
 
 .dec-question {
@@ -155,12 +158,12 @@
   flex: 1;
 }
 .dec-opt-text strong {
-  font-size: 13px;
+  font-size: 15px; /* Aumentado */
   font-weight: 900;
   letter-spacing: 0.3px;
 }
 .dec-opt-text span {
-  font-size: 11px;
+  font-size: 12px; /* Aumentado */
   opacity: 0.8;
   line-height: 1.4;
 }
@@ -201,11 +204,83 @@
     align-items: center;
     padding: 20px;
   }
-  .dec-card { border-radius: 20px; }
+  .dec-card { 
+    border-radius: 20px; 
+    max-width: 700px; /* Aumentado a 700px para mayor impacto */
+  }
+  .dec-body {
+    padding: 24px 40px 30px; /* Más padding vertical, pero balanceado horizontalmente */
+  }
+  .dec-price-anchor {
+    width: 100%; /* Asegurar que tome todo el ancho disponible */
+  }
   .cod-card {
     border-radius: 20px;
+    max-width: 800px; /* Mucho más ancho como solicitó el usuario */
     max-height: 86vh;
     animation: fadeScale 0.35s cubic-bezier(0.34,1.2,0.64,1);
+  }
+  
+  /* Adaptar contenido interno para el ancho mayor */
+  .cod-qty-cards {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .cod-payment-toggle {
+    max-width: none; /* Ahora ocupan todo el ancho disponible */
+  }
+
+  /* Formulario de Paso 2 en dos columnas */
+  #cod-step-2 .cod-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+  }
+  
+  #cod-step-2 .cod-section-title {
+    grid-column: span 2;
+    border-bottom: 1px solid #f0ebe7;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+  }
+
+  /* Paso 4 - Botones secundarios en dos columnas */
+  #cod-step-4 .cod-actions-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  #cod-step-4 .cod-btn-secondary,
+  #cod-step-4 .cod-btn-wa-full {
+    margin-top: 0 !important;
+    height: 100%;
+  }
+}
+
+/* ── NEON PULSE FOR TERMS ── */
+.cod-pulse-neon {
+  animation: neonPulse 2s infinite ease-in-out !important;
+  border-radius: 12px;
+  transition: all 0.3s;
+  display: block;
+}
+
+@keyframes neonPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0px rgba(200,130,100,0) !important;
+    background: rgba(0,0,0,0.02) !important;
+    transform: scale(1);
+    border-color: rgba(0,0,0,0.05) !important;
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(200,130,100,0.8) !important;
+    background: #fff5f0 !important;
+    border-color: var(--copper,#c88264) !important;
+    transform: scale(1.015);
   }
 }
 
@@ -257,11 +332,11 @@
   flex-shrink: 0;
 }
 .cod-progress-track {
-  height: 4px;
+  height: 6px; /* Aumentado */
   background: #e8e0da;
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .cod-progress-fill {
   height: 100%;
@@ -278,22 +353,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  font-size: 9.5px;
+  gap: 4px;
+  font-size: 11px; /* Aumentado */
   color: #bbb;
   font-weight: 600;
   transition: color 0.3s;
 }
 .cod-step-label.active { color: var(--copper,#c88264); }
 .cod-step-dot {
-  width: 22px; height: 22px;
+  width: 28px; height: 28px; /* Aumentado */
   border-radius: 50%;
   background: #e8e0da;
   color: #888;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 12px; /* Aumentado */
   font-weight: 900;
   transition: all 0.3s;
 }
@@ -344,7 +419,7 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 8px 4px;
+  padding: 12px 8px; /* Aumentado de 8px 4px */
   border-radius: 12px;
   border: 2px solid #e8e0da;
   background: #faf9f8;
@@ -363,14 +438,14 @@
   gap: 1px;
 }
 .cod-pay-btn strong {
-  font-size: 8.5px;
+  font-size: 11px; /* Aumentado de 8.5px */
   font-weight: 800;
   color: var(--dark,#1c1917);
   letter-spacing: 0.1px;
   line-height: 1.1;
 }
 .cod-pay-btn span {
-  font-size: 7.5px;
+  font-size: 10px; /* Aumentado de 7.5px */
   color: #777;
   line-height: 1.1;
 }
@@ -380,7 +455,7 @@
   box-shadow: 0 0 0 3px rgba(200,130,100,0.15);
 }
 .cod-pay-btn.active strong { color: var(--copper,#c88264); }
-.cod-pay-icon { font-size: 1.2rem; flex-shrink: 0; }
+.cod-pay-icon { font-size: 1.5rem; flex-shrink: 0; } /* Aumentado */
 
 /* ── ALMACENES LIST ── */
 .cod-almacenes-list {
@@ -507,12 +582,16 @@
   background: #f5f4f2;
   border-radius: 12px;
   padding: 10px 12px;
-  margin-bottom: 10px;
+  border: 2px solid #e8e0da;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .cod-custom-label-txt { font-size: 11px; color: #555; margin-bottom: 8px; font-weight: 600; }
 .cod-custom-input-wrap {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 .cod-qty-btn {
@@ -560,45 +639,45 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px; /* Aumentado */
   color: #555;
-  padding: 3px 0;
+  padding: 4px 0;
 }
 .cod-sum-row.total {
   border-top: 1.5px solid #e8e0da;
-  padding-top: 8px;
-  margin-top: 6px;
-  font-size: 14px;
+  padding-top: 10px;
+  margin-top: 8px;
+  font-size: 18px; /* Aumentado significativamente */
   color: var(--dark,#1c1917);
   font-weight: 800;
 }
 .cod-efectivo-row {
-  font-size: 11px;
+  font-size: 12px; /* Aumentado */
   color: #888;
-  padding-top: 4px;
+  padding-top: 5px;
   border-top: 1px dashed #e0d8d2;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 .cod-sum-margin {
-  font-size: 11px;
+  font-size: 13px; /* Aumentado */
   color: #27ae60;
   font-weight: 700;
-  margin-top: 6px;
+  margin-top: 8px;
   text-align: right;
 }
 .cod-saving-vs {
-  font-size: 11px;
+  font-size: 12px; /* Aumentado */
   color: var(--copper,#c88264);
   font-weight: 700;
-  margin-top: 5px;
+  margin-top: 6px;
   text-align: right;
   border-top: 1px dashed #e8d5c8;
-  padding-top: 5px;
+  padding-top: 6px;
 }
 .va-free {
   color: #27ae60;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 12px; /* Aumentado */
 }
 
 /* ── BANK DATA ── */
@@ -606,14 +685,14 @@
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
   border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 10px;
+  padding: 16px 20px; /* Aumentado padding */
+  margin-bottom: 12px;
 }
 .cod-bank-title {
-  font-size: 12px;
+  font-size: 14px; /* Aumentado */
   font-weight: 800;
   color: #166534;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -621,18 +700,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 11px;
+  font-size: 13px; /* Aumentado */
   color: #333;
-  padding: 4px 0;
+  padding: 6px 0;
   border-bottom: 1px solid #d1fae5;
 }
 .cod-bank-row:last-of-type { border-bottom: none; }
-.cod-bank-label { color: #888; font-size: 10px; font-weight: 600; }
-.cod-bank-num { font-weight: 700; font-family: monospace; letter-spacing: 0.3px; font-size: 11px; }
+.cod-bank-label { color: #888; font-size: 12px; font-weight: 600; }
+.cod-bank-num { font-weight: 700; font-family: monospace; letter-spacing: 0.3px; font-size: 13px; }
 .cod-bank-note {
-  font-size: 10px;
+  font-size: 11px; /* Aumentado */
   color: #166534;
-  margin-top: 8px;
+  margin-top: 10px;
   font-style: italic;
 }
 
@@ -798,7 +877,14 @@
   color: var(--copper,#c88264);
   transition: all 0.2s;
 }
-.cod-btn-pdf:hover { background: #fdf6f2; }
+.cod-actions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cod-btn-wa-full {
+  width: 100%;
+}
 .cod-btn-pdf:disabled {
   opacity: 0.4;
   cursor: not-allowed;
