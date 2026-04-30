@@ -638,24 +638,210 @@ body.cursor-hover #va-cursor-dot {
 }
 
 /* ═══════════════════════════════════════════════════
-   PREMIUM SUBMERGE BACKGROUND (WebGL 3D Engine)
+   CINEMATIC INTRO (ABYSS + GLASS SHATTER)
    ═══════════════════════════════════════════════════ */
-#submerge-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10; /* Sobre las secciones, debajo de modales */
-    pointer-events: none; /* No bloquea clics en los botones */
-    opacity: 0.15; /* Muy transparente para no solapar los textos */
-    mix-blend-mode: multiply;
-    transition: opacity 0.8s ease;
+:root {
+  --crack-delay: 5s; /* El tiempo inmersivo antes de romperse */
 }
 
-.dark-theme #submerge-canvas {
-    opacity: 0.35; /* Un poco más visible pero sin ahogar el diseño oscuro */
-    mix-blend-mode: screen;
+#cinematic-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #020202; /* Fondo profundo para que el shader y texto resalten */
+  overflow: hidden;
+  transition: opacity 1.2s ease-in-out, visibility 1.2s ease-in-out;
+}
+
+#cinematic-intro.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#abyss-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.8; /* Más visible ahora que es una cinemática completa */
+}
+
+#abyss-hud {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.6; /* HUD sutil como contexto */
+  pointer-events: none;
+}
+
+#glass-shatter-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3; 
+  pointer-events: none;
+}
+
+#shatter-svg {
+  width: 90vw;
+  max-width: 1000px;
+  height: auto;
+}
+
+/* ── ANIMACIONES DEL CRISTAL ROTO ── */
+#title-text {
+  animation: shake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation-delay: var(--crack-delay);
+}
+
+#title-left, #title-middle, #title-right {
+  transform-origin: 50% 50%;
+}
+
+#title-left { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+#title-middle { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); display: none; }
+#title-right { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
+
+#title-left {
+  animation: 
+    left-scale 3s ease-in-out both, 
+    shatter-left 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
+  animation-delay: 0s, var(--crack-delay);
+}
+
+#title-right {
+  animation: 
+    right-scale 3s ease-in-out both, 
+    shatter-right 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
+  animation-delay: 0s, var(--crack-delay);
+}
+
+#crack {
+  animation: show-crack 0.1s both;
+  animation-delay: var(--crack-delay);
+}
+
+@keyframes left-scale {
+  0% { transform: scale(1.1) translateX(10px); opacity: 0; filter: blur(4px); }
+  100% { transform: scale(1) translateX(0); opacity: 1; filter: blur(0); }
+}
+
+@keyframes right-scale {
+  0% { transform: scale(1.1) translateX(-10px); opacity: 0; filter: blur(4px); }
+  100% { transform: scale(1) translateX(0); opacity: 1; filter: blur(0); }
+}
+
+@keyframes show-crack {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shatter-left {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; filter: blur(0); }
+  50% { filter: blur(2px); opacity: 1; }
+  100% { transform: translate(-15vw, 10vh) rotate(-15deg) scale(0.9); filter: blur(10px); opacity: 0; }
+}
+
+@keyframes shatter-right {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; filter: blur(0); }
+  50% { filter: blur(2px); opacity: 1; }
+  100% { transform: translate(15vw, -10vh) rotate(10deg) scale(0.9); filter: blur(10px); opacity: 0; }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); filter: blur(2px); }
+  20%, 80% { transform: translate3d(2px, 0, 0); filter: blur(1px); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); filter: blur(4px); }
+  40%, 60% { transform: translate3d(4px, 0, 0); filter: blur(2px); }
+}
+
+.hud-header {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 28px 36px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.hud-header .logo {
+    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase; color: #fff; text-decoration: none;
+}
+.hud-nav { display: flex; align-items: center; gap: 32px; }
+.hud-nav a {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none;
+}
+
+.live {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.live .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #5EEAD4; box-shadow: 0 0 8px #5EEAD4;
+    animation: hudPulse 2.4s ease-in-out infinite;
+}
+@keyframes hudPulse { 0%,100%{opacity:1} 50%{opacity:0.1} }
+
+.hud-footer {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 36px 32px;
+    display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 24px;
+}
+.hud-footer .f-left { display: flex; flex-direction: column; gap: 10px; }
+.hud-footer .f-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800; line-height: 0.88; letter-spacing: -0.03em; color: #fff;
+    white-space: nowrap;
+}
+.hud-footer .f-title.ghost {
+    font-weight: 400; color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+}
+.hud-footer .f-meta { display: flex; align-items: center; gap: 16px; }
+.hud-footer .f-tag {
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.hud-footer .f-tag b { color: #5EEAD4; font-weight: 400; }
+
+.hud-footer .f-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.hud-footer .f-coords {
+    font-family: 'Space Mono', monospace; font-size: 16px;
+    color: rgba(255,255,255,0.4); font-variant-numeric: tabular-nums; letter-spacing: 0.04em;
+}
+.hud-footer .f-hint {
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.2);
+}
+
+.side-r {
+    position: absolute; right: 36px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.side-r span {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.2); writing-mode: vertical-rl;
+}
+.side-line {
+    width: 1px; height: 60px; background: rgba(255,255,255,0.07); overflow: hidden;
+}
+.side-line::after {
+    content: ''; display: block; width: 100%; height: 35%;
+    background: linear-gradient(to bottom, transparent, #5EEAD4);
+    animation: hudDrip 3s ease-in-out infinite;
+}
+@keyframes hudDrip { 0%{transform: translateY(-300%)} 100%{transform: translateY(500%)} }
+
+@media(max-width: 1100px) {
+    .hud-header { padding: 20px; }
+    .hud-nav a { display: none; }
+    .hud-footer { padding: 0 20px 24px; grid-template-columns: 1fr; }
+    .hud-footer .f-right { display: none; }
+    .side-r { display: none; }
+    .hud-footer .f-title { font-size: clamp(2.5rem, 6vw, 4rem); white-space: normal; }
 }
 
 

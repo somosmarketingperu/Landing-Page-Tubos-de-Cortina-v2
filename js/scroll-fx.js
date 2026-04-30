@@ -336,18 +336,35 @@ function initCTAShimmer() {
 }
 
 /* ─────────────────────────────────────────────
-   8. PRELOADER — Dismiss after sections load
+   8. CINEMATIC INTRO (ABYSS + GLASS SHATTER)
    ───────────────────────────────────────────── */
 function initPreloader() {
-    var preloader = document.getElementById('va-preloader');
-    if (!preloader) return;
-    // Add loaded class to trigger CSS fade-out
-    preloader.classList.add('loaded');
-    // Remove from DOM after transition completes
+    var cinematic = document.getElementById('cinematic-intro');
+    if (!cinematic) return;
+
+    // Bloquear scroll mientras se reproduce la cinemática
+    document.body.style.overflow = 'hidden';
+
+    // Calcular cuánto tiempo llevamos cargando la página
+    var elapsed = performance.now();
+    var targetTime = 6300; // 6.3 segundos de coreografía (5s intro + 0.8s shatter + margen)
+    var remaining = Math.max(0, targetTime - elapsed);
+
     setTimeout(function() {
-        if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-    }, 800);
-    console.log('Preloader: Dismissed');
+        // Desvanecer cinemática
+        cinematic.classList.add('loaded');
+        
+        // Restaurar scroll
+        document.body.style.overflow = '';
+        
+        // Retirar del DOM y apagar motor WebGL tras la transición (1.2s)
+        setTimeout(function() {
+            if (cinematic.parentNode) cinematic.parentNode.removeChild(cinematic);
+            window.dispatchEvent(new Event('abyss-destroy')); // Libera memoria GPU
+        }, 1200);
+        
+        console.log('Cinematic Intro: Completed');
+    }, remaining);
 }
 
 /* ─────────────────────────────────────────────

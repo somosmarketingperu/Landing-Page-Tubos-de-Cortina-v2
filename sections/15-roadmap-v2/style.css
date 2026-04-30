@@ -129,8 +129,28 @@
 /* ── PASO ROW ── */
 .rm-step {
   position: sticky;
-  top: 100px; /* Ajuste para que se apilen debajo del header */
-  margin-bottom: 0;
+  transition: transform 0.4s ease;
+  /* Margin bottom para dar espacio al scroll entre capas */
+  margin-bottom: 60px;
+}
+
+/* Z-Index progresivo y escalonado de posición para efecto mazo */
+.rm-step--1 { z-index: 1; top: 80px; }
+.rm-step--2 { z-index: 2; top: 110px; }
+.rm-step--3 { z-index: 3; top: 140px; }
+.rm-step--4 { z-index: 4; top: 170px; }
+.rm-step--5 { z-index: 5; top: 200px; }
+.rm-step--6 { z-index: 6; top: 230px; }
+
+@media (max-width: 768px) {
+  .rm-step { margin-bottom: 40px; }
+  /* En tablets/móviles reducimos el desplazamiento para que no se pierda el contenido */
+  .rm-step--1 { top: 70px; }
+  .rm-step--2 { top: 90px; }
+  .rm-step--3 { top: 110px; }
+  .rm-step--4 { top: 130px; }
+  .rm-step--5 { top: 150px; }
+  .rm-step--6 { top: 170px; }
 }
 
 /* ── CARD — 2 columnas ── */

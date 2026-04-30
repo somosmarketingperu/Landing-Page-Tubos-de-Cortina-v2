@@ -35,59 +35,123 @@
 .va-args-grid {
   display: flex;
   flex-direction: column;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+  gap: 40px; /* Base gap when not sticky */
 }
 
 .va-arg-card {
   background: #f8fafc;
-  padding: 40px;
-  border-radius: 24px;
+  padding: 50px 40px;
+  border-radius: 32px;
   border: 1px solid #e2e8f0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
+/* ─────────────────────────────────────────────
+   STACKING LOGIC (Desktop & Tablet)
+   ───────────────────────────────────────────── */
+.va-stack-card {
+  position: sticky;
+  /* El "top" determina dónde se detiene cada tarjeta */
+  top: 120px;
+  /* Margin bottom crea el espacio de scroll necesario para ver el efecto */
+  margin-bottom: 80px;
+}
+
+/* Z-Index incremental: Cada tarjeta nueva queda POR ENCIMA de la anterior */
+.va-stack-card:nth-child(1) { z-index: 1; top: 100px; }
+.va-stack-card:nth-child(2) { z-index: 2; top: 130px; }
+.va-stack-card:nth-child(3) { z-index: 3; top: 160px; }
+.va-stack-card:nth-child(4) { z-index: 4; top: 190px; }
+.va-stack-card:nth-child(5) { z-index: 5; top: 220px; }
+.va-stack-card:nth-child(6) { z-index: 6; top: 250px; }
+
+/* Efecto de Profundidad: Las tarjetas de abajo se ven más grandes o con más sombra */
 .va-arg-card:hover {
-  box-shadow: 0 20px 50px rgba(29, 78, 216, 0.12);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(29, 78, 216, 0.15);
   border-color: var(--arg-blue);
 }
 
 .va-arg-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
+  font-size: 56px;
+  margin-bottom: 24px;
   display: block;
 }
 
 .va-arg-card h3 {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 950;
   color: var(--arg-navy);
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   text-transform: uppercase;
+  letter-spacing: -0.5px;
 }
 
 .va-arg-card p {
-  font-size: 15px;
+  font-size: 17px;
   color: #64748b;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* RESPONSIVO */
-@media (max-width: 992px) {
-  .va-args-header h2 { font-size: 40px; }
-  .va-args-header h2 span { font-size: 48px; }
+@media (max-width: 1024px) {
+  .va-args-header h2 { font-size: 48px; }
+  .va-args-header h2 span { font-size: 56px; }
+  .va-stack-card { top: 100px; margin-bottom: 60px; }
+}
+
+@media (max-width: 768px) {
+  /* En tablets pequeñas, reducimos el escalonado del top */
+  .va-stack-card:nth-child(n) { top: 110px; }
+  .va-args-grid { padding: 0 20px; }
 }
 
 @media (max-width: 600px) {
-  .va-arg-card { padding: 30px 20px; }
-  /* Disable stacking on mobile — normal flow */
+  .va-arg-card { padding: 35px 25px; border-radius: 24px; }
+  .va-arg-card h3 { font-size: 20px; }
+  .va-arg-card p { font-size: 15px; }
+  
+  /* Habilitar Stacking en móvil para una experiencia Premium coherente */
   .va-stack-card {
-    position: relative !important;
-    top: auto !important;
+    position: sticky !important;
+    margin-bottom: 50px;
   }
+  
+  /* Escalonado sutil en móvil */
+  .va-stack-card:nth-child(1) { top: 60px; }
+  .va-stack-card:nth-child(2) { top: 80px; }
+  .va-stack-card:nth-child(3) { top: 100px; }
+  .va-stack-card:nth-child(4) { top: 120px; }
+  .va-stack-card:nth-child(5) { top: 140px; }
+  .va-stack-card:nth-child(6) { top: 160px; }
 }
+
+/* ═══════════════════════════════════════
+   SCROLL EFFECTS (Active on all devices)
+   ═══════════════════════════════════════ */
+.glow-on-scroll {
+  opacity: 0.6;
+  transform: translateY(20px) scale(0.98);
+  transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.glow-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Delay gradual para que las tarjetas no aparezcan todas juntas al cargar */
+.glow-delay-1 { transition-delay: 0.1s; }
+.glow-delay-2 { transition-delay: 0.2s; }
+.glow-delay-3 { transition-delay: 0.3s; }
+.glow-delay-4 { transition-delay: 0.4s; }
+.glow-delay-5 { transition-delay: 0.5s; }
+.glow-delay-6 { transition-delay: 0.6s; }
 
 /* ═══════════════════════════════════════
    DARK THEME

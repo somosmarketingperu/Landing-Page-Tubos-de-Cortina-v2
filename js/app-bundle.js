@@ -33,7 +33,7 @@ document.addEventListener('sectionsLoaded', () => {
         { name: 'Magnetic Buttons',    fn: () => typeof initMagneticButtons    === 'function' && initMagneticButtons()    },
         { name: 'Highlight Lines',     fn: () => typeof initHighlightLines     === 'function' && initHighlightLines()     },
         { name: 'Section Fades',       fn: () => typeof initSectionFades       === 'function' && initSectionFades()       },
-        { name: 'Submerge WebGL BG',   fn: () => typeof initSubmergeBackground === 'function' && initSubmergeBackground() },
+        { name: 'Abyss WebGL BG',      fn: () => typeof initAbyssBackground    === 'function' && initAbyssBackground()    },
     ];
 
     modules.forEach(m => {
