@@ -490,10 +490,9 @@ body.cursor-hover #va-cursor-dot {
 /* --- Theme Toggle Button --- */
 .va-theme-toggle {
     position: fixed;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    z-index: 10000;
+    bottom: 70px; /* Por encima de la barra sticky que mide 50px */
+    left: 20px;
+    z-index: 200000; /* Por encima de TODO, incluso del checkout */
     width: 45px;
     height: 45px;
     border-radius: 50%;
