@@ -47,6 +47,7 @@
   font-size: 0.9rem;
   transition: var(--transition);
   display: inline-block;
+  white-space: nowrap; /* Evita que el precio se rompa */
 }
 
 .va-btn-main:hover {
