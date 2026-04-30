@@ -52,11 +52,11 @@
   background: none;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 24px; /* Aumentado */
   cursor: pointer;
-  padding: 2px 8px;
+  padding: 10px 15px; /* Área táctil mayor */
   border-radius: 6px;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 0.2s;
 }
 .dec-close:hover { opacity: 1; }
@@ -315,11 +315,11 @@
   background: none;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 24px; /* Aumentado */
   cursor: pointer;
-  padding: 2px 8px;
+  padding: 10px 15px; /* Área táctil mayor */
   border-radius: 6px;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 0.2s;
 }
 .cod-close:hover { opacity: 1; }

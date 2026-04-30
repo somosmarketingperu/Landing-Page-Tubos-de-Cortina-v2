@@ -490,8 +490,9 @@ body.cursor-hover #va-cursor-dot {
 /* --- Theme Toggle Button --- */
 .va-theme-toggle {
     position: fixed;
-    top: 75px;
-    right: 20px;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
     z-index: 10000;
     width: 45px;
     height: 45px;
