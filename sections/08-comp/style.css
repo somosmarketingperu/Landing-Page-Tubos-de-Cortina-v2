@@ -31,7 +31,7 @@
 }
 
 .va-comp-type {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 800;
   color: #a1a1aa;
   letter-spacing: 2px;
@@ -49,7 +49,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 13px;
+  font-size: 15px;
   color: #71717a;
   padding-bottom: 12px;
   border-bottom: 1px dashed #e4e4e7;
@@ -63,12 +63,12 @@
 .va-cp-item strong {
   color: var(--dark);
   font-weight: 800;
-  font-size: 16px;
+  font-size: 18px;
   white-space: nowrap; /* Evita el salto de línea en S/ 00.00 */
 }
 
 .va-comp-footer {
-  font-size: 12px;
+  font-size: 13px;
   color: #a1a1aa;
   margin-top: 20px;
 }
@@ -112,6 +112,13 @@
   font-weight: 900;
   font-size: 12px;
   letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.va-comp-seal:hover {
+  background: var(--dark);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(200, 130, 100, 0.4);
 }
 
 @media (max-width: 1024px) {
@@ -138,11 +145,11 @@
 }
 
 .dark-theme .va-comp-type {
-  color: #64748b;
+  color: #94a3b8;
 }
 
 .dark-theme .va-cp-item {
-  color: #94a3b8;
+  color: #cbd5e1;
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -151,7 +158,7 @@
 }
 
 .dark-theme .va-comp-footer {
-  color: #64748b;
+  color: #94a3b8;
 }
 
 .dark-theme .va-comp-card.main {

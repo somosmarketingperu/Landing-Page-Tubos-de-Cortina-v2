@@ -1,11 +1,44 @@
-<div class="va-sticky-wrap">
-  <button class="va-sticky-close" id="va-sticky-close" aria-label="Cerrar banner">&times;</button>
-  <div class="va-sticky-content">
-    <div class="va-sticky-pills">
-      <span class="va-p-pill">🚚 CONTRA ENTREGA</span>
-      <span class="va-p-pill">🏢 RECOJO LIMA</span>
+<div class="va-sticky-bar" id="va-sticky-bar">
+  <button class="va-sticky-close" id="va-sticky-close" onclick="this.parentElement.style.display='none'" aria-label="Cerrar banner">&times;</button>
+  
+  <div class="va-sticky-marquee">
+    <div class="va-marquee-inner">
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c88264" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        ENVÍOS A TODO EL PERÚ CON SHALOM
+      </span>
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        STOCK 100% REAL
+      </span>
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        IMPORTACIÓN DIRECTA
+      </span>
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        PAGO CONTRA ENTREGA
+      </span>
+      
+      <!-- Duplicado para loop -->
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c88264" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        ENVÍOS A TODO EL PERÚ CON SHALOM
+      </span>
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        STOCK 100% REAL
+      </span>
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        IMPORTACIÓN DIRECTA
+      </span>
+      <span class="va-marquee-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        PAGO CONTRA ENTREGA
+      </span>
     </div>
-    <p class="va-sticky-text"><strong>¡OFERTA!</strong> Flete Shalom desde S/. 55 · <strong>Adelanto 20% / Saldo 80%</strong></p>
-    <a href="#checkout" class="va-sticky-btn">PEDIR AHORA</a>
   </div>
+
+  <button class="va-sticky-action-btn" onclick="openDecisionModal()">PIDE AQUÍ</button>
 </div>
