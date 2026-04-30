@@ -41,6 +41,13 @@ function initKitParallax() {
             ]
         },
         {
+            triggerId: 'sol-trigger-v1',
+            layers: [
+                { id: 'sol-img-v1', factor: 30 },
+                { id: 'sol-glare-v1', isGlare: true }
+            ]
+        },
+        {
             triggerId: 'hero-trigger-main',
             layers: [
                 { id: 'hero-img-main', factor: 35 },
@@ -97,6 +104,13 @@ function initKitParallax() {
             layers: [
                 { id: 'auth-block-4', factor: 20 },
                 { id: 'auth-glare-4', isGlare: true }
+            ]
+        },
+        {
+            triggerId: 'bt-trigger-infog',
+            layers: [
+                { id: 'bt-img-infog', factor: 30 },
+                { id: 'bt-glare-infog', isGlare: true }
             ]
         }
     ];

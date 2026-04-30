@@ -11,58 +11,56 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 50px;
-  align-items: stretch; /* Stretch to make both columns equal height */
+  align-items: stretch;
 }
 
 .va-sol-feat-grid {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Spread items evenly across full height */
-  gap: 30px; /* Minimum gap */
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .va-sol-feat {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  background: #f8f9fa; /* Color gris súper limpio como en la otra sección */
-  padding: 35px 30px; /* Mucho más relleno vertical y horizontal */
+  background: #f8f9fa;
+  padding: 35px 30px;
   border-radius: 16px;
-  border: none; /* Sin borde */
   transition: all 0.3s ease;
 }
 
 .va-sol-feat:hover {
   background: white;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  transform: translateX(10px); /* Efecto de deslizar a la derecha */
+  transform: translateX(10px);
 }
 
 .va-sf-icon {
   background: white;
-  width: 75px; /* Ícono mucho más grande */
+  width: 75px;
   height: 75px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%; /* Círculo perfecto */
-  font-size: 2.5rem; /* Emoji mucho más grande */
+  border-radius: 50%;
+  font-size: 2.5rem;
   box-shadow: 0 5px 10px rgba(0,0,0,0.05);
-  border: none;
 }
 
 .va-sf-content h4 {
-  font-size: 1.4rem; /* Texto significativamente más grande */
+  font-size: 1.4rem;
   font-weight: 900;
   margin-bottom: 10px;
   letter-spacing: -0.2px;
 }
 
 .va-sf-content p {
-  font-size: 1.15rem; /* Párrafos más grandes para llenar espacio */
+  font-size: 1.15rem;
   color: #334155;
-  line-height: 1.6; /* Mayor interlineado para dar más altura */
+  line-height: 1.6;
   text-align: left;
 }
 
@@ -73,7 +71,7 @@
 .va-sol-main-visual img {
   border-radius: 20px;
   box-shadow: var(--shadow);
-  max-height: 800px; /* Prevent it from being too tall */
+  max-height: 800px;
   width: 100%;
   object-fit: contain;
 }
@@ -97,5 +95,33 @@
 @media (max-width: 900px) {
   .va-sol-infographic { grid-template-columns: 1fr; }
   .va-sol-feat-grid { order: 2; }
-  .va-sol-main-visual { order: 1; }
+  .va-sol-main-visual { order: 1; margin-bottom: 30px; }
+}
+
+/* DARK THEME */
+.dark-theme .va-solution {
+  background: var(--bone);
+}
+
+.dark-theme .va-sol-feat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.dark-theme .va-sol-feat:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--copper);
+}
+
+.dark-theme .va-sf-icon {
+  background: #111;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.dark-theme .va-sf-content h4 {
+  color: #fff;
+}
+
+.dark-theme .va-sf-content p {
+  color: #999;
 }

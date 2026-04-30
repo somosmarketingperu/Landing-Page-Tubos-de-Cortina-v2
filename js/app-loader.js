@@ -9,12 +9,14 @@ const SECTIONS = [
     '01-header',
     '02-hero',            // 1. PROMESA DE VALOR
     '17-problem-v2',      // 2. PROBLEMA (consciencia)
-    '14-solucion-v2',     // 3. SOLUCIÓN (consciencia)
+    '14-solucion',         // 2.5 ALIVIO EMOCIONAL (beneficios directos)
+    '14-solucion-v2',     // 3. SOLUCIÓN TÉCNICA (ingeniería)
     '05-kit-v2',          // 4. PRODUCTO / OFERTA (consciencia)
     '03-calc-v2',         // 5. CALCULADORA — cuánto gana (aquí el cerebro quiere números)
     '07-args-v2',         // 6. BENEFICIOS
     '18-before-after-v2', // 7. ANTES / DESPUÉS del producto
     '04-profile-v2',      // 8. SEGMENTACIÓN — para quién es
+    '07b-business-trend',  // 8.5 TENDENCIA NEGOCIOS (infografía técnica)
     '06-auth-v2',         // 9. AUTORIDAD — 30 años Ricmar, RUC 20
     '15-roadmap-v2',      // 10. PROCESO DE COMPRA — cómo funciona el 20/80
     '08-comp',            // 11. COMPARATIVA — vs competencia local
