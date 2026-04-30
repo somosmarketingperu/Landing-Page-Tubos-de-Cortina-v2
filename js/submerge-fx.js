@@ -131,13 +131,14 @@ function initSubmergeBackground() {
     if (!canvas) return;
 
     // Inicializar Motor WebGL
+    const isMobile = window.innerWidth < 768;
     const renderer = new THREE.WebGLRenderer({ 
         canvas, 
         alpha: true, 
-        antialias: true 
+        antialias: !isMobile // Desactivar antialias en móvil para velocidad
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
     
@@ -145,8 +146,9 @@ function initSubmergeBackground() {
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.z = 4; // Zoom al objeto
 
-    // Geometría: Icosaedro subdividido para suavidad
-    const geometry = new THREE.IcosahedronGeometry(1.4, 128);
+    // Geometría: Icosaedro - Menos subdivisiones en móvil para carga instantánea
+    const detail = isMobile ? 48 : 128;
+    const geometry = new THREE.IcosahedronGeometry(1.4, detail);
     
     // Detector de Tema (Claro u Oscuro)
     const isDark = document.documentElement.classList.contains('dark-theme');
