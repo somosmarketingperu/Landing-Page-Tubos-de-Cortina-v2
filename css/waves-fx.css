@@ -1,0 +1,96 @@
+/* WAVES-FX.CSS — Versión Sincronizada con Sistema Global (v3.0) */
+.waves-container {
+  --mx: 0;
+  --my: 0;
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 800px; 
+  height: 80px; 
+  margin: 10px auto;
+  overflow: visible;
+  text-align: center;
+  /* Conexión con el Sistema Global de la Landing */
+  color: var(--dark); 
+}
+
+.waves-header {
+  display: flex;
+  flex-wrap: nowrap; 
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.waves-letter {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0 0.5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 950;
+  text-transform: uppercase;
+  font-size: clamp(16px, 3.5vw, 28px);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.waves-letter.is-space { width: 0.4em; }
+
+.l-main, .l-copy {
+  display: block;
+  transition: transform 0.1s ease-out;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.l-main {
+  position: relative;
+  z-index: 50;
+  color: inherit !important; /* Hereda de var(--dark) */
+  text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.l-copy {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+/* Capas de Profundidad (Cobre/Oro Premium) */
+.c-1 { 
+    color: #ea580c; z-index: 40; opacity: 0.8; 
+    transform: translate3d(calc(var(--mx) * 12px), calc(var(--my) * 25px), -10px) rotate(calc(var(--mx) * 3deg));
+}
+.c-2 { 
+    color: #f59e0b; z-index: 30; opacity: 0.6; 
+    transform: translate3d(calc(var(--mx) * 24px), calc(var(--my) * 50px), -20px) rotate(calc(var(--mx) * 6deg));
+}
+.c-3 { 
+    color: #94a3b8; z-index: 20; opacity: 0.4; 
+    transform: translate3d(calc(var(--mx) * 36px), calc(var(--my) * 75px), -30px) rotate(calc(var(--mx) * 9deg));
+}
+.c-4 { 
+    color: #cbd5e1; z-index: 10; opacity: 0.2; 
+    transform: translate3d(calc(var(--mx) * 48px), calc(var(--my) * 100px), -40px) rotate(calc(var(--mx) * 12deg));
+}
+
+/* RUC Adaptado */
+.waves-container.is-ruc {
+  height: 40px;
+  margin-top: 5px;
+}
+.waves-container.is-ruc .waves-letter {
+  font-size: clamp(10px, 1.8vw, 16px);
+  font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .waves-container { height: 50px; }
+  .l-copy { 
+      transform: translate3d(calc(var(--mx) * 6px), calc(var(--my) * 12px), -5px);
+  }
+}
