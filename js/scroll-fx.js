@@ -162,10 +162,19 @@ function initSocialProofToasts() {
         }, 4000);
     }
 
+    // 🕒 Cronograma de Intenciones de Compra:
+    // 1. Primera intención: 30 segundos
+    setTimeout(showToast, 30000);
+
+    // 2. Segunda intención: 3 minutos
+    setTimeout(showToast, 180000);
+
+    // 3. Siguientes: Cada 5 minutos (contados desde la aparición de la primera a los 30s)
+    // Esto significa que la tercera aparece a los 5m 30s, la cuarta a los 10m 30s, etc.
     setTimeout(function() {
         showToast();
-        setInterval(showToast, 17000 + Math.floor(Math.random() * 5000));
-    }, 8000);
+        setInterval(showToast, 300000);
+    }, 330000);
 
     console.log('Social Proof Toasts: Active');
 }

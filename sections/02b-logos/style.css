@@ -1,0 +1,91 @@
+/**
+ * TRUST MARQUEE SECTION (Non-Sticky)
+ * Scrolling logos for payments and logistics
+ */
+.va-trust-marquee-section {
+  padding: 40px 0;
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  overflow: hidden;
+}
+
+.va-trust-marquee-container {
+  display: flex;
+  overflow: hidden;
+  /* Efecto de desvanecimiento en los bordes */
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.va-trust-marquee-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: va-trust-scroll 45s linear infinite;
+}
+
+@keyframes va-trust-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.va-trust-group {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding-right: 60px;
+}
+
+.va-trust-label {
+  color: #57534e;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-right: 10px;
+}
+
+.va-trust-tag {
+  color: #a8a29e;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 7px 18px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.va-trust-tag.highlight {
+  color: var(--copper);
+  border-color: rgba(200, 130, 100, 0.25);
+  background: rgba(200, 130, 100, 0.05);
+}
+
+.va-trust-tag.secure {
+  background: rgba(74, 222, 128, 0.05);
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.va-trust-icon {
+  height: 22px;
+  filter: grayscale(1) brightness(1.5);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.va-trust-tag:hover, .va-trust-icon:hover {
+  filter: grayscale(0) brightness(1);
+  opacity: 1;
+  border-color: var(--copper);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .va-trust-marquee-section { padding: 30px 0; }
+  .va-trust-group { gap: 20px; padding-right: 40px; }
+  .va-trust-tag { font-size: 11px; padding: 5px 12px; }
+}
