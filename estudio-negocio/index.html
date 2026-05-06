@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Intermediación Digital (SID) | Whitepaper Estratégico</title>
+
+
+  
+  <!-- Estilos del Proyecto -->
+  <link rel="stylesheet" href="../css/globals.css?v=4.1">
+  <link rel="stylesheet" href="../css/waves-fx.css?v=1.0">
+  <link rel="stylesheet" href="../css/perspective-fx.css?v=1.0">
+  <style>
+    /* SYNC-FX.CSS - Multi-Window Simulation Style */
+    #sync-intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        z-index: 9999;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        color: #fff;
+        transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+    }
+    #sync-intro.loaded {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    #sync-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    .sync-window-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        pointer-events: none;
+    }
+    .v-window {
+        position: absolute;
+        width: 320px;
+        height: 220px;
+        background: rgba(10, 10, 10, 0.6);
+        border: 1px solid rgba(0, 255, 157, 0.3);
+        backdrop-filter: blur(12px);
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 157, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        pointer-events: all;
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    .v-window-header {
+        height: 32px;
+        background: rgba(0, 255, 157, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        justify-content: space-between;
+    }
+    .v-window-title {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    .v-window-controls { display: flex; gap: 6px; }
+    .v-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); }
+    .v-dot.green { background: #00ff9d; box-shadow: 0 0 5px #00ff9d; }
+    .v-window-content {
+        flex: 1;
+        padding: 15px;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .v-data-line {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 4px;
+    }
+    .v-label { color: #00ff9d; font-weight: 600; }
+    .v-value { font-family: monospace; color: #fff; }
+    .sync-hud {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 20; /* Por encima de todo */
+        pointer-events: none;
+    }
+    .sync-top-left { font-size: 12px; font-weight: 800; letter-spacing: 2px; color: #fff; opacity: 0.8; }
+    .sync-status {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 2;
+    }
+    .status-label { 
+        font-size: 10px; 
+        letter-spacing: 4px; 
+        color: #00ff9d; 
+        margin-bottom: 80px; /* Reducido para mejor integración */
+        text-transform: uppercase; 
+    }
+    .status-main {
+        font-size: 56px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        color: #fff;
+        text-shadow: 0 0 15px rgba(0, 255, 157, 0.8), 0 0 30px rgba(0, 0, 0, 1), 0 0 60px rgba(0, 0, 0, 1);
+        margin-top: 100px;
+    }
+    @keyframes neon-pulse {
+        0% { box-shadow: 0 0 10px rgba(0, 255, 157, 0.2); }
+        50% { box-shadow: 0 0 25px rgba(0, 255, 157, 0.5); }
+        100% { box-shadow: 0 0 10px rgba(0, 255, 157, 0.2); }
+    }
+    .v-window.active { border-color: #00ff9d; animation: neon-pulse 2s infinite ease-in-out; }
+    @media (max-width: 768px) {
+        .v-window { width: 260px; height: 180px; }
+        .status-main { font-size: 28px; }
+    }
+  </style>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Google Fonts - Simplificado para consistencia técnica -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <!-- Three.js Import Map -->
+  <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+      "jsm/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+    }
+  }
+  </script>
+  
+  <!-- GSAP for Abyss HUD animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="study-body">
+
+  <!-- INTRODUCCIÓN CINEMÁTICA: SID SYNC (Multi-Window Simulation) -->
+  <div id="sync-intro">
+    <canvas id="sync-canvas"></canvas>
+
+    <!-- Virtual Windows Overlay -->
+    <div class="sync-window-overlay">
+      <!-- Window A: Node Control -->
+      <div class="v-window" id="win-a">
+        <div class="v-window-header">
+          <span class="v-window-title">NODO_SID_01 // HUB_LIMA</span>
+          <div class="v-window-controls">
+            <div class="v-dot"></div>
+            <div class="v-dot green"></div>
+          </div>
+        </div>
+        <div class="v-window-content">
+          <div class="v-data-line"><span class="v-label">ESTADO</span><span class="v-value">EN LÍNEA</span></div>
+          <div class="v-data-line"><span class="v-label">TASA_SYNC</span><span class="v-value">99.8%</span></div>
+          <div class="v-data-line"><span class="v-label">FLUJO_DATOS</span><span class="v-value">CIFRADO</span></div>
+        </div>
+      </div>
+
+      <!-- Window B: Logistics Sync -->
+      <div class="v-window" id="win-b">
+        <div class="v-window-header">
+          <span class="v-window-title">MÓDULO_LOGÍSTICA // PROVINCIA</span>
+          <div class="v-window-controls">
+            <div class="v-dot"></div>
+            <div class="v-dot green"></div>
+          </div>
+        </div>
+        <div class="v-window-content">
+          <div class="v-data-line"><span class="v-label">LATENCIA</span><span class="v-value">12ms</span></div>
+          <div class="v-data-line"><span class="v-label">CONEXIÓN</span><span class="v-value">ACTIVA</span></div>
+          <div class="v-data-line"><span class="v-label">COLA</span><span class="v-value">0_PENDIENTES</span></div>
+        </div>
+      </div>
+
+      <!-- Window C: Financial Ledger -->
+      <div class="v-window" id="win-c">
+        <div class="v-window-header">
+          <span class="v-window-title">LIBRO_MAYOR // ARBITRAJE</span>
+          <div class="v-window-controls">
+            <div class="v-dot"></div>
+            <div class="v-dot green"></div>
+          </div>
+        </div>
+        <div class="v-window-content">
+          <div class="v-data-line"><span class="v-label">SALDO</span><span class="v-value">SINCRONIZADO</span></div>
+          <div class="v-data-line"><span class="v-label">MARGEN</span><span class="v-value">ESTABLE</span></div>
+          <div class="v-data-line"><span class="v-label">NODOS</span><span class="v-value">1,024</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Elements -->
+    <div class="sync-hud">
+      <div class="sync-top-left">WHITEPAPER ESTRATÉGICO / SID-2026</div>
+      <div class="sync-status">
+        <div class="status-label">PLATAFORMA DE ALTO IMPACTO B2B</div>
+        <div class="status-main">SOMOS_MARKETING_PERU</div>
+      </div>
+      <div class="sync-bottom-right"></div>
+    </div>
+  </div>
+
+  <div class="blueprint-container">
+    <!-- NAVEGACIÓN LATERAL (BLUEPRINT) -->
+    <aside class="blueprint-nav">
+      <a href="#intro" class="nav-item active">01. Introducción</a>
+      <a href="#methodology" class="nav-item">02. Metodología</a>
+      <a href="#pipeline" class="nav-item">03. Pipeline</a>
+      <a href="#data" class="nav-item">04. Validación</a>
+      <a href="#results" class="nav-item">05. Resultados</a>
+      <a href="#references" class="nav-item">06. Referencias</a>
+    </aside>
+
+    <main class="scientific-paper">
+      <div id="sections-container">
+        <!-- Las secciones se cargan aquí vía section-loader.js -->
+      </div>
+    </main>
+  </div>
+
+
+  <!-- Scripts Logic -->
+  <script type="module">
+    import * as THREE from 'three';
+    
+    function initSyncHero() {
+        const canvas = document.querySelector("#sync-canvas");
+        if (!canvas) return;
+
+        const state = { windows: [], core: null, particles: null, mouse: { x: 0, y: 0 } };
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const coreGroup = new THREE.Group();
+        scene.add(coreGroup);
+        const coreGeo = new THREE.SphereGeometry(0.7, 64, 64); // Más pequeño para no estorbar
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0x00ff9d, wireframe: true, transparent: true, opacity: 0.2 });
+        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+        coreGroup.add(coreMesh);
+        const innerGeo = new THREE.SphereGeometry(0.8, 32, 32);
+        const innerMat = new THREE.MeshBasicMaterial({ color: 0x00ff9d, transparent: true, opacity: 0.1 });
+        const innerMesh = new THREE.Mesh(innerGeo, innerMat);
+        coreGroup.add(innerMesh);
+        state.core = coreGroup;
+
+        const particlesCount = 200;
+        const posArray = new Float32Array(particlesCount * 3);
+        const velArray = new Float32Array(particlesCount * 3);
+        for (let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+            velArray[i] = (Math.random() - 0.5) * 0.02;
+        }
+        const particlesGeo = new THREE.BufferGeometry();
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMat = new THREE.PointsMaterial({ size: 0.02, color: 0x00ff9d, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
+        const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+        scene.add(particlesMesh);
+        state.particles = { mesh: particlesMesh, pos: posArray, vel: velArray };
+
+        const winElements = document.querySelectorAll('.v-window');
+        const isMobile = window.innerWidth <= 768;
+        
+        // Posiciones específicas en las esquinas
+        const positions = isMobile ? [
+          {x: 0, y: -220}, // Superior
+          {x: -40, y: 220}, // Inferior Izq
+          {x: 40, y: 220}  // Inferior Der
+        ] : [
+          {x: -450, y: -200}, // Arriba Izquierda
+          {x: 450, y: -200},  // Arriba Derecha
+          {x: 0, y: 250}      // Abajo Centro
+        ];
+
+        winElements.forEach((el, i) => {
+            const pos = positions[i];
+            const x = pos.x + window.innerWidth / 2 - 160;
+            const y = pos.y + window.innerHeight / 2 - 110;
+            gsap.set(el, { x: x, y: y, opacity: 0 });
+            state.windows.push({ el: el, baseX: x, baseY: y, angle: 0, floatOffset: Math.random() * 10 });
+        });
+
+        // Mouse Tracker para Parallax
+        window.addEventListener('mousemove', (e) => {
+            state.mouse.x = (e.clientX / window.innerWidth) - 0.5;
+            state.mouse.y = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        const tl = gsap.timeline({ delay: 0.5 });
+        tl.to(".v-window", { opacity: 1, scale: 1, y: (i, target) => gsap.getProperty(target, "y"), duration: 1.2, stagger: 0.2, ease: "power4.out" });
+        tl.from(".status-main", { opacity: 0, y: 30, duration: 1, ease: "power3.out" }, "-=0.8");
+        tl.from(".sync-top-left", { opacity: 0, x: -20, duration: 0.8 }, "-=1");
+
+        const clock = new THREE.Clock();
+        function animate() {
+            const elapsedTime = clock.getElapsedTime();
+            const requestID = requestAnimationFrame(animate);
+            if (state.core) {
+                state.core.rotation.y = elapsedTime * 0.2;
+                state.core.rotation.z = elapsedTime * 0.1;
+                
+                // Parallax suave con el mouse
+                state.core.position.x += (state.mouse.x * 2 - state.core.position.x) * 0.05;
+                state.core.position.y += (-state.mouse.y * 2 - state.core.position.y) * 0.05;
+
+                const s = 1 + Math.sin(elapsedTime * 2) * 0.05;
+                state.core.scale.set(s, s, s);
+            }
+            if (state.particles) {
+                const positions = state.particles.mesh.geometry.attributes.position.array;
+                for (let i = 0; i < particlesCount; i++) {
+                    const i3 = i * 3;
+                    positions[i3] += state.particles.vel[i3];
+                    positions[i3+1] += state.particles.vel[i3+1];
+                    positions[i3+2] += state.particles.vel[i3+2];
+                    positions[i3] *= 0.995; positions[i3+1] *= 0.995; positions[i3+2] *= 0.995;
+                    if (Math.abs(positions[i3]) < 0.1) positions[i3] = (Math.random() - 0.5) * 10;
+                }
+                state.particles.mesh.geometry.attributes.position.needsUpdate = true;
+            }
+            state.windows.forEach(win => {
+                const floatY = Math.sin(elapsedTime + win.floatOffset) * 15;
+                const floatX = Math.cos(elapsedTime * 0.8 + win.floatOffset) * 10;
+                gsap.set(win.el, { x: win.baseX + floatX, y: win.baseY + floatY });
+                if (Math.random() > 0.995) win.el.classList.toggle('active');
+            });
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        window.addEventListener('sync-destroy', () => {
+            scene.clear();
+            renderer.dispose();
+        });
+    }
+    
+    function initPreloader() {
+        const intro = document.getElementById('sync-intro');
+        if (!intro) return;
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            intro.classList.add('loaded');
+            document.body.style.overflow = '';
+            window.dispatchEvent(new Event('sync-destroy'));
+            setTimeout(() => { if (intro.parentNode) intro.parentNode.removeChild(intro); }, 1200);
+            gsap.to(".blueprint-container", { opacity: 1, visibility: "visible", duration: 1.5, ease: "power2.inOut" });
+        }, 6000);
+    }
+
+    window.addEventListener('load', () => {
+        initSyncHero();
+        initPreloader();
+    });
+  </script>
+
+  <script src="js/section-loader.js"></script>
+  <script src="js/nav-tracker.js"></script>
+  <script src="simulation.js"></script>
+</body>
+</html>

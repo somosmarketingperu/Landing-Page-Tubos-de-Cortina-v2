@@ -1,0 +1,47 @@
+/* ACTO 4: LOGÍSTICA DE CAPILARIDAD */
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.hub-card {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 25px;
+    text-align: center;
+    position: relative;
+}
+
+.hub-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--acento);
+    transform: scaleX(0);
+    transition: 0.3s;
+}
+
+.hub-card:hover::after {
+    transform: scaleX(1);
+}
+
+.hub-icon {
+    font-size: 32px;
+    color: var(--acento);
+    margin-bottom: 15px;
+}
+
+.hub-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.hub-card p {
+    font-size: 13px;
+    color: #666;
+}

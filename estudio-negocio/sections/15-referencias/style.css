@@ -1,0 +1,55 @@
+.biblio-paper {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 60px 40px 120px 40px;
+    background: #fff;
+    color: #333;
+}
+
+.biblio-paper h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    font-weight: 900;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.biblio-paper ul {
+    list-style: none;
+    padding: 0;
+}
+
+.biblio-paper li {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    text-indent: -30px;
+    text-align: justify;
+}
+
+.conclusions-box-simple {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #f9f9f9;
+    border-top: 4px solid #000;
+}
+
+.conclusions-box-simple h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.conclusions-box-simple p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    font-style: italic;
+}

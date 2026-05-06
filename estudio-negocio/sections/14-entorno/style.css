@@ -1,0 +1,46 @@
+/* ACTO 9: NOTICIAS DEL ECOSISTEMA */
+.news-newspaper {
+    column-count: 3;
+    column-gap: 40px;
+    column-rule: 1px solid #ddd;
+    margin: 60px 0;
+}
+
+.news-article {
+    break-inside: avoid;
+    margin-bottom: 30px;
+}
+
+.news-article img {
+    width: 100%;
+    margin-bottom: 15px;
+    filter: grayscale(0.2);
+}
+
+.news-article h4 {
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.news-article p {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.news-date {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--acento);
+    margin-bottom: 5px;
+}
+
+@media (max-width: 900px) {
+    .news-newspaper { column-count: 1; }
+}

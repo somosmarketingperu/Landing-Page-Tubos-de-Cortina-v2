@@ -1,0 +1,168 @@
+/* ESTUDIO-NEGOCIO / ESTILO-GLOBAL-MODULAR.CSS */
+
+:root {
+    --bg-papel: #ffffff;
+    --texto-principal: #1a1a1a;
+    --acento: #c0392b;
+    --serif: 'Playfair Display', serif;
+    --sans: 'Inter', sans-serif;
+    
+    /* PALETA BLUEPRINT PREMIUM */
+    --bp-bg: #0c0c0c;
+    --bp-paper: #ffffff;
+    --bp-accent: #d90429; /* Un rojo más vibrante y premium */
+    --bp-accent-soft: rgba(217, 4, 41, 0.05);
+    --bp-text-dim: #6c757d;
+    --bp-border: #f1f3f5;
+    --bp-dark: #121212;
+}
+
+body.study-body {
+    background: var(--bp-bg);
+    /* Sutil textura de grano de papel para el fondo oscuro */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-blend-mode: overlay;
+    color: var(--texto-principal);
+    font-family: var(--sans);
+    margin: 0;
+}
+
+/* ==========================================================================
+   STRATEGIC BLUEPRINT LAYOUT
+   ========================================================================== */
+
+.blueprint-container {
+    display: flex;
+    position: relative;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 100px 50px;
+    gap: 100px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* SIDE PROGRESS NAV */
+.blueprint-nav {
+    position: sticky;
+    top: 150px;
+    height: fit-content;
+    width: 200px;
+    padding-left: 30px;
+    border-left: 1px solid #222;
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    .blueprint-nav { display: block; }
+}
+
+.nav-item {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #444;
+    text-decoration: none;
+    margin-bottom: 35px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0.5;
+}
+
+.nav-item.active {
+    color: var(--bp-accent);
+    opacity: 1;
+    transform: translateX(10px);
+}
+
+/* CONTENEDOR PRINCIPAL - FORMATO PAPER PREMIUM */
+.scientific-paper {
+    flex: 1;
+    max-width: 1100px;
+    background: var(--bp-paper);
+    box-shadow: 0 100px 150px -50px rgba(0,0,0,0.8);
+    min-height: 100vh;
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Decoración técnica en las esquinas */
+.scientific-paper::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 20px;
+    height: 20px;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+
+/* MODULAR BLOCKS */
+.blueprint-section {
+    padding: 120px 100px;
+    border-bottom: 1px solid var(--bp-border);
+    position: relative;
+}
+
+/* LAYOUT EN Z (Alternado para evitar huecos vacíos) */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.split-layout.reverse {
+    grid-template-columns: 1fr 1.5fr;
+}
+
+@media (max-width: 1100px) {
+    .blueprint-section { padding: 60px 40px; }
+    .split-layout { gap: 40px; }
+}
+
+@media (max-width: 900px) {
+    .split-layout, .split-layout.reverse { grid-template-columns: 1fr; }
+    .blueprint-container { padding: 0; gap: 0; }
+}
+
+/* TARJETAS DE INSIGHT MEJORADAS */
+.insight-card {
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0;
+    border-top: 4px solid var(--bp-accent);
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    position: sticky;
+    top: 150px; /* Se queda pegada al hacer scroll */
+}
+
+.insight-card .metric {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 15px;
+    color: #000;
+    letter-spacing: -2px;
+}
+
+.insight-card .label {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--bp-accent);
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Global Reset for Paper Content */
+p {
+    line-height: 1.9;
+    font-size: 17px;
+    color: #2c2c2c;
+    margin-bottom: 30px;
+}

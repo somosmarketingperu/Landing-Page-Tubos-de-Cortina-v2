@@ -1,0 +1,11 @@
+{
+  "name": "sid-email-sender",
+  "version": "1.0.0",
+  "description": "Herramienta interna para envío de dossiers personalizados",
+  "scripts": {
+    "start": "npx http-server -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

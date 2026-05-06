@@ -1,0 +1,44 @@
+/* ACTO 3: EL MAPA DE LA OPORTUNIDAD */
+.map-story-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+    margin: 60px 0;
+}
+
+.map-visual-premium {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+
+.map-visual-premium img {
+    width: 100%;
+    display: block;
+}
+
+.map-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    background: white;
+}
+
+.map-data-table th {
+    background: var(--texto-principal);
+    color: white;
+    padding: 10px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.map-data-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.map-data-table tr:hover {
+    background: rgba(200, 130, 100, 0.1);
+}

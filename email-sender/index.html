@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SID | Paper Dispatch Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f0f2f5; font-family: 'Poppins', sans-serif; margin: 0; height: 100vh; display: flex; overflow: hidden; }
+        .left-panel { flex: 0 0 400px; background: #1c1917; color: white; padding: 40px 30px; box-sizing: border-box; border-right: 4px solid #c88264; display: flex; flex-direction: column; }
+        .right-panel { flex: 1; padding: 20px; overflow-y: auto; background: #eaeff2; display: flex; flex-direction: column; align-items: center; }
+        
+        .header-sid { color: #c88264; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
+        .form-title { font-size: 24px; margin-bottom: 30px; font-weight: 900; line-height: 1.2; }
+        
+        label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; font-weight: bold; }
+        input { width: 100%; background: #2a2a2a; border: 1px solid #333; padding: 14px; color: white; border-radius: 8px; box-sizing: border-box; font-size: 14px; margin-bottom: 20px; transition: 0.3s; }
+        input:focus { outline: none; border-color: #c88264; }
+        
+        .btn-dispatch { background: #c88264; color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 14px; letter-spacing: 1px; transition: 0.3s; }
+        .btn-dispatch:hover { background: #b06e52; transform: translateY(-2px); }
+        .btn-dispatch:disabled { background: #444; cursor: not-allowed; transform: none; }
+        
+        /* LOG CONSOLE */
+        .log-console { background: #000; color: #0f0; font-family: monospace; font-size: 10px; padding: 15px; border-radius: 8px; flex: 1; margin-top: 30px; overflow-y: auto; border: 1px solid #333; }
+        .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 2px; }
+        .log-time { color: #555; margin-right: 8px; }
+
+        .preview-container { width: 100%; max-width: 650px; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 8px; margin-bottom: 50px; flex-shrink: 0; }
+        .cap-link { color: #c88264; font-weight: bold; text-decoration: none; font-size: 9px; margin-left: 8px; border: 1px solid #c88264; padding: 2px 5px; border-radius: 4px; display: inline-block; white-space: nowrap; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-card { background: #fff; width: 90%; max-width: 400px; border-radius: 15px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5); padding: 40px 20px; }
+        .modal-btn { background: #c88264; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="header-sid">SOMOS MARKETING PERÚ</div>
+        <div class="form-title">Paper Dispatch Control</div>
+        
+        <label>Email del Destinatario</label>
+        <input type="email" id="email" placeholder="cliente@ejemplo.com">
+        
+        <label>Nombre del Revisor / Cliente</label>
+        <input type="text" id="nombre" placeholder="Nombre del Revisor" oninput="updatePreview()">
+        
+        <button id="main-btn" class="btn-dispatch" onclick="enviar()">🚀 ENVIAR DOCUMENTACIÓN</button>
+        
+        <div class="log-console" id="log-console">
+            <div class="log-entry"><span class="log-time">[SISTEMA]</span> Consola de despacho lista...</div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div id="preview-area" class="preview-container"></div>
+    </div>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-card">
+            <div id="modal-icon" style="font-size:50px; margin-bottom:20px;">✅</div>
+            <div id="modal-title" style="font-size:22px; font-weight:900; margin-bottom:10px;">¡Envío Exitoso!</div>
+            <div id="modal-body" style="color:#666; font-size:14px;">El correo ha sido enviado.</div>
+            <button class="modal-btn" onclick="closeModal()">CERRAR</button>
+        </div>
+    </div>
+
+    <script>
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKva-7SGXgFsTrG_iY7xGbNiqr9XkGdm1_Oi0rjPUOl3_cCct5-s5dGOg1sO_968wV/exec';
+        
+        function log(msg, type = "INFO") {
+            const consoleEl = document.getElementById('log-console');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            const time = new Date().toLocaleTimeString();
+            entry.innerHTML = `<span class="log-time">[${time}]</span> <span style="color:${type==='ERR'?'#f87171':'#0f0'}">${msg}</span>`;
+            consoleEl.appendChild(entry);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        function updatePreview() {
+            const nombre = document.getElementById('nombre').value || "[Nombre del Revisor]";
+            const abstractCompleto = "El mercado mayorista peruano se caracteriza por una fuerte centralización en Lima, lo que impone altos costos logísticos y operativos a los minoristas de los diferentes departamentos del Perú, junto con una baja adopción del comercio electrónico (el 72% de las mypes no está preparado) y un incremento en el riesgo de seguridad y extorsión. Esta fricción se agrava por la aversión a la pérdida, que dificulta los pagos anticipados en el canal B2B. El presente trabajo, aborda esta problemática, propone el diseño e implementación del Sistema de Intermediación Comercial (SIC), un embudo de ventas semiautomático fundamentado en cuatro pilares: privacidad corporativa, automatización 24/7 mediante chatbot, eliminación de intermediarios y digitalización de la confianza a través del pago contra entrega, apalancado en la red logística nacional. Los resultados del modelado financiero y de demanda muestran que el punto de equilibrio del SIC es marginal, requiriendo solo 334 unidades mensuales para cubrir costos fijos, una cifra que el sistema supera en más de cuatro veces bajo escenarios conservadores de conversión. Se concluye que el SIC es un modelo viable y robusto que descentraliza el comercio B2B de manera segura, mitiga la aversión a la pérdida del comprador y ofrece un amplio margen de escalabilidad a un portafolio de 1,000 productos.";
+
+            const html = `
+                <div style="background:#1c1917; padding:40px 30px; text-align:center; color:white; border-radius:8px 8px 0 0;">
+                    <div style="color:#c88264; font-size:9px; font-weight:bold; letter-spacing:3px; margin-bottom:10px;">DOCUMENTACIÓN TÉCNICA EXCLUSIVA</div>
+                    <div style="font-size:18px; font-weight:900; line-height:1.2;">ESTUDIO ACADÉMICO: SISTEMA DE INTERMEDIACIÓN COMERCIAL (SIC)</div>
+                </div>
+                <div style="padding:30px; font-family: sans-serif; color:#333; line-height:1.5; font-size:12px;">
+                    <p>Estimado/a <strong>${nombre}</strong>,</p>
+                    <p>Adjuntamos la investigación comercial estratégica desarrollada bajo la autoría de <strong>Jose Ricardo Garcia Quispe</strong>.</p>
+                    
+                    <div style="background:#fdfaf8; border-left:4px solid #c88264; padding:20px; margin:20px 0; border-radius:4px;">
+                        <div style="font-weight:bold; color:#c88264; font-size:10px; margin-bottom:12px; text-transform:uppercase;">Resumen Ejecutivo (Abstract):</div>
+                        <p style="margin:0; font-style:italic; font-size:11px; color:#555; line-height:1.7; text-align:justify;">"${abstractCompleto}"</p>
+                    </div>
+
+                    <div style="font-weight:bold; color:#1c1917; font-size:12px; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">DESGLOSE TÉCNICO DE CAPÍTULOS:</div>
+                    <div style="font-size:10px; line-height:1.8;">
+                        <div>1. Introducción <span style="float:right; color:#c88264; font-weight:bold;">[Anexo 01]</span></div>
+                        <div>2.2 Estado del arte <span style="float:right; color:#c88264; font-weight:bold;">[Anexo 02]</span></div>
+                        <div>Capítulo 3. Metodología de la investigación <span style="float:right; color:#c88264; font-weight:bold;">[Anexo 03]</span></div>
+                        <div>Capítulo 4. Diseño del Sistema (SIC) <span style="float:right; color:#c88264; font-weight:bold;">[Anexo 04]</span></div>
+                        <div>Capítulo 5. Análisis de mercado y viabilidad <span style="float:right; color:#c88264; font-weight:bold;">[Anexo 06]</span></div>
+                        <div>5.2 Distribución y escenarios de venta <span style="float:right; color:#c88264; font-weight:bold;">[Anexo 05]</span></div>
+                        <div>7. Recomendaciones finales <span style="float:right; color:#c88264; font-weight:bold;">[Anexo 07]</span></div>
+                    </div>
+
+                    <div style="background:#1c1917; padding:15px; border-radius:8px; text-align:center; margin-top:25px; color:white; font-weight:bold; font-size:11px;">
+                        🎥 VIDEO RESUMEN DE 5 MINUTOS
+                    </div>
+
+                    <div style="text-align:center; margin-top:20px;">
+                        <div style="background:#c88264; color:white; padding:15px; border-radius:6px; font-weight:bold; display:inline-block; width:100%; box-sizing:border-box;">DESCARGAR PAPER COMPLETO (PDF)</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('preview-area').innerHTML = html;
+        }
+
+        async function enviar() {
+            const email = document.getElementById('email').value;
+            const nombre = document.getElementById('nombre').value;
+            const btn = document.getElementById('main-btn');
+
+            if(!email || !nombre) { log("Error: Faltan datos", "ERR"); alert("Completa los datos"); return; }
+            
+            btn.disabled = true;
+            btn.innerText = "PROCESANDO...";
+            
+            log("--- INICIANDO DESPACHO ---");
+            log(`Destinatario: ${email}`);
+            log(`Asunto: [REVISIÓN TÉCNICA] ${nombre}, aquí tienes el Blueprint SID`);
+            log("Configurando conexión con Apps Script...");
+
+            const payload = {
+                secretKey: "SID-PRO-2026-SECURE",
+                type: 'custom_info',
+                email: email,
+                nombre: nombre
+            };
+
+            try {
+                log("Enviando paquete de datos (Espejo total cortinas)...");
+                // Añadimos un t= para evitar que el navegador use una versión vieja
+                const response = await fetch(APPS_SCRIPT_URL + "?t=" + Date.now(), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload)
+                });
+                
+                log("¡Servidor contactado con éxito!");
+                log("✅ PROCESO FINALIZADO");
+                
+                showModal();
+            } catch (e) {
+                log("ERROR DE CONEXIÓN: " + e.message, "ERR");
+                log("Tip: Verifica que tu internet no bloquee script.google.com");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "🚀 ENVIAR DOCUMENTACIÓN";
+            }
+        }
+
+        function showModal() { document.getElementById('modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+        window.onload = updatePreview;
+    </script>
+</body>
+</html>

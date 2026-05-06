@@ -1,0 +1,48 @@
+<section class="study-section">
+    <div class="section-tag">VI. PROYECCIÓN ESTOCÁSTICA Y ESCALABILIDAD</div>
+
+
+
+    <h2>Modelado de Proyección Estocástica (12 Meses)</h2>
+    <p class="section-desc">Utilizamos un motor de simulación para proyectar el comportamiento del mercado bajo variables de incertidumbre. El análisis integra la variabilidad de la demanda regional y el retorno de inversión acumulado.</p>
+    
+    <div class="sim-notebook">
+        <div class="notebook-header">
+            <div class="nb-title"><i class="fas fa-file-code"></i> analisis_montecarlo_factoria.ipynb</div>
+            <div class="nb-actions">
+                <button id="runSim" class="nb-btn-run"><i class="fas fa-play"></i> Ejecutar Algoritmo</button>
+                <span id="seedDisplay">Semilla: #777</span>
+            </div>
+        </div>
+        
+        <div class="notebook-output">
+            <!-- Gráfico 1: Demanda -->
+            <div class="sim-chart-container">
+                <div class="chart-header">
+                    <h4>1. Variabilidad de la Demanda Mensual</h4>
+                    <p>Simulación de rotación por goteo en los 250 nodos regionales.</p>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="demandChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Gráfico 2: Acumulado -->
+            <div class="sim-chart-container">
+                <div class="chart-header">
+                    <h4>2. Proyección de EBIT Acumulado</h4>
+                    <p>Análisis de flujos de caja y hitos de escalamiento semestral.</p>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="cumulativeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="output-log" id="simLog">
+                [INFO] Inicializando motor de proyección de 12 meses...
+                [INFO] Cargando parámetros estocásticos para 250 Hubs...
+                [RESULTADO] Proyección de viabilidad económica completada.
+            </div>
+        </div>
+    </div>
+</section>

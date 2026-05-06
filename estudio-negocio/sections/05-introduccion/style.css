@@ -1,0 +1,96 @@
+/* INTRODUCCION STYLES */
+.question-lead {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--acento);
+    line-height: 1.1;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -1px;
+}
+
+.evolution-box {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.evolution-box h4 {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: #888;
+}
+
+.evo-comparison {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.evo-item {
+    flex: 1;
+}
+
+.evo-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #999;
+}
+
+.evo-item p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.evo-item.active p {
+    color: var(--texto-principal);
+    font-weight: 600;
+}
+
+.evo-arrow {
+    color: var(--acento);
+    font-size: 20px;
+}
+
+.narrative-visual img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.skill-card {
+    background: #fdfdfd;
+    border-top: 4px solid var(--acento);
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+}
+
+.skill-card h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.skill-card ul {
+    padding-left: 15px;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.skill-card p {
+    font-size: 13px;
+    line-height: 1.6;
+}

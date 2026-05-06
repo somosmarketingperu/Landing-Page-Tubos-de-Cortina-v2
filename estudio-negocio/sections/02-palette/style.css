@@ -1,0 +1,27 @@
+/* PALETA DE PRODUCTO */
+.product-palette {
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.palette-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--acento);
+    color: var(--acento);
+    padding: 10px 25px;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.palette-btn.active {
+    background: var(--acento);
+    color: white;
+}

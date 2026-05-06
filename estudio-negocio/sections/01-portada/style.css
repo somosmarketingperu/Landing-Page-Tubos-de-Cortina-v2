@@ -1,0 +1,24 @@
+.scientific-cover {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paper-title-block {
+    text-align: center;
+    width: 100%;
+}
+
+.paper-authors {
+    text-align: center;
+}
+
+.paper-abstract-box {
+    margin: 40px auto;
+    text-align: left;
+}
+
+.paper-journal {
+    text-align: center;
+}

@@ -24,16 +24,25 @@ var CONFIG = {
 // ── ENTRY POINT (POST) ────────────────────────────
 function doPost(e) {
   try {
-    var data = JSON.parse(e.postData.contents);
+    var data;
+    try {
+      data = JSON.parse(e.postData.contents);
+    } catch (parseErr) {
+      // Fallback para cuando el JSON viene "sucio" por el modo no-cors
+      return buildResponse({ success: false, error: 'Formato de datos inválido' });
+    }
 
-    // ── Verificar clave secreta (protección anti-spam) ──
+    // ── Verificar clave secreta ──
     if (data.secretKey !== CONFIG.SECRET_KEY) {
       return buildResponse({ success: false, error: 'No autorizado' });
     }
 
-    // ── Diferenciar entre Pedido y Reclamo ──
     var resultado;
-    if (data.type === 'claim') {
+    
+    // FORZAR: Si el tipo es custom_info o si es una petición de la nueva herramienta
+    if (data.type === 'custom_info' || (!data.productos && data.email)) {
+      resultado = procesarInfoPersonalizada(data);
+    } else if (data.type === 'claim') {
       resultado = procesarReclamacion(data);
     } else {
       resultado = procesarPedido(data);
@@ -41,14 +50,15 @@ function doPost(e) {
     
     return buildResponse(resultado);
   } catch (err) {
-    Logger.log('ERROR doPost: ' + err.message);
     return buildResponse({ success: false, error: err.message });
   }
 }
 
-// También acepta GET para pruebas rápidas desde el browser
+// También acepta GET para mostrar la Interfaz Administrativa
 function doGet(e) {
-  return buildResponse({ ok: true, message: 'TubosCortina EmailSender activo ✅' });
+  return HtmlService.createHtmlOutput(obtenerInterfazAdmin())
+    .setTitle('SID | Administrador de Dossiers')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 // ── LÓGICA PRINCIPAL ──────────────────────────────
@@ -586,11 +596,200 @@ function construirEmailReclamoHTML(data, num) {
 </html>';
 }
 
-// ── RESPUESTA HTTP CON CORS ───────────────────────
+// ── LÓGICA DE INFORMACIÓN PERSONALIZADA ─────────────
 
-function buildResponse(data) {
-  var output = ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
-  return output;
+function procesarInfoPersonalizada(data) {
+  try {
+    var htmlBody = construirEmailInfoHTML(data);
+
+    // --- CONEXIÓN CON TU CARPETA DE DRIVE ---
+    var FOLDER_ID = "1ooT2yyhaGeIGn3aN2O43VbyI-DLk6DIU"; 
+    var folder = DriveApp.getFolderById(FOLDER_ID);
+    var attachments = [];
+    
+    // Nombres exactos de tus archivos en Drive
+    var filesToAttach = [
+      "Paper SIC completo.pdf", 
+      "Resumen Paper.mp4",
+      "Cap 1 Introduccion.png",
+      "Cap 2 Estado del Arte.png",
+      "Cap 3 Metodologia de Investigacion.png",
+      "Cap 4 Proceso del sistema.png",
+      "Cap 4 Modelo de Pago Anticipado y contraEntrega.png",
+      "Cap 5 Analisis de Viabilidad y Escalabilidad.png",
+      "Cap 6 Recomendaciones.png"
+    ];
+
+    filesToAttach.forEach(function(fileName) {
+      var files = folder.getFilesByName(fileName);
+      if (files.hasNext()) {
+        attachments.push(files.next().getBlob());
+      }
+    });
+
+    // Enviar email con toda la documentación
+    GmailApp.sendEmail(
+      data.email,
+      "[REVISIÓN TÉCNICA] " + data.nombre + ", aquí tienes el Blueprint SID (Documentación Completa)",
+      "Hola " + data.nombre + ", adjunto encontrarás el Paper SIC Completo, el video resumen y los esquemas técnicos solicitados.",
+      {
+        htmlBody: htmlBody,
+        attachments: attachments,
+        name: "Somos Marketing Perú",
+        replyTo: CONFIG.EMPRESA_EMAIL
+      }
+    );
+
+    return { success: true, message: "Toda la documentación técnica ha sido enviada a " + data.email };
+  } catch (e) {
+    return { success: false, error: "Error de acceso a Drive: " + e.toString() };
+  }
+}
+
+function construirEmailInfoHTML(data) {
+  var fullAbstract = 'El mercado mayorista peruano se caracteriza por una fuerte centralización en Lima, lo que genera brechas logísticas y de seguridad para los comerciantes provincianos. Este trabajo propone el diseño del Sistema de Intermediación Digital (SID), un embudo semiautomático fundamentado en la privacidad corporativa, la automatización 24/7 y la digitalización de la confianza. A través de un arbitraje logístico capilar, el SID permite descentralizar el abastecimiento B2B, eliminando el riesgo de extorsión y optimizando el flujo de caja mediante una estructura de pagos híbrida (adelanto y contraentrega).';
+  
+  var capitulos = [
+    { n: 'I', t: 'Introducción: Nodo físico y brecha digital', img: 'Cap%201%20Introduccion.png' },
+    { n: 'II', t: 'Estado del Arte: Inseguridad y aversión a la pérdida', img: 'Cap%202%20Estado%20del%20Arte.png' },
+    { n: 'III', t: 'Metodología: Pipeline operativo del lead a la entrega', img: 'Cap%203%20Metodologia%20de%20Investigacion.png' },
+    { n: 'IV', t: 'Minería de Datos: Análisis de mercado y procesos', img: 'Cap%204%20Proceso%20del%20sistema.png' },
+    { n: 'V', t: 'Resultados y Discusión: Viabilidad y Escalabilidad', img: 'Cap%205%20Analisis%20de%20Viabilidad%20y%20Escalabilidad.png' },
+    { n: 'VI', t: 'Conclusiones y Recomendaciones Estratégicas', img: 'Cap%206%20Recomendaciones.png' }
+  ];
+
+  var htmlCapitulos = capitulos.map(function(c) {
+    return '\
+    <div style="padding:12px 0; border-bottom:1px solid #f0f0f0; display:flex; justify-content:space-between; align-items:center;">\
+      <div style="font-size:13px; color:#1c1917;"><strong>' + c.n + '.</strong> ' + c.t + '</div>\
+      <a href="' + CONFIG.ALLOWED_ORIGIN + '/docs/' + c.img + '" style="font-size:10px; color:#c88264; text-decoration:none; font-weight:bold; border:1px solid #c88264; padding:2px 8px; border-radius:4px; margin-left:10px;">VER RESUMEN</a>\
+    </div>';
+  }).join('');
+
+  return '\
+<!DOCTYPE html>\
+<html>\
+<head><meta charset="UTF-8"></head>\
+<body style="margin:0;padding:0;font-family:Arial, sans-serif;background-color:#f4f4f4;">\
+  <div style="max-width:650px;margin:20px auto;background-color:#fff;border-radius:8px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);">\
+    \
+    <div style="background-color:#1c1917;padding:30px; border-bottom: 4px solid #c88264; text-align:center;">\
+      <div style="color:#c88264;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;">ENTREGA DE DOCUMENTACIÓN TÉCNICA</div>\
+      <div style="color:white;font-size:20px;font-weight:900;letter-spacing:-0.5px;">BLUEPRINT: SISTEMA DE INTERMEDIACIÓN DIGITAL (SID)</div>\
+    </div>\
+\
+    <div style="padding:40px 35px;">\
+      <p style="font-size:16px;color:#1c1917;">Estimado/a <strong>' + (data.nombre || '[Nombre del Revisor]') + '</strong>,</p>\
+      <p style="color:#444;line-height:1.7;font-size:14px;">Adjuntamos la documentación completa de la investigación comercial realizada por <strong>Somos Marketing Perú</strong> bajo la autoría de <strong>Jose Ricardo Garcia Quispe</strong>.</p>\
+\
+      <!-- ABSTRACT SECCIÓN -->\
+      <div style="background-color:#fdfaf8; border-left:4px solid #c88264; padding:25px; margin:30px 0;">\
+        <div style="font-weight:bold; color:#c88264; font-size:12px; text-transform:uppercase; margin-bottom:12px; letter-spacing:1px;">RESUMEN EJECUTIVO (ABSTRACT):</div>\
+        <p style="margin:0; font-style:italic; font-size:14px; color:#555; line-height:1.8;">' + fullAbstract + '</p>\
+      </div>\
+\
+      <!-- CAPITULOS SECCIÓN -->\
+      <div style="margin-bottom:30px;">\
+        <div style="font-weight:bold; color:#1c1917; font-size:12px; text-transform:uppercase; margin-bottom:15px; border-bottom:1px solid #1c1917; padding-bottom:5px;">ESTRUCTURA DEL PAPER TÉCNICO:</div>\
+        ' + htmlCapitulos + '\
+      </div>\
+\
+      <div style="text-align:center; margin:50px 0;">\
+        <a href="' + CONFIG.ALLOWED_ORIGIN + '" style="background-color:#1c1917; color:white; padding:18px 40px; border-radius:4px; text-decoration:none; font-weight:bold; font-size:13px; letter-spacing:1px; display:inline-block; box-shadow:0 10px 20px rgba(0,0,0,0.15);">DESCARGAR PAPER COMPLETO (PDF)</a>\
+        <div style="margin-top:15px; font-size:10px; color:#aaa;">Fecha de Consolidación: 2026 // Tiempo de Elaboración: 3 días</div>\
+      </div>\
+    </div>\
+\
+    <div style="background-color:#f9f7f5;padding:30px;text-align:center;border-top:1px solid #eee;">\
+      <div style="font-size:11px;color:#aaa;">\
+        <strong style="color:#555;">SOMOS MARKETING PERÚ EIRL</strong><br>\
+        División de Inteligencia Comercial y Automatización B2B<br>\
+        RUC 20615554384 · Lima, Perú\
+      </div>\
+    </div>\
+  </div>\
+</body>\
+</html>';
+}
+
+// ── INTERFAZ ADMINISTRATIVA (HTML) ──────────────────
+
+function obtenerInterfazAdmin() {
+  return '<!DOCTYPE html>\
+<html lang="es">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <style>\
+        body { background: #f0f2f5; font-family: sans-serif; margin: 0; height: 100vh; display: flex; overflow: hidden; }\
+        .left-panel { flex: 0 0 380px; background: #1c1917; color: white; padding: 30px; box-sizing: border-box; border-right: 4px solid #c88264; overflow-y: auto; }\
+        .right-panel { flex: 1; padding: 40px; overflow-y: auto; display: flex; justify-content: center; background: #eaeff2; }\
+        .header-sid { color: #c88264; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-bottom: 20px; }\
+        .form-title { font-size: 22px; margin-bottom: 30px; font-weight: 900; }\
+        .form-group { margin-bottom: 20px; }\
+        label { display: block; font-size: 11px; color: #888; margin-bottom: 8px; text-transform: uppercase; }\
+        input { width: 100%; background: #2a2a2a; border: 1px solid #333; padding: 12px; color: white; border-radius: 6px; box-sizing: border-box; }\
+        input:focus { outline: none; border-color: #c88264; }\
+        .btn-dispatch { background: #c88264; color: white; border: none; width: 100%; padding: 16px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 20px; }\
+        .btn-dispatch:hover { background: #b06e52; }\
+        .preview-container { width: 100%; max-width: 650px; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 10px; }\
+        #status { margin-top: 20px; font-size: 13px; text-align: center; }\
+        .cap-row { font-size: 11px; display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }\
+    </style>\
+</head>\
+<body>\
+    <div class="left-panel">\
+        <div class="header-sid">SOMOS MARKETING PERÚ</div>\
+        <div class="form-title">Paper Dispatch Control</div>\
+        <div class="form-group">\
+            <label>Email Destinatario</label>\
+            <input type="email" id="email" placeholder="cliente@ejemplo.com">\
+        </div>\
+        <div class="form-group">\
+            <label>Nombre Completo</label>\
+            <input type="text" id="nombre" placeholder="Nombre del Revisor" oninput="updatePreview()">\
+        </div>\
+        <div style="font-size:11px; color:#555; margin-bottom:10px;">[VISTA PREVIA DE CAPÍTULOS]</div>\
+        <div class="cap-row"><span>I. Introducción</span> <span style="color:#c88264">PNG</span></div>\
+        <div class="cap-row"><span>II. Estado del Arte</span> <span style="color:#c88264">PNG</span></div>\
+        <div class="cap-row"><span>III. Metodología</span> <span style="color:#c88264">PNG</span></div>\
+        <div class="cap-row"><span>IV. Minería de Datos</span> <span style="color:#c88264">PNG</span></div>\
+        <div class="cap-row"><span>V. Resultados</span> <span style="color:#c88264">PNG</span></div>\
+        <div class="cap-row"><span>VI. Recomendaciones</span> <span style="color:#c88264">PNG</span></div>\
+        \
+        <button class="btn-dispatch" onclick="enviar()">ENVIAR INVITACIÓN</button>\
+        <div id="status"></div>\
+    </div>\
+    <div class="right-panel">\
+        <div id="preview-area" class="preview-container"></div>\
+    </div>\
+    <script>\
+        function updatePreview() {\
+            const nombre = document.getElementById("nombre").value || "[Nombre del Cliente]";\
+            google.script.run.withSuccessHandler(html => {\
+                document.getElementById("preview-area").innerHTML = html;\
+            }).generarPreviewHTML(nombre);\
+        }\
+        function enviar() {\
+            const btn = document.querySelector(".btn-dispatch");\
+            const data = {\
+                secretKey: "' + CONFIG.SECRET_KEY + '",\
+                type: "custom_info",\
+                email: document.getElementById("email").value,\
+                nombre: document.getElementById("nombre").value\
+            };\
+            btn.disabled = true; btn.innerText = "DESPACHANDO...";\
+            google.script.run.withSuccessHandler(res => {\
+                btn.disabled = false; btn.innerText = "ENVIAR INVITACIÓN";\
+                document.getElementById("status").innerHTML = res.success ? "✅ Enviado" : "❌ Error: " + res.error;\
+            }).procesarInfoPersonalizada(data);\
+        }\
+        window.onload = updatePreview;\
+    </script>\
+</body>\
+</html>';
+}
+
+function generarPreviewHTML(nombre) {
+  return construirEmailInfoHTML({ nombre: nombre });
 }

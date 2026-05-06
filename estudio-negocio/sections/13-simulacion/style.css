@@ -1,0 +1,93 @@
+/* ACTO 8: SIMULACIÓN PROBABILÍSTICA */
+.sim-notebook {
+    background: #1c1917;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #fff;
+    margin: 40px 0;
+    border: 1px solid #333;
+}
+
+.notebook-header {
+    background: #2d2d2d;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+}
+
+.nb-title {
+    font-family: monospace;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.nb-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nb-btn-run {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nb-btn-run:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+#seedDisplay {
+    font-family: monospace;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.notebook-output {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.sim-chart-container {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.chart-header h4 {
+    margin-bottom: 5px;
+    color: var(--acento);
+}
+
+.chart-header p {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
+
+.chart-wrap {
+    height: 300px;
+    position: relative;
+}
+
+.output-log {
+    background: #000;
+    padding: 20px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #00ff00;
+    border-radius: 4px;
+    line-height: 1.6;
+}
